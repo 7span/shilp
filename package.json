@@ -1,6 +1,6 @@
 {
   "name": "@7span/styles",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "The common styles for 7Span Projects",
   "main": "index.js",
   "scripts": {
