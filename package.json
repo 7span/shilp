@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "parcel 'test/index.html' --open"
   },
-  "author": "Harsh Kansagara",
+  "author": "Harsh Kansagara <mail@theharsh.in>",
   "license": "ISC",
   "dependencies": {
     "include-media": "^1.4.9"
