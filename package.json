@@ -1,0 +1,18 @@
+{
+  "name": "@7span/styles",
+  "version": "1.0.0",
+  "description": "The common styles for 7Span Projects",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel 'test/index.html' --open"
+  },
+  "author": "Harsh Kansagara",
+  "license": "ISC",
+  "dependencies": {
+    "include-media": "^1.4.9"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.11.0",
+    "sass": "^1.17.2"
+  }
+}

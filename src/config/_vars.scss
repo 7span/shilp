@@ -1,0 +1,20 @@
+/*----------------------------------
+CONTAINER WIDTH
+Defines the max-width of the container
+----------------------------------*/
+$container-width: (
+  desktop: 1140px,
+  tablet: 720px,
+  phone: 540px
+);
+
+/*----------------------------------
+BREAKPOINTS
+Desktop first breakpoints.
+----------------------------------*/
+
+$breakpoints: (
+  desktop: 1200px,
+  tablet: 768px,
+  phone: 576px
+);

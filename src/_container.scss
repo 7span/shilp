@@ -1,0 +1,17 @@
+.ss-container {
+  max-width: map-get($container-width, "desktop");
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  border: 5px solid red;
+  &.is-fluid {
+    max-width: none;
+  }
+  @include media("<desktop") {
+    max-width: map-get($container-width, "tablet");
+  }
+  @include media("<tablet") {
+    max-width: map-get($container-width, "phone");
+  }
+}

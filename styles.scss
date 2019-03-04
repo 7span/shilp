@@ -1,0 +1,26 @@
+//INCLUDE MEDIA FOR MEDIA QUERIES
+@import "~include-media/dist/_include-media.scss";
+
+//NORMALIZE
+@import "./src/normalize";
+
+//SCSS VARIABLES
+@import "./src/config/vars";
+
+//MATERIAL COLORS
+@import "./src/config/vars";
+
+//7SPAN MIXINS
+@import "./src/config/mixins";
+
+//7SPAN FUNCTIONS
+@import "./src/config/functions";
+
+//CSS VARIABLES
+@import "./src/config/css-vars";
+
+//7SPAN DEFAULTS
+@import "./src/defaults";
+
+//CONTAINER
+@import "./src/container";
