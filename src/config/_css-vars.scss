@@ -1,8 +1,18 @@
 :root {
   /* BRAND COLORS */
-  --color--primary: #000000;
-  --color--secondary: #ffe183;
-  --color--accent: #ffe183;
+  --color--primary: #3f51b5;
+  --color--secondary: #00bcd4;
+  --color--accent: #ffc107;
+
+  /* BRAND COLORS HOVERS */
+  --hover-color--primary: #283593;
+  --hover-color--secondary: #00838f;
+  --hover-color--accent: #ff8f00;
+
+  /* TEXT COLORS*/
+  --text-color--primary: #ffffff;
+  --text-color--secondary: #ffffff;
+  --text-color--accent: #000000;
 
   /* DARK COLORS */
   --color--dark: #9e9e9e;
@@ -58,49 +68,38 @@
 
   /* SPACE */
   --space--sm: 8px;
+  --space--md: 16px;
   --space: 16px;
   --space--lg: 24px;
   --space--xl: 32px;
   --space--section: 150px;
 
   /* INPUT SIZE */
+  --input-size--xs: 24px;
+  --input-size--sm: 32px;
+  --input-size--md: 40px;
   --input-size: 40px;
-  --input-size--small: 32px;
-  --input-size--large: 48px;
+  --input-size--lg: 48px;
 
   /* BOX-SHADOWS */
   --box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.15);
-}
 
-/*----------------------------------
-MEDIA QUERY
-Change variables with respective
-to breakpoints
-----------------------------------*/
+  /* BREAKPOINTS */
+  --breakpoint--xs: #{map-get($breakpoints, xs)};
+  --breakpoint--sm: #{map-get($breakpoints, sm)};
+  --breakpoint--md: #{map-get($breakpoints, md)};
+  --breakpoint--lg: #{map-get($breakpoints, lg)};
 
-@media only screen and (max-width: 1199px) {
-  :root {
-    --space--section: 120px;
-  }
-}
+  /* CONTAINER SIZES*/
+  --container-width--xs: 100%;
+  --container-width--sm: 540px;
+  --container-width--md: 720px;
+  --container-width--lg: 960px;
+  --container-width--xl: 1140px;
 
-@media only screen and (max-width: 991px) {
-  :root {
-    --space--section: 60px;
-    --font-size--h1: 36px;
-    --font-size--h2: 24px;
-    --font-size--h3: 18px;
-  }
-}
-
-@media only screen and (max-width: 767px) {
-  :root {
-    --space--section: 80px;
-  }
-}
-
-@media only screen and (max-width: 575px) {
-}
-
-@media only screen and (max-width: 400px) {
+  /*GAP*/
+  --gap--sm: 16px;
+  --gap--md: 16px;
+  --gap--lg: 16px;
+  --gap--xl: 16px;
 }

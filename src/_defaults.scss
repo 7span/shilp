@@ -17,16 +17,18 @@ h5,
 h6 {
   font-family: var(--font--heading);
   margin: 0px;
+  line-height: 1;
 }
 
 p,
 small,
 span {
   margin: 0px;
+  line-height: 1;
   font-family: var(--font--content);
 }
 
-$headers: h1, h2, h3, h4, h5, p, span, small;
+$headers: h1, h2, h3, h4, h5, h6, p, span, small;
 
 @each $header in $headers {
   #{$header} {

@@ -338,20 +338,8 @@ template {
 }
 
 /*----------------------------------
-CONTAINER WIDTH
-Defines the max-width of the container
-----------------------------------*/
-/*----------------------------------
 BREAKPOINTS
-Desktop first breakpoints.
-----------------------------------*/
-/*----------------------------------
-CONTAINER WIDTH
-Defines the max-width of the container
-----------------------------------*/
-/*----------------------------------
-BREAKPOINTS
-Desktop first breakpoints.
+No XL Breakpoint required in Desktop First approach
 ----------------------------------*/
 /*----------------------------------
 Button Markup Clean
@@ -364,9 +352,17 @@ Position Mixin
 ----------------------------------*/
 :root {
   /* BRAND COLORS */
-  --color--primary: #000000;
-  --color--secondary: #ffe183;
-  --color--accent: #ffe183;
+  --color--primary: #3f51b5;
+  --color--secondary: #00bcd4;
+  --color--accent: #ffc107;
+  /* BRAND COLORS HOVERS */
+  --hover-color--primary: #283593;
+  --hover-color--secondary: #00838f;
+  --hover-color--accent: #ff8f00;
+  /* TEXT COLORS*/
+  --text-color--primary: #ffffff;
+  --text-color--secondary: #ffffff;
+  --text-color--accent: #000000;
   /* DARK COLORS */
   --color--dark: #9e9e9e;
   --color--darker: #424242;
@@ -414,41 +410,37 @@ Position Mixin
   --border-radius--lg: 0px;
   /* SPACE */
   --space--sm: 8px;
+  --space--md: 16px;
   --space: 16px;
   --space--lg: 24px;
   --space--xl: 32px;
   --space--section: 150px;
   /* INPUT SIZE */
+  --input-size--xs: 24px;
+  --input-size--sm: 32px;
+  --input-size--md: 40px;
   --input-size: 40px;
-  --input-size--small: 32px;
-  --input-size--large: 48px;
+  --input-size--lg: 48px;
   /* BOX-SHADOWS */
   --box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.15);
+  /* BREAKPOINTS */
+  --breakpoint--xs: 576px;
+  --breakpoint--sm: 768px;
+  --breakpoint--md: 992px;
+  --breakpoint--lg: 1200px;
+  /* CONTAINER SIZES*/
+  --container-width--xs: 100%;
+  --container-width--sm: 540px;
+  --container-width--md: 720px;
+  --container-width--lg: 960px;
+  --container-width--xl: 1140px;
+  /*GAP*/
+  --gap--sm: 16px;
+  --gap--md: 16px;
+  --gap--lg: 16px;
+  --gap--xl: 16px;
 }
 
-/*----------------------------------
-MEDIA QUERY
-Change variables with respective
-to breakpoints
-----------------------------------*/
-@media only screen and (max-width: 1199px) {
-  :root {
-    --space--section: 120px;
-  }
-}
-@media only screen and (max-width: 991px) {
-  :root {
-    --space--section: 60px;
-    --font-size--h1: 36px;
-    --font-size--h2: 24px;
-    --font-size--h3: 18px;
-  }
-}
-@media only screen and (max-width: 767px) {
-  :root {
-    --space--section: 80px;
-  }
-}
 body {
   font-family: var(--font--content);
   line-height: 1.5;
@@ -468,12 +460,14 @@ h5,
 h6 {
   font-family: var(--font--heading);
   margin: 0px;
+  line-height: 1;
 }
 
 p,
 small,
 span {
   margin: 0px;
+  line-height: 1;
   font-family: var(--font--content);
 }
 
@@ -497,6 +491,10 @@ h5 {
   font-size: var(--font-size--h5);
 }
 
+h6 {
+  font-size: var(--font-size--h6);
+}
+
 p {
   font-size: var(--font-size--p);
 }
@@ -509,28 +507,258 @@ small {
   font-size: var(--font-size--small);
 }
 
-img {
+img,
+svg {
   vertical-align: top;
 }
 
 .ss-container {
-  max-width: 1140px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 15px;
-  padding-right: 15px;
-  border: 5px solid red;
+  max-width: var(--container-width--xl);
+  padding-left: var(--gap--xl);
+  padding-right: var(--gap--xl);
 }
 .ss-container.is-fluid {
   max-width: none;
 }
-@media (max-width: 1199px) {
+
+@media only screen and (max-width: 1200px) {
   .ss-container {
-    max-width: 720px;
+    max-width: var(--container-width--lg);
+    padding-left: var(--gap--lg);
+    padding-right: var(--gap--lg);
   }
 }
-@media (max-width: 767px) {
+@media only screen and (max-width: 992px) {
   .ss-container {
-    max-width: 540px;
+    max-width: var(--container-width--md);
+    padding-left: var(--gap--md);
+    padding-right: var(--gap--md);
   }
+}
+@media only screen and (max-width: 768px) {
+  .ss-container {
+    max-width: var(--container-width--sm);
+    padding-left: var(--gap--sm);
+    padding-right: var(--gap--sm);
+  }
+}
+@media only screen and (max-width: 576px) {
+  .ss-container {
+    max-width: var(--container-width--xs);
+    padding-left: var(--gap--xs);
+    padding-right: var(--gap--xs);
+  }
+}
+/*----------------------------------
+NORMALIZE
+Contains the default properties of button
+----------------------------------*/
+/*----------------------------------
+VARIANTS
+Generates classes based on themes colors
+----------------------------------*/
+/*----------------------------------
+STYLES
+----------------------------------*/
+/*----------------------------------
+SIZES
+----------------------------------*/
+/*----------------------------------
+SHAPES
+----------------------------------*/
+/*----------------------------------
+GENNERATE CLASSES
+----------------------------------*/
+.button--primary {
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px var(--space--md);
+  height: var(--input-size--md);
+  background-color: var(--color--primary);
+  color: var(--text-color--primary);
+}
+.button--primary:hover {
+  background-color: var(--hover-color--primary);
+}
+.button--primary.button--solid {
+  border: 2px solid var(--color--primary);
+  background-color: transparent;
+  color: var(--color--primary);
+}
+.button--primary.button--solid:hover {
+  background-color: var(--color--primary);
+  color: var(--text-color--primary);
+}
+.button--primary.button--outline {
+  border: 2px solid var(--color--primary);
+  background-color: transparent;
+  color: var(--color--primary);
+}
+.button--primary.button--outline:hover {
+  background-color: var(--color--primary);
+  color: var(--text-color--primary);
+}
+
+.button--secondary {
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px var(--space--md);
+  height: var(--input-size--md);
+  background-color: var(--color--secondary);
+  color: var(--text-color--secondary);
+}
+.button--secondary:hover {
+  background-color: var(--hover-color--secondary);
+}
+.button--secondary.button--solid {
+  border: 2px solid var(--color--secondary);
+  background-color: transparent;
+  color: var(--color--secondary);
+}
+.button--secondary.button--solid:hover {
+  background-color: var(--color--secondary);
+  color: var(--text-color--secondary);
+}
+.button--secondary.button--outline {
+  border: 2px solid var(--color--secondary);
+  background-color: transparent;
+  color: var(--color--secondary);
+}
+.button--secondary.button--outline:hover {
+  background-color: var(--color--secondary);
+  color: var(--text-color--secondary);
+}
+
+.button--accent {
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px var(--space--md);
+  height: var(--input-size--md);
+  background-color: var(--color--accent);
+  color: var(--text-color--accent);
+}
+.button--accent:hover {
+  background-color: var(--hover-color--accent);
+}
+.button--accent.button--solid {
+  border: 2px solid var(--color--accent);
+  background-color: transparent;
+  color: var(--color--accent);
+}
+.button--accent.button--solid:hover {
+  background-color: var(--color--accent);
+  color: var(--text-color--accent);
+}
+.button--accent.button--outline {
+  border: 2px solid var(--color--accent);
+  background-color: transparent;
+  color: var(--color--accent);
+}
+.button--accent.button--outline:hover {
+  background-color: var(--color--accent);
+  color: var(--text-color--accent);
+}
+
+.button--square {
+  height: var(--input-size--md);
+  width: var(--input-size--md);
+  padding: 0;
+}
+
+.button--rounded {
+  border-radius: 4px;
+}
+
+.button--circle {
+  width: var(--input-size--md);
+  height: var(--input-size--md);
+  padding: 0;
+  border-radius: 50%;
+}
+
+.button--xs {
+  padding: 0px var(--space--xs);
+  height: var(--input-size--xs);
+}
+.button--xs.button--square {
+  height: var(--input-size--xs);
+  width: var(--input-size--xs);
+  padding: 0;
+}
+.button--xs.button--rounded {
+  border-radius: 4px;
+}
+.button--xs.button--circle {
+  width: var(--input-size--xs);
+  height: var(--input-size--xs);
+  padding: 0;
+  border-radius: 50%;
+}
+
+.button--sm {
+  padding: 0px var(--space--sm);
+  height: var(--input-size--sm);
+}
+.button--sm.button--square {
+  height: var(--input-size--sm);
+  width: var(--input-size--sm);
+  padding: 0;
+}
+.button--sm.button--rounded {
+  border-radius: 4px;
+}
+.button--sm.button--circle {
+  width: var(--input-size--sm);
+  height: var(--input-size--sm);
+  padding: 0;
+  border-radius: 50%;
+}
+
+.button--md {
+  padding: 0px var(--space--md);
+  height: var(--input-size--md);
+}
+.button--md.button--square {
+  height: var(--input-size--md);
+  width: var(--input-size--md);
+  padding: 0;
+}
+.button--md.button--rounded {
+  border-radius: 4px;
+}
+.button--md.button--circle {
+  width: var(--input-size--md);
+  height: var(--input-size--md);
+  padding: 0;
+  border-radius: 50%;
+}
+
+.button--lg {
+  padding: 0px var(--space--lg);
+  height: var(--input-size--lg);
+}
+.button--lg.button--square {
+  height: var(--input-size--lg);
+  width: var(--input-size--lg);
+  padding: 0;
+}
+.button--lg.button--rounded {
+  border-radius: 4px;
+}
+.button--lg.button--circle {
+  width: var(--input-size--lg);
+  height: var(--input-size--lg);
+  padding: 0;
+  border-radius: 50%;
 }

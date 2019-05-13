@@ -1,20 +1,10 @@
 /*----------------------------------
-CONTAINER WIDTH
-Defines the max-width of the container
-----------------------------------*/
-$container-width: (
-  desktop: 1140px,
-  tablet: 720px,
-  phone: 540px
-);
-
-/*----------------------------------
 BREAKPOINTS
-Desktop first breakpoints.
+No XL Breakpoint required in Desktop First approach
 ----------------------------------*/
-
 $breakpoints: (
-  desktop: 1200px,
-  tablet: 768px,
-  phone: 576px
+  lg: 1200px,
+  md: 992px,
+  sm: 768px,
+  xs: 576px
 );

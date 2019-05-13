@@ -1,16 +1,22 @@
+@mixin container($breakpoint) {
+  max-width: var(--container-width--#{$breakpoint});
+  padding-left: var(--gap--#{$breakpoint});
+  padding-right: var(--gap--#{$breakpoint});
+}
+
 .ss-container {
-  max-width: map-get($container-width, "desktop");
   margin-left: auto;
   margin-right: auto;
-  padding-left: 15px;
-  padding-right: 15px;
+  @include container(xl);
   &.is-fluid {
     max-width: none;
   }
-  @include media("<desktop") {
-    max-width: map-get($container-width, "tablet");
-  }
-  @include media("<tablet") {
-    max-width: map-get($container-width, "phone");
+}
+
+@each $bp, $value in $breakpoints {
+  @media only screen and (max-width: $value) {
+    .ss-container {
+      @include container($bp);
+    }
   }
 }

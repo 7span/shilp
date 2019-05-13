@@ -1,0 +1,100 @@
+$variants: "primary", "secondary", "accent";
+$styles: "solid", "outline";
+$sizes: "xs", "sm", "md", "lg";
+$shapes: "square", "rounded", "pill", "circle";
+
+/*----------------------------------
+NORMALIZE
+Contains the default properties of button
+----------------------------------*/
+@mixin button-normalize {
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*----------------------------------
+VARIANTS
+Generates classes based on themes colors
+----------------------------------*/
+@mixin button-variant($variant: "primary") {
+  background-color: var(--color--#{$variant});
+  color: var(--text-color--#{$variant});
+  &:hover {
+    background-color: var(--hover-color--#{$variant});
+  }
+}
+
+/*----------------------------------
+STYLES
+----------------------------------*/
+@mixin button-style($variant: "primary", $style: "solid") {
+  border: 2px solid var(--color--#{$variant});
+  background-color: transparent;
+  color: var(--color--#{$variant});
+  &:hover {
+    background-color: var(--color--#{$variant});
+    color: var(--text-color--#{$variant});
+  }
+}
+
+/*----------------------------------
+SIZES
+----------------------------------*/
+@mixin button-size($size: "md") {
+  padding: 0px var(--space--#{$size});
+  height: var(--input-size--#{$size});
+}
+
+/*----------------------------------
+SHAPES
+----------------------------------*/
+@mixin button-shape($size: "md", $shape: "flat") {
+  @if $shape== "rounded" {
+    border-radius: 4px;
+  } @else if $shape== "square" {
+    height: var(--input-size--#{$size});
+    width: var(--input-size--#{$size});
+    padding: 0;
+  } @else if $shape== "circle" {
+    width: var(--input-size--#{$size});
+    height: var(--input-size--#{$size});
+    padding: 0;
+    border-radius: 50%;
+  }
+}
+
+/*----------------------------------
+GENNERATE CLASSES
+----------------------------------*/
+@each $variant in $variants {
+  .button--#{$variant} {
+    @include button-normalize();
+    @include button-size();
+    @include button-variant($variant);
+    @each $style in $styles {
+      &.button--#{$style} {
+        @include button-style($variant, "solid");
+      }
+    }
+  }
+}
+
+@each $shape in $shapes {
+  .button--#{$shape} {
+    @include button-shape("md", $shape);
+  }
+}
+
+@each $size in $sizes {
+  .button--#{$size} {
+    @include button-size($size);
+    @each $shape in $shapes {
+      &.button--#{$shape} {
+        @include button-shape($size, $shape);
+      }
+    }
+  }
+}
