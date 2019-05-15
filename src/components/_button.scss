@@ -1,18 +1,33 @@
-$variants: "primary", "secondary", "accent";
+$variants: "primary", "secondary", "accent", "light", "dark";
 $styles: "solid", "outline";
-$sizes: "xs", "sm", "md", "lg";
-$shapes: "square", "rounded", "pill", "circle";
+$sizes: "xs", "sm", "md", "lg", "xl";
+$shapes: "rectangle", "square", "rounded", "pill", "circle";
 
 /*----------------------------------
 NORMALIZE
 Contains the default properties of button
 ----------------------------------*/
-@mixin button-normalize {
+@mixin button-common {
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  outline: 0;
+  white-space: nowrap;
+  svg {
+    margin-right: var(--space--xs);
+  }
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.8;
+  }
+  @if mixin-exists(__button) {
+    @include __button();
+  }
+  &.is-loading {
+    cursor: wait;
+  }
 }
 
 /*----------------------------------
@@ -22,7 +37,12 @@ Generates classes based on themes colors
 @mixin button-variant($variant: "primary") {
   background-color: var(--color--#{$variant});
   color: var(--text-color--#{$variant});
-  &:hover {
+  svg {
+    path {
+      fill: var(--text-color--#{$variant});
+    }
+  }
+  &:hover:not(:disabled) {
     background-color: var(--hover-color--#{$variant});
   }
 }
@@ -34,7 +54,7 @@ STYLES
   border: 2px solid var(--color--#{$variant});
   background-color: transparent;
   color: var(--color--#{$variant});
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: var(--color--#{$variant});
     color: var(--text-color--#{$variant});
   }
@@ -43,15 +63,31 @@ STYLES
 /*----------------------------------
 SIZES
 ----------------------------------*/
+$iconSize: (
+  lg: 32px,
+  md: 24px,
+  sm: 16px,
+  xs: 16px
+);
+
 @mixin button-size($size: "md") {
-  padding: 0px var(--space--#{$size});
+  @if $size== "xs" {
+    font-size: 70%;
+    padding: 0px var(--space--sm);
+  } @else {
+    padding: 0px var(--space--#{$size});
+  }
   height: var(--input-size--#{$size});
+  svg {
+    height: map-get($iconSize, $size) !important;
+    width: map-get($iconSize, $size) !important;
+  }
 }
 
 /*----------------------------------
 SHAPES
 ----------------------------------*/
-@mixin button-shape($size: "md", $shape: "flat") {
+@mixin button-shape($size: "md", $shape: "rectangle") {
   @if $shape== "rounded" {
     border-radius: 4px;
   } @else if $shape== "square" {
@@ -63,6 +99,8 @@ SHAPES
     height: var(--input-size--#{$size});
     padding: 0;
     border-radius: 50%;
+  } @else if $shape== "pill" {
+    border-radius: var(--input-size--#{$size});
   }
 }
 
@@ -71,7 +109,7 @@ GENNERATE CLASSES
 ----------------------------------*/
 @each $variant in $variants {
   .button--#{$variant} {
-    @include button-normalize();
+    @include button-common();
     @include button-size();
     @include button-variant($variant);
     @each $style in $styles {
@@ -85,6 +123,11 @@ GENNERATE CLASSES
 @each $shape in $shapes {
   .button--#{$shape} {
     @include button-shape("md", $shape);
+    @if $shape== "circle" or $shape== "square" {
+      svg {
+        margin: 0;
+      }
+    }
   }
 }
 

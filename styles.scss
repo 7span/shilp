@@ -1,29 +1,19 @@
-//INCLUDE MEDIA FOR MEDIA QUERIES
-@import "./node_modules/include-media/dist/_include-media.scss";
+$debug: false;
 
 //NORMALIZE
 @import "./src/normalize";
 
-//SCSS VARIABLES
-@import "./src/config/vars";
-
-//MATERIAL COLORS
-@import "./src/config/material-colors";
-
-//7SPAN MIXINS
-@import "./src/config/mixins";
-
-//7SPAN FUNCTIONS
-@import "./src/config/functions";
-
-//CSS VARIABLES
-@import "./src/config/css-vars";
+//CONFIG
+@import "./src/config/index.scss";
 
 //7SPAN DEFAULTS
 @import "./src/defaults";
 
 //CONTAINER
-@import "./src/container";
+@import "./src/components/container";
 
 //BUTTON
-@import "./src/button";
+@import "./src/components/button";
+
+//GRID
+@import "./src/components/grid";

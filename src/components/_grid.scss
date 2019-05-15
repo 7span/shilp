@@ -1,0 +1,63 @@
+$grids: 12;
+
+@mixin col($bp: "") {
+  @for $i from 1 through $grids {
+    @if ($bp!= "") {
+      &.#{$bp}--is-#{$i} {
+        flex: 0 0 (100% / $grids) * $i;
+      }
+    } @else {
+      &.is-#{$i} {
+        flex: 0 0 (100% / $grids) * $i;
+      }
+    }
+  }
+}
+
+@mixin row-gap($bp: "md") {
+  &:not(.no-gap) {
+    margin-left: calc(-1 * var(--gap--#{$bp}));
+    margin-right: calc(-1 * var(--gap--#{$bp}));
+  }
+}
+
+@mixin col-gap($bp: "md") {
+  padding-left: var(--gap--#{$bp});
+  padding-right: var(--gap--#{$bp});
+}
+
+.ss-row {
+  display: flex;
+  flex-wrap: wrap;
+  @include row-gap;
+  &.no-gap {
+    > .ss-col {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+  @if ($debug) {
+    border: 1px dotted red;
+  }
+}
+
+.ss-col {
+  flex: 1 1 auto;
+  @include col();
+  @include col-gap();
+  @if ($debug) {
+    border: 1px dotted blue;
+  }
+}
+
+@each $bp, $value in $breakpoints {
+  @media only screen and (max-width: $value) {
+    .ss-row {
+      @include row-gap($bp);
+    }
+    .ss-col {
+      @include col($bp);
+      @include col-gap($bp);
+    }
+  }
+}

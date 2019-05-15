@@ -4,7 +4,7 @@
   "description": "The common styles for 7Span Projects",
   "main": "index.js",
   "scripts": {
-    "dev": "parcel 'test/index.html' --open"
+    "dev": "parcel 'test/index.pug' --open"
   },
   "author": "Harsh Kansagara <mail@theharsh.in>",
   "license": "ISC",
@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "parcel-bundler": "^1.11.0",
+    "pug": "^2.0.3",
     "sass": "^1.17.2"
   },
   "bundledDependencies": [

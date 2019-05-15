@@ -3,26 +3,22 @@
   --color--primary: #3f51b5;
   --color--secondary: #00bcd4;
   --color--accent: #ffc107;
+  --color--dark: #263238;
+  --color--light: #eceff1;
 
   /* BRAND COLORS HOVERS */
   --hover-color--primary: #283593;
   --hover-color--secondary: #00838f;
   --hover-color--accent: #ff8f00;
+  --hover-color--dark: #37474f;
+  --hover-color--light: #cfd8dc;
 
   /* TEXT COLORS*/
   --text-color--primary: #ffffff;
   --text-color--secondary: #ffffff;
   --text-color--accent: #000000;
-
-  /* DARK COLORS */
-  --color--dark: #9e9e9e;
-  --color--darker: #424242;
-  --color--darkest: #212121;
-
-  /* LIGHT COLORS */
-  --color--light: #eeeeee;
-  --color--lighter: #f5f5f5;
-  --color--lightest: #fafafa;
+  --text-color--light: #000000;
+  --text-color--dark: #ffffff;
 
   /* SOCIAL COLORS */
   --color--facebook: #3b5999;
@@ -67,19 +63,20 @@
   --border-radius--lg: 0px;
 
   /* SPACE */
-  --space--sm: 8px;
-  --space--md: 16px;
-  --space: 16px;
-  --space--lg: 24px;
-  --space--xl: 32px;
-  --space--section: 150px;
+  --space--xs: 8px;
+  --space--sm: 16px;
+  --space--md: 24px;
+  --space: 24px;
+  --space--lg: 32px;
+  --space--xl: 40px;
 
   /* INPUT SIZE */
-  --input-size--xs: 24px;
-  --input-size--sm: 32px;
-  --input-size--md: 40px;
-  --input-size: 40px;
-  --input-size--lg: 48px;
+  --input-size--xs: 16px;
+  --input-size--sm: 24px;
+  --input-size--md: 32px;
+  --input-size: 32px;
+  --input-size--lg: 40px;
+  --input-size--xl: 48px;
 
   /* BOX-SHADOWS */
   --box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.15);
@@ -98,8 +95,10 @@
   --container-width--xl: 1140px;
 
   /*GAP*/
+  --gap--xs: 16px;
   --gap--sm: 16px;
   --gap--md: 16px;
+  --gap: 16px;
   --gap--lg: 16px;
   --gap--xl: 16px;
 }

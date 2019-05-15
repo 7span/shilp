@@ -1,6 +1,5 @@
 body {
   font-family: var(--font--content);
-  line-height: 1.5;
 }
 
 *,
@@ -16,15 +15,11 @@ h4,
 h5,
 h6 {
   font-family: var(--font--heading);
-  margin: 0px;
-  line-height: 1;
 }
 
 p,
 small,
 span {
-  margin: 0px;
-  line-height: 1;
   font-family: var(--font--content);
 }
 
