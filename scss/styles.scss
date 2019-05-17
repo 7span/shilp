@@ -1,0 +1,20 @@
+//NORMALIZE
+@import "./normalize";
+
+//CONFIG
+@import "./config/index.scss";
+
+//7SPAN DEFAULTS
+@import "./defaults";
+
+//CONTAINER
+@import "./components/container";
+
+//BUTTON
+@import "./components/button";
+
+//GRID
+@import "./components/grid";
+
+//INPUTS
+@import "./components/inputs";

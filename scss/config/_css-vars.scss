@@ -5,6 +5,13 @@
   --color--accent: #ffc107;
   --color--dark: #263238;
   --color--light: #eceff1;
+  --color--focus: #b3e5fc;
+
+  /* STATE COLORS */
+  --color--danger: #f44336;
+  --color--warning: #ffc107;
+  --color--success: #4caf50;
+  --color--info: #2196f3;
 
   /* BRAND COLORS HOVERS */
   --hover-color--primary: #283593;
@@ -20,6 +27,9 @@
   --text-color--light: #000000;
   --text-color--dark: #ffffff;
 
+  /* BORDER COLORS */
+  --border-color: #b0bec5;
+
   /* SOCIAL COLORS */
   --color--facebook: #3b5999;
   --color--messenger: #0084ff;
@@ -33,6 +43,14 @@
   --color--instagram: #e4405f;
   --color--snapchat: #fffc00;
   --color--quora: #b92b27;
+
+  /* GREYS */
+  --grey--lightest: #eceff1;
+  --grey--lighter: #cfd8dc;
+  --grey--light: #b0bec5;
+  --grey--dark: #455a64;
+  --grey--darker: #37474f;
+  --grey--darkest: #263238;
 
   /* FONTS */
   --font-system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -95,10 +113,10 @@
   --container-width--xl: 1140px;
 
   /*GAP*/
-  --gap--xs: 16px;
-  --gap--sm: 16px;
-  --gap--md: 16px;
-  --gap: 16px;
+  --gap--xs: 4px;
+  --gap--sm: 8px;
+  --gap--md: 12px;
+  --gap: 12px;
   --gap--lg: 16px;
-  --gap--xl: 16px;
+  --gap--xl: 20px;
 }

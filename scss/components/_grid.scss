@@ -1,0 +1,135 @@
+$grids: 12;
+
+/*----------------------------------
+ROW
+----------------------------------*/
+@mixin row($bp: false) {
+  @each $size in $sizes {
+    $className: null;
+    @if ($bp) {
+      $className: #{$bp}--is-#{$size};
+    } @else {
+      $className: is-#{$size};
+    }
+    &.#{$className} {
+      @include row-gap($size);
+    }
+    &.is-multi {
+      @include row-gap($size, true);
+      > .ss-col {
+        @include col-gap($size, true);
+      }
+    }
+  }
+}
+
+@mixin row-gap($size: "md", $multi: false) {
+  &:not(.no-gap) {
+    $gap: calc(-1 * var(--gap--#{$size}));
+    @if $multi {
+      margin: $gap;
+    } @else {
+      margin-left: $gap;
+      margin-right: $gap;
+    }
+  }
+}
+
+/*----------------------------------
+COLUMN
+----------------------------------*/
+
+@mixin col($bp: false) {
+  @for $i from 1 through $grids {
+    $className: null;
+    @if ($bp) {
+      $className: #{$bp}--is-#{$i};
+    } @else {
+      $className: is-#{$i};
+    }
+    &.#{$className} {
+      flex: 0 0 (100% / $grids) * $i;
+    }
+  }
+}
+
+@mixin col-gap($size: "md", $multi: false) {
+  $gap: var(--gap--#{$size});
+  @if $multi {
+    padding: $gap;
+  } @else {
+    padding-left: $gap;
+    padding-right: $gap;
+  }
+}
+
+/*----------------------------------
+CREATE CLASSES
+----------------------------------*/
+
+.ss-row {
+  display: flex;
+  flex-wrap: wrap;
+  @include row-gap;
+  @include row;
+  &.no-gap {
+    > .ss-col {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+  @if ($debug) {
+    border: 1px dotted red;
+  }
+}
+
+.ss-col {
+  flex: 1 1 auto;
+  @include col();
+  @include col-gap();
+  @if ($debug) {
+    border: 1px dotted blue;
+  }
+}
+
+/*----------------------------------
+GRID
+----------------------------------*/
+@mixin grid($bp: false) {
+  @for $size from 1 through 12 {
+    $className: null;
+    @if ($bp) {
+      $className: #{$bp}--is-#{$size};
+    } @else {
+      $className: is-#{$size};
+    }
+    &.#{$className} {
+      grid-template-columns: repeat($size, 1fr);
+      > .field {
+        margin: 0;
+      }
+    }
+  }
+}
+.ss-grid {
+  display: grid;
+  gap: var(--gap--md);
+  @include grid;
+}
+
+/*----------------------------------
+MEDIA QUERIES
+----------------------------------*/
+@each $bp, $value in $breakpoints {
+  @media only screen and (max-width: $value) {
+    .ss-row {
+      @include row($bp);
+    }
+    .ss-col {
+      @include col($bp);
+    }
+    .ss-grid {
+      @include grid($bp);
+    }
+  }
+}

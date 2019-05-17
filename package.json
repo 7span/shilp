@@ -1,22 +1,30 @@
 {
-  "name": "@7span/styles",
-  "version": "2.0.0",
-  "description": "The common styles for 7Span Projects",
-  "main": "index.js",
+  "name": "styles",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "dev": "parcel 'test/index.pug' --open"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
   },
-  "author": "Harsh Kansagara <mail@theharsh.in>",
-  "license": "ISC",
   "dependencies": {
-    "include-media": "^1.4.9"
+    "core-js": "^2.6.5",
+    "vue": "^2.6.10",
+    "vue-router": "^3.0.3",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.11.0",
+    "@vue/cli-plugin-babel": "^3.7.0",
+    "@vue/cli-plugin-eslint": "^3.7.0",
+    "@vue/cli-service": "^3.7.0",
+    "@vue/eslint-config-prettier": "^4.0.1",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "node-sass": "^4.9.0",
     "pug": "^2.0.3",
-    "sass": "^1.17.2"
-  },
-  "bundledDependencies": [
-    "include-media"
-  ]
+    "pug-plain-loader": "^1.0.0",
+    "sass-loader": "^7.1.0",
+    "vue-template-compiler": "^2.5.21"
+  }
 }

@@ -1,0 +1,7 @@
+@mixin breakpoints-list() {
+  @each $bp, $value in $breakpoints {
+    @media only screen and (max-width: $value) {
+      @content;
+    }
+  }
+}

@@ -1,6 +1,5 @@
 $variants: "primary", "secondary", "accent", "light", "dark";
 $styles: "solid", "outline";
-$sizes: "xs", "sm", "md", "lg", "xl";
 $shapes: "rectangle", "square", "rounded", "pill", "circle";
 
 /*----------------------------------
@@ -15,6 +14,8 @@ Contains the default properties of button
   justify-content: center;
   outline: 0;
   white-space: nowrap;
+  font-size: var(--font-size--span);
+  font-family: var(--font--content);
   svg {
     margin-right: var(--space--xs);
   }
@@ -28,6 +29,9 @@ Contains the default properties of button
   &.is-loading {
     cursor: wait;
   }
+  &.is-fluid {
+    width: 100%;
+  }
 }
 
 /*----------------------------------
@@ -37,11 +41,10 @@ Generates classes based on themes colors
 @mixin button-variant($variant: "primary") {
   background-color: var(--color--#{$variant});
   color: var(--text-color--#{$variant});
-  svg {
-    path {
-      fill: var(--text-color--#{$variant});
-    }
+  path {
+    fill: var(--text-color--#{$variant});
   }
+
   &:hover:not(:disabled) {
     background-color: var(--hover-color--#{$variant});
   }
@@ -51,12 +54,21 @@ Generates classes based on themes colors
 STYLES
 ----------------------------------*/
 @mixin button-style($variant: "primary", $style: "solid") {
-  border: 2px solid var(--color--#{$variant});
-  background-color: transparent;
-  color: var(--color--#{$variant});
-  &:hover:not(:disabled) {
-    background-color: var(--color--#{$variant});
-    color: var(--text-color--#{$variant});
+  @if $style== "outline" {
+    border: 2px solid var(--color--#{$variant});
+    background-color: transparent;
+    color: var(--color--#{$variant});
+    path {
+      fill: var(--color--#{$variant});
+    }
+
+    &:hover:not(:disabled) {
+      background-color: var(--color--#{$variant});
+      color: var(--text-color--#{$variant});
+      path {
+        fill: var(--text-color--#{$variant});
+      }
+    }
   }
 }
 
@@ -64,10 +76,10 @@ STYLES
 SIZES
 ----------------------------------*/
 $iconSize: (
-  lg: 32px,
-  md: 24px,
+  lg: 24px,
+  md: 20px,
   sm: 16px,
-  xs: 16px
+  xs: 12px
 );
 
 @mixin button-size($size: "md") {
@@ -79,8 +91,8 @@ $iconSize: (
   }
   height: var(--input-size--#{$size});
   svg {
-    height: map-get($iconSize, $size) !important;
-    width: map-get($iconSize, $size) !important;
+    height: map-get($iconSize, $size);
+    width: map-get($iconSize, $size);
   }
 }
 
@@ -108,20 +120,22 @@ SHAPES
 GENNERATE CLASSES
 ----------------------------------*/
 @each $variant in $variants {
-  .button--#{$variant} {
+  button.is-#{$variant},
+  .button.is-#{$variant} {
     @include button-common();
     @include button-size();
     @include button-variant($variant);
     @each $style in $styles {
-      &.button--#{$style} {
-        @include button-style($variant, "solid");
+      &.is-#{$style} {
+        @include button-style($variant, $style);
       }
     }
   }
 }
 
 @each $shape in $shapes {
-  .button--#{$shape} {
+  button.is-#{$shape},
+  .button.is-#{$shape} {
     @include button-shape("md", $shape);
     @if $shape== "circle" or $shape== "square" {
       svg {
@@ -132,10 +146,11 @@ GENNERATE CLASSES
 }
 
 @each $size in $sizes {
-  .button--#{$size} {
+  .button.is-#{$size},
+  button.is-#{$size} {
     @include button-size($size);
     @each $shape in $shapes {
-      &.button--#{$shape} {
+      &.is-#{$shape} {
         @include button-shape($size, $shape);
       }
     }

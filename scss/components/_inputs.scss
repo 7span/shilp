@@ -1,0 +1,74 @@
+@mixin input-common {
+  outline: 0;
+  padding: 0 var(--space--xs);
+  border: 1px solid var(--grey--light);
+  font-size: var(--font-size--span);
+  font-family: var(--font--content);
+  width: 100%;
+  color: #000000;
+  &:focus {
+    box-shadow: 0 0 0 3px var(--color--focus);
+    position: relative;
+    //border-color: transparent;
+  }
+  &:disabled {
+    background-color: var(--grey--lightest);
+  }
+}
+@mixin input-size($size: "md") {
+  height: var(--input-size--#{$size});
+  line-height: var(--input-size--#{$size});
+}
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="password"] {
+  @include input-common;
+  @include input-size;
+  @each $size in $sizes {
+    &.is-#{$size} {
+      @include input-size($size);
+    }
+  }
+}
+
+label {
+  font-size: var(--font-size--span);
+}
+
+.field {
+  + .field {
+    margin-top: var(--space--md);
+  }
+  > label {
+    display: flex;
+    margin-bottom: 4px;
+  }
+  > small {
+    display: flex;
+    margin-top: 4px;
+    color: var(--grey--dark);
+  }
+  &.is-radio,
+  &.is-checkbox {
+    display: flex;
+    align-items: center;
+    > label {
+      margin-bottom: 0;
+      margin-left: var(--space--xs);
+      cursor: pointer;
+    }
+  }
+
+  //GROUP ITEMS
+  &__group {
+    display: flex;
+    > .field {
+      + .field {
+        margin-top: 0;
+      }
+    }
+  }
+}
