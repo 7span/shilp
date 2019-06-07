@@ -1,5 +1,6 @@
-$variants: "primary", "secondary", "accent", "light", "dark";
-$styles: "solid", "outline";
+$variants: "primary", "secondary", "accent", "light", "dark", "info", "success",
+  "danger", "warning";
+$styles: "solid", "outline", "muted";
 $shapes: "rectangle", "square", "rounded", "pill", "circle";
 
 /*----------------------------------
@@ -46,7 +47,7 @@ Generates classes based on themes colors
   }
 
   &:hover:not(:disabled) {
-    background-color: var(--hover-color--#{$variant});
+    background-color: var(--color--#{$variant}--hover);
   }
 }
 
@@ -68,6 +69,16 @@ STYLES
       path {
         fill: var(--text-color--#{$variant});
       }
+    }
+  } @else if $style== "muted" {
+    background-color: var(--color--#{$variant}--muted);
+    color: var(--color--#{$variant});
+    path {
+      fill: var(--color--#{$variant});
+    }
+    &:hover {
+      background-color: var(--color--#{$variant}--muted);
+      color: var(--color--#{$variant});
     }
   }
 }

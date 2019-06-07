@@ -49,6 +49,7 @@ COLUMN
     }
     &.#{$className} {
       flex: 0 0 (100% / $grids) * $i;
+      max-width: (100% / $grids) * $i;
     }
   }
 }
@@ -84,7 +85,9 @@ CREATE CLASSES
 }
 
 .ss-col {
-  flex: 1 1 auto;
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
   @include col();
   @include col-gap();
   @if ($debug) {
@@ -105,9 +108,6 @@ GRID
     }
     &.#{$className} {
       grid-template-columns: repeat($size, 1fr);
-      > .field {
-        margin: 0;
-      }
     }
   }
 }

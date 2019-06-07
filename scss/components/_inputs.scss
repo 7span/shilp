@@ -1,30 +1,54 @@
+$field-states: "danger", "warning", "success", "info";
+
+/*----------------------------------
+COMMON CSS
+Applies to textboxes, textareas, select
+----------------------------------*/
 @mixin input-common {
   outline: 0;
   padding: 0 var(--space--xs);
   border: 1px solid var(--grey--light);
+  border-radius: 0;
   font-size: var(--font-size--span);
   font-family: var(--font--content);
   width: 100%;
   color: #000000;
   &:focus {
-    box-shadow: 0 0 0 3px var(--color--focus);
+    box-shadow: 0 0 0 3px var(--color--primary--muted);
     position: relative;
-    //border-color: transparent;
   }
   &:disabled {
+    color: var(--grey);
     background-color: var(--grey--lightest);
   }
 }
+
+/*----------------------------------
+SIZES
+----------------------------------*/
 @mixin input-size($size: "md") {
   height: var(--input-size--#{$size});
   line-height: var(--input-size--#{$size});
 }
 
-input[type="text"],
-input[type="email"],
-input[type="url"],
-input[type="search"],
-input[type="password"] {
+/*----------------------------------
+ALL INPUT TEXT TYPES
+Selector for all the input types
+----------------------------------*/
+@mixin input-text {
+  input[type="text"],
+  input[type="email"],
+  input[type="url"],
+  input[type="search"],
+  input[type="password"] {
+    @content;
+  }
+}
+
+/*----------------------------------
+Input
+----------------------------------*/
+@include input-text {
   @include input-common;
   @include input-size;
   @each $size in $sizes {
@@ -34,14 +58,37 @@ input[type="password"] {
   }
 }
 
+/*----------------------------------
+Labels
+----------------------------------*/
 label {
   font-size: var(--font-size--span);
 }
 
-.field {
-  + .field {
-    margin-top: var(--space--md);
+/*----------------------------------
+Select
+----------------------------------*/
+select {
+  @include input-common;
+  @include input-size;
+  @each $size in $sizes {
+    &.is-#{$size} {
+      @include input-size($size);
+    }
   }
+}
+
+/*----------------------------------
+Form Fields
+----------------------------------*/
+
+.field {
+  margin-bottom: var(--space--md);
+
+  .field {
+    margin: 0;
+  }
+
   > label {
     display: flex;
     margin-bottom: 4px;
@@ -51,6 +98,23 @@ label {
     margin-top: 4px;
     color: var(--grey--dark);
   }
+
+  //FIELD STATES
+  @each $state in $field-states {
+    &.is-#{$state} {
+      @include input-text {
+        border-color: var(--color--#{$state});
+        &:focus {
+          box-shadow: 0 0 0 3px var(--color--#{$state}--muted);
+        }
+      }
+      small {
+        color: var(--color--#{$state});
+      }
+    }
+  }
+
+  //RADIO & CHECKBOX
   &.is-radio,
   &.is-checkbox {
     display: flex;
@@ -59,6 +123,11 @@ label {
       margin-bottom: 0;
       margin-left: var(--space--xs);
       cursor: pointer;
+    }
+    @each $size in $sizes {
+      &.is-#{$size} {
+        @include input-size($size);
+      }
     }
   }
 

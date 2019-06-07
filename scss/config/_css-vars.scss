@@ -14,11 +14,30 @@
   --color--info: #2196f3;
 
   /* BRAND COLORS HOVERS */
-  --hover-color--primary: #283593;
-  --hover-color--secondary: #00838f;
-  --hover-color--accent: #ff8f00;
-  --hover-color--dark: #37474f;
-  --hover-color--light: #cfd8dc;
+  --color--primary--hover: #283593;
+  --color--secondary--hover: #00838f;
+  --color--accent--hover: #ff8f00;
+  --color--dark--hover: #37474f;
+  --color--light--hover: #cfd8dc;
+
+  /*STATE HOVER COLORS */
+  --color--danger--hover: #d32f2f;
+  --color--warning--hover: #ffa000;
+  --color--success--hover: #388e3c;
+  --color--info--hover: #1976d2;
+
+  /* BRAND COLORS MUTED */
+  --color--primary--muted: #e8eaf6;
+  --color--secondary--muted: #e3f2fd;
+  --color--accent--muted: #fff8e1;
+  --color--dark--muted: #37474f; //TODO:
+  --color--light--muted: #cfd8dc; //TODO:
+
+  /*STATE HOVER MUTED */
+  --color--danger--muted: #ffebee;
+  --color--warning--muted: #fff8e1;
+  --color--success--muted: #e8f5e9;
+  --color--info--muted: #e3f2fd;
 
   /* TEXT COLORS*/
   --text-color--primary: #ffffff;
@@ -26,6 +45,12 @@
   --text-color--accent: #000000;
   --text-color--light: #000000;
   --text-color--dark: #ffffff;
+
+  /* STATE TEXT COLORS */
+  --text-color--danger: #ffffff;
+  --text-color--warning: #000000;
+  --text-color--success: #ffffff;
+  --text-color--info: #ffffff;
 
   /* BORDER COLORS */
   --border-color: #b0bec5;
@@ -48,6 +73,7 @@
   --grey--lightest: #eceff1;
   --grey--lighter: #cfd8dc;
   --grey--light: #b0bec5;
+  --grey: #607d8b;
   --grey--dark: #455a64;
   --grey--darker: #37474f;
   --grey--darkest: #263238;
