@@ -1,56 +1,22 @@
+@mixin define-colors{
+  @each $variant, $color in $colors {
+    @each $shade,$code in $color{
+      @if($shade=='default'){
+        --color--#{$variant}:#{$code}
+      }
+      @else if($shade=='text'){
+        --text-color--#{$variant}:#{$code}
+      }
+      @else{
+        --color--#{$variant}--#{$shade}:#{$code}
+      }
+    }
+  }
+}
+
 :root {
-  /* BRAND COLORS */
-  --color--primary: #3f51b5;
-  --color--secondary: #00bcd4;
-  --color--accent: #ffc107;
-  --color--dark: #263238;
-  --color--light: #eceff1;
+  @include define-colors;
   --color--focus: #b3e5fc;
-
-  /* STATE COLORS */
-  --color--danger: #f44336;
-  --color--warning: #ffc107;
-  --color--success: #4caf50;
-  --color--info: #2196f3;
-
-  /* BRAND COLORS HOVERS */
-  --color--primary--hover: #283593;
-  --color--secondary--hover: #00838f;
-  --color--accent--hover: #ff8f00;
-  --color--dark--hover: #37474f;
-  --color--light--hover: #cfd8dc;
-
-  /*STATE HOVER COLORS */
-  --color--danger--hover: #d32f2f;
-  --color--warning--hover: #ffa000;
-  --color--success--hover: #388e3c;
-  --color--info--hover: #1976d2;
-
-  /* BRAND COLORS MUTED */
-  --color--primary--muted: #e8eaf6;
-  --color--secondary--muted: #e3f2fd;
-  --color--accent--muted: #fff8e1;
-  --color--dark--muted: #37474f; //TODO:
-  --color--light--muted: #cfd8dc; //TODO:
-
-  /*STATE HOVER MUTED */
-  --color--danger--muted: #ffebee;
-  --color--warning--muted: #fff8e1;
-  --color--success--muted: #e8f5e9;
-  --color--info--muted: #e3f2fd;
-
-  /* TEXT COLORS*/
-  --text-color--primary: #ffffff;
-  --text-color--secondary: #ffffff;
-  --text-color--accent: #000000;
-  --text-color--light: #000000;
-  --text-color--dark: #ffffff;
-
-  /* STATE TEXT COLORS */
-  --text-color--danger: #ffffff;
-  --text-color--warning: #000000;
-  --text-color--success: #ffffff;
-  --text-color--info: #ffffff;
 
   /* BORDER COLORS */
   --border-color: #b0bec5;
@@ -70,13 +36,13 @@
   --color--quora: #b92b27;
 
   /* GREYS */
-  --grey--lightest: #eceff1;
-  --grey--lighter: #cfd8dc;
-  --grey--light: #b0bec5;
-  --grey: #607d8b;
-  --grey--dark: #455a64;
-  --grey--darker: #37474f;
-  --grey--darkest: #263238;
+  --color--grey--lightest: #eceff1;
+  --color--grey--lighter: #cfd8dc;
+  --color--grey--light: #b0bec5;
+  --color--grey: #607d8b;
+  --color--grey--dark: #455a64;
+  --color--grey--darker: #37474f;
+  --color--grey--darkest: #263238;
 
   /* FONTS */
   --font-system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -107,6 +73,7 @@
   --border-radius--lg: 0px;
 
   /* SPACE */
+  --space--0: 0px;
   --space--xs: 8px;
   --space--sm: 16px;
   --space--md: 24px;
@@ -125,24 +92,29 @@
   /* BOX-SHADOWS */
   --box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.15);
 
-  /* BREAKPOINTS */
-  --breakpoint--xs: #{map-get($breakpoints, xs)};
-  --breakpoint--sm: #{map-get($breakpoints, sm)};
-  --breakpoint--md: #{map-get($breakpoints, md)};
-  --breakpoint--lg: #{map-get($breakpoints, lg)};
+  // /* BREAKPOINTS */
+  // --breakpoint--mobile: #{map-get($breakpoints, mobile)};
+  // --breakpoint--tablet: #{map-get($breakpoints, tablet)};
+  // --breakpoint--laptop: #{map-get($breakpoints, laptop)};
+  // --breakpoint--desktop: #{map-get($breakpoints, desktop)};
 
-  /* CONTAINER SIZES*/
-  --container-width--xs: 100%;
-  --container-width--sm: 540px;
-  --container-width--md: 720px;
-  --container-width--lg: 960px;
-  --container-width--xl: 1140px;
+  // /* CONTAINER SIZES*/
+  // --container-width--mobile: #{map-get($containers, mobile)};
+  // --container-width--tablet: #{map-get($containers, tablet)};
+  // --container-width--laptop: #{map-get($containers, laptop)};
+  // --container-width--desktop: #{map-get($containers, desktop)};
 
   /*GAP*/
-  --gap--xs: 4px;
-  --gap--sm: 8px;
-  --gap--md: 12px;
-  --gap: 12px;
-  --gap--lg: 16px;
-  --gap--xl: 20px;
+  --gap--desktop: 16px;
+  --gap--laptop: 16px;
+  --gap--tablet: 16px;
+  --gap--phablet: 16px;
+  --gap--phone: 16px;
+
+  --gap--xs: 8px;
+  --gap--sm: 16px;
+  --gap--md: 24px;
+  --gap: 24px;
+  --gap--lg: 32px;
+  --gap--xl: 40px;
 }

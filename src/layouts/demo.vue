@@ -1,4 +1,4 @@
 <template lang="pug">
-router-view
+  .demo
+    slot
 </template>
-

@@ -1,7 +1,44 @@
-@mixin breakpoints-list() {
+/*----------------------------------
+Breakpoint Class Maker
+Accepts Break Point and Class Name
+----------------------------------*/
+@function class-from-breakpoint($bp, $class) {
+  @if ($bp==$default-breakpoint) {
+    @return #{$class};
+  } @else {
+    @return #{$bp}--#{$class};
+  }
+}
+
+/*----------------------------------
+Loops through all the breakpoints
+and generates the media query for each
+----------------------------------*/
+@mixin loop-breakpoint() {
   @each $bp, $value in $breakpoints {
     @media only screen and (max-width: $value) {
-      @content;
+      @content ($bp);
     }
+  }
+}
+
+/*----------------------------------
+Loop through sizes
+----------------------------------*/
+@mixin loop-size() {
+  @each $size in $sizes {
+    @content ($size);
+  }
+}
+
+/*----------------------------------
+Automatically generates class for 
+given breakpoint
+----------------------------------*/
+
+@mixin breakpoint-rule($bp, $class) {
+  $class: class-from-breakpoint($bp, $class);
+  .#{$class} {
+    @content;
   }
 }

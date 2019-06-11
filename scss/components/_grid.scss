@@ -1,31 +1,23 @@
 $grids: 12;
 
 /*----------------------------------
-ROW
+MIXINS
 ----------------------------------*/
-@mixin row($bp: false) {
-  @each $size in $sizes {
-    $className: null;
-    @if ($bp) {
-      $className: #{$bp}--is-#{$size};
-    } @else {
-      $className: is-#{$size};
-    }
-    &.#{$className} {
-      @include row-gap($size);
-    }
-    &.is-multi {
-      @include row-gap($size, true);
-      > .ss-col {
-        @include col-gap($size, true);
-      }
+//ROW
+@mixin row($bp) {
+  @include row-gap($bp, false);
+  &.is-multi {
+    @include row-gap($bp, true);
+    > .ss-col {
+      @include col-gap($bp, true);
     }
   }
 }
 
-@mixin row-gap($size: "md", $multi: false) {
+//ROW GAP
+@mixin row-gap($bp, $multi) {
   &:not(.no-gap) {
-    $gap: calc(-1 * var(--gap--#{$size}));
+    $gap: calc(-1 * var(--gap--#{$bp}));
     @if $multi {
       margin: $gap;
     } @else {
@@ -35,17 +27,14 @@ ROW
   }
 }
 
-/*----------------------------------
-COLUMN
-----------------------------------*/
-
-@mixin col($bp: false) {
+//COLUMN
+@mixin col($bp) {
   @for $i from 1 through $grids {
     $className: null;
-    @if ($bp) {
-      $className: #{$bp}--is-#{$i};
-    } @else {
+    @if ($bp==$default-breakpoint) {
       $className: is-#{$i};
+    } @else {
+      $className: #{$bp}--is-#{$i};
     }
     &.#{$className} {
       flex: 0 0 (100% / $grids) * $i;
@@ -54,8 +43,9 @@ COLUMN
   }
 }
 
-@mixin col-gap($size: "md", $multi: false) {
-  $gap: var(--gap--#{$size});
+//COLUMN GAP
+@mixin col-gap($bp, $multi) {
+  $gap: var(--gap--#{$bp});
   @if $multi {
     padding: $gap;
   } @else {
@@ -64,15 +54,33 @@ COLUMN
   }
 }
 
-/*----------------------------------
-CREATE CLASSES
-----------------------------------*/
+//GRID
+@mixin grid($bp) {
+  @for $size from 1 through 12 {
+    $className: null;
+    @if ($bp==$default-breakpoint) {
+      $className: is-#{$size};
+    } @else {
+      $className: #{$bp}--is-#{$size};
+    }
+    &.#{$className} {
+      //Ocupies the space required for content.
+      grid-template-columns: repeat($size, minmax(min-content, max-content));
+      &.is-fluid {
+        //Distributes across available space.
+        grid-template-columns: repeat($size, 1fr);
+      }
+    }
+  }
+}
 
+/*----------------------------------
+CSS RULES
+----------------------------------*/
 .ss-row {
   display: flex;
   flex-wrap: wrap;
-  @include row-gap;
-  @include row;
+  @include row($default-breakpoint);
   &.no-gap {
     > .ss-col {
       padding-left: 0;
@@ -88,48 +96,28 @@ CREATE CLASSES
   flex-basis: 0;
   flex-grow: 1;
   max-width: 100%;
-  @include col();
-  @include col-gap();
+  @include col($default-breakpoint);
+  @include col-gap($default-breakpoint, false);
   @if ($debug) {
     border: 1px dotted blue;
   }
 }
 
-/*----------------------------------
-GRID
-----------------------------------*/
-@mixin grid($bp: false) {
-  @for $size from 1 through 12 {
-    $className: null;
-    @if ($bp) {
-      $className: #{$bp}--is-#{$size};
-    } @else {
-      $className: is-#{$size};
-    }
-    &.#{$className} {
-      grid-template-columns: repeat($size, 1fr);
-    }
-  }
-}
 .ss-grid {
   display: grid;
   gap: var(--gap--md);
-  @include grid;
+  @include grid($default-breakpoint);
 }
 
 /*----------------------------------
 MEDIA QUERIES
 ----------------------------------*/
-@each $bp, $value in $breakpoints {
-  @media only screen and (max-width: $value) {
-    .ss-row {
-      @include row($bp);
-    }
-    .ss-col {
-      @include col($bp);
-    }
-    .ss-grid {
-      @include grid($bp);
-    }
+@include loop-breakpoint() using ($bp) {
+  .ss-row {
+    @include row($bp);
+  }
+  .ss-col {
+    @include col($bp);
+    @include col-gap($bp, false);
   }
 }

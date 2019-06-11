@@ -4,7 +4,9 @@ import router from "./router";
 import store from "./store";
 
 Vue.config.productionTip = false;
-require('../scss/styles.scss'); 
+require("../scss/styles.scss");
+
+Vue.component("LayoutDemo", "@/layouts/demo");
 
 new Vue({
   router,

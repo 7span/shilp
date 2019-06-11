@@ -7,7 +7,7 @@ Applies to textboxes, textareas, select
 @mixin input-common {
   outline: 0;
   padding: 0 var(--space--xs);
-  border: 1px solid var(--grey--light);
+  border: 1px solid var(--color--grey--light);
   border-radius: 0;
   font-size: var(--font-size--span);
   font-family: var(--font--content);
@@ -18,8 +18,8 @@ Applies to textboxes, textareas, select
     position: relative;
   }
   &:disabled {
-    color: var(--grey);
-    background-color: var(--grey--lightest);
+    color: var(--color--grey);
+    background-color: var(--color--grey--lightest);
   }
 }
 
@@ -78,6 +78,11 @@ select {
   }
 }
 
+textarea {
+  @include input-common;
+  padding: var(--space--xs);
+}
+
 /*----------------------------------
 Form Fields
 ----------------------------------*/
@@ -92,11 +97,12 @@ Form Fields
   > label {
     display: flex;
     margin-bottom: 4px;
+    color: var(--color--grey--dark);
   }
   > small {
     display: flex;
     margin-top: 4px;
-    color: var(--grey--dark);
+    color: var(--color--grey--dark);
   }
 
   //FIELD STATES
@@ -122,6 +128,7 @@ Form Fields
     > label {
       margin-bottom: 0;
       margin-left: var(--space--xs);
+      color: #000;
       cursor: pointer;
     }
     @each $size in $sizes {

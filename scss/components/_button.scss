@@ -3,37 +3,6 @@ $variants: "primary", "secondary", "accent", "light", "dark", "info", "success",
 $styles: "solid", "outline", "muted";
 $shapes: "rectangle", "square", "rounded", "pill", "circle";
 
-/*----------------------------------
-NORMALIZE
-Contains the default properties of button
-----------------------------------*/
-@mixin button-common {
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  outline: 0;
-  white-space: nowrap;
-  font-size: var(--font-size--span);
-  font-family: var(--font--content);
-  svg {
-    margin-right: var(--space--xs);
-  }
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.8;
-  }
-  @if mixin-exists(__button) {
-    @include __button();
-  }
-  &.is-loading {
-    cursor: wait;
-  }
-  &.is-fluid {
-    width: 100%;
-  }
-}
 
 /*----------------------------------
 VARIANTS
@@ -127,14 +96,45 @@ SHAPES
   }
 }
 
+
+/*----------------------------------
+NORMALIZE
+Contains the default properties of button
+----------------------------------*/
+.button {
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: 0;
+  white-space: nowrap;
+  font-size: var(--font-size--span);
+  font-family: var(--font--content);
+  svg {
+    margin-right: var(--space--xs);
+  }
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.8;
+  }
+  &.is-loading {
+    cursor: wait;
+  }
+  &.is-fluid {
+    width: 100%;
+  }
+  @if mixin-exists(__button) {
+    @include __button();
+  }
+  @include button-size;
+}
+
 /*----------------------------------
 GENNERATE CLASSES
 ----------------------------------*/
 @each $variant in $variants {
-  button.is-#{$variant},
   .button.is-#{$variant} {
-    @include button-common();
-    @include button-size();
     @include button-variant($variant);
     @each $style in $styles {
       &.is-#{$style} {
@@ -145,7 +145,6 @@ GENNERATE CLASSES
 }
 
 @each $shape in $shapes {
-  button.is-#{$shape},
   .button.is-#{$shape} {
     @include button-shape("md", $shape);
     @if $shape== "circle" or $shape== "square" {
@@ -157,8 +156,7 @@ GENNERATE CLASSES
 }
 
 @each $size in $sizes {
-  .button.is-#{$size},
-  button.is-#{$size} {
+  .button.is-#{$size} {
     @include button-size($size);
     @each $shape in $shapes {
       &.is-#{$shape} {

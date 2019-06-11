@@ -4,9 +4,9 @@
     .ss-col(v-for="i in 12") 
       div {{i}}
   .ss-row.rows__2(v-for="i in 11")
-    .ss-col(:class="`is-${i}`") 
+    .ss-col.phone--is-12.phablet--is-6(:class="`is-${i}`") 
       div {{i}}
-    .ss-col(:class="`is-${12 - i}`") 
+    .ss-col.phone--is-12.phablet--is-6(:class="`is-${12 - i}`") 
       div {{12 - i}}
 </template>
 

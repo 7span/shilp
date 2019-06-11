@@ -1,5 +1,5 @@
 @mixin container($breakpoint) {
-  max-width: var(--container-width--#{$breakpoint});
+  max-width: map-get($containers, $breakpoint);
   padding-left: var(--gap--#{$breakpoint});
   padding-right: var(--gap--#{$breakpoint});
 }
@@ -7,16 +7,14 @@
 .ss-container {
   margin-left: auto;
   margin-right: auto;
-  @include container(xl);
+  @include container($default-breakpoint);
   &.is-fluid {
     max-width: none;
   }
 }
 
-@each $bp, $value in $breakpoints {
-  @media only screen and (max-width: $value) {
-    .ss-container {
-      @include container($bp);
-    }
+@include loop-breakpoint() using ($bp) {
+  .ss-container {
+    @include container($bp);
   }
 }
