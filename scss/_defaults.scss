@@ -1,0 +1,44 @@
+@mixin defaults {
+  *,
+  *:after,
+  *:before {
+    box-sizing: border-box;
+  }
+
+  @each $heading, $config in $headings {
+    #{$heading},
+    .#{$heading} {
+      font-size: var(--font-size--#{$heading});
+      font-weight: var(--font-weight--bold);
+      font-family: var(--font--heading);
+    }
+  }
+
+  img,
+  svg {
+    vertical-align: top;
+  }
+}
+
+/*----------------------------------
+If the scoped is true,
+the default rules will be applied 
+under scoped selector.
+Useful when integrating with other
+CSS frameworks
+----------------------------------*/
+@if $scoped {
+  .#{$scope} {
+    font-family: var(--font--content);
+    @include defaults;
+  }
+} @else {
+  @at-root {
+    body {
+      font-family: var(--font--content);
+      margin: 0;
+      padding: 0;
+    }
+    @include defaults;
+  }
+}

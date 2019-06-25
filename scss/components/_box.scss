@@ -1,20 +1,20 @@
-@mixin container($breakpoint) {
-  max-width: map-get($containers, $breakpoint);
+@mixin box($breakpoint) {
+  max-width: map-get($boxes, $breakpoint);
   padding-left: var(--gap--#{$breakpoint});
   padding-right: var(--gap--#{$breakpoint});
 }
 
-.ss-container {
+.box {
   margin-left: auto;
   margin-right: auto;
-  @include container($default-breakpoint);
+  @include box($default-breakpoint);
   &.is-fluid {
     max-width: none;
   }
 }
 
 @include loop-breakpoint() using ($bp) {
-  .ss-container {
-    @include container($bp);
+  .box {
+    @include box($bp);
   }
 }

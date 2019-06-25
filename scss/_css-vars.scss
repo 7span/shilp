@@ -1,0 +1,89 @@
+:root {
+  //Loop through colors
+  @include loop-colors() using ($variant, $shade, $code) {
+    @if ($shade== "default") {
+      --color--#{$variant}: #{$code};
+    } @else if($shade== "text") {
+      --text-color--#{$variant}: #{$code};
+    } @else {
+      --color--#{$variant}--#{$shade}: #{$code};
+    }
+  }
+
+  //Loop Through Greys
+  @each $shade, $code in $greys {
+    @if ($shade== "default") {
+      --color--grey: #{$code};
+    } @else {
+      --color--grey--#{$shade}: #{$code};
+    }
+  }
+
+  //Loop Through Social Colors
+  @each $platform, $code in $social {
+    --color--#{$platform}: #{$code};
+  }
+
+  //Loop through Headers
+  @each $heading, $config in $headings {
+    --font-size--#{$heading}: #{map-get($config, "size")};
+  }
+
+  //Loop through Gaps
+  @each $gap, $val in $gaps {
+    @if ($gap == "default") {
+      --gap: #{$val};
+    } @else {
+      --gap--#{$gap}: #{$val};
+    }
+  }
+
+  //Loop through Spaces
+  @each $space, $val in $spaces {
+    @if ($space== "default") {
+      --space: #{$val};
+    } @else {
+      --space--#{$space}: #{$val};
+    }
+  }
+
+  //Loop through Input Sizes
+  @each $size, $val in $input-sizes {
+    @if ($size== "default") {
+      --input-size: #{$val};
+    } @else {
+      --input-size--#{$size}: #{$val};
+    }
+  }
+
+  /* FONTS */
+  --font--system: #{$system-fonts};
+  --font--heading: #{map-deep-get($font, "family", "heading")};
+  --font--content: #{map-deep-get($font, "family", "content")};
+
+  /* FONT WEIGHTS */
+  --font-weight--regular: #{map-deep-get($font, "weight", "regular")};
+  --font-weight--bold: #{map-deep-get($font, "weight", "bold")};
+  --font-weight--light: #{map-deep-get($font, "weight", "light")};
+
+  /* BORDER RADIUS */
+  --border-radius--sm: 0px;
+  --border-radius: 0px;
+  --border-radius--lg: 0px;
+
+  /* BOX-SHADOWS */
+  --box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.15);
+  --color--focus: #b3e5fc;
+
+  // /* BREAKPOINTS */
+  // --breakpoint--mobile: #{map-get($breakpoints, mobile)};
+  // --breakpoint--tablet: #{map-get($breakpoints, tablet)};
+  // --breakpoint--laptop: #{map-get($breakpoints, laptop)};
+  // --breakpoint--desktop: #{map-get($breakpoints, desktop)};
+
+  // /* CONTAINER SIZES*/
+  // --container-width--mobile: #{map-get($containers, mobile)};
+  // --container-width--tablet: #{map-get($containers, tablet)};
+  // --container-width--laptop: #{map-get($containers, laptop)};
+  // --container-width--desktop: #{map-get($containers, desktop)};
+}

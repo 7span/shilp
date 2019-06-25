@@ -4,18 +4,18 @@ $grids: 12;
 MIXINS
 ----------------------------------*/
 //ROW
-@mixin row($bp) {
-  @include row-gap($bp, false);
+@mixin blocks($bp) {
+  @include blocks-gap($bp, false);
   &.is-multi {
-    @include row-gap($bp, true);
-    > .ss-col {
-      @include col-gap($bp, true);
+    @include blocks-gap($bp, true);
+    > .block {
+      @include block-gap($bp, true);
     }
   }
 }
 
 //ROW GAP
-@mixin row-gap($bp, $multi) {
+@mixin blocks-gap($bp, $multi) {
   &:not(.no-gap) {
     $gap: calc(-1 * var(--gap--#{$bp}));
     @if $multi {
@@ -28,7 +28,7 @@ MIXINS
 }
 
 //COLUMN
-@mixin col($bp) {
+@mixin block($bp) {
   @for $i from 1 through $grids {
     $className: null;
     @if ($bp==$default-breakpoint) {
@@ -44,7 +44,7 @@ MIXINS
 }
 
 //COLUMN GAP
-@mixin col-gap($bp, $multi) {
+@mixin block-gap($bp, $multi) {
   $gap: var(--gap--#{$bp});
   @if $multi {
     padding: $gap;
@@ -77,33 +77,36 @@ MIXINS
 /*----------------------------------
 CSS RULES
 ----------------------------------*/
-.ss-row {
+.blocks {
   display: flex;
   flex-wrap: wrap;
-  @include row($default-breakpoint);
+  @include blocks($default-breakpoint);
   &.no-gap {
-    > .ss-col {
+    > .block {
       padding-left: 0;
       padding-right: 0;
     }
+  }
+  &.is-middle {
+    align-items: center;
   }
   @if ($debug) {
     border: 1px dotted red;
   }
 }
 
-.ss-col {
+.block {
   flex-basis: 0;
   flex-grow: 1;
   max-width: 100%;
-  @include col($default-breakpoint);
-  @include col-gap($default-breakpoint, false);
+  @include block($default-breakpoint);
+  @include block-gap($default-breakpoint, false);
   @if ($debug) {
     border: 1px dotted blue;
   }
 }
 
-.ss-grid {
+.grid {
   display: grid;
   gap: var(--gap--md);
   @include grid($default-breakpoint);
@@ -113,11 +116,11 @@ CSS RULES
 MEDIA QUERIES
 ----------------------------------*/
 @include loop-breakpoint() using ($bp) {
-  .ss-row {
-    @include row($bp);
+  .blocks {
+    @include blocks($bp);
   }
-  .ss-col {
-    @include col($bp);
-    @include col-gap($bp, false);
+  .block {
+    @include block($bp);
+    @include block-gap($bp, false);
   }
 }

@@ -1,0 +1,30 @@
+@mixin gap($bp, $prop, $rule, $gap) {
+  @include breakpoint-rule($bp, g#{$prop}--#{$gap}) {
+    display: inline-flex;
+    @if ($prop== "x") {
+      flex-direction: row;
+    }
+    @if ($prop== "y") {
+      flex-direction: column;
+    }
+
+    > * {
+      + * {
+        #{$rule}: var(--gap--#{$gap});
+      }
+    }
+  }
+}
+
+@each $gap, $value in $gaps {
+  @include gap($default-breakpoint, "x", "margin-left", $gap);
+  @include gap($default-breakpoint, "y", "margin-top", $gap);
+}
+
+//Media Query
+@include loop-breakpoint() using ($bp) {
+  @each $gap, $value in $gaps {
+    @include gap($bp, "x", "margin-left", $gap);
+    @include gap($bp, "y", "margin-top", $gap);
+  }
+}

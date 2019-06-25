@@ -3,7 +3,6 @@ $variants: "primary", "secondary", "accent", "light", "dark", "info", "success",
 $styles: "solid", "outline", "muted";
 $shapes: "rectangle", "square", "rounded", "pill", "circle";
 
-
 /*----------------------------------
 VARIANTS
 Generates classes based on themes colors
@@ -63,8 +62,8 @@ $iconSize: (
 );
 
 @mixin button-size($size: "md") {
-  @if $size== "xs" {
-    font-size: 70%;
+  @if $size== "sm" {
+    font-size: 12px;
     padding: 0px var(--space--sm);
   } @else {
     padding: 0px var(--space--#{$size});
@@ -85,23 +84,24 @@ SHAPES
   } @else if $shape== "square" {
     height: var(--input-size--#{$size});
     width: var(--input-size--#{$size});
-    padding: 0;
+    padding: 0 !important;
   } @else if $shape== "circle" {
     width: var(--input-size--#{$size});
     height: var(--input-size--#{$size});
-    padding: 0;
+    padding: 0 !important;
     border-radius: 50%;
   } @else if $shape== "pill" {
     border-radius: var(--input-size--#{$size});
   }
 }
 
-
 /*----------------------------------
 NORMALIZE
 Contains the default properties of button
 ----------------------------------*/
-.button {
+.button,
+.button-group > button,
+.button-group > a {
   border: none;
   cursor: pointer;
   display: flex;
@@ -109,8 +109,9 @@ Contains the default properties of button
   justify-content: center;
   outline: 0;
   white-space: nowrap;
-  font-size: var(--font-size--span);
   font-family: var(--font--content);
+  text-decoration: none;
+  font-size: 14px;
   svg {
     margin-right: var(--space--xs);
   }
@@ -124,10 +125,28 @@ Contains the default properties of button
   &.is-fluid {
     width: 100%;
   }
+  &:hover {
+    text-decoration: none;
+  }
   @if mixin-exists(__button) {
     @include __button();
   }
   @include button-size;
+}
+
+.button-group {
+  display: flex;
+  > button,
+  > a {
+    flex: 0 0 auto;
+  }
+  &.is-stacked {
+    flex-direction: column;
+    > button,
+    > a {
+      width: 100%;
+    }
+  }
 }
 
 /*----------------------------------
@@ -142,9 +161,25 @@ GENNERATE CLASSES
       }
     }
   }
+  .button-group.is-#{$variant} {
+    > button,
+    > a {
+      @include button-variant($variant);
+    }
+    @each $style in $styles {
+      &.is-#{$style} {
+        > button,
+        > a {
+          @include button-style($variant, $style);
+        }
+      }
+    }
+  }
 }
 
 @each $shape in $shapes {
+  .button-group.is-#{$shape} > button,
+  .button-group.is-#{$shape} > a,
   .button.is-#{$shape} {
     @include button-shape("md", $shape);
     @if $shape== "circle" or $shape== "square" {
@@ -161,6 +196,21 @@ GENNERATE CLASSES
     @each $shape in $shapes {
       &.is-#{$shape} {
         @include button-shape($size, $shape);
+      }
+    }
+  }
+
+  .button-group.is-#{$size} {
+    > button,
+    > a {
+      @include button-size($size);
+    }
+    @each $shape in $shapes {
+      &.is-#{$shape} {
+        > button,
+        > a {
+          @include button-shape($size, $shape);
+        }
       }
     }
   }

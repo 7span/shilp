@@ -1,4 +1,14 @@
 /*----------------------------------
+Get Deeper Values from Map
+----------------------------------*/
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}
+
+/*----------------------------------
 Breakpoint Class Maker
 Accepts Break Point and Class Name
 ----------------------------------*/
@@ -28,6 +38,17 @@ Loop through sizes
 @mixin loop-size() {
   @each $size in $sizes {
     @content ($size);
+  }
+}
+
+/*----------------------------------
+Loop colors
+----------------------------------*/
+@mixin loop-colors() {
+  @each $variant, $color in $colors {
+    @each $shade, $code in $color {
+      @content ($variant,$shade,$code);
+    }
   }
 }
 

@@ -1,11 +1,11 @@
 <template lang="pug">
-.ss-container
+.box
   .links
     router-link(to="/demos/input") Inputs
-    router-link(to="/demos/grid") Grid
+    router-link(to="/demos/blocks") Blocks
     router-link(to="/demos/button") Button
     router-link(to="/demos/spacing") Spacing
-    router-link(to="/demos/spacing") Colors
+    router-link(to="/demos/colors") Colors
   .demos
     router-view
 </template>

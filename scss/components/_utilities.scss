@@ -1,0 +1,20 @@
+$utilityClasses: (
+  ta: (
+    rule: "text-align",
+    values: (
+      "center",
+      "left",
+      "right"
+    )
+  )
+);
+
+@each $utility, $config in $utilityClasses {
+  $values: map-get($config, "values");
+  $rule: map-get($config, "rule");
+  @each $value in $values {
+    .#{$utility}--#{$value} {
+      #{$rule}: #{$value};
+    }
+  }
+}

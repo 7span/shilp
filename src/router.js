@@ -7,31 +7,41 @@ export default new Router({
   routes: [
     {
       path: "/",
-      component: require("@/App").default
-    },
-    {
-      path: "/demos",
-      component: require("@/views/demos/").default,
+      component: require("@/app").default,
       children: [
         {
-          path: "button",
-          component: require("@/views/demos/button").default
-        },
-        {
-          path: "grid",
-          component: require("@/views/demos/grid").default
-        },
-        {
-          path: "input",
-          component: require("@/views/demos/input").default
-        },
-        {
-          path: "spacing",
-          component: require("@/views/demos/spacing").default
-        },
-        {
-          path: "colors",
-          component: require("@/views/demos/colors").default
+          path: "",
+          component: require("@/views/index").default,
+          children: [
+            {
+              path: "text",
+              component: require("@/views/demos/text").default
+            },
+            {
+              path: "button",
+              component: require("@/views/demos/button").default
+            },
+            {
+              path: "blocks",
+              component: require("@/views/demos/blocks").default
+            },
+            {
+              path: "input",
+              component: require("@/views/demos/input").default
+            },
+            {
+              path: "spacing",
+              component: require("@/views/demos/spacing").default
+            },
+            {
+              path: "gaps",
+              component: require("@/views/demos/gaps").default
+            },
+            {
+              path: "colors",
+              component: require("@/views/demos/colors").default
+            }
+          ]
         }
       ]
     }

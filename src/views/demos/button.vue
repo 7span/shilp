@@ -1,7 +1,8 @@
 <template lang="pug">
 .buttons
-  .ss-row
-    .ss-col.is-6
+  h1 Buttons
+  .blocks
+    .block.is-5
       .field
         label Button Text
         input(type="text" v-model="text")
@@ -13,16 +14,30 @@
 
       .field(v-for="variant,key in variants")
         label {{key}}
-        .ss-grid.is-5
+        .grid.is-3
           .field.is-radio(v-for="item in variant")
             input(:id="`variant-${item}`" type="radio" :name="key" :value="item" v-model="selected[key]") 
             label(:for="`variant-${item}`") {{item}}
 
-    .ss-col.is-6
-      button(:class="buttonClass") 
-        svg(v-if="icon" viewBox='0 0 24 24')
-          path(fill='#000000',d='M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z')
-        | {{text}}
+    .block.is-7.gy--xl
+      section
+        h3.m--0 Button Classes
+        p.m--0 .{{buttonClass.join(".")}}
+
+      section
+        h3.m--0 Button Preview
+        button(:class="buttonClass") 
+          svg(v-if="icon" viewBox='0 0 24 24')
+            path(fill='#000000',d='M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z')
+          | {{text}}
+
+      section
+        h3.m--0 Button Group
+        .button-group.is-stacked.gy--xs(:class="buttonClass.filter(item=>item!=='button')")
+          button(v-for="n in 3") 
+            svg(v-if="icon" viewBox='0 0 24 24')
+              path(fill='#000000',d='M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z')
+            | {{text}} {{n}}
 </template>
  
 <script>

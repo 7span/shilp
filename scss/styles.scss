@@ -1,26 +1,15 @@
-//NORMALIZE
-//@import "./normalize";
+@import "./config";
+@import "./vars";
+@import "./mixins";
+@import "./functions";
+@import "./css-vars";
 
-//CONFIG
-@import "./config/index.scss";
-
-//7SPAN DEFAULTS
 @import "./defaults";
-
-//CONTAINER
-@import "./components/container";
-
-//BUTTON
+@import "./components/box";
 @import "./components/button";
-
-//GRID
-@import "./components/grid";
-
-//INPUTS
+@import "./components/blocks";
 @import "./components/inputs";
-
-//SPACING
-@import "./components/spacing";
-
-//COLORS
+@import "./components/space";
+@import "./components/gap";
 @import "./components/color";
+@import "./components/utilities";
