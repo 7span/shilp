@@ -45,7 +45,7 @@ Loop through sizes
 Loop colors
 ----------------------------------*/
 @mixin loop-colors() {
-  @each $variant, $color in $colors {
+  @each $variant, $color in $styles-colors {
     @each $shade, $code in $color {
       @content ($variant,$shade,$code);
     }

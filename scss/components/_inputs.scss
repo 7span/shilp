@@ -1,5 +1,4 @@
 $field-states: "danger", "warning", "success", "info";
-
 /*----------------------------------
 COMMON CSS
 Applies to textboxes, textareas, select
@@ -35,12 +34,24 @@ SIZES
 ALL INPUT TEXT TYPES
 Selector for all the input types
 ----------------------------------*/
+
 @mixin input-text {
-  input[type="text"],
+  input[type="color"],
+  input[type="date"],
+  input[type="datetime-local"],
   input[type="email"],
-  input[type="url"],
+  input[type="file"],
+  input[type="month"],
+  input[type="number"],
+  input[type="image"],
+  input[type="password"],
+  input[type="range"],
   input[type="search"],
-  input[type="password"] {
+  input[type="tel"],
+  input[type="text"],
+  input[type="time"],
+  input[type="url"],
+  input[type="week"] {
     @content;
   }
 }
