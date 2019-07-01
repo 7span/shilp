@@ -5,12 +5,16 @@
     box-sizing: border-box;
   }
 
-  @each $heading, $config in $headings {
-    #{$heading},
-    .#{$heading} {
-      font-size: var(--font-size--#{$heading});
-      font-weight: var(--font-weight--bold);
-      font-family: var(--font--heading);
+  /*
+  TEXT
+  Sets the default font-family, size, weight for text tags.
+  */
+  @each $tag, $tag-settings in $styles-text {
+    #{$tag},
+    .#{$tag} {
+      font-size: var(--font-size--#{$tag});
+      font-family: map-get($tag-settings, "font-family");
+      font-weight: map-get($tag-settings, "font-weight");
     }
   }
 
@@ -20,22 +24,20 @@
   }
 }
 
-/*----------------------------------
-If the scoped is true,
-the default rules will be applied 
-under scoped selector.
-Useful when integrating with other
-CSS frameworks
-----------------------------------*/
+/*
+SCOPE
+If the scoped is true, the default rules will be applied under scoped selector.
+Useful when integrating with other CSS frameworks
+*/
 @if $scoped {
   .#{$scope} {
-    font-family: var(--font--content);
+    font-family: var(--font-family--content);
     @include defaults;
   }
 } @else {
   @at-root {
     body {
-      font-family: var(--font--content);
+      font-family: var(--font-family--content);
       margin: 0;
       padding: 0;
     }

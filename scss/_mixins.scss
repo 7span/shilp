@@ -1,31 +1,24 @@
-/*----------------------------------
-Button Markup Clean
-----------------------------------*/
-@mixin button--clean($size: false) {
+/*
+RESETS
+Resets the markup of HTML tags
+*/
+@mixin button--reset {
   background: transparent;
   border: none;
   outline: 0;
   padding: 0;
   cursor: pointer;
-
-  @if $size {
-    width: $size;
-    height: $size;
-  }
 }
 
-/*----------------------------------
-Listing Markup Clean
-----------------------------------*/
-@mixin ul--clean {
+@mixin ul--reset {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-/*----------------------------------
-Position Mixin
-----------------------------------*/
+/*
+POSITION
+*/
 @mixin position($pos: absolute, $t: 0, $r: 0, $b: 0, $l: 0) {
   position: $pos;
   top: $t;

@@ -1,0 +1,75 @@
+:root {
+  //COLORS
+  @include loop-colors() using ($variant, $shade, $value) {
+    @if ($shade== "default") {
+      --color--#{$variant}: #{$value};
+    } @else if($shade== "text") {
+      --text-color--#{$variant}: #{$value};
+    } @else {
+      --color--#{$variant}--#{$shade}: #{$value};
+    }
+  }
+
+  //FONT-FAMILIES
+  @each $type, $value in $font-families {
+    --font-family--#{$type}: #{$value};
+  }
+
+  //FONT-SIZES
+  @each $size, $value in $font-sizes {
+    --font-size--#{$size}: #{$value};
+  }
+
+  //FONT-WEIGHTS
+  @each $type, $value in $font-weights {
+    --font-weight--#{$type}: #{$value};
+  }
+
+  //GAPS
+  @each $size, $value in $gaps {
+    @if ($size == "default") {
+      --gap: #{$size};
+    } @else {
+      --gap--#{$size}: #{$value};
+    }
+  }
+
+  //SPACES
+  @each $size, $value in $spaces {
+    @if ($size== "default") {
+      --space: #{$size};
+    } @else {
+      --space--#{$size}: #{$value};
+    }
+  }
+
+  //INPUT-SIZES
+  @each $size, $value in $input-sizes {
+    @if ($size== "default") {
+      --input-size: #{$value};
+    } @else {
+      --input-size--#{$size}: #{$value};
+    }
+  }
+
+  //BORDER-RADIUS
+  @each $size, $value in $border-radius {
+    @if ($size== "default") {
+      --border-radius: #{$value};
+    } @else {
+      --border-radius--#{$size}: #{$value};
+    }
+  }
+
+  // BREAKPOINTS
+  // --breakpoint--mobile: #{map-get($breakpoints, mobile)};
+  // --breakpoint--tablet: #{map-get($breakpoints, tablet)};
+  // --breakpoint--laptop: #{map-get($breakpoints, laptop)};
+  // --breakpoint--desktop: #{map-get($breakpoints, desktop)};
+
+  // CONTAINER SIZES
+  // --container-width--mobile: #{map-get($containers, mobile)};
+  // --container-width--tablet: #{map-get($containers, tablet)};
+  // --container-width--laptop: #{map-get($containers, laptop)};
+  // --container-width--desktop: #{map-get($containers, desktop)};
+}

@@ -1,0 +1,272 @@
+/*
+STYLES COLORS
+Map should follow this format: ColorName > Shade > Color Code
+*/
+$styles-colors: () !default;
+$styles-colors: map-merge(
+  (
+    primary: (
+      default: #3f51b5,
+      hover: #283593,
+      muted: #e8eaf6,
+      text: #ffffff
+    ),
+    secondary: (
+      default: #00bcd4,
+      hover: #00838f,
+      muted: #e3f2fd,
+      text: #ffffff
+    ),
+    accent: (
+      default: #ffc107,
+      hover: #ff8f00,
+      muted: #fff8e1,
+      text: #000000
+    ),
+    dark: (
+      default: #263238,
+      hover: #37474f,
+      muted: #37474f,
+      text: #ffffff
+    ),
+    light: (
+      default: #eceff1,
+      hover: #cfd8dc,
+      muted: #cfd8dc,
+      text: #000000
+    ),
+    danger: (
+      default: #f44336,
+      hover: #d32f2f,
+      muted: #ffebee,
+      text: #ffffff
+    ),
+    warning: (
+      default: #ffc107,
+      hover: #ffa000,
+      muted: #fff8e1,
+      text: #000000
+    ),
+    success: (
+      default: #4caf50,
+      hover: #388e3c,
+      muted: #e8f5e9,
+      text: #ffffff
+    ),
+    info: (
+      default: #2196f3,
+      hover: #1976d2,
+      muted: #e3f2fd,
+      text: #ffffff
+    ),
+    grey: (
+      lightest: #eceff1,
+      lighter: #cfd8dc,
+      light: #b0bec5,
+      default: #607d8b,
+      dark: #455a64,
+      darker: #37474f,
+      darkest: #263238
+    )
+  ),
+  $styles-colors
+);
+
+/*
+FONT-FAMILIES
+*/
+$font-families: () !default;
+$font-families: map-merge(
+  (
+    system: $system-fonts,
+    heading: $system-fonts,
+    content: $system-fonts,
+    code: '"Courier New", Courier, monospace'
+  ),
+  $font-families
+);
+
+/*
+FONT-WEIGHTS
+*/
+$font-weights: () !default;
+$font-weights: map-merge(
+  (
+    light: 300,
+    regular: 400,
+    bold: 600
+  ),
+  $font-weights
+);
+
+/*
+FONT-SIZES
+*/
+$font-sizes: () !default;
+$font-sizes: map-merge(
+  (
+    h1: 48px,
+    h2: 36px,
+    h3: 24px,
+    h4: 18px,
+    h5: 16px,
+    h6: 13px,
+    p: 16px,
+    span: 16px,
+    small: 12px,
+    code: 14px
+  ),
+  $font-sizes
+);
+
+/*
+TEXT
+Defines the default font sizes, family and weights
+The CSS variables are just a normal text for SCSS which will be rendered run time.
+The CSS varialbes are used as fallback value.
+*/
+$styles-text: () !default;
+$styles-text: map-merge(
+  (
+    "h1": (
+      font-family: var(--font-family--heading),
+      font-weight: var(--font-weight--bold)
+    ),
+    "h2": (
+      font-family: var(--font-family--heading),
+      font-weight: var(--font-weight--bold)
+    ),
+    "h3": (
+      font-family: var(--font-family--heading),
+      font-weight: var(--font-weight--bold)
+    ),
+    "h4": (
+      font-family: var(--font-family--heading),
+      font-weight: var(--font-weight--bold)
+    ),
+    "h5": (
+      font-family: var(--font-family--heading),
+      font-weight: var(--font-weight--bold)
+    ),
+    "h6": (
+      font-family: var(--font-family--heading),
+      font-weight: var(--font-weight--bold)
+    )
+  ),
+  $styles-text
+);
+
+/*
+SIZES 
+Diffrent sizing for elements, spacing, margin.
+I.e. is--xs, space--sm, p--xl
+*/
+$sizes: "0", "xs", "sm", "md", "lg", "xl";
+
+/*
+BREAKPOINTS
+Follows the desktop-first approach.
+*/
+$breakpoints: () !default;
+$breakpoints: map-merge(
+  (
+    laptop: 1200px,
+    tablet: 992px,
+    phablet: 768px,
+    phone: 576px
+  ),
+  $breakpoints
+);
+
+/*
+BOXES
+Container sizes for boxed content.
+Works just like Bootstrap's "container"
+*/
+$boxes: () !default;
+$boxes: map-merge(
+  (
+    desktop: 1140px,
+    laptop: 960px,
+    tablet: 720px,
+    phablet: 540px,
+    phone: 100%
+  ),
+  $boxes
+);
+
+/*
+GAPS
+The sizes are used for keeping gap between blocks(aka grid).
+The values same as breakpoint names will be used for gap in active media query.
+*/
+//TODO Reduce the number of variables and use the space instead!
+
+$gaps: () !default;
+$gaps: map-merge(
+  (
+    default: 24px,
+    desktop: 16px,
+    laptop: 16px,
+    tablet: 16px,
+    phablet: 16px,
+    phone: 16px,
+    xs: 8px,
+    sm: 16px,
+    md: 24px,
+    lg: 32px,
+    xl: 40px
+  ),
+  $gaps
+);
+
+/*
+SPACES
+Used for spacing values in margin, padding etc.
+*/
+$spaces: () !default;
+$spaces: map-merge(
+  (
+    0: 0px,
+    xs: 8px,
+    sm: 16px,
+    md: 24px,
+    default: 24px,
+    lg: 32px,
+    xl: 40px
+  ),
+  $spaces
+);
+
+/*
+INPUT SIZES
+Sizes for input, buttons.
+*/
+$input-sizes: () !default;
+$input-sizes: map-merge(
+  (
+    xs: 16px,
+    sm: 24px,
+    md: 32px,
+    default: 32px,
+    lg: 40px,
+    xl: 48px
+  ),
+  $input-sizes
+);
+
+/*
+BORDER_RADIUS
+*/
+$border-radius: () !default;
+$border-radius: map-merge(
+  (
+    xs: 2px,
+    sm: 4px,
+    md: 6px,
+    default: 6px,
+    lg: 8px,
+    xl: 10px
+  ),
+  $border-radius
+);
