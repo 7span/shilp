@@ -62,7 +62,7 @@ Input
 @include input-text {
   @include input-common;
   @include input-size;
-  @each $size in $sizes {
+  @each $size in $styles-sizes {
     &.is-#{$size} {
       @include input-size($size);
     }
@@ -82,7 +82,7 @@ Select
 select {
   @include input-common;
   @include input-size;
-  @each $size in $sizes {
+  @each $size in $styles-sizes {
     &.is-#{$size} {
       @include input-size($size);
     }
@@ -142,7 +142,7 @@ Form Fields
       color: #000;
       cursor: pointer;
     }
-    @each $size in $sizes {
+    @each $size in $styles-sizes {
       &.is-#{$size} {
         @include input-size($size);
       }

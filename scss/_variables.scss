@@ -75,35 +75,35 @@ $styles-colors: map-merge(
 /*
 FONT-FAMILIES
 */
-$font-families: () !default;
-$font-families: map-merge(
+$styles-font-families: () !default;
+$styles-font-families: map-merge(
   (
     system: $system-fonts,
     heading: $system-fonts,
     content: $system-fonts,
     code: '"Courier New", Courier, monospace'
   ),
-  $font-families
+  $styles-font-families
 );
 
 /*
 FONT-WEIGHTS
 */
-$font-weights: () !default;
-$font-weights: map-merge(
+$styles-font-weights: () !default;
+$styles-font-weights: map-merge(
   (
     light: 300,
     regular: 400,
     bold: 600
   ),
-  $font-weights
+  $styles-font-weights
 );
 
 /*
 FONT-SIZES
 */
-$font-sizes: () !default;
-$font-sizes: map-merge(
+$styles-font-sizes: () !default;
+$styles-font-sizes: map-merge(
   (
     h1: 48px,
     h2: 36px,
@@ -116,7 +116,7 @@ $font-sizes: map-merge(
     small: 12px,
     code: 14px
   ),
-  $font-sizes
+  $styles-font-sizes
 );
 
 /*
@@ -161,21 +161,21 @@ SIZES
 Diffrent sizing for elements, spacing, margin.
 I.e. is--xs, space--sm, p--xl
 */
-$sizes: "0", "xs", "sm", "md", "lg", "xl";
+$styles-sizes: "0", "xs", "sm", "md", "lg", "xl";
 
 /*
 BREAKPOINTS
 Follows the desktop-first approach.
 */
-$breakpoints: () !default;
-$breakpoints: map-merge(
+$styles-breakpoints: () !default;
+$styles-breakpoints: map-merge(
   (
     laptop: 1200px,
     tablet: 992px,
     phablet: 768px,
     phone: 576px
   ),
-  $breakpoints
+  $styles-breakpoints
 );
 
 /*
@@ -183,8 +183,8 @@ BOXES
 Container sizes for boxed content.
 Works just like Bootstrap's "container"
 */
-$boxes: () !default;
-$boxes: map-merge(
+$styles-boxes: () !default;
+$styles-boxes: map-merge(
   (
     desktop: 1140px,
     laptop: 960px,
@@ -192,7 +192,7 @@ $boxes: map-merge(
     phablet: 540px,
     phone: 100%
   ),
-  $boxes
+  $styles-boxes
 );
 
 /*
@@ -202,8 +202,8 @@ The values same as breakpoint names will be used for gap in active media query.
 */
 //TODO Reduce the number of variables and use the space instead!
 
-$gaps: () !default;
-$gaps: map-merge(
+$styles-gaps: () !default;
+$styles-gaps: map-merge(
   (
     default: 24px,
     desktop: 16px,
@@ -217,15 +217,15 @@ $gaps: map-merge(
     lg: 32px,
     xl: 40px
   ),
-  $gaps
+  $styles-gaps
 );
 
 /*
 SPACES
 Used for spacing values in margin, padding etc.
 */
-$spaces: () !default;
-$spaces: map-merge(
+$styles-spaces: () !default;
+$styles-spaces: map-merge(
   (
     0: 0px,
     xs: 8px,
@@ -235,15 +235,15 @@ $spaces: map-merge(
     lg: 32px,
     xl: 40px
   ),
-  $spaces
+  $styles-spaces
 );
 
 /*
 INPUT SIZES
 Sizes for input, buttons.
 */
-$input-sizes: () !default;
-$input-sizes: map-merge(
+$styles-input-sizes: () !default;
+$styles-input-sizes: map-merge(
   (
     xs: 16px,
     sm: 24px,
@@ -252,14 +252,14 @@ $input-sizes: map-merge(
     lg: 40px,
     xl: 48px
   ),
-  $input-sizes
+  $styles-input-sizes
 );
 
 /*
 BORDER_RADIUS
 */
-$border-radius: () !default;
-$border-radius: map-merge(
+$styles-border-radius: () !default;
+$styles-border-radius: map-merge(
   (
     xs: 2px,
     sm: 4px,
@@ -268,5 +268,5 @@ $border-radius: map-merge(
     lg: 8px,
     xl: 10px
   ),
-  $border-radius
+  $styles-border-radius
 );

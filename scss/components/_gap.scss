@@ -16,14 +16,14 @@
   }
 }
 
-@each $gap, $value in $gaps {
+@each $gap, $value in $styles-gaps {
   @include gap($default-breakpoint, "x", "margin-left", $gap);
   @include gap($default-breakpoint, "y", "margin-top", $gap);
 }
 
 //Media Query
 @include loop-breakpoint() using ($bp) {
-  @each $gap, $value in $gaps {
+  @each $gap, $value in $styles-gaps {
     @include gap($bp, "x", "margin-left", $gap);
     @include gap($bp, "y", "margin-top", $gap);
   }

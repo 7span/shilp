@@ -11,22 +11,22 @@
   }
 
   //FONT-FAMILIES
-  @each $type, $value in $font-families {
+  @each $type, $value in $styles-font-families {
     --font-family--#{$type}: #{$value};
   }
 
   //FONT-SIZES
-  @each $size, $value in $font-sizes {
+  @each $size, $value in $styles-font-sizes {
     --font-size--#{$size}: #{$value};
   }
 
   //FONT-WEIGHTS
-  @each $type, $value in $font-weights {
+  @each $type, $value in $styles-font-weights {
     --font-weight--#{$type}: #{$value};
   }
 
   //GAPS
-  @each $size, $value in $gaps {
+  @each $size, $value in $styles-gaps {
     @if ($size == "default") {
       --gap: #{$size};
     } @else {
@@ -35,7 +35,7 @@
   }
 
   //SPACES
-  @each $size, $value in $spaces {
+  @each $size, $value in $styles-spaces {
     @if ($size== "default") {
       --space: #{$size};
     } @else {
@@ -44,7 +44,7 @@
   }
 
   //INPUT-SIZES
-  @each $size, $value in $input-sizes {
+  @each $size, $value in $styles-input-sizes {
     @if ($size== "default") {
       --input-size: #{$value};
     } @else {
@@ -53,7 +53,7 @@
   }
 
   //BORDER-RADIUS
-  @each $size, $value in $border-radius {
+  @each $size, $value in $styles-border-radius {
     @if ($size== "default") {
       --border-radius: #{$value};
     } @else {

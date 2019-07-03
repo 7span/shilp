@@ -191,7 +191,7 @@ GENNERATE CLASSES
   }
 }
 
-@each $size in $sizes {
+@each $size in $styles-sizes {
   .button.is-#{$size} {
     @include button-size($size);
     @each $shape in $shapes {

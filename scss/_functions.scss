@@ -25,7 +25,7 @@ Loops through all the breakpoints
 and generates the media query for each
 ----------------------------------*/
 @mixin loop-breakpoint() {
-  @each $bp, $value in $breakpoints {
+  @each $bp, $value in $styles-breakpoints {
     @media only screen and (max-width: $value) {
       @content ($bp);
     }
@@ -36,7 +36,7 @@ and generates the media query for each
 Loop through sizes
 ----------------------------------*/
 @mixin loop-size() {
-  @each $size in $sizes {
+  @each $size in $styles-sizes {
     @content ($size);
   }
 }
