@@ -9,57 +9,15 @@ Get Deeper Values from Map
 }
 
 /*----------------------------------
-Breakpoint Class Maker
-Accepts Break Point and Class Name
-----------------------------------*/
-@function class-from-breakpoint($bp, $class) {
-  @if ($bp==$default-breakpoint) {
-    @return #{$class};
-  } @else {
-    @return #{$bp}--#{$class};
-  }
-}
-
-/*----------------------------------
-Loops through all the breakpoints
-and generates the media query for each
-----------------------------------*/
-@mixin loop-breakpoint() {
-  @each $bp, $value in $styles-breakpoints {
-    @media only screen and (max-width: $value) {
-      @content ($bp);
-    }
-  }
-}
-
-/*----------------------------------
-Loop through sizes
-----------------------------------*/
-@mixin loop-size() {
-  @each $size in $styles-sizes {
-    @content ($size);
-  }
-}
-
-/*----------------------------------
-Loop colors
-----------------------------------*/
-@mixin loop-colors() {
-  @each $variant, $color in $styles-colors {
-    @each $shade, $code in $color {
-      @content ($variant,$shade,$code);
-    }
-  }
-}
-
-/*----------------------------------
 Automatically generates class for 
 given breakpoint
 ----------------------------------*/
 
-@mixin breakpoint-rule($bp, $class) {
-  $class: class-from-breakpoint($bp, $class);
-  .#{$class} {
-    @content;
+@function breakpoint-class($breakpoint, $class) {
+  @if ($breakpoint== "desktop") {
+    $class: #{$class};
+  } @else {
+    $class: #{$breakpoint}--#{$class};
   }
+  @return $class;
 }

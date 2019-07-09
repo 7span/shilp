@@ -1,4 +1,4 @@
-$directions: (
+$space-directions: (
   t: (
     "top"
   ),
@@ -18,42 +18,44 @@ $directions: (
   y: (
     "top",
     "bottom"
-  ),
-  "": (
-    "top",
-    "bottom",
-    "left",
-    "right"
   )
 );
 
-@mixin space($bp, $prop, $direction) {
-  @include loop-size using ($size) {
-    @include breakpoint-rule($bp, #{$prop}#{$direction}--#{$size}) {
-      $space-rule: map-get($directions, $direction);
-      @each $rule, $val in $space-rule {
-        @if ($prop== "m") {
-          margin-#{$rule}: var(--space--#{$size});
-        }
-        @if ($prop== "p") {
-          padding-#{$rule}: var(--space--#{$size});
+$space-props: (
+  m: "margin",
+  p: "padding"
+);
+
+@mixin space($breakpoint) {
+  @each $prop-initial, $prop in $space-props {
+    //All Directions
+    @include loop-space using ($space, $value) {
+      $className: breakpoint-class($breakpoint, #{$prop-initial}--#{$space});
+      .#{$className} {
+        #{$prop}: var(--space--#{$space});
+      }
+    }
+
+    //Left,Right,Top,Bottom,X,Y
+    @each $direction-initial, $direction in $space-directions {
+      @include loop-space using ($space, $value) {
+        $className: breakpoint-class(
+          $breakpoint,
+          #{$prop-initial}#{$direction-initial}--#{$space}
+        );
+        .#{$className} {
+          @each $side, $value in $direction {
+            #{$prop}-#{$side}: var(--space--#{$space});
+          }
         }
       }
     }
   }
 }
 
-//Default Rule
-@each $direction, $key in $directions {
-  @include space($default-breakpoint, "m", $direction);
-  @include space($default-breakpoint, "p", $direction);
-}
+@include space("desktop");
 
 //Media Query
-@include loop-breakpoint() using ($bp) {
-  //Default Rule
-  @each $direction, $key in $directions {
-    @include space($bp, "m", $direction);
-    @include space($bp, "p", $direction);
-  }
+@include loop-breakpoint() using ($breakpoint) {
+  @include space($breakpoint);
 }

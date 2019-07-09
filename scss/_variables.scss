@@ -26,14 +26,14 @@ $styles-colors: map-merge(
     dark: (
       default: #263238,
       hover: #37474f,
-      muted: #37474f,
+      muted: #cfd8dc,
       text: #ffffff
     ),
     light: (
       default: #eceff1,
       hover: #cfd8dc,
-      muted: #cfd8dc,
-      text: #000000
+      muted: #263238,
+      text: #263238
     ),
     danger: (
       default: #f44336,
@@ -205,7 +205,6 @@ The values same as breakpoint names will be used for gap in active media query.
 $styles-gaps: () !default;
 $styles-gaps: map-merge(
   (
-    default: 24px,
     desktop: 16px,
     laptop: 16px,
     tablet: 16px,
@@ -231,7 +230,6 @@ $styles-spaces: map-merge(
     xs: 8px,
     sm: 16px,
     md: 24px,
-    default: 24px,
     lg: 32px,
     xl: 40px
   ),
@@ -245,7 +243,6 @@ Sizes for input, buttons.
 $styles-input-sizes: () !default;
 $styles-input-sizes: map-merge(
   (
-    xs: 16px,
     sm: 24px,
     md: 32px,
     default: 32px,

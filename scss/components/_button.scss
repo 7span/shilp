@@ -1,113 +1,149 @@
-$variants: "primary", "secondary", "accent", "light", "dark", "info", "success",
-  "danger", "warning";
-$styles: "solid", "outline", "muted";
-$shapes: "rectangle", "square", "rounded", "pill", "circle";
+/**
+Defines the button variants to generate for.
+The values are taken from $button-styles-colors
+The color map must contain "hover", "default", "muted", "text" values.
+*/
+$button-variants: "primary", "secondary", "accent", "light", "dark", "info",
+  "success", "danger", "warning";
 
-/*----------------------------------
-VARIANTS
-Generates classes based on themes colors
-----------------------------------*/
-@mixin button-variant($variant: "primary") {
+$button-styles: "solid", "outline", "muted";
+
+$button-shapes: "rectangle", "square", "rounded", "pill", "circle";
+
+/**
+BUTTON STYLE MIXINS
+Each style has unique CSS rules hence requires seperate mixins.
+naming convention is: button-style--<style_name>
+*/
+@mixin button-style--solid($variant) {
   background-color: var(--color--#{$variant});
   color: var(--text-color--#{$variant});
   path {
     fill: var(--text-color--#{$variant});
   }
-
   &:hover:not(:disabled) {
     background-color: var(--color--#{$variant}--hover);
   }
 }
 
-/*----------------------------------
-STYLES
-----------------------------------*/
-@mixin button-style($variant: "primary", $style: "solid") {
-  @if $style== "outline" {
-    border: 2px solid var(--color--#{$variant});
-    background-color: transparent;
-    color: var(--color--#{$variant});
+@mixin button-style--outline($variant) {
+  border: $button-outline solid var(--color--#{$variant});
+  background-color: transparent;
+  color: var(--color--#{$variant});
+  path {
+    fill: var(--color--#{$variant});
+  }
+  &:hover:not(:disabled) {
+    background-color: var(--color--#{$variant});
+    color: var(--text-color--#{$variant});
     path {
-      fill: var(--color--#{$variant});
+      fill: var(--text-color--#{$variant});
     }
+  }
+}
 
-    &:hover:not(:disabled) {
-      background-color: var(--color--#{$variant});
-      color: var(--text-color--#{$variant});
-      path {
-        fill: var(--text-color--#{$variant});
-      }
-    }
-  } @else if $style== "muted" {
+@mixin button-style--muted($variant) {
+  background-color: var(--color--#{$variant}--muted);
+  color: var(--color--#{$variant});
+  path {
+    fill: var(--color--#{$variant});
+  }
+  &:hover {
     background-color: var(--color--#{$variant}--muted);
     color: var(--color--#{$variant});
-    path {
-      fill: var(--color--#{$variant});
-    }
-    &:hover {
-      background-color: var(--color--#{$variant}--muted);
-      color: var(--color--#{$variant});
-    }
   }
 }
 
-/*----------------------------------
-SIZES
-----------------------------------*/
-$iconSize: (
+@mixin button-style($style, $variant) {
+  @if $style== "solid" {
+    @include button-style--solid($variant);
+  } //
+  @else if $style== "outline" {
+    @include button-style--outline($variant);
+  } //
+  @else if $style== "muted" {
+    @include button-style--muted($variant);
+  }
+}
+
+/**
+BUTTON SHAPES
+*/
+@mixin button-shape--rectangle {
+  border-radius: 0;
+}
+@mixin button-shape--rounded {
+  border-radius: 4px;
+}
+@mixin button-shape--pill($size) {
+  border-radius: var(--input-size--#{$size});
+}
+@mixin button-shape--square($size) {
+  height: var(--input-size--#{$size});
+  width: var(--input-size--#{$size});
+  padding: 0 !important;
+  border-radius: 0;
+  svg {
+    margin: 0;
+  }
+}
+@mixin button-shape--circle($size) {
+  height: var(--input-size--#{$size});
+  width: var(--input-size--#{$size});
+  padding: 0 !important;
+  border-radius: 50%;
+  svg {
+    margin: 0;
+  }
+}
+
+@mixin button-shape($shape, $size) {
+  @if $shape== "rectangle" {
+    @include button-shape--rectangle;
+  } //
+  @else if $shape== "rounded" {
+    @include button-shape--rounded;
+  } //
+  @else if $shape== "pill" {
+    @include button-shape--pill($size);
+  } //
+  @else if $shape== "square" {
+    @include button-shape--square($size);
+  } //
+  @else if $shape== "circle" {
+    @include button-shape--circle($size);
+  }
+}
+
+/**
+BUTTON SIZES
+Uses $styles-input-sizes map to define sizes
+*/
+$button-icon-size: (
   lg: 24px,
   md: 20px,
-  sm: 16px,
-  xs: 12px
+  sm: 16px
 );
 
-@mixin button-size($size: "md") {
-  @if $size== "sm" {
-    font-size: 12px;
-    padding: 0px var(--space--sm);
-  } @else {
-    padding: 0px var(--space--#{$size});
-  }
+@mixin button-size($size) {
+  padding: 0px var(--space--#{$size});
   height: var(--input-size--#{$size});
   svg {
-    height: map-get($iconSize, $size);
-    width: map-get($iconSize, $size);
+    height: map-get($button-icon-size, $size);
+    width: map-get($button-icon-size, $size);
   }
 }
 
-/*----------------------------------
-SHAPES
-----------------------------------*/
-@mixin button-shape($size: "md", $shape: "rectangle") {
-  @if $shape== "rounded" {
-    border-radius: 4px;
-  } @else if $shape== "square" {
-    height: var(--input-size--#{$size});
-    width: var(--input-size--#{$size});
-    padding: 0 !important;
-  } @else if $shape== "circle" {
-    width: var(--input-size--#{$size});
-    height: var(--input-size--#{$size});
-    padding: 0 !important;
-    border-radius: 50%;
-  } @else if $shape== "pill" {
-    border-radius: var(--input-size--#{$size});
-  }
-}
-
-/*----------------------------------
-NORMALIZE
-Contains the default properties of button
-----------------------------------*/
+/**
+Default .button rules.
+*/
 .button,
 .button-group > button,
 .button-group > a {
-  border: none;
-  cursor: pointer;
+  @include button--reset;
   display: flex;
   align-items: center;
   justify-content: center;
-  outline: 0;
   white-space: nowrap;
   font-family: var(--font--content);
   text-decoration: none;
@@ -115,6 +151,9 @@ Contains the default properties of button
   line-height: 1;
   svg {
     margin-right: var(--space--xs);
+  }
+  &:hover {
+    text-decoration: none;
   }
   &:disabled {
     cursor: not-allowed;
@@ -126,13 +165,12 @@ Contains the default properties of button
   &.is-fluid {
     width: 100%;
   }
-  &:hover {
-    text-decoration: none;
-  }
   @if mixin-exists(__button) {
     @include __button();
   }
-  @include button-size;
+  @include button-size($default-button-size);
+  @include button-shape($default-button-shape, $default-button-size);
+  @include button-style($default-button-style, $default-button-variant);
 }
 
 .button-group {
@@ -150,69 +188,81 @@ Contains the default properties of button
   }
 }
 
-/*----------------------------------
-GENNERATE CLASSES
-----------------------------------*/
-@each $variant in $variants {
-  .button.is-#{$variant} {
-    @include button-variant($variant);
-    @each $style in $styles {
-      &.is-#{$style} {
-        @include button-style($variant, $style);
-      }
-    }
+/**
+STYLE CLASSES
+Generates classes for button styles.
+Uses default variant value.
+*/
+@each $style in $button-styles {
+  .button-group.is-#{$style} > button,
+  .button-group.is-#{$style} > a,
+  .button.is-#{$style} {
+    @include button-style($style, $default-button-variant);
   }
-  .button-group.is-#{$variant} {
-    > button,
-    > a {
-      @include button-variant($variant);
-    }
-    @each $style in $styles {
-      &.is-#{$style} {
-        > button,
-        > a {
-          @include button-style($variant, $style);
-        }
-      }
+}
+
+/**
+VARIANT CLASSES
+Generates classes for button variants.
+Uses default style value.
+*/
+@each $variant in $button-variants {
+  .button-group.is-#{$variant} > button,
+  .button-group.is-#{$variant} > a,
+  .button.is-#{$variant} {
+    @include button-style($default-button-style, $variant);
+  }
+}
+
+/**
+STYLE & VARIANT CLASSES
+Generates classes for button styles & variants.
+*/
+@each $style in $button-styles {
+  @each $variant in $button-variants {
+    .button-group.is-#{$variant}.is-#{$style} > button,
+    .button-group.is-#{$variant}.is-#{$style} > a,
+    .button.is-#{$variant}.is-#{$style} {
+      @include button-style($style, $variant);
     }
   }
 }
 
-@each $shape in $shapes {
+/**
+SHAPE CLASSES
+Generates classes for button shapes.
+Users default size value.
+*/
+@each $shape in $button-shapes {
   .button-group.is-#{$shape} > button,
   .button-group.is-#{$shape} > a,
   .button.is-#{$shape} {
-    @include button-shape("md", $shape);
-    @if $shape== "circle" or $shape== "square" {
-      svg {
-        margin: 0;
-      }
-    }
+    @include button-shape($shape, $default-button-size);
   }
 }
 
-@each $size in $styles-sizes {
+/**
+SIZE CLASSES
+Generates classes for button sizes.
+Users default size value.
+*/
+@each $size, $value in $styles-input-sizes {
+  .button-group.is-#{$size} > button,
+  .button-group.is-#{$size} > a,
   .button.is-#{$size} {
     @include button-size($size);
-    @each $shape in $shapes {
-      &.is-#{$shape} {
-        @include button-shape($size, $shape);
-      }
-    }
   }
+}
 
-  .button-group.is-#{$size} {
-    > button,
-    > a {
-      @include button-size($size);
-    }
-    @each $shape in $shapes {
-      &.is-#{$shape} {
-        > button,
-        > a {
-          @include button-shape($size, $shape);
-        }
-      }
+/**
+SIZE & SHAPE CLASEES
+*/
+@each $shape in $button-shapes {
+  @each $size, $value in $styles-input-sizes {
+    .button-group.is-#{$shape}.is-#{$size} > button,
+    .button-group.is-#{$shape}.is-#{$size} > a,
+    .button.is-#{$shape}.is-#{$size} {
+      @include button-shape($shape, $size);
     }
   }
 }

@@ -7,14 +7,14 @@
 .box {
   margin-left: auto;
   margin-right: auto;
-  @include box($default-breakpoint);
+  @include box("desktop");
   &.is-fluid {
     max-width: none;
   }
 }
 
-@include loop-breakpoint() using ($bp) {
+@include loop-breakpoint() using ($breakpoint) {
   .box {
-    @include box($bp);
+    @include box($breakpoint);
   }
 }

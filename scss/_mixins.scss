@@ -26,3 +26,53 @@ POSITION
   bottom: $b;
   left: $l;
 }
+
+/**
+Loops through all the breakpoints
+and generates the media query for each
+*/
+@mixin loop-breakpoint() {
+  @each $breakpoint, $value in $styles-breakpoints {
+    @media only screen and (max-width: $value) {
+      @content ($breakpoint);
+    }
+  }
+}
+
+/**
+Loop through sizes
+*/
+@mixin loop-size() {
+  @each $size in $styles-sizes {
+    @content ($size);
+  }
+}
+
+/**
+Loop through spaces
+*/
+@mixin loop-space() {
+  @each $space, $value in $styles-spaces {
+    @content ($space, $value);
+  }
+}
+
+/**
+Loop through gaps
+*/
+@mixin loop-gap() {
+  @each $gap, $value in $styles-gaps {
+    @content ($gap,$value);
+  }
+}
+
+/**
+Loop colors
+*/
+@mixin loop-colors() {
+  @each $variant, $color in $styles-colors {
+    @each $shade, $code in $color {
+      @content ($variant,$shade,$code);
+    }
+  }
+}

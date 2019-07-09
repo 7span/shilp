@@ -1,126 +1,81 @@
-$grids: 12;
+$styles-grid-size: 12;
 
-/*----------------------------------
-MIXINS
-----------------------------------*/
-//ROW
-@mixin blocks($bp) {
-  @include blocks-gap($bp, false);
-  &.is-multi {
-    @include blocks-gap($bp, true);
+/**
+BLOCKS
+Same as bootstrap's row.
+*/
+@mixin blocks($breakpoint) {
+  $gap: calc(-1 * var(--gap--#{$breakpoint}));
+  margin-left: $gap;
+  margin-right: $gap;
+  > .block {
+    @include block($breakpoint);
+  }
+
+  &.is-multirow {
+    margin: $gap;
     > .block {
-      @include block-gap($bp, true);
+      padding: $gap;
     }
   }
 }
 
-//ROW GAP
-@mixin blocks-gap($bp, $multi) {
-  &:not(.no-gap) {
-    $gap: calc(-1 * var(--gap--#{$bp}));
-    @if $multi {
-      margin: $gap;
-    } @else {
-      margin-left: $gap;
-      margin-right: $gap;
-    }
-  }
-}
-
-//COLUMN
-@mixin block($bp) {
-  @for $i from 1 through $grids {
-    $className: null;
-    @if ($bp==$default-breakpoint) {
-      $className: is-#{$i};
-    } @else {
-      $className: #{$bp}--is-#{$i};
-    }
+/**
+BLOCK
+Same as bootstrap's col.
+*/
+@mixin block($breakpoint) {
+  $gap: var(--gap--#{$breakpoint});
+  padding-left: $gap;
+  padding-right: $gap;
+  @for $i from 1 through $styles-grid-size {
+    $className: breakpoint-class($breakpoint, is-#{$i});
     &.#{$className} {
-      flex: 0 0 (100% / $grids) * $i;
-      max-width: (100% / $grids) * $i;
+      flex: 0 0 (100% / $styles-grid-size) * $i;
+      max-width: (100% / $styles-grid-size) * $i;
     }
   }
 }
 
-//COLUMN GAP
-@mixin block-gap($bp, $multi) {
-  $gap: var(--gap--#{$bp});
-  @if $multi {
-    padding: $gap;
-  } @else {
-    padding-left: $gap;
-    padding-right: $gap;
-  }
-}
-
-//GRID
-@mixin grid($bp) {
-  @for $size from 1 through 12 {
-    $className: null;
-    @if ($bp==$default-breakpoint) {
-      $className: is-#{$size};
-    } @else {
-      $className: #{$bp}--is-#{$size};
-    }
-    &.#{$className} {
-      //Ocupies the space required for content.
-      grid-template-columns: repeat($size, minmax(min-content, max-content));
-      &.is-fluid {
-        //Distributes across available space.
-        grid-template-columns: repeat($size, 1fr);
-      }
-    }
-  }
-}
-
-/*----------------------------------
-CSS RULES
-----------------------------------*/
+/**
+BLOCKS RULES
+*/
 .blocks {
   display: flex;
   flex-wrap: wrap;
-  @include blocks($default-breakpoint);
-  &.no-gap {
-    > .block {
-      padding-left: 0;
-      padding-right: 0;
-    }
+  > .block {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
   }
+  @include blocks("desktop");
+
   &.is-middle {
     align-items: center;
   }
+
+  //Remove gap
+  &.no-gap {
+    margin: 0;
+    > .block {
+      padding: 0;
+    }
+  }
+
+  //DEBUG MODE HIGHLIGHT
   @if ($debug) {
     border: 1px dotted red;
+    .block {
+      border: 1px dotted blue;
+    }
   }
 }
 
-.block {
-  flex-basis: 0;
-  flex-grow: 1;
-  max-width: 100%;
-  @include block($default-breakpoint);
-  @include block-gap($default-breakpoint, false);
-  @if ($debug) {
-    border: 1px dotted blue;
-  }
-}
-
-.grid {
-  display: grid;
-  gap: var(--gap--md);
-  @include grid($default-breakpoint);
-}
-
-/*----------------------------------
-MEDIA QUERIES
-----------------------------------*/
-@include loop-breakpoint() using ($bp) {
+/**
+MEDIA QUERY FOR BLOCKS
+*/
+@include loop-breakpoint() using ($breakpoint) {
   .blocks {
-    @include blocks($bp);
-  }
-  .block {
-    @include block($bp);
-    @include block-gap($bp, false);
+    @include blocks($breakpoint);
   }
 }

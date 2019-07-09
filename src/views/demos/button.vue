@@ -1,6 +1,7 @@
 <template lang="pug">
 .buttons
   h1 Buttons
+  button.button.is-secondary Default Button!
   .blocks
     .block.is-5
       .field
@@ -63,7 +64,7 @@ export default {
         "warning",
         "danger"
       ],
-      size: ["lg", "md", "sm"],
+      size: ["xl", "lg", "md", "sm"],
       shape: ["rectangle", "pill", "rounded", "circle", "square"],
       style: ["solid", "outline", "muted"]
     }

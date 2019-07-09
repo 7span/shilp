@@ -3,7 +3,7 @@
   h1 Inputs
   .blocks
     .block.is-4
-      .field
+      .field.is-loading
         label First Name
         input(type="text" placeholder="e.g. John")
         small This is help text.
