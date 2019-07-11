@@ -4,10 +4,19 @@ $scope: "sevenspan" !default;
 $system-fonts: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"' !default;
 
 /**
-Button Default Values
+BUTTON 
+Default Values
 */
 $default-button-variant: "primary" !default;
 $default-button-style: "solid" !default;
-$default-button-shape: "rectangle" !default;
+$default-button-shape: "rounded" !default;
 $default-button-size: "md" !default;
 $button-outline: 1px !default;
+
+/**
+INPUT
+Default Values
+*/
+$default-input-radius: 3px !default;
+$default-input-size: "md" !default;
+$input-border: 1px !default;

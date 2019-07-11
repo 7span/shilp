@@ -21,11 +21,11 @@ GAPS
   }
 }
 
-[class^="gx--"] {
+[class*="gx--"] {
   display: inline-flex;
   flex-direction: row;
 }
-[class^="gy--"] {
+[class*="gy--"] {
   display: inline-flex;
   flex-direction: column;
 }

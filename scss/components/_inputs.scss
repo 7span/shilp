@@ -1,98 +1,53 @@
 $field-states: "danger", "warning", "success", "info";
-/*----------------------------------
-COMMON CSS
-Applies to textboxes, textareas, select
-----------------------------------*/
-@mixin input-common {
-  outline: 0;
-  padding: 0 var(--space--xs);
-  border: 1px solid var(--color--grey--light);
-  border-radius: 0;
-  font-size: var(--font-size--span);
-  font-family: var(--font--content);
-  width: 100%;
-  color: #000000;
-  &:focus {
-    box-shadow: 0 0 0 3px var(--color--primary--muted);
-    position: relative;
+
+/**
+FIELD SIZES
+Generates the size based on $styles-input-sizes map
+*/
+@mixin field-size($size) {
+  &.is-radio,
+  &.is-checkbox {
+    height: var(--input-size--#{$size});
+    line-height: var(--input-size--#{$size});
   }
-  &:disabled {
-    color: var(--color--grey);
-    background-color: var(--color--grey--lightest);
+  .field__block {
+    height: var(--input-size--#{$size});
+    line-height: var(--input-size--#{$size});
+  }
+  .field__before,
+  .field__after {
+    min-width: var(--input-size--#{$size});
   }
 }
-
-/*----------------------------------
-SIZES
-----------------------------------*/
-@mixin input-size($size: "md") {
-  height: var(--input-size--#{$size});
-  line-height: var(--input-size--#{$size});
-}
-
-/*----------------------------------
-ALL INPUT TEXT TYPES
-Selector for all the input types
-----------------------------------*/
-
-@mixin input-text {
-  // TODO Use .field__input class instead of this rules.
-  input[type="color"],
-  input[type="date"],
-  input[type="datetime-local"],
-  input[type="email"],
-  input[type="file"],
-  input[type="month"],
-  input[type="number"],
-  input[type="image"],
-  input[type="password"],
-  input[type="range"],
-  input[type="search"],
-  input[type="tel"],
-  input[type="text"],
-  input[type="time"],
-  input[type="url"],
-  input[type="week"] {
-    @content;
-  }
-}
-
-/*----------------------------------
-Input
-----------------------------------*/
-@include input-text {
-  @include input-common;
-  @include input-size;
-  @each $size in $styles-sizes {
+@mixin field-sizes {
+  @each $size, $value in $styles-input-sizes {
     &.is-#{$size} {
-      @include input-size($size);
+      @include field-size($size);
     }
   }
 }
 
-/*----------------------------------
-Labels
-----------------------------------*/
-label {
-  font-size: var(--font-size--span);
-}
-
-/*----------------------------------
-Select
-----------------------------------*/
-select {
-  @include input-common;
-  @include input-size;
-  @each $size in $styles-sizes {
-    &.is-#{$size} {
-      @include input-size($size);
+/**
+FIELD STATES
+*/
+@mixin field-states {
+  @each $state in $field-states {
+    &.is-#{$state} {
+      //Input, Select, Textarea
+      .field__block {
+        border-color: var(--color--#{$state});
+        &:focus {
+          box-shadow: 0 0 0 3px var(--color--#{$state}--muted);
+        }
+      }
+      .field__before,
+      .field__after {
+        border-color: var(--color--#{$state});
+        background-color: var(--color--#{$state}--muted);
+        color: var(--color--#{$state}--hover);
+      }
     }
   }
-}
-
-textarea {
-  @include input-common;
-  padding: var(--space--xs);
 }
 
 /*----------------------------------
@@ -101,38 +56,15 @@ Form Fields
 
 .field {
   margin-bottom: var(--space--md);
+  @include field-size($default-input-size);
+  @include field-sizes;
+  @include field-states;
 
   .field {
-    margin: 0;
+    margin-bottom: 0;
   }
 
-  > label {
-    display: flex;
-    margin-bottom: 4px;
-    color: var(--color--grey--dark);
-  }
-  > small {
-    display: flex;
-    margin-top: 4px;
-    color: var(--color--grey--dark);
-  }
-
-  //FIELD STATES
-  @each $state in $field-states {
-    &.is-#{$state} {
-      @include input-text {
-        border-color: var(--color--#{$state});
-        &:focus {
-          box-shadow: 0 0 0 3px var(--color--#{$state}--muted);
-        }
-      }
-      small {
-        color: var(--color--#{$state});
-      }
-    }
-  }
-
-  //RADIO & CHECKBOX
+  //Radio, Checkbox
   &.is-radio,
   &.is-checkbox {
     display: flex;
@@ -142,21 +74,6 @@ Form Fields
       margin-left: var(--space--xs);
       color: #000;
       cursor: pointer;
-    }
-    @each $size in $styles-sizes {
-      &.is-#{$size} {
-        @include input-size($size);
-      }
-    }
-  }
-
-  //GROUP ITEMS
-  &__group {
-    display: flex;
-    > .field {
-      + .field {
-        margin-top: 0;
-      }
     }
   }
 
@@ -170,6 +87,78 @@ Form Fields
         animation-iteration-count: infinite;
       }
     }
+  }
+
+  > label {
+    display: flex;
+    margin-bottom: 4px;
+    color: var(--color--grey--dark);
+  }
+
+  > small {
+    display: flex;
+    margin-top: 4px;
+    color: var(--color--grey);
+  }
+
+  //Input, Select, Textarea
+  &__block {
+    outline: 0;
+    padding: 0 var(--space--xs);
+    border: $input-border solid var(--color--grey);
+    border-radius: $default-input-radius;
+    font-size: var(--font-size--span);
+    font-family: var(--font--content);
+    color: #000;
+    width: 100%;
+    min-width: 0px; //When .field__group is used, the input becomes flex child.
+    &:focus {
+      box-shadow: 0 0 0 3px var(--color--primary--muted);
+      position: relative;
+    }
+    &:disabled {
+      color: var(--color--grey);
+      background-color: var(--color--grey--lightest);
+    }
+  }
+
+  //GROUP ITEMS
+  &__group {
+    display: flex;
+    align-items: stretch;
+    > * {
+      border-radius: 0;
+      &:first-child {
+        border-radius: $default-input-radius 0 0 $default-input-radius;
+      }
+      &:last-child {
+        border-radius: 0 $default-input-radius $default-input-radius 0;
+      }
+    }
+    > .field {
+      + .field {
+        margin-top: 0;
+      }
+    }
+  }
+
+  &__before,
+  &__after {
+    flex: 0 0 auto;
+    border: $input-border solid var(--color--grey);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px var(--space--xs);
+    background-color: var(--color--grey--lighter);
+    color: var(--color--grey--dark);
+  }
+  &__before {
+    border-right: none;
+  }
+  &__after {
+    border-left: none;
   }
 }
 

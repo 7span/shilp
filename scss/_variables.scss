@@ -59,7 +59,7 @@ $styles-colors: map-merge(
       muted: #e3f2fd,
       text: #ffffff
     ),
-    grey: (
+    "grey": (
       lightest: #eceff1,
       lighter: #cfd8dc,
       light: #b0bec5,
@@ -231,7 +231,8 @@ $styles-spaces: map-merge(
     sm: 16px,
     md: 24px,
     lg: 32px,
-    xl: 40px
+    xl: 40px,
+    auto: auto
   ),
   $styles-spaces
 );
