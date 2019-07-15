@@ -1,6 +1,7 @@
-/*----------------------------------
+/**
+MAP DEEP GET
 Get Deeper Values from Map
-----------------------------------*/
+*/
 @function map-deep-get($map, $keys...) {
   @each $key in $keys {
     $map: map-get($map, $key);
@@ -8,10 +9,11 @@ Get Deeper Values from Map
   @return $map;
 }
 
-/*----------------------------------
+/**
+BREAKPOINT CLASS
 Automatically generates class for 
 given breakpoint
-----------------------------------*/
+*/
 
 @function breakpoint-class($breakpoint, $class) {
   @if ($breakpoint== "desktop") {
@@ -20,4 +22,25 @@ given breakpoint
     $class: #{$breakpoint}--#{$class};
   }
   @return $class;
+}
+
+/**
+CSS VARIABLES
+@prop: Property (Color, Font-Family, Font-Size)
+@val : Value (Blue)
+@mod : Modifier (Dark, Light)
+*/
+@function --var($prop, $val, $mod: "") {
+  @if ($mod== "") {
+    @return var(--#{$prop}--#{$val});
+  }
+  @return var(--#{$prop}--#{$val}--#{$mod});
+}
+
+@function --color($val, $mod: "") {
+  @return --var("color", $val, $mod);
+}
+
+@function --space($val, $mod: "") {
+  @return --var("space", $val, $mod);
 }
