@@ -6,7 +6,7 @@ import store from "./store";
 Vue.config.productionTip = false;
 require("../scss/styles.scss");
 
-Vue.component("LayoutDemo", "@/layouts/demo");
+Vue.component("MIcon", require("@/components/icon").default);
 
 new Vue({
   router,

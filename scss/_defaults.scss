@@ -40,6 +40,8 @@ Useful when integrating with other CSS frameworks
       font-family: var(--font-family--content);
       margin: 0;
       padding: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
     @include defaults;
   }

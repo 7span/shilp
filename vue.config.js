@@ -6,5 +6,12 @@ module.exports = {
         implementation: require("sass")
       }
     }
+  },
+  configureWebpack: {
+    resolve: {
+      alias: {
+        "@icon": "vue-material-design-icons"
+      }
+    }
   }
 };

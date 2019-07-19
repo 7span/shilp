@@ -44,3 +44,11 @@ CSS VARIABLES
 @function --space($val, $mod: "") {
   @return --var("space", $val, $mod);
 }
+
+@function --input-size($val, $mod: "") {
+  @return --var("input-size", $val, $mod);
+}
+
+@function --font-weight($val, $mod: "") {
+  @return --var("font-weight", $val, $mod);
+}

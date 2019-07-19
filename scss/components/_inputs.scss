@@ -127,7 +127,9 @@ Form Fields
     display: flex;
     align-items: stretch;
     > * {
-      border-radius: 0;
+      &:not(:first-child):not(:last-child) {
+        border-radius: 0;
+      }
       &:first-child {
         border-radius: $default-input-radius 0 0 $default-input-radius;
       }

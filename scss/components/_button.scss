@@ -10,6 +10,8 @@ $button-styles: "solid", "outline", "muted";
 
 $button-shapes: "rectangle", "square", "rounded", "pill", "circle";
 
+$button-alignments: "left", "right";
+
 /**
 BUTTON STYLE MIXINS
 Each style has unique CSS rules hence requires seperate mixins.
@@ -83,7 +85,7 @@ BUTTON SHAPES
   width: var(--input-size--#{$size});
   padding: 0 !important;
   border-radius: 0;
-  svg {
+  .button__icon {
     margin: 0;
   }
 }
@@ -92,7 +94,7 @@ BUTTON SHAPES
   width: var(--input-size--#{$size});
   padding: 0 !important;
   border-radius: 50%;
-  svg {
+  .button__icon {
     margin: 0;
   }
 }
@@ -120,6 +122,7 @@ BUTTON SIZES
 Uses $styles-input-sizes map to define sizes
 */
 $button-icon-size: (
+  xl: 28px,
   lg: 24px,
   md: 20px,
   sm: 16px
@@ -128,28 +131,63 @@ $button-icon-size: (
 @mixin button-size($size) {
   padding: 0px var(--space--#{$size});
   height: var(--input-size--#{$size});
-  svg {
-    height: map-get($button-icon-size, $size);
-    width: map-get($button-icon-size, $size);
+  .button__icon {
+    svg {
+      height: map-get($button-icon-size, $size) !important;
+      width: map-get($button-icon-size, $size) !important;
+    }
   }
+}
+
+/**
+Button Alignment
+*/
+@mixin button-alignment--left {
+  padding-left: 0;
+  .button__icon {
+    justify-content: flex-end;
+    margin-right: var(--space--xs);
+  }
+}
+@mixin button-alignment--right {
+  padding-right: 0;
+  flex-direction: row-reverse;
+  .button__icon {
+    justify-content: flex-start;
+    margin-left: var(--space--xs);
+  }
+}
+
+@mixin button-alignment($alignment, $size) {
+  .button__icon {
+    width: --input-size($size);
+  }
+  @if $alignment== "left" {
+    @include button-alignment--left;
+  } //
+  @else if $alignment== "right" {
+    @include button-alignment--right;
+  } //
 }
 
 /**
 Default .button rules.
 */
 .button,
-.button-group > button,
-.button-group > a {
+.button-group a,
+.button-group button {
   @include button--reset;
   display: flex;
   align-items: center;
-  justify-content: center;
   white-space: nowrap;
   font-family: var(--font--content);
   text-decoration: none;
   font-size: 14px;
   line-height: 1;
-  svg {
+  .button__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-right: var(--space--xs);
   }
   &:hover {
@@ -175,14 +213,16 @@ Default .button rules.
 
 .button-group {
   display: flex;
-  > button,
-  > a {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  a {
     flex: 0 0 auto;
   }
   &.is-stacked {
     flex-direction: column;
-    > button,
-    > a {
+    button,
+    a {
       width: 100%;
     }
   }
@@ -194,8 +234,8 @@ Generates classes for button styles.
 Uses default variant value.
 */
 @each $style in $button-styles {
-  .button-group.is-#{$style} > button,
-  .button-group.is-#{$style} > a,
+  .button-group.is-#{$style} a,
+  .button-group.is-#{$style} button,
   .button.is-#{$style} {
     @include button-style($style, $default-button-variant);
   }
@@ -207,8 +247,8 @@ Generates classes for button variants.
 Uses default style value.
 */
 @each $variant in $button-variants {
-  .button-group.is-#{$variant} > button,
-  .button-group.is-#{$variant} > a,
+  .button-group.is-#{$variant} a,
+  .button-group.is-#{$variant} button,
   .button.is-#{$variant} {
     @include button-style($default-button-style, $variant);
   }
@@ -220,8 +260,8 @@ Generates classes for button styles & variants.
 */
 @each $style in $button-styles {
   @each $variant in $button-variants {
-    .button-group.is-#{$variant}.is-#{$style} > button,
-    .button-group.is-#{$variant}.is-#{$style} > a,
+    .button-group.is-#{$variant}.is-#{$style} a,
+    .button-group.is-#{$variant}.is-#{$style} button,
     .button.is-#{$variant}.is-#{$style} {
       @include button-style($style, $variant);
     }
@@ -234,8 +274,8 @@ Generates classes for button shapes.
 Users default size value.
 */
 @each $shape in $button-shapes {
-  .button-group.is-#{$shape} > button,
-  .button-group.is-#{$shape} > a,
+  .button-group.is-#{$shape} a,
+  .button-group.is-#{$shape} button,
   .button.is-#{$shape} {
     @include button-shape($shape, $default-button-size);
   }
@@ -247,8 +287,8 @@ Generates classes for button sizes.
 Users default size value.
 */
 @each $size, $value in $styles-input-sizes {
-  .button-group.is-#{$size} > button,
-  .button-group.is-#{$size} > a,
+  .button-group.is-#{$size} a,
+  .button-group.is-#{$size} button,
   .button.is-#{$size} {
     @include button-size($size);
   }
@@ -259,10 +299,32 @@ SIZE & SHAPE CLASEES
 */
 @each $shape in $button-shapes {
   @each $size, $value in $styles-input-sizes {
-    .button-group.is-#{$shape}.is-#{$size} > button,
-    .button-group.is-#{$shape}.is-#{$size} > a,
+    .button-group.is-#{$shape}.is-#{$size} a,
+    .button-group.is-#{$shape}.is-#{$size} button,
     .button.is-#{$shape}.is-#{$size} {
       @include button-shape($shape, $size);
+    }
+  }
+}
+
+/**
+ALIGNMENT CLASSES
+Uses default Button Size
+*/
+@each $align in $button-alignments {
+  .button-group.is-#{$align} a,
+  .button-group.is-#{$align} button,
+  .button.is-#{$align} {
+    @include button-alignment($align, $default-button-size);
+  }
+}
+
+@each $align in $button-alignments {
+  @each $size, $value in $styles-input-sizes {
+    .button-group.is-#{$align}.is-#{$size} a,
+    .button-group.is-#{$align}.is-#{$size} button,
+    .button.is-#{$align}.is-#{$size} {
+      @include button-alignment($align, $size);
     }
   }
 }
