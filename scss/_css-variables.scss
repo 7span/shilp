@@ -1,12 +1,14 @@
 :root {
   //COLORS
-  @include loop-colors() using ($variant, $shade, $value) {
-    @if ($shade== "default") {
-      --color--#{$variant}: #{$value};
-    } @else if($shade== "text") {
-      --text-color--#{$variant}: #{$value};
-    } @else {
-      --color--#{$variant}--#{$shade}: #{$value};
+  @each $variant, $color in $styles-colors {
+    @each $shade, $value in $color {
+      @if ($shade== "default") {
+        --color--#{$variant}: #{$value};
+      } @else if($shade== "text") {
+        --text-color--#{$variant}: #{$value};
+      } @else {
+        --color--#{$variant}--#{$shade}: #{$value};
+      }
     }
   }
 

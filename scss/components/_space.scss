@@ -29,7 +29,7 @@ $space-props: (
 @mixin space($breakpoint) {
   @each $prop-initial, $prop in $space-props {
     //All Directions
-    @include loop-space using ($space, $value) {
+    @each $space, $value in $styles-spaces {
       $className: breakpoint-class($breakpoint, #{$prop-initial}--#{$space});
       .#{$className} {
         #{$prop}: var(--space--#{$space});
@@ -38,7 +38,8 @@ $space-props: (
 
     //Left,Right,Top,Bottom,X,Y
     @each $direction-initial, $direction in $space-directions {
-      @include loop-space using ($space, $value) {
+
+      @each $space, $value in $styles-spaces {
         $className: breakpoint-class(
           $breakpoint,
           #{$prop-initial}#{$direction-initial}--#{$space}
@@ -49,6 +50,7 @@ $space-props: (
           }
         }
       }
+
     }
   }
 }
@@ -56,6 +58,9 @@ $space-props: (
 @include space("desktop");
 
 //Media Query
-@include loop-breakpoint() using ($breakpoint) {
-  @include space($breakpoint);
+@each $breakpoint, $value in $styles-breakpoints {
+  @media only screen and (max-width: $value) {
+    @include space($breakpoint);
+  }
 }
+

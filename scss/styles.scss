@@ -1,9 +1,4 @@
-@import "./config";
-@import "./variables";
-@import "./mixins";
-@import "./functions";
-@import "./css-variables";
-
+@import "./globals";
 @import "./defaults";
 @import "./components/box";
 @import "./components/button";

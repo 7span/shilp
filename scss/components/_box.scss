@@ -13,8 +13,10 @@
   }
 }
 
-@include loop-breakpoint() using ($breakpoint) {
-  .box {
-    @include box($breakpoint);
+@each $breakpoint, $value in $styles-breakpoints {
+  @media only screen and (max-width: $value) {
+    .box {
+      @include box($breakpoint);
+    }
   }
 }

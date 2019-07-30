@@ -3,7 +3,7 @@ module.exports = {
     extract: true,
     loaderOptions: {
       sass: {
-        implementation: require("sass")
+        data: '@import "@/../scss/_globals.scss";'
       }
     }
   },

@@ -1,21 +1,23 @@
-@include loop-colors() using ($variant, $shade, $code) {
-  //Color
-  .is-#{$variant} {
-    @if ($shade== "default") {
-      color: var(--color--#{$variant});
-      //Background Color
-      &.is-block {
-        background-color: var(--color--#{$variant});
-        color: var(--text-color--#{$variant});
-      }
-    } @else {
-      //Color
-      &.is-#{$shade} {
-        color: var(--color--#{$variant}--#{$shade});
+@each $variant, $color in $styles-colors {
+  @each $shade, $code in $color {
+    //Color
+    .is-#{$variant} {
+      @if ($shade== "default") {
+        color: var(--color--#{$variant});
         //Background Color
         &.is-block {
-          background-color: var(--color--#{$variant}--#{$shade});
-          color: var(--color--#{$variant}--hover);
+          background-color: var(--color--#{$variant});
+          color: var(--text-color--#{$variant});
+        }
+      } @else {
+        //Color
+        &.is-#{$shade} {
+          color: var(--color--#{$variant}--#{$shade});
+          //Background Color
+          &.is-block {
+            background-color: var(--color--#{$variant}--#{$shade});
+            color: var(--color--#{$variant}--hover);
+          }
         }
       }
     }

@@ -30,14 +30,16 @@ GAPS
   flex-direction: column;
 }
 
-@include loop-gap using ($gap, $value) {
+@each $gap, $value in $styles-gaps {
   @include gap("desktop", "x", $gap);
   @include gap("desktop", "y", $gap);
 }
 
-@include loop-breakpoint using ($breakpoint) {
-  @each $gap, $value in $styles-gaps {
-    @include gap($breakpoint, "x", $gap);
-    @include gap($breakpoint, "y", $gap);
+@each $breakpoint, $value in $styles-breakpoints {
+  @media only screen and (max-width: $value) {
+    @each $gap, $value in $styles-gaps {
+      @include gap($breakpoint, "x", $gap);
+      @include gap($breakpoint, "y", $gap);
+    }
   }
 }

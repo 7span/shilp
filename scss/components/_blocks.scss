@@ -74,8 +74,10 @@ BLOCKS RULES
 /**
 MEDIA QUERY FOR BLOCKS
 */
-@include loop-breakpoint() using ($breakpoint) {
-  .blocks {
-    @include blocks($breakpoint);
+@each $breakpoint, $value in $styles-breakpoints {
+  @media only screen and (max-width: $value) {
+    .blocks {
+      @include blocks($breakpoint);
+    }
   }
 }
