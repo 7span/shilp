@@ -1,7 +1,5 @@
 @mixin box($breakpoint) {
   max-width: map-get($styles-boxes, $breakpoint);
-  padding-left: var(--gap--#{$breakpoint});
-  padding-right: var(--gap--#{$breakpoint});
 }
 
 .box {

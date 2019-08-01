@@ -1,7 +1,6 @@
-/*
-STYLES COLORS
-Map should follow this format: ColorName > Shade > Color Code
-*/
+// STYLES COLORS
+// Map should follow this format: ColorName > Shade > Color Code
+
 $styles-colors: () !default;
 $styles-colors: map-merge(
   (

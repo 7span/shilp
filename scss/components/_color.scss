@@ -3,20 +3,20 @@
     //Color
     .is-#{$variant} {
       @if ($shade== "default") {
-        color: var(--color--#{$variant});
+        color: --color($variant);
         //Background Color
         &.is-block {
-          background-color: var(--color--#{$variant});
-          color: var(--text-color--#{$variant});
+          background-color: --color($variant);
+          color: --text-color($variant);
         }
       } @else {
         //Color
         &.is-#{$shade} {
-          color: var(--color--#{$variant}--#{$shade});
+          color: --color($variant, $shade);
           //Background Color
           &.is-block {
-            background-color: var(--color--#{$variant}--#{$shade});
-            color: var(--color--#{$variant}--hover);
+            background-color: --color($variant, $shade);
+            color: --color($variant, hover);
           }
         }
       }

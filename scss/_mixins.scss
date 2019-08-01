@@ -1,7 +1,5 @@
-/*
-RESETS
-Resets the markup of HTML tags
-*/
+// RESETS
+// Resets the markup of HTML tags
 @mixin button--reset {
   background: transparent;
   border: none;
@@ -16,9 +14,7 @@ Resets the markup of HTML tags
   padding: 0;
 }
 
-/*
-POSITION
-*/
+// POSITION
 @mixin position($pos: absolute, $t: 0, $r: 0, $b: 0, $l: 0) {
   position: $pos;
   top: $t;

@@ -5,10 +5,8 @@
     box-sizing: border-box;
   }
 
-  /*
-  TEXT
-  Sets the default font-family, size, weight for text tags.
-  */
+  // TEXT
+  // Sets the default font-family, size, weight for text tags.
   @each $tag, $tag-settings in $styles-text {
     #{$tag},
     .#{$tag} {
@@ -24,11 +22,9 @@
   }
 }
 
-/*
-SCOPE
-If the scoped is true, the default rules will be applied under scoped selector.
-Useful when integrating with other CSS frameworks
-*/
+// SCOPE
+// If the scoped is true, the default rules will be applied under scoped selector.
+// Useful when integrating with other CSS frameworks
 @if $scoped {
   .#{$scope} {
     font-family: var(--font-family--content);

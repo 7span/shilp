@@ -1,58 +1,100 @@
-/**
-Defines the button variants to generate for.
-The values are taken from $button-styles-colors
-The color map must contain "hover", "default", "muted", "text" values.
-*/
-$button-variants: "primary", "secondary", "accent", "light", "dark", "info",
-  "success", "danger", "warning";
+$styles-button-defaults: () !default;
+$styles-button-defaults: map-merge(
+  (
+    "variants": (
+      primary,
+      secondary,
+      accent,
+      light,
+      dark,
+      info,
+      success,
+      danger,
+      warning
+    ),
+    "styles": (
+      solid,
+      outline,
+      muted
+    ),
+    "shapes": (
+      rectangle,
+      square,
+      rounded,
+      pill,
+      circle
+    ),
+    "alignments": (
+      left,
+      right
+    ),
+    "variant": "primary",
+    "style": "solid",
+    "shape": "rounded",
+    "size": "md",
+    "outline": 1px,
+    "icon-size": (
+      xl: 28px,
+      lg: 24px,
+      md: 20px,
+      sm: 16px
+    )
+  ),
+  $styles-button-defaults
+);
 
-$button-styles: "solid", "outline", "muted";
+$button-shape: map-get($styles-button-defaults, "shape");
+$button-variant: map-get($styles-button-defaults, "variant");
+$button-size: map-get($styles-button-defaults, "size");
+$button-style: map-get($styles-button-defaults, "style");
+$button-outline: map-get($styles-button-defaults, "outline");
+$button-icon-size: map-get($styles-button-defaults, "icon-size");
 
-$button-shapes: "rectangle", "square", "rounded", "pill", "circle";
+// The color map must contain "hover", "default", "muted", "text" values.
+$button-variants: map-get($styles-button-defaults, "variants");
+$button-styles: map-get($styles-button-defaults, "styles");
+$button-shapes: map-get($styles-button-defaults, "shapes");
+$button-alignments: map-get($styles-button-defaults, "alignments");
 
-$button-alignments: "left", "right";
-
-/**
-BUTTON STYLE MIXINS
-Each style has unique CSS rules hence requires seperate mixins.
-naming convention is: button-style--<style_name>
-*/
+// STYLES
+// Each style has unique CSS rules hence requires seperate mixins.
+// naming convention is: button-style--<style_name>
 @mixin button-style--solid($variant) {
-  background-color: var(--color--#{$variant});
-  color: var(--text-color--#{$variant});
+  background-color: --color($variant);
+  color: --text-color($variant);
   path {
-    fill: var(--text-color--#{$variant});
+    fill: --text-color($variant);
   }
   &:hover:not(:disabled) {
-    background-color: var(--color--#{$variant}--hover);
+    background-color: --color($variant, hover);
   }
 }
 
 @mixin button-style--outline($variant) {
-  border: $button-outline solid var(--color--#{$variant});
+  border: $button-outline solid --color($variant);
   background-color: transparent;
-  color: var(--color--#{$variant});
+  color: --color($variant);
   path {
-    fill: var(--color--#{$variant});
+    fill: --color($variant);
   }
   &:hover:not(:disabled) {
-    background-color: var(--color--#{$variant});
-    color: var(--text-color--#{$variant});
+    background-color: --color($variant);
+    color: --text-color($variant);
     path {
-      fill: var(--text-color--#{$variant});
+      fill: --text-color($variant);
     }
   }
 }
 
 @mixin button-style--muted($variant) {
-  background-color: var(--color--#{$variant}--muted);
-  color: var(--color--#{$variant});
+  background-color: --color($variant, muted);
+  color: --color($variant);
   path {
-    fill: var(--color--#{$variant});
+    fill: --color($variant);
   }
   &:hover {
-    background-color: var(--color--#{$variant}--muted);
-    color: var(--color--#{$variant});
+    background-color: --color($variant, muted);
+    color: --color($variant);
   }
 }
 
@@ -68,9 +110,7 @@ naming convention is: button-style--<style_name>
   }
 }
 
-/**
-BUTTON SHAPES
-*/
+// SHAPES
 @mixin button-shape--rectangle {
   border-radius: 0;
 }
@@ -78,11 +118,11 @@ BUTTON SHAPES
   border-radius: 4px;
 }
 @mixin button-shape--pill($size) {
-  border-radius: var(--input-size--#{$size});
+  border-radius: --input-size($size);
 }
 @mixin button-shape--square($size) {
-  height: var(--input-size--#{$size});
-  width: var(--input-size--#{$size});
+  height: --input-size($size);
+  width: --input-size($size);
   padding: 0 !important;
   border-radius: 0;
   .button__icon {
@@ -90,8 +130,8 @@ BUTTON SHAPES
   }
 }
 @mixin button-shape--circle($size) {
-  height: var(--input-size--#{$size});
-  width: var(--input-size--#{$size});
+  height: --input-size($size);
+  width: --input-size($size);
   padding: 0 !important;
   border-radius: 50%;
   .button__icon {
@@ -117,20 +157,11 @@ BUTTON SHAPES
   }
 }
 
-/**
-BUTTON SIZES
-Uses $styles-input-sizes map to define sizes
-*/
-$button-icon-size: (
-  xl: 28px,
-  lg: 24px,
-  md: 20px,
-  sm: 16px
-);
-
+// SIZES
+// Uses $styles-input-sizes map to define sizes
 @mixin button-size($size) {
-  padding: 0px var(--space--#{$size});
-  height: var(--input-size--#{$size});
+  padding: 0px --space($size);
+  height: --input-size($size);
   .button__icon {
     svg {
       height: map-get($button-icon-size, $size) !important;
@@ -139,14 +170,12 @@ $button-icon-size: (
   }
 }
 
-/**
-Button Alignment
-*/
+// ALIGNMENT
 @mixin button-alignment--left {
   padding-left: 0;
   .button__icon {
     justify-content: flex-end;
-    margin-right: var(--space--xs);
+    margin-right: --space(xs);
   }
 }
 @mixin button-alignment--right {
@@ -154,7 +183,7 @@ Button Alignment
   flex-direction: row-reverse;
   .button__icon {
     justify-content: flex-start;
-    margin-left: var(--space--xs);
+    margin-left: --space(xs);
   }
 }
 
@@ -170,9 +199,7 @@ Button Alignment
   } //
 }
 
-/**
-Default .button rules.
-*/
+// Default .button rules.
 .button,
 .button-group a,
 .button-group button {
@@ -180,7 +207,7 @@ Default .button rules.
   display: flex;
   align-items: center;
   white-space: nowrap;
-  font-family: var(--font--content);
+  font-family: --font-family(content);
   text-decoration: none;
   font-size: 14px;
   line-height: 1;
@@ -188,7 +215,7 @@ Default .button rules.
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: var(--space--xs);
+    margin-right: --space(xs);
   }
   &:hover {
     text-decoration: none;
@@ -206,9 +233,9 @@ Default .button rules.
   @if mixin-exists(__button) {
     @include __button();
   }
-  @include button-size($default-button-size);
-  @include button-shape($default-button-shape, $default-button-size);
-  @include button-style($default-button-style, $default-button-variant);
+  @include button-size($button-size);
+  @include button-shape($button-shape, $button-size);
+  @include button-style($button-style, $button-variant);
 }
 
 .button-group {
@@ -228,36 +255,30 @@ Default .button rules.
   }
 }
 
-/**
-STYLE CLASSES
-Generates classes for button styles.
-Uses default variant value.
-*/
+// STYLE CLASSES
+// Generates classes for button styles.
+// Uses default variant value.
 @each $style in $button-styles {
   .button-group.is-#{$style} a,
   .button-group.is-#{$style} button,
   .button.is-#{$style} {
-    @include button-style($style, $default-button-variant);
+    @include button-style($style, $button-variant);
   }
 }
 
-/**
-VARIANT CLASSES
-Generates classes for button variants.
-Uses default style value.
-*/
+// VARIANT CLASSES
+// Generates classes for button variants.
+// Uses default style value.
 @each $variant in $button-variants {
   .button-group.is-#{$variant} a,
   .button-group.is-#{$variant} button,
   .button.is-#{$variant} {
-    @include button-style($default-button-style, $variant);
+    @include button-style($button-style, $variant);
   }
 }
 
-/**
-STYLE & VARIANT CLASSES
-Generates classes for button styles & variants.
-*/
+// STYLE & VARIANT CLASSES
+// Generates classes for button styles & variants.
 @each $style in $button-styles {
   @each $variant in $button-variants {
     .button-group.is-#{$variant}.is-#{$style} a,
@@ -268,24 +289,20 @@ Generates classes for button styles & variants.
   }
 }
 
-/**
-SHAPE CLASSES
-Generates classes for button shapes.
-Users default size value.
-*/
+// SHAPE CLASSES
+// Generates classes for button shapes.
+// Users default size value.
 @each $shape in $button-shapes {
   .button-group.is-#{$shape} a,
   .button-group.is-#{$shape} button,
   .button.is-#{$shape} {
-    @include button-shape($shape, $default-button-size);
+    @include button-shape($shape, $button-size);
   }
 }
 
-/**
-SIZE CLASSES
-Generates classes for button sizes.
-Users default size value.
-*/
+// SIZE CLASSES
+// Generates classes for button sizes.
+// Users default size value.
 @each $size, $value in $styles-input-sizes {
   .button-group.is-#{$size} a,
   .button-group.is-#{$size} button,
@@ -294,9 +311,7 @@ Users default size value.
   }
 }
 
-/**
-SIZE & SHAPE CLASEES
-*/
+// SIZE & SHAPE CLASEES
 @each $shape in $button-shapes {
   @each $size, $value in $styles-input-sizes {
     .button-group.is-#{$shape}.is-#{$size} a,
@@ -307,15 +322,13 @@ SIZE & SHAPE CLASEES
   }
 }
 
-/**
-ALIGNMENT CLASSES
-Uses default Button Size
-*/
+// ALIGNMENT CLASSES
+// Uses default Button Size
 @each $align in $button-alignments {
   .button-group.is-#{$align} a,
   .button-group.is-#{$align} button,
   .button.is-#{$align} {
-    @include button-alignment($align, $default-button-size);
+    @include button-alignment($align, $button-size);
   }
 }
 

@@ -1,14 +1,10 @@
-/*
-SIZES 
-Diffrent sizing for elements, spacing, margin.
-I.e. is--xs, space--sm, p--xl
-*/
+// SIZES
+// Diffrent sizing for elements, spacing, margin.
+// I.e. is--xs, space--sm, p--xl
 $styles-sizes: "0", "xs", "sm", "md", "lg", "xl";
 
-/*
-BREAKPOINTS
-Follows the desktop-first approach.
-*/
+// BREAKPOINTS
+//Follows the desktop-first approach.
 $styles-breakpoints: () !default;
 $styles-breakpoints: map-merge(
   (
@@ -20,11 +16,9 @@ $styles-breakpoints: map-merge(
   $styles-breakpoints
 );
 
-/*
-BOXES
-Container sizes for boxed content.
-Works just like Bootstrap's "container"
-*/
+// BOXES
+// Container sizes for boxed content.
+// Works just like Bootstrap's "container"
 $styles-boxes: () !default;
 $styles-boxes: map-merge(
   (
@@ -37,34 +31,23 @@ $styles-boxes: map-merge(
   $styles-boxes
 );
 
-/*
-GAPS
-The sizes are used for keeping gap between blocks(aka grid).
-The values same as breakpoint names will be used for gap in active media query.
-*/
-//TODO Reduce the number of variables and use the space instead!
-
+// GAPS
+// The sizes are used for keeping gap between blocks(aka grid).
 $styles-gaps: () !default;
 $styles-gaps: map-merge(
   (
-    desktop: 16px,
-    laptop: 16px,
-    tablet: 16px,
-    phablet: 16px,
-    phone: 16px,
-    xs: 8px,
-    sm: 16px,
-    md: 24px,
-    lg: 32px,
-    xl: 40px
+    0: 0px,
+    xs: 4px,
+    sm: 8px,
+    md: 16px,
+    lg: 24px,
+    xl: 32px
   ),
   $styles-gaps
 );
 
-/*
-SPACES
-Used for spacing values in margin, padding etc.
-*/
+// SPACES
+// Used for spacing values in margin, padding etc.
 $styles-spaces: () !default;
 $styles-spaces: map-merge(
   (
@@ -79,10 +62,8 @@ $styles-spaces: map-merge(
   $styles-spaces
 );
 
-/*
-INPUT SIZES
-Sizes for input, buttons.
-*/
+// INPUT SIZES
+// Sizes for input, buttons.
 $styles-input-sizes: () !default;
 $styles-input-sizes: map-merge(
   (
@@ -95,9 +76,7 @@ $styles-input-sizes: map-merge(
   $styles-input-sizes
 );
 
-/*
-BORDER_RADIUS
-*/
+// BORDER_RADIUS
 $styles-border-radius: () !default;
 $styles-border-radius: map-merge(
   (

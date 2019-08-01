@@ -1,6 +1,4 @@
-/*
-FONT-FAMILIES
-*/
+// FONT-FAMILIES
 $styles-font-families: () !default;
 $styles-font-families: map-merge(
   (
@@ -12,9 +10,7 @@ $styles-font-families: map-merge(
   $styles-font-families
 );
 
-/*
-FONT-WEIGHTS
-*/
+// FONT-WEIGHTS
 $styles-font-weights: () !default;
 $styles-font-weights: map-merge(
   (
@@ -25,9 +21,7 @@ $styles-font-weights: map-merge(
   $styles-font-weights
 );
 
-/*
-FONT-SIZES
-*/
+// FONT-SIZES
 $styles-font-sizes: () !default;
 $styles-font-sizes: map-merge(
   (
@@ -45,12 +39,11 @@ $styles-font-sizes: map-merge(
   $styles-font-sizes
 );
 
-/*
-TEXT
-Defines the default font sizes, family and weights
-The CSS variables are just a normal text for SCSS which will be rendered run time.
-The CSS varialbes are used as fallback value.
-*/
+// TEXT
+// Defines the default font sizes, family and weights
+// The CSS variables are just a normal text for SCSS which will be rendered run time.
+// The CSS varialbes are used as fallback value.
+
 $styles-text: () !default;
 $styles-text: map-merge(
   (

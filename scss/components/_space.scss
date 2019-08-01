@@ -32,13 +32,12 @@ $space-props: (
     @each $space, $value in $styles-spaces {
       $className: breakpoint-class($breakpoint, #{$prop-initial}--#{$space});
       .#{$className} {
-        #{$prop}: var(--space--#{$space});
+        #{$prop}: --space($space);
       }
     }
 
     //Left,Right,Top,Bottom,X,Y
     @each $direction-initial, $direction in $space-directions {
-
       @each $space, $value in $styles-spaces {
         $className: breakpoint-class(
           $breakpoint,
@@ -46,11 +45,10 @@ $space-props: (
         );
         .#{$className} {
           @each $side, $value in $direction {
-            #{$prop}-#{$side}: var(--space--#{$space});
+            #{$prop}-#{$side}: --space($space);
           }
         }
       }
-
     }
   }
 }
@@ -63,4 +61,3 @@ $space-props: (
     @include space($breakpoint);
   }
 }
-

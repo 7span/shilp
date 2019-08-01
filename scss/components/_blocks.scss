@@ -1,83 +1,79 @@
-$styles-grid-size: 12;
+$styles-blocks-defaults: () !default;
+$styles-blocks-defaults: map-merge(
+  (
+    "gaps": $styles-gaps,
+    "grids": 12,
+    "gap": sm
+  ),
+  $styles-blocks-defaults
+);
 
-/**
-BLOCKS
-Same as bootstrap's row.
-*/
-@mixin blocks($breakpoint) {
-  $gap: calc(-1 * var(--gap--#{$breakpoint}));
-  margin-left: $gap;
-  margin-right: $gap;
-  > .block {
-    @include block($breakpoint);
-  }
+$blocks-grids: map-get($styles-blocks-defaults, "grids");
+$blocks-gap: map-get($styles-blocks-defaults, "gap");
+$blocks-gaps: map-get($styles-blocks-defaults, "gaps");
 
-  &.is-multirow {
-    margin: $gap;
-    > .block {
-      padding: $gap;
+// RESPONSIVE BLOCKS GAP
+// Generates the responsive classes based on breakpoint. with all the gap values.
+@mixin responsive-blocks-gap($breakpoint) {
+  @each $gap, $value in $blocks-gaps {
+    $className: breakpoint-class($breakpoint, g--#{$gap});
+    &.#{$className} {
+      @include blocks-gap($gap);
     }
   }
 }
 
-/**
-BLOCK
-Same as bootstrap's col.
-*/
-@mixin block($breakpoint) {
-  $gap: var(--gap--#{$breakpoint});
-  padding-left: $gap;
-  padding-right: $gap;
-  @for $i from 1 through $styles-grid-size {
+// BLOCKS GAP
+@mixin blocks-gap($gap) {
+  $negetive-gap: calc(-1 * #{--gap($gap)});
+  margin-left: $negetive-gap;
+  margin-right: $negetive-gap;
+  > .block {
+    padding-left: --gap($gap);
+    padding-right: --gap($gap);
+  }
+}
+
+// BLOCK SIZE
+// Defines the block size based on breakpoint and a class name.
+// I.e. .is-6 .phone--is-12
+@mixin block-size($breakpoint) {
+  @for $i from 1 through $blocks-grids {
     $className: breakpoint-class($breakpoint, is-#{$i});
     &.#{$className} {
-      flex: 0 0 (100% / $styles-grid-size) * $i;
-      max-width: (100% / $styles-grid-size) * $i;
+      flex: 0 0 (100% / $blocks-grids) * $i;
+      max-width: (100% / $blocks-grids) * $i;
     }
   }
 }
 
-/**
-BLOCKS RULES
-*/
+// BLOCKS RULES
 .blocks {
   display: flex;
   flex-wrap: wrap;
-  > .block {
-    flex-basis: 0;
-    flex-grow: 1;
-    max-width: 100%;
-  }
-  @include blocks("desktop");
-
+  //This will set a default gap rules.
+  @include blocks-gap($blocks-gap);
+  //This will add rules for desktop and diffrent sizes.
+  @include responsive-blocks-gap("desktop");
   &.is-middle {
     align-items: center;
   }
-
-  //Remove gap
-  &.no-gap {
-    margin: 0;
-    > .block {
-      padding: 0;
-    }
-  }
-
-  //DEBUG MODE HIGHLIGHT
-  @if ($debug) {
-    border: 1px dotted red;
-    .block {
-      border: 1px dotted blue;
-    }
-  }
+}
+.block {
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+  @include block-size("desktop");
 }
 
-/**
-MEDIA QUERY FOR BLOCKS
-*/
+// MEDIA QUERY
 @each $breakpoint, $value in $styles-breakpoints {
   @media only screen and (max-width: $value) {
     .blocks {
-      @include blocks($breakpoint);
+      @include responsive-blocks-gap($breakpoint);
+    }
+    .block {
+      @include block-size($breakpoint);
     }
   }
 }

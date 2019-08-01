@@ -1,7 +1,3 @@
-/**
-GAPS
-*/
-
 @mixin gap($breakpoint, $direction, $gap) {
   $className: breakpoint-class($breakpoint, g#{$direction}--#{$gap});
   $rule: "";
@@ -15,7 +11,7 @@ GAPS
   .#{$className} {
     > * {
       + * {
-        #{$rule}: var(--gap--#{$gap});
+        #{$rule}: --gap($gap);
       }
     }
   }

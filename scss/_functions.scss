@@ -1,7 +1,5 @@
-/**
-MAP DEEP GET
-Get Deeper Values from Map
-*/
+// MAP DEEP GET
+// Get Deeper Values from Map
 @function map-deep-get($map, $keys...) {
   @each $key in $keys {
     $map: map-get($map, $key);
@@ -9,12 +7,8 @@ Get Deeper Values from Map
   @return $map;
 }
 
-/**
-BREAKPOINT CLASS
-Automatically generates class for 
-given breakpoint
-*/
-
+// BREAKPOINT CLASS
+//Automatically generates class for given breakpoint
 @function breakpoint-class($breakpoint, $class) {
   @if ($breakpoint== "desktop") {
     $class: #{$class};
@@ -24,12 +18,10 @@ given breakpoint
   @return $class;
 }
 
-/**
-CSS VARIABLES
-@prop: Property (Color, Font-Family, Font-Size)
-@val : Value (Blue)
-@mod : Modifier (Dark, Light)
-*/
+// CSS VARIABLES
+// @prop: Property (Color, Font-Family, Font-Size)
+// @val : Value (Blue)
+// @mod : Modifier (Dark, Light)
 @function --var($prop, $val, $mod: "") {
   @if ($mod== "") {
     @return var(--#{$prop}--#{$val});
@@ -41,8 +33,16 @@ CSS VARIABLES
   @return --var("color", $val, $mod);
 }
 
+@function --text-color($val, $mod: "") {
+  @return --var("text-color", $val, $mod);
+}
+
 @function --space($val, $mod: "") {
   @return --var("space", $val, $mod);
+}
+
+@function --gap($val, $mod: "") {
+  @return --var("gap", $val, $mod);
 }
 
 @function --input-size($val, $mod: "") {
@@ -51,4 +51,8 @@ CSS VARIABLES
 
 @function --font-weight($val, $mod: "") {
   @return --var("font-weight", $val, $mod);
+}
+
+@function --font-family($val, $mod: "") {
+  @return --var("font-family", $val, $mod);
 }

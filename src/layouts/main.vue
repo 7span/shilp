@@ -65,7 +65,7 @@
           </li>
         </ul>
       </aside>
-      <main class="main">
+      <main class="main p--xl">
         <router-view></router-view>
       </main>
     </div>
