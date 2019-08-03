@@ -1,0 +1,9 @@
+// Sets the default font-family, size, weight for text tags.
+@each $tag, $tag-settings in $styles-text {
+  #{$tag},
+  .#{$tag} {
+    font-size: --font-size($tag);
+    font-family: map-get($tag-settings, "font-family");
+    font-weight: map-get($tag-settings, "font-weight");
+  }
+}

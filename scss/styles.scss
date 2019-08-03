@@ -1,6 +1,7 @@
-@import "./globals";
-@import "./css-variables";
+@import "./globals"; // Required
+@import "./css-variables"; // Required
 @import "./defaults";
+@import "./components/text";
 @import "./components/box";
 @import "./components/button";
 @import "./components/blocks";

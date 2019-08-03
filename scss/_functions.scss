@@ -56,3 +56,7 @@
 @function --font-family($val, $mod: "") {
   @return --var("font-family", $val, $mod);
 }
+
+@function --font-size($val, $mod: "") {
+  @return --var("font-size", $val, $mod);
+}

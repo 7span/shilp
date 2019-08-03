@@ -5,6 +5,7 @@ $styles-form-defaults: map-merge(
     "radius": 3px,
     "size": "md",
     "border-width": 1px,
+    "border-color": --color(grey, light),
     "states": (
       danger,
       warning,
@@ -19,6 +20,7 @@ $form-radius: map-get($styles-form-defaults, "radius");
 $form-size: map-get($styles-form-defaults, "size");
 $form-border-width: map-get($styles-form-defaults, "border-width");
 $form-states: map-get($styles-form-defaults, "states");
+$form-border-color: map-get($styles-form-defaults, "border-color");
 
 // FIELD SIZES
 // Generates the size based on $styles-input-sizes map
@@ -53,7 +55,7 @@ $form-states: map-get($styles-form-defaults, "states");
       .field__block {
         border-color: --color($state);
         &:focus {
-          box-shadow: 0 0 0 3px --color($state, muted);
+          box-shadow: inset 0 0 0 3px --color($state, muted);
         }
       }
       .field__before,
@@ -118,15 +120,15 @@ $form-states: map-get($styles-form-defaults, "states");
   &__block {
     outline: 0;
     padding: 0 --space(xs);
-    border: $form-border-width solid --color(grey);
-    border-radius: $form-radius;
+    border: $form-border-width solid $form-border-color;
     font-size: --font-size(span);
     font-family: --font-family(content);
     color: #000;
     width: 100%;
+    border-radius: $form-radius;
     min-width: 0px; //When .field__group is used, the input becomes flex child.
     &:focus {
-      box-shadow: 0 0 0 3px --color(primary, muted);
+      box-shadow: inset 0 0 0 3px --color(primary, muted);
       position: relative;
     }
     &:disabled {
@@ -140,16 +142,15 @@ $form-states: map-get($styles-form-defaults, "states");
     display: flex;
     align-items: stretch;
     > * {
-      &:not(:first-child):not(:last-child) {
-        border-radius: 0;
-      }
+      border-radius: 0;
       &:first-child {
-        border-top-left-radius: $form-radius;
-        border-bottom-left-radius: $form-radius;
+        border-radius: $form-radius 0 0 $form-radius;
       }
       &:last-child {
-        border-top-right-radius: $form-radius;
-        border-bottom-right-radius: $form-radius;
+        border-radius: 0 $form-radius $form-radius 0;
+      }
+      &:only-child {
+        border-radius: $form-radius;
       }
     }
     > .field {
@@ -162,7 +163,7 @@ $form-states: map-get($styles-form-defaults, "states");
   &__before,
   &__after {
     flex: 0 0 auto;
-    border: $form-border-width solid --color(grey);
+    border: $form-border-width solid $form-border-color;
 
     display: flex;
     justify-content: center;

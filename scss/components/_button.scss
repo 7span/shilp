@@ -13,6 +13,7 @@ $styles-button-defaults: map-merge(
       warning
     ),
     "styles": (
+      trn,
       solid,
       outline,
       muted
@@ -92,9 +93,27 @@ $button-alignments: map-get($styles-button-defaults, "alignments");
   path {
     fill: --color($variant);
   }
-  &:hover {
-    background-color: --color($variant, muted);
-    color: --color($variant);
+  &:hover:not(:disabled) {
+    background-color: --color($variant);
+    color: --text-color($variant);
+    path {
+      fill: --text-color($variant);
+    }
+  }
+}
+
+@mixin button-style--trn($variant) {
+  background-color: transparent;
+  color: --color($variant);
+  path {
+    fill: --color($variant);
+  }
+  &:hover:not(:disabled) {
+    background-color: transparent;
+    color: --color($variant, hover);
+    path {
+      fill: --color($variant, hover);
+    }
   }
 }
 
@@ -107,6 +126,9 @@ $button-alignments: map-get($styles-button-defaults, "alignments");
   } //
   @else if $style== "muted" {
     @include button-style--muted($variant);
+  } //
+  @else if $style== "trn" {
+    @include button-style--trn($variant);
   }
 }
 
@@ -124,7 +146,7 @@ $button-alignments: map-get($styles-button-defaults, "alignments");
   height: --input-size($size);
   width: --input-size($size);
   padding: 0 !important;
-  border-radius: 0;
+  justify-content: center;
   .button__icon {
     margin: 0;
   }
@@ -134,6 +156,7 @@ $button-alignments: map-get($styles-button-defaults, "alignments");
   width: --input-size($size);
   padding: 0 !important;
   border-radius: 50%;
+  justify-content: center;
   .button__icon {
     margin: 0;
   }

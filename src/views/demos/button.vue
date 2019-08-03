@@ -28,14 +28,14 @@
       section
         h3.m--0 Button Preview
         button(:class="buttonClass") 
-          m-icon CheckCircle
+          m-icon.button__icon CheckCircle
           span {{text}}
 
       section
         h3.m--0 Button Group
         .button-group.is-stacked.gy--xs(:class="buttonClass.filter(item=>item!=='button')")
           button(v-for="n in 3") 
-            m-icon CheckCircle
+            m-icon.button__icon CheckCircle
             span {{text}}
 </template>
  
@@ -64,7 +64,7 @@ export default {
       ],
       size: ["xl", "lg", "md", "sm"],
       shape: ["rectangle", "pill", "rounded", "circle", "square"],
-      style: ["solid", "outline", "muted"]
+      style: ["solid", "outline", "muted", "trn"]
     }
   }),
   computed: {

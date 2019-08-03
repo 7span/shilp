@@ -1,3 +1,10 @@
+// CSS VARIABLES
+// Generates the CSS variable for all the SCSS variables and maps
+// The standard of variable naming is: property--value--modifier
+// Example: --color--primary--muted.
+// The modifier "default" will not be added at the end.
+// Example: --color--primary
+
 :root {
   //COLORS
   @each $variant, $color in $styles-colors {

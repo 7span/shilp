@@ -1,3 +1,6 @@
+// DEFAULT CSS RULES
+// This will be added at root level of the document if not scoped.
+
 @mixin defaults {
   *,
   *:after,
@@ -5,20 +8,18 @@
     box-sizing: border-box;
   }
 
-  // TEXT
-  // Sets the default font-family, size, weight for text tags.
-  @each $tag, $tag-settings in $styles-text {
-    #{$tag},
-    .#{$tag} {
-      font-size: var(--font-size--#{$tag});
-      font-family: map-get($tag-settings, "font-family");
-      font-weight: map-get($tag-settings, "font-weight");
-    }
-  }
-
   img,
   svg {
     vertical-align: top;
+  }
+
+  strong,
+  b {
+    font-weight: --font-weight(bold);
+  }
+
+  code {
+    font-family: --font-family(code);
   }
 }
 
@@ -27,15 +28,17 @@
 // Useful when integrating with other CSS frameworks
 @if $scoped {
   .#{$scope} {
-    font-family: var(--font-family--content);
+    font-family: --font-family(content);
+    font-weight: --font-family(regular);
     @include defaults;
   }
 } @else {
   @at-root {
     body {
-      font-family: var(--font-family--content);
       margin: 0;
       padding: 0;
+      font-family: --font-family(content);
+      font-weight: --font-family(regular);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
