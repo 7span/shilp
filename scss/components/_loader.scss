@@ -1,0 +1,57 @@
+$styles-loader-defaults: () !default;
+$styles-loader-defaults: map-merge(
+  (
+    "size": 32px,
+    "width": 3px,
+    "base-color": rgba(255, 255, 255, 0.8),
+    "overlay-color": rgba(255, 255, 255, 0.5),
+    "color": --color(primary)
+  ),
+  $styles-loader-defaults
+);
+
+$loader-color: map-get($styles-loader-defaults, "color");
+$loader-size: map-get($styles-loader-defaults, "size");
+$loader-width: map-get($styles-loader-defaults, "width");
+$loader-base-color: map-get($styles-loader-defaults, "base-color");
+$loader-overlay-color: map-get($styles-loader-defaults, "base-color");
+
+.loader {
+  position: relative;
+  min-height: 48px;
+  &:after {
+    content: "";
+    width: $loader-size;
+    height: $loader-size;
+    border-radius: 50%;
+    border-width: $loader-width;
+    border-color: $loader-color $loader-base-color $loader-base-color
+      $loader-base-color;
+    border-style: solid;
+    display: block;
+    @include position(absolute);
+    z-index: 3;
+    animation-name: loading;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    margin: auto;
+  }
+
+  &--overlay {
+    &:before {
+      content: "";
+      @include position(absolute);
+      background-color: $loader-overlay-color;
+      z-index: 2;
+    }
+  }
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

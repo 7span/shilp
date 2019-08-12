@@ -5,7 +5,7 @@
       @if ($shade== "default") {
         color: --color($variant);
         //Background Color
-        &.is-block {
+        &.block {
           background-color: --color($variant);
           color: --text-color($variant);
         }
@@ -14,7 +14,7 @@
         &.is-#{$shade} {
           color: --color($variant, $shade);
           //Background Color
-          &.is-block {
+          &.block {
             background-color: --color($variant, $shade);
             color: --color($variant, hover);
           }

@@ -22,6 +22,13 @@ $form-border-width: map-get($styles-form-defaults, "border-width");
 $form-states: map-get($styles-form-defaults, "states");
 $form-border-color: map-get($styles-form-defaults, "border-color");
 
+//CUSTOM SELECT
+$select-arrow-color: map-deep-get($styles-colors, "grey", "default");
+$select-arrow: m-icon(
+  "M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z",
+  $select-arrow-color
+);
+
 // FIELD SIZES
 // Generates the size based on $styles-input-sizes map
 @mixin field-size($size) {
@@ -66,6 +73,15 @@ $form-border-color: map-get($styles-form-defaults, "border-color");
       }
     }
   }
+}
+
+@mixin form-field-defaults {
+  font-size: --font-size(span);
+  font-family: --font-family(content);
+  color: #000;
+  width: 100%;
+  outline: 0;
+  padding: 0 --space(xs);
 }
 
 // FIELD
@@ -118,13 +134,8 @@ $form-border-color: map-get($styles-form-defaults, "border-color");
 
   //Input, Select, Textarea
   &__block {
-    outline: 0;
-    padding: 0 --space(xs);
+    @include form-field-defaults;
     border: $form-border-width solid $form-border-color;
-    font-size: --font-size(span);
-    font-family: --font-family(content);
-    color: #000;
-    width: 100%;
     border-radius: $form-radius;
     min-width: 0px; //When .field__group is used, the input becomes flex child.
     &:focus {
@@ -195,5 +206,27 @@ $form-border-color: map-get($styles-form-defaults, "border-color");
   }
   100% {
     content: "....";
+  }
+}
+
+.select {
+  position: relative;
+  select {
+    @include position(absolute);
+    @include form-field-defaults;
+    border-radius: $form-radius - 1;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+  &:after {
+    content: "";
+    @include position(absolute, 0, 0, 0, auto);
+    width: 32px;
+    height: 100%;
+    display: block;
+    background-image: url($select-arrow);
+    background-repeat: no-repeat;
+    background-position: center;
   }
 }

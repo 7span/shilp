@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <header class="header is-primary is-block">
+    <header class="block header is-primary">
       <h1 class="h3 m--0 pl--lg">Styles</h1>
     </header>
 
@@ -12,20 +12,6 @@
               <m-icon>FormatFont</m-icon>
               <span>Texts</span>
             </router-link>
-            <ul class="button-group is-stacked pl--sm">
-              <li>
-                <router-link to="/text">
-                  <m-icon>FormatFont</m-icon>
-                  <span>Texts</span>
-                </router-link>
-              </li>
-              <li>
-                <router-link to="/text">
-                  <m-icon>FormatFont</m-icon>
-                  <span>Texts</span>
-                </router-link>
-              </li>
-            </ul>
           </li>
           <li>
             <router-link to="/input">
@@ -61,6 +47,12 @@
             <router-link to="/colors">
               <m-icon>Palette</m-icon>
               <span>Colors</span>
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/loader">
+              <m-icon>Loading</m-icon>
+              <span>Loader</span>
             </router-link>
           </li>
         </ul>

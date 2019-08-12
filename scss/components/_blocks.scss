@@ -28,9 +28,14 @@ $blocks-gaps: map-get($styles-blocks-defaults, "gaps");
   $negetive-gap: calc(-1 * #{--gap($gap)});
   margin-left: $negetive-gap;
   margin-right: $negetive-gap;
+  &:first-child {
+    margin-top: $negetive-gap;
+  }
+  &:last-child {
+    margin-bottom: $negetive-gap;
+  }
   > .block {
-    padding-left: --gap($gap);
-    padding-right: --gap($gap);
+    padding: --gap($gap);
   }
 }
 
@@ -58,12 +63,12 @@ $blocks-gaps: map-get($styles-blocks-defaults, "gaps");
   &.is-middle {
     align-items: center;
   }
-}
-.block {
-  flex-basis: 0;
-  flex-grow: 1;
-  max-width: 100%;
-  @include block-size("desktop");
+  > .block {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+    @include block-size("desktop");
+  }
 }
 
 // MEDIA QUERY
@@ -71,9 +76,9 @@ $blocks-gaps: map-get($styles-blocks-defaults, "gaps");
   @media only screen and (max-width: $value) {
     .blocks {
       @include responsive-blocks-gap($breakpoint);
-    }
-    .block {
-      @include block-size($breakpoint);
+      > .block {
+        @include block-size($breakpoint);
+      }
     }
   }
 }

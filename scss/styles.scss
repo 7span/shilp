@@ -1,15 +1,4 @@
 @import "./globals"; // Required
 @import "./css-variables"; // Required
 @import "./defaults";
-@import "./components/text";
-@import "./components/box";
-@import "./components/button";
-@import "./components/blocks";
-@import "./components/grid";
-@import "./components/form";
-@import "./components/space";
-@import "./components/gap";
-@import "./components/color";
-@import "./components/utilities";
-@import "./components/nav";
-@import "./components/ratio";
+@import "./components/all";

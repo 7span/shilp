@@ -12,7 +12,8 @@ export default {
     ArrowExpandHorizontal: require("@icon/ArrowExpandHorizontal").default,
     PanHorizontal: require("@icon/PanHorizontal").default,
     Palette: require("@icon/Palette").default,
-    CheckCircle: require("@icon/CheckCircle").default
+    CheckCircle: require("@icon/CheckCircle").default,
+    Loading: require("@icon/Loading").default,
   },
   computed: {
     setClass() {

@@ -71,4 +71,14 @@
               input(type="radio" id="female") 
               label(for="female") Female
 
+  .blocks
+    .block.is-4
+      .field
+        label City Custom Dropdown
+        .select.field__block
+          select
+            option Select The Option
+            option Ahmedabad
+            option Rajkot
+
 </template>

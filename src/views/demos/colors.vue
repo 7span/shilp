@@ -2,7 +2,7 @@
 .box
   h1 Colors
   ul
-    li is-[variant].is-[shade][is-block]
+    li is-[variant].is-[shade][.block]
     li use .is-block to use color variant as background-color
   .blocks
     .block.is-primary Hello

@@ -36,6 +36,10 @@ export default new Router({
         {
           path: "colors",
           component: require("@/views/demos/colors").default
+        },
+        {
+          path: "loader",
+          component: require("@/views/demos/loader").default
         }
       ]
     }

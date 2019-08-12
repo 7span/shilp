@@ -1,0 +1,19 @@
+// MAP DEEP GET
+// Get Deeper Values from Map
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}
+
+// BREAKPOINT CLASS
+//Automatically generates class for given breakpoint
+@function breakpoint-class($breakpoint, $class) {
+  @if ($breakpoint== "desktop") {
+    $class: #{$class};
+  } @else {
+    $class: #{$breakpoint}--#{$class};
+  }
+  @return $class;
+}
