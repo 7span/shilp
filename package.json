@@ -1,6 +1,18 @@
 {
   "name": "@7span/shilp",
+  "description": "CSS Framework Completely Customizable via CSS Variables",
   "version": "0.1.0-beta.1",
+  "keywords": [
+    "css",
+    "sass",
+    "scss",
+    "mobile-first",
+    "responsive",
+    "front-end",
+    "framework",
+    "web"
+  ],
+  "author": "Harsh Kansagara (https://7span.com)",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
