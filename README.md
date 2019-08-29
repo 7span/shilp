@@ -1,4 +1,4 @@
-# Styles
+# Shilp (शिल्प)
 
 CSS Framework built with SCSS.
 
