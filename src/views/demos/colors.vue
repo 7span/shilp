@@ -5,16 +5,16 @@
     li is-[variant].is-[shade][.block]
     li use .is-block to use color variant as background-color
   .blocks
-    .block.is-primary Hello
-    .block.is-danger How are you?
+    .block.bg-color--primary Hello
+    .block.bg-color--danger How are you?
   .blocks
-    .block.is-primary.is-block.p--xs Hello
-    .block.is-secondary.is-block.p--sm How are you?
-    .block.is-accent.is-block.p--md I'm fine!
+    .block.bg-color--primary.shade--darker.p--xs Hello
+    .block.bg-color--secondary.shade--lighter.p--sm How are you?
+    .block.bg-color--accent.shade--light.p--md I'm fine!
   .blocks
-    .block.is-primary.is-block.is-muted.p--xs Hello
-    .block.is-secondary.is-block.is-muted.p--sm How are you?
-    .block.is-accent.is-block.is-muted.p--md I'm fine!
+    .block.color--primary.shade--lighter.p--xs Hello
+    .block.color--secondary.shade--lighter.p--sm How are you?
+    .block.color--accent.shade--lighter.p--md I'm fine!
 </template>
 
 <style lang="scss">

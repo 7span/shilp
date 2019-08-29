@@ -48,7 +48,7 @@ $select-arrow: m-icon(
 }
 @mixin field-sizes {
   @each $size, $value in $styles-input-sizes {
-    &.is-#{$size} {
+    &.size--#{$size} {
       @include field-size($size);
     }
   }
@@ -57,19 +57,19 @@ $select-arrow: m-icon(
 // FIELD STATES
 @mixin form-states {
   @each $state in $form-states {
-    &.is-#{$state} {
+    &.color--#{$state} {
       //Input, Select, Textarea
       .field__block {
         border-color: --color($state);
         &:focus {
-          box-shadow: inset 0 0 0 3px --color($state, muted);
+          box-shadow: inset 0 0 0 3px --color($state, lightest);
         }
       }
       .field__before,
       .field__after {
         border-color: --color($state);
-        background-color: --color($state, muted);
-        color: --color($state, hover);
+        background-color: --color($state, lightest);
+        color: --color($state, darker);
       }
     }
   }
@@ -139,7 +139,7 @@ $select-arrow: m-icon(
     border-radius: $form-radius;
     min-width: 0px; //When .field__group is used, the input becomes flex child.
     &:focus {
-      box-shadow: inset 0 0 0 3px --color(primary, muted);
+      box-shadow: inset 0 0 0 3px --color(grey, lightest);
       position: relative;
     }
     &:disabled {

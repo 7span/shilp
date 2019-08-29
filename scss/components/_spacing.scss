@@ -53,7 +53,7 @@ $space-props: (
   }
 }
 
-@include space("desktop");
+@include space("phone");
 
 //Media Query
 @each $breakpoint, $value in $styles-breakpoints {

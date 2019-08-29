@@ -2,18 +2,18 @@
 .inputs
   h1 Inputs
   .blocks
-    .block.is-4
+    .block.size--4
       .field.is-loading
         label First Name
         input.field__block(type="text" placeholder="e.g. John")
         small This is help text.
-    .block.is-4
+    .block.size--4
       .field
         label Last Name
         input.field__block(type="text" placeholder="e.g. Doe")
         small This is help text.
 
-    .block.is-4
+    .block.size--4
       .field
         label Email
         .field__group
@@ -22,19 +22,19 @@
         small This is help text.
 
   .blocks
-    .block.is-4
+    .block.size--4
       .field.is-loading
         label First Name
         input.field__block(type="text" placeholder="e.g. John")
         small This is help text.
-    .block.is-4
-      .field.is-danger
+    .block.size--4
+      .field.color--danger
         label Last Name
         input.field__block(type="text" placeholder="e.g. Doe")
         small This is help text.
 
-    .block.is-4
-      .field.is-success
+    .block.size--4
+      .field.color--success
         label Email
         .field__group
           .field__before @
@@ -43,7 +43,7 @@
         small This is help text.
 
   .blocks
-    .block.is-4
+    .block.size--4
       .field
         label City
         select.field__block
@@ -51,14 +51,14 @@
           option Ahmedabad
           option Rajkot
 
-    .block.is-4
+    .block.size--4
       .field
         label Marital Status
         .field.is-checkbox.is-md
           input(type="checkbox" id="marriage") 
           label(for="marriage") Married
 
-    .block.is-4
+    .block.size--4
       .field
         label Gender
         .blocks
@@ -72,7 +72,7 @@
               label(for="female") Female
 
   .blocks
-    .block.is-4
+    .block.size--4
       .field
         label City Custom Dropdown
         .select.field__block

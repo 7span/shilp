@@ -27,8 +27,8 @@
 }
 
 @each $gap, $value in $styles-gaps {
-  @include gap("desktop", "x", $gap);
-  @include gap("desktop", "y", $gap);
+  @include gap("phone", "x", $gap);
+  @include gap("phone", "y", $gap);
 }
 
 @each $breakpoint, $value in $styles-breakpoints {

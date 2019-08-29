@@ -1,12 +1,12 @@
 // BREAKPOINTS
-//Follows the desktop-first approach.
 $styles-breakpoints: () !default;
 $styles-breakpoints: map-merge(
   (
-    laptop: 1200px,
-    tablet: 992px,
-    phablet: 768px,
-    phone: 576px
+    //phone not required in mobile first approach
+      phablet: 576px,
+    tablet: 768px,
+    laptop: 992px,
+    desktop: 1200px
   ),
   $styles-breakpoints
 );
@@ -17,11 +17,11 @@ $styles-breakpoints: map-merge(
 $styles-boxes: () !default;
 $styles-boxes: map-merge(
   (
-    desktop: 1140px,
-    laptop: 960px,
+    //phone: 100%,
+      phablet: 540px,
     tablet: 720px,
-    phablet: 540px,
-    phone: 100%
+    laptop: 960px,
+    desktop: 1140px
   ),
   $styles-boxes
 );

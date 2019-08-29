@@ -22,8 +22,8 @@ export default new Router({
           component: require("@/views/demos/blocks").default
         },
         {
-          path: "input",
-          component: require("@/views/demos/input").default
+          path: "form",
+          component: require("@/views/demos/form").default
         },
         {
           path: "spacing",

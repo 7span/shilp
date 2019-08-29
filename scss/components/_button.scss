@@ -1,7 +1,7 @@
 $styles-button-defaults: () !default;
 $styles-button-defaults: map-merge(
   (
-    "variants": (
+    "colors": (
       primary,
       secondary,
       accent,
@@ -29,11 +29,13 @@ $styles-button-defaults: map-merge(
       left,
       right
     ),
-    "variant": "primary",
+    "color": "primary",
     "style": "solid",
     "shape": "rounded",
     "size": "md",
     "outline": 1px,
+    "muted-shade": "lightest",
+    "hover-shade": "darker",
     "icon-size": (
       xl: 28px,
       lg: 24px,
@@ -45,90 +47,126 @@ $styles-button-defaults: map-merge(
 );
 
 $button-shape: map-get($styles-button-defaults, "shape");
-$button-variant: map-get($styles-button-defaults, "variant");
+$button-color: map-get($styles-button-defaults, "color");
 $button-size: map-get($styles-button-defaults, "size");
 $button-style: map-get($styles-button-defaults, "style");
 $button-outline: map-get($styles-button-defaults, "outline");
 $button-icon-size: map-get($styles-button-defaults, "icon-size");
 
-// The color map must contain "hover", "default", "muted", "text" values.
-$button-variants: map-get($styles-button-defaults, "variants");
+$button-colors: map-get($styles-button-defaults, "colors");
 $button-styles: map-get($styles-button-defaults, "styles");
 $button-shapes: map-get($styles-button-defaults, "shapes");
 $button-alignments: map-get($styles-button-defaults, "alignments");
+$button-hover-shade: map-get($styles-button-defaults, "hover-shade");
+$button-muted-shade: map-get($styles-button-defaults, "muted-shade");
+
+// DEFINES COLORS
+// Defines the colors to use in diffrent shade based on provided color.
+// Specially useful in light and dark shades.
+@function define-colors($color) {
+  $default: "";
+  $text: "";
+  $hover: "";
+  $muted: "";
+  @if ($color== "light") {
+    $default: --color(grey, lightest);
+    $text: --color(grey, darkest);
+    $hover: --color(grey, lighter);
+    $muted: --color(grey, lightest);
+  } @else if($color== "dark") {
+    $default: --color(grey, darkest);
+    $text: --color(grey, lightest);
+    $hover: --color(grey, darker);
+    $muted: --color(grey, darkest);
+  } @else {
+    $default: --color($color);
+    $text: --text-color($color);
+    $hover: --color($color, $button-hover-shade);
+    $muted: --color($color, $button-muted-shade);
+  }
+  @return (default: $default, hover: $hover, text: $text, muted: $muted);
+}
 
 // STYLES
 // Each style has unique CSS rules hence requires seperate mixins.
 // naming convention is: button-style--<style_name>
-@mixin button-style--solid($variant) {
-  background-color: --color($variant);
-  color: --text-color($variant);
+@mixin button-style--solid($color) {
+  $colors: define-colors($color);
+
+  background-color: map-get($colors, default);
+  color: map-get($colors, text);
   path {
-    fill: --text-color($variant);
+    fill: map-get($colors, text);
   }
   &:hover:not(:disabled) {
-    background-color: --color($variant, hover);
+    background-color: map-get($colors, hover);
   }
 }
 
-@mixin button-style--outline($variant) {
-  border: $button-outline solid --color($variant);
+@mixin button-style--outline($color) {
+  $colors: define-colors($color);
+
+  border: $button-outline solid map-get($colors, default);
   background-color: transparent;
-  color: --color($variant);
+  color: map-get($colors, default);
   path {
-    fill: --color($variant);
+    fill: map-get($colors, default);
   }
   &:hover:not(:disabled) {
-    background-color: --color($variant);
-    color: --text-color($variant);
+    background-color: map-get($colors, default);
+    color: map-get($colors, text);
     path {
-      fill: --text-color($variant);
+      fill: map-get($colors, text);
     }
   }
 }
 
-@mixin button-style--muted($variant) {
-  background-color: --color($variant, muted);
-  color: --color($variant);
+@mixin button-style--muted($color) {
+  $colors: define-colors($color);
+
+  background-color: map-get($colors, muted);
+  color: map-get($colors, default);
   path {
-    fill: --color($variant);
+    fill: map-get($colors, default);
   }
   &:hover:not(:disabled) {
-    background-color: --color($variant);
-    color: --text-color($variant);
+    background-color: map-get($colors, default);
+    color: map-get($colors, text);
     path {
-      fill: --text-color($variant);
+      fill: map-get($colors, text);
     }
   }
 }
 
-@mixin button-style--trn($variant) {
+@mixin button-style--trn($color) {
+  $colors: define-colors($color);
+
   background-color: transparent;
-  color: --color($variant);
+  color: map-get($colors, default);
   path {
-    fill: --color($variant);
+    fill: map-get($colors, default);
   }
   &:hover:not(:disabled) {
     background-color: transparent;
-    color: --color($variant, hover);
+    color: map-get($colors, hover);
     path {
-      fill: --color($variant, hover);
+      fill: map-get($colors, hover);
     }
   }
 }
 
-@mixin button-style($style, $variant) {
+@mixin button-style($style, $color) {
   @if $style== "solid" {
-    @include button-style--solid($variant);
+    @include button-style--solid($color);
   } //
   @else if $style== "outline" {
-    @include button-style--outline($variant);
+    @include button-style--outline($color);
   } //
   @else if $style== "muted" {
-    @include button-style--muted($variant);
+    @include button-style--muted($color);
   } //
   @else if $style== "trn" {
-    @include button-style--trn($variant);
+    @include button-style--trn($color);
   }
 }
 
@@ -196,6 +234,7 @@ $button-alignments: map-get($styles-button-defaults, "alignments");
 // ALIGNMENT
 @mixin button-alignment--left {
   padding-left: 0;
+  justify-content: flex-start;
   .button__icon {
     justify-content: flex-end;
     margin-right: --space(xs);
@@ -204,6 +243,7 @@ $button-alignments: map-get($styles-button-defaults, "alignments");
 @mixin button-alignment--right {
   padding-right: 0;
   flex-direction: row-reverse;
+  justify-content: flex-end;
   .button__icon {
     justify-content: flex-start;
     margin-left: --space(xs);
@@ -224,16 +264,16 @@ $button-alignments: map-get($styles-button-defaults, "alignments");
 
 // Default .button rules.
 .button,
-.button-group a,
-.button-group button {
+.button-group .button {
   @include button--reset;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   white-space: nowrap;
   font-family: --font-family(content);
   text-decoration: none;
   font-size: 14px;
   line-height: 1;
+  justify-content: center;
   .button__icon {
     display: flex;
     justify-content: center;
@@ -258,7 +298,7 @@ $button-alignments: map-get($styles-button-defaults, "alignments");
   }
   @include button-size($button-size);
   @include button-shape($button-shape, $button-size);
-  @include button-style($button-style, $button-variant);
+  @include button-style($button-style, $button-color);
 }
 
 .button-group {
@@ -280,34 +320,31 @@ $button-alignments: map-get($styles-button-defaults, "alignments");
 
 // STYLE CLASSES
 // Generates classes for button styles.
-// Uses default variant value.
+// Uses default color value.
 @each $style in $button-styles {
-  .button-group.is-#{$style} a,
-  .button-group.is-#{$style} button,
-  .button.is-#{$style} {
-    @include button-style($style, $button-variant);
+  .button-group.style--#{$style} .button,
+  .button.style--#{$style} {
+    @include button-style($style, $button-color);
   }
 }
 
-// VARIANT CLASSES
-// Generates classes for button variants.
+// COLORS CLASSES
+// Generates classes for button colors.
 // Uses default style value.
-@each $variant in $button-variants {
-  .button-group.is-#{$variant} a,
-  .button-group.is-#{$variant} button,
-  .button.is-#{$variant} {
-    @include button-style($button-style, $variant);
+@each $color in $button-colors {
+  .button-group.color--#{$color} .button,
+  .button.color--#{$color} {
+    @include button-style($button-style, $color);
   }
 }
 
-// STYLE & VARIANT CLASSES
-// Generates classes for button styles & variants.
+// STYLE & COLOR CLASSES
+// Generates classes for button styles & colors.
 @each $style in $button-styles {
-  @each $variant in $button-variants {
-    .button-group.is-#{$variant}.is-#{$style} a,
-    .button-group.is-#{$variant}.is-#{$style} button,
-    .button.is-#{$variant}.is-#{$style} {
-      @include button-style($style, $variant);
+  @each $color in $button-colors {
+    .button-group.color--#{$color}.style--#{$style} .button,
+    .button.color--#{$color}.style--#{$style} {
+      @include button-style($style, $color);
     }
   }
 }
@@ -316,9 +353,8 @@ $button-alignments: map-get($styles-button-defaults, "alignments");
 // Generates classes for button shapes.
 // Users default size value.
 @each $shape in $button-shapes {
-  .button-group.is-#{$shape} a,
-  .button-group.is-#{$shape} button,
-  .button.is-#{$shape} {
+  .button-group.shape--#{$shape} .button,
+  .button.shape--#{$shape} {
     @include button-shape($shape, $button-size);
   }
 }
@@ -327,9 +363,8 @@ $button-alignments: map-get($styles-button-defaults, "alignments");
 // Generates classes for button sizes.
 // Users default size value.
 @each $size, $value in $styles-input-sizes {
-  .button-group.is-#{$size} a,
-  .button-group.is-#{$size} button,
-  .button.is-#{$size} {
+  .button-group.size--#{$size} .button,
+  .button.size--#{$size} {
     @include button-size($size);
   }
 }
@@ -337,9 +372,8 @@ $button-alignments: map-get($styles-button-defaults, "alignments");
 // SIZE & SHAPE CLASEES
 @each $shape in $button-shapes {
   @each $size, $value in $styles-input-sizes {
-    .button-group.is-#{$shape}.is-#{$size} a,
-    .button-group.is-#{$shape}.is-#{$size} button,
-    .button.is-#{$shape}.is-#{$size} {
+    .button-group.shape--#{$shape}.size--#{$size} .button,
+    .button.shape--#{$shape}.size--#{$size} {
       @include button-shape($shape, $size);
     }
   }
@@ -348,18 +382,16 @@ $button-alignments: map-get($styles-button-defaults, "alignments");
 // ALIGNMENT CLASSES
 // Uses default Button Size
 @each $align in $button-alignments {
-  .button-group.is-#{$align} a,
-  .button-group.is-#{$align} button,
-  .button.is-#{$align} {
+  .button-group.align--#{$align} .button,
+  .button.align--#{$align} {
     @include button-alignment($align, $button-size);
   }
 }
 
 @each $align in $button-alignments {
   @each $size, $value in $styles-input-sizes {
-    .button-group.is-#{$align}.is-#{$size} a,
-    .button-group.is-#{$align}.is-#{$size} button,
-    .button.is-#{$align}.is-#{$size} {
+    .button-group.align--#{$align}.size--#{$size} .button,
+    .button.align--#{$align}.size--#{$size} {
       @include button-alignment($align, $size);
     }
   }

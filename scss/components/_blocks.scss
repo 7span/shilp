@@ -41,14 +41,18 @@ $blocks-gaps: map-get($styles-blocks-defaults, "gaps");
 
 // BLOCK SIZE
 // Defines the block size based on breakpoint and a class name.
-// I.e. .is-6 .phone--is-12
+// I.e. .size--6 .phone--size--12
 @mixin block-size($breakpoint) {
   @for $i from 1 through $blocks-grids {
-    $className: breakpoint-class($breakpoint, is-#{$i});
+    $className: breakpoint-class($breakpoint, size--#{$i});
     &.#{$className} {
       flex: 0 0 (100% / $blocks-grids) * $i;
       max-width: (100% / $blocks-grids) * $i;
     }
+  }
+  &.#{$breakpoint}--size--auto {
+    flex-grow: 1;
+    flex-basis: 0;
   }
 }
 
@@ -58,22 +62,20 @@ $blocks-gaps: map-get($styles-blocks-defaults, "gaps");
   flex-wrap: wrap;
   //This will set a default gap rules.
   @include blocks-gap($blocks-gap);
-  //This will add rules for desktop and diffrent sizes.
-  @include responsive-blocks-gap("desktop");
+  @include responsive-blocks-gap("phone");
   &.is-middle {
     align-items: center;
   }
   > .block {
-    flex-basis: 0;
-    flex-grow: 1;
     max-width: 100%;
-    @include block-size("desktop");
+    width: 100%;
+    @include block-size("phone");
   }
 }
 
 // MEDIA QUERY
 @each $breakpoint, $value in $styles-breakpoints {
-  @media only screen and (max-width: $value) {
+  @media only screen and (min-width: $value) {
     .blocks {
       @include responsive-blocks-gap($breakpoint);
       > .block {

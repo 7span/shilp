@@ -16,5 +16,5 @@
 .grid {
   display: grid;
   gap: --gap(md);
-  @include grid("desktop");
+  @include grid("phone");
 }

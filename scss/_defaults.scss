@@ -29,7 +29,7 @@
 @if $scoped {
   .#{$scope} {
     font-family: --font-family(content);
-    font-weight: --font-family(regular);
+    font-weight: --font-weight(regular);
     @include defaults;
   }
 } @else {

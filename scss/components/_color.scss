@@ -1,23 +1,26 @@
-@each $variant, $color in $styles-colors {
-  @each $shade, $code in $color {
-    //Color
-    .is-#{$variant} {
+@each $color, $shades in $styles-colors {
+  @each $shade, $code in $shades {
+    //Background Color
+    .bg-color--#{$color} {
       @if ($shade== "default") {
-        color: --color($variant);
-        //Background Color
-        &.block {
-          background-color: --color($variant);
-          color: --text-color($variant);
-        }
+        background-color: --color($color);
+        color: --text-color($color);
       } @else {
         //Color
-        &.is-#{$shade} {
-          color: --color($variant, $shade);
-          //Background Color
-          &.block {
-            background-color: --color($variant, $shade);
-            color: --color($variant, hover);
-          }
+        &.shade--#{$shade} {
+          background-color: --color($color, $shade);
+          color: --text-color($color);
+        }
+      }
+    }
+
+    //Color
+    .color--#{$color} {
+      @if ($shade== "default") {
+        color: --color($color);
+      } @else {
+        &.shade--#{$shade} {
+          color: --color($color, $shade);
         }
       }
     }

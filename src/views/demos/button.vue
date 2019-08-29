@@ -43,40 +43,40 @@
 export default {
   data: () => ({
     icon: true,
-    text: "Hello World!",
+    text: 'Hello World!',
     selected: {
-      color: "primary",
-      size: "md",
-      shape: "rectangle",
-      style: "solid"
+      color: 'primary',
+      size: 'md',
+      shape: 'rectangle',
+      style: 'solid'
     },
     variants: {
       color: [
-        "primary",
-        "secondary",
-        "accent",
-        "light",
-        "dark",
-        "info",
-        "success",
-        "warning",
-        "danger"
+        'primary',
+        'secondary',
+        'accent',
+        'light',
+        'dark',
+        'info',
+        'success',
+        'warning',
+        'danger'
       ],
-      size: ["xl", "lg", "md", "sm"],
-      shape: ["rectangle", "pill", "rounded", "circle", "square"],
-      style: ["solid", "outline", "muted", "trn"]
+      size: ['xl', 'lg', 'md', 'sm'],
+      shape: ['rectangle', 'pill', 'rounded', 'circle', 'square'],
+      style: ['solid', 'outline', 'muted', 'trn']
     }
   }),
   computed: {
     buttonClass() {
-      let classes = ["button"];
+      let classes = ['button']
       for (var val in this.selected) {
-        if (this.selected[val]) classes.push(`is-${this.selected[val]}`);
+        if (this.selected[val]) classes.push(`${val}--${this.selected[val]}`)
       }
-      return classes;
+      return classes
     }
   }
-};
+}
 </script>
 
 

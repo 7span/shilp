@@ -5,14 +5,14 @@
 .box {
   margin-left: auto;
   margin-right: auto;
-  @include box("desktop");
+  @include box("phone");
   &.is-fluid {
     max-width: none;
   }
 }
 
 @each $breakpoint, $value in $styles-breakpoints {
-  @media only screen and (max-width: $value) {
+  @media only screen and (min-width: $value) {
     .box {
       @include box($breakpoint);
     }
