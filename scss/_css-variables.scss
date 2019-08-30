@@ -7,7 +7,7 @@
 
 :root {
   //COLORS
-  @each $variant, $color in $styles-colors {
+  @each $variant, $color in $shilp-colors {
     @each $shade, $value in $color {
       @if ($shade== "default") {
         --color--#{$variant}: #{$value};
@@ -20,22 +20,22 @@
   }
 
   //FONT-FAMILIES
-  @each $type, $value in $styles-font-families {
+  @each $type, $value in $shilp-font-families {
     --font-family--#{$type}: #{$value};
   }
 
   //FONT-SIZES
-  @each $size, $value in $styles-font-sizes {
+  @each $size, $value in $shilp-font-sizes {
     --font-size--#{$size}: #{$value};
   }
 
   //FONT-WEIGHTS
-  @each $type, $value in $styles-font-weights {
+  @each $type, $value in $shilp-font-weights {
     --font-weight--#{$type}: #{$value};
   }
 
   //GAPS
-  @each $size, $value in $styles-gaps {
+  @each $size, $value in $shilp-gaps {
     @if ($size == "default") {
       --gap: #{$size};
     } @else {
@@ -44,7 +44,7 @@
   }
 
   //SPACES
-  @each $size, $value in $styles-spaces {
+  @each $size, $value in $shilp-spaces {
     @if ($size== "default") {
       --space: #{$size};
     } @else {
@@ -53,7 +53,7 @@
   }
 
   //INPUT-SIZES
-  @each $size, $value in $styles-input-sizes {
+  @each $size, $value in $shilp-input-sizes {
     @if ($size== "default") {
       --input-size: #{$value};
     } @else {
@@ -62,7 +62,7 @@
   }
 
   //BORDER-RADIUS
-  @each $size, $value in $styles-border-radius {
+  @each $size, $value in $shilp-border-radius {
     @if ($size== "default") {
       --border-radius: #{$value};
     } @else {

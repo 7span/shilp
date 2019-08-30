@@ -1,20 +1,16 @@
 @mixin block-with-ratio($width, $height) {
   padding-bottom: ($height / $width) * 100%;
+  overflow: hidden;
 }
 
-.ratio {
+.ratio--1-1 {
   @include block-with-ratio(1, 1);
-  overflow: hidden;
+}
 
-  &.is-1-1 {
-    @include block-with-ratio(1, 1);
-  }
+.ratio--4-3 {
+  @include block-with-ratio(4, 3);
+}
 
-  &.is-4-3 {
-    @include block-with-ratio(4, 3);
-  }
-
-  &.is-16-9 {
-    @include block-with-ratio(16, 9);
-  }
+.ratio--16-9 {
+  @include block-with-ratio(16, 9);
 }

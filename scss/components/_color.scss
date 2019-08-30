@@ -1,4 +1,4 @@
-@each $color, $shades in $styles-colors {
+@each $color, $shades in $shilp-colors {
   @each $shade, $code in $shades {
     //Background Color
     .bg-color--#{$color} {

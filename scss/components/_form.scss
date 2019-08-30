@@ -1,6 +1,6 @@
 // DEFAULTS
-$styles-form-defaults: () !default;
-$styles-form-defaults: map-merge(
+$shilp-form-defaults: () !default;
+$shilp-form-defaults: map-merge(
   (
     "radius": 3px,
     "size": "md",
@@ -13,24 +13,24 @@ $styles-form-defaults: map-merge(
       info
     )
   ),
-  $styles-form-defaults
+  $shilp-form-defaults
 );
 
-$form-radius: map-get($styles-form-defaults, "radius");
-$form-size: map-get($styles-form-defaults, "size");
-$form-border-width: map-get($styles-form-defaults, "border-width");
-$form-states: map-get($styles-form-defaults, "states");
-$form-border-color: map-get($styles-form-defaults, "border-color");
+$form-radius: map-get($shilp-form-defaults, "radius");
+$form-size: map-get($shilp-form-defaults, "size");
+$form-border-width: map-get($shilp-form-defaults, "border-width");
+$form-states: map-get($shilp-form-defaults, "states");
+$form-border-color: map-get($shilp-form-defaults, "border-color");
 
 //CUSTOM SELECT
-$select-arrow-color: map-deep-get($styles-colors, "grey", "default");
+$select-arrow-color: map-deep-get($shilp-colors, "grey", "default");
 $select-arrow: m-icon(
   "M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z",
   $select-arrow-color
 );
 
 // FIELD SIZES
-// Generates the size based on $styles-input-sizes map
+// Generates the size based on $shilp-input-sizes map
 @mixin field-size($size) {
   &.is-radio,
   &.is-checkbox {
@@ -47,7 +47,7 @@ $select-arrow: m-icon(
   }
 }
 @mixin field-sizes {
-  @each $size, $value in $styles-input-sizes {
+  @each $size, $value in $shilp-input-sizes {
     &.size--#{$size} {
       @include field-size($size);
     }

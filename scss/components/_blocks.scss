@@ -1,16 +1,16 @@
-$styles-blocks-defaults: () !default;
-$styles-blocks-defaults: map-merge(
+$shilp-blocks-defaults: () !default;
+$shilp-blocks-defaults: map-merge(
   (
-    "gaps": $styles-gaps,
+    "gaps": $shilp-gaps,
     "grids": 12,
     "gap": sm
   ),
-  $styles-blocks-defaults
+  $shilp-blocks-defaults
 );
 
-$blocks-grids: map-get($styles-blocks-defaults, "grids");
-$blocks-gap: map-get($styles-blocks-defaults, "gap");
-$blocks-gaps: map-get($styles-blocks-defaults, "gaps");
+$blocks-grids: map-get($shilp-blocks-defaults, "grids");
+$blocks-gap: map-get($shilp-blocks-defaults, "gap");
+$blocks-gaps: map-get($shilp-blocks-defaults, "gaps");
 
 // RESPONSIVE BLOCKS GAP
 // Generates the responsive classes based on breakpoint. with all the gap values.
@@ -74,7 +74,7 @@ $blocks-gaps: map-get($styles-blocks-defaults, "gaps");
 }
 
 // MEDIA QUERY
-@each $breakpoint, $value in $styles-breakpoints {
+@each $breakpoint, $value in $shilp-breakpoints {
   @media only screen and (min-width: $value) {
     .blocks {
       @include responsive-blocks-gap($breakpoint);

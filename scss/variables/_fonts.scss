@@ -1,29 +1,29 @@
 // FONT-FAMILIES
-$styles-font-families: () !default;
-$styles-font-families: map-merge(
+$shilp-font-families: () !default;
+$shilp-font-families: map-merge(
   (
     system: $system-fonts,
     heading: $system-fonts,
     content: $system-fonts,
     code: '"Courier New", Courier, monospace'
   ),
-  $styles-font-families
+  $shilp-font-families
 );
 
 // FONT-WEIGHTS
-$styles-font-weights: () !default;
-$styles-font-weights: map-merge(
+$shilp-font-weights: () !default;
+$shilp-font-weights: map-merge(
   (
     light: 300,
     regular: 400,
     bold: 600
   ),
-  $styles-font-weights
+  $shilp-font-weights
 );
 
 // FONT-SIZES
-$styles-font-sizes: () !default;
-$styles-font-sizes: map-merge(
+$shilp-font-sizes: () !default;
+$shilp-font-sizes: map-merge(
   (
     h1: 48px,
     h2: 36px,
@@ -36,7 +36,7 @@ $styles-font-sizes: map-merge(
     small: 12px,
     code: 14px
   ),
-  $styles-font-sizes
+  $shilp-font-sizes
 );
 
 // TEXT
@@ -44,8 +44,8 @@ $styles-font-sizes: map-merge(
 // The CSS variables are just a normal text for SCSS which will be rendered run time.
 // The CSS varialbes are used as fallback value.
 
-$styles-text: () !default;
-$styles-text: map-merge(
+$shilp-text: () !default;
+$shilp-text: map-merge(
   (
     "h1": (
       font-family: var(--font-family--heading),
@@ -72,5 +72,5 @@ $styles-text: map-merge(
       font-weight: var(--font-weight--bold)
     )
   ),
-  $styles-text
+  $shilp-text
 );

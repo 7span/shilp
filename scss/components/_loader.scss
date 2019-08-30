@@ -1,5 +1,5 @@
-$styles-loader-defaults: () !default;
-$styles-loader-defaults: map-merge(
+$shilp-loader-defaults: () !default;
+$shilp-loader-defaults: map-merge(
   (
     "size": 32px,
     "width": 3px,
@@ -7,14 +7,14 @@ $styles-loader-defaults: map-merge(
     "overlay-color": rgba(255, 255, 255, 0.5),
     "color": --color(primary)
   ),
-  $styles-loader-defaults
+  $shilp-loader-defaults
 );
 
-$loader-color: map-get($styles-loader-defaults, "color");
-$loader-size: map-get($styles-loader-defaults, "size");
-$loader-width: map-get($styles-loader-defaults, "width");
-$loader-base-color: map-get($styles-loader-defaults, "base-color");
-$loader-overlay-color: map-get($styles-loader-defaults, "base-color");
+$loader-color: map-get($shilp-loader-defaults, "color");
+$loader-size: map-get($shilp-loader-defaults, "size");
+$loader-width: map-get($shilp-loader-defaults, "width");
+$loader-base-color: map-get($shilp-loader-defaults, "base-color");
+$loader-overlay-color: map-get($shilp-loader-defaults, "base-color");
 
 .loader {
   position: relative;

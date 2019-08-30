@@ -1,6 +1,6 @@
 // BREAKPOINTS
-$styles-breakpoints: () !default;
-$styles-breakpoints: map-merge(
+$shilp-breakpoints: () !default;
+$shilp-breakpoints: map-merge(
   (
     //phone not required in mobile first approach
       phablet: 576px,
@@ -8,14 +8,14 @@ $styles-breakpoints: map-merge(
     laptop: 992px,
     desktop: 1200px
   ),
-  $styles-breakpoints
+  $shilp-breakpoints
 );
 
 // BOXES
 // Container sizes for boxed content.
 // Works just like Bootstrap's "container"
-$styles-boxes: () !default;
-$styles-boxes: map-merge(
+$shilp-boxes: () !default;
+$shilp-boxes: map-merge(
   (
     //phone: 100%,
       phablet: 540px,
@@ -23,13 +23,13 @@ $styles-boxes: map-merge(
     laptop: 960px,
     desktop: 1140px
   ),
-  $styles-boxes
+  $shilp-boxes
 );
 
 // GAPS
 // The sizes are used for keeping gap between blocks(aka grid).
-$styles-gaps: () !default;
-$styles-gaps: map-merge(
+$shilp-gaps: () !default;
+$shilp-gaps: map-merge(
   (
     0: 0px,
     xs: 4px,
@@ -38,13 +38,13 @@ $styles-gaps: map-merge(
     lg: 24px,
     xl: 32px
   ),
-  $styles-gaps
+  $shilp-gaps
 );
 
 // SPACES
 // Used for spacing values in margin, padding etc.
-$styles-spaces: () !default;
-$styles-spaces: map-merge(
+$shilp-spaces: () !default;
+$shilp-spaces: map-merge(
   (
     0: 0px,
     xs: 8px,
@@ -54,13 +54,13 @@ $styles-spaces: map-merge(
     xl: 40px,
     auto: auto
   ),
-  $styles-spaces
+  $shilp-spaces
 );
 
 // INPUT SIZES
 // Sizes for input, buttons.
-$styles-input-sizes: () !default;
-$styles-input-sizes: map-merge(
+$shilp-input-sizes: () !default;
+$shilp-input-sizes: map-merge(
   (
     sm: 24px,
     md: 32px,
@@ -68,12 +68,12 @@ $styles-input-sizes: map-merge(
     lg: 40px,
     xl: 48px
   ),
-  $styles-input-sizes
+  $shilp-input-sizes
 );
 
 // BORDER_RADIUS
-$styles-border-radius: () !default;
-$styles-border-radius: map-merge(
+$shilp-border-radius: () !default;
+$shilp-border-radius: map-merge(
   (
     xs: 2px,
     sm: 4px,
@@ -82,5 +82,5 @@ $styles-border-radius: map-merge(
     lg: 8px,
     xl: 10px
   ),
-  $styles-border-radius
+  $shilp-border-radius
 );

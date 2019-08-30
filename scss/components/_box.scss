@@ -1,5 +1,5 @@
 @mixin box($breakpoint) {
-  max-width: map-get($styles-boxes, $breakpoint);
+  max-width: map-get($shilp-boxes, $breakpoint);
 }
 
 .box {
@@ -11,7 +11,7 @@
   }
 }
 
-@each $breakpoint, $value in $styles-breakpoints {
+@each $breakpoint, $value in $shilp-breakpoints {
   @media only screen and (min-width: $value) {
     .box {
       @include box($breakpoint);

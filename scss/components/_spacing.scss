@@ -29,7 +29,7 @@ $space-props: (
 @mixin space($breakpoint) {
   @each $prop-initial, $prop in $space-props {
     //All Directions
-    @each $space, $value in $styles-spaces {
+    @each $space, $value in $shilp-spaces {
       $className: breakpoint-class($breakpoint, #{$prop-initial}--#{$space});
       .#{$className} {
         #{$prop}: --space($space);
@@ -38,7 +38,7 @@ $space-props: (
 
     //Left,Right,Top,Bottom,X,Y
     @each $direction-initial, $direction in $space-directions {
-      @each $space, $value in $styles-spaces {
+      @each $space, $value in $shilp-spaces {
         $className: breakpoint-class(
           $breakpoint,
           #{$prop-initial}#{$direction-initial}--#{$space}
@@ -56,7 +56,7 @@ $space-props: (
 @include space("phone");
 
 //Media Query
-@each $breakpoint, $value in $styles-breakpoints {
+@each $breakpoint, $value in $shilp-breakpoints {
   @media only screen and (max-width: $value) {
     @include space($breakpoint);
   }

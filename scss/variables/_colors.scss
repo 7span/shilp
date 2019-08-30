@@ -1,8 +1,8 @@
-// STYLES COLORS
+// COLORS
 // Map should follow this format: ColorName > Shade : Color Code
 
-$styles-colors: () !default;
-$styles-colors: map-merge(
+$shilp-colors: () !default;
+$shilp-colors: map-merge(
   (
     "primary": (
       lightest: #dae1fb,
@@ -84,5 +84,5 @@ $styles-colors: map-merge(
       darkest: #263238
     )
   ),
-  $styles-colors
+  $shilp-colors
 );

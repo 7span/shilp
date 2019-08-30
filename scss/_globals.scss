@@ -1,6 +1,6 @@
 // This file can be imported to expose variables and mixins to the project.
 // Specially in case of SPAs where you need to access variables, mixins and functions.
 @import "./config";
-@import "./variables";
+@import "./variables/all";
 @import "./mixins";
-@import "./functions/_all.scss";
+@import "./functions/all";

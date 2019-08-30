@@ -1,5 +1,5 @@
-$styles-button-defaults: () !default;
-$styles-button-defaults: map-merge(
+$shilp-button-defaults: () !default;
+$shilp-button-defaults: map-merge(
   (
     "colors": (
       primary,
@@ -43,22 +43,22 @@ $styles-button-defaults: map-merge(
       sm: 16px
     )
   ),
-  $styles-button-defaults
+  $shilp-button-defaults
 );
 
-$button-shape: map-get($styles-button-defaults, "shape");
-$button-color: map-get($styles-button-defaults, "color");
-$button-size: map-get($styles-button-defaults, "size");
-$button-style: map-get($styles-button-defaults, "style");
-$button-outline: map-get($styles-button-defaults, "outline");
-$button-icon-size: map-get($styles-button-defaults, "icon-size");
+$button-shape: map-get($shilp-button-defaults, "shape");
+$button-color: map-get($shilp-button-defaults, "color");
+$button-size: map-get($shilp-button-defaults, "size");
+$button-style: map-get($shilp-button-defaults, "style");
+$button-outline: map-get($shilp-button-defaults, "outline");
+$button-icon-size: map-get($shilp-button-defaults, "icon-size");
 
-$button-colors: map-get($styles-button-defaults, "colors");
-$button-styles: map-get($styles-button-defaults, "styles");
-$button-shapes: map-get($styles-button-defaults, "shapes");
-$button-alignments: map-get($styles-button-defaults, "alignments");
-$button-hover-shade: map-get($styles-button-defaults, "hover-shade");
-$button-muted-shade: map-get($styles-button-defaults, "muted-shade");
+$button-colors: map-get($shilp-button-defaults, "colors");
+$button-styles: map-get($shilp-button-defaults, "styles");
+$button-shapes: map-get($shilp-button-defaults, "shapes");
+$button-alignments: map-get($shilp-button-defaults, "alignments");
+$button-hover-shade: map-get($shilp-button-defaults, "hover-shade");
+$button-muted-shade: map-get($shilp-button-defaults, "muted-shade");
 
 // DEFINES COLORS
 // Defines the colors to use in diffrent shade based on provided color.
@@ -219,7 +219,7 @@ $button-muted-shade: map-get($styles-button-defaults, "muted-shade");
 }
 
 // SIZES
-// Uses $styles-input-sizes map to define sizes
+// Uses $shilp-input-sizes map to define sizes
 @mixin button-size($size) {
   padding: 0px --space($size);
   height: --input-size($size);
@@ -362,7 +362,7 @@ $button-muted-shade: map-get($styles-button-defaults, "muted-shade");
 // SIZE CLASSES
 // Generates classes for button sizes.
 // Users default size value.
-@each $size, $value in $styles-input-sizes {
+@each $size, $value in $shilp-input-sizes {
   .button-group.size--#{$size} .button,
   .button.size--#{$size} {
     @include button-size($size);
@@ -371,7 +371,7 @@ $button-muted-shade: map-get($styles-button-defaults, "muted-shade");
 
 // SIZE & SHAPE CLASEES
 @each $shape in $button-shapes {
-  @each $size, $value in $styles-input-sizes {
+  @each $size, $value in $shilp-input-sizes {
     .button-group.shape--#{$shape}.size--#{$size} .button,
     .button.shape--#{$shape}.size--#{$size} {
       @include button-shape($shape, $size);
@@ -389,7 +389,7 @@ $button-muted-shade: map-get($styles-button-defaults, "muted-shade");
 }
 
 @each $align in $button-alignments {
-  @each $size, $value in $styles-input-sizes {
+  @each $size, $value in $shilp-input-sizes {
     .button-group.align--#{$align}.size--#{$size} .button,
     .button.align--#{$align}.size--#{$size} {
       @include button-alignment($align, $size);

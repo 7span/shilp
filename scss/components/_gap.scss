@@ -26,14 +26,14 @@
   flex-direction: column;
 }
 
-@each $gap, $value in $styles-gaps {
+@each $gap, $value in $shilp-gaps {
   @include gap("phone", "x", $gap);
   @include gap("phone", "y", $gap);
 }
 
-@each $breakpoint, $value in $styles-breakpoints {
+@each $breakpoint, $value in $shilp-breakpoints {
   @media only screen and (max-width: $value) {
-    @each $gap, $value in $styles-gaps {
+    @each $gap, $value in $shilp-gaps {
       @include gap($breakpoint, "x", $gap);
       @include gap($breakpoint, "y", $gap);
     }
