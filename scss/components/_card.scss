@@ -1,0 +1,21 @@
+$card-border-color: --color(grey, lighter);
+
+.card {
+  background-color: #fff;
+  border: 1px solid $card-border-color;
+  border-radius: --border-radius(md);
+}
+
+.card__header {
+  display: flex;
+  align-items: center;
+  padding: --space(sm);
+  border-bottom: 1px solid $card-border-color;
+}
+.card__title {
+  margin: 0;
+}
+
+.card__body {
+  padding: --space(sm);
+}

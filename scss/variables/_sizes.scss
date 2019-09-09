@@ -26,27 +26,14 @@ $shilp-boxes: map-merge(
   $shilp-boxes
 );
 
-// GAPS
-// The sizes are used for keeping gap between blocks(aka grid).
-$shilp-gaps: () !default;
-$shilp-gaps: map-merge(
-  (
-    0: 0px,
-    xs: 4px,
-    sm: 8px,
-    md: 16px,
-    lg: 24px,
-    xl: 32px
-  ),
-  $shilp-gaps
-);
-
 // SPACES
 // Used for spacing values in margin, padding etc.
+// The sizes are also used for keeping gap between blocks(aka grid).
 $shilp-spaces: () !default;
 $shilp-spaces: map-merge(
   (
     0: 0px,
+    xxs: 4px,
     xs: 8px,
     sm: 16px,
     md: 24px,
@@ -62,13 +49,41 @@ $shilp-spaces: map-merge(
 $shilp-input-sizes: () !default;
 $shilp-input-sizes: map-merge(
   (
-    sm: 24px,
-    md: 32px,
-    default: 32px,
-    lg: 40px,
-    xl: 48px
+    xs: 24px,
+    sm: 32px,
+    md: 40px,
+    lg: 48px,
+    xl: 56px
   ),
   $shilp-input-sizes
+);
+
+// INPUT ICON SIZES
+// Sizes of icons for input, buttons.
+$shilp-input-icon-sizes: () !default;
+$shilp-input-icon-sizes: map-merge(
+  (
+    xl: 28px,
+    lg: 24px,
+    md: 20px,
+    sm: 16px,
+    xs: 16px
+  ),
+  $shilp-input-icon-sizes
+);
+
+// INPUT FONT SIZES
+// Sizes of icons for input, buttons.
+$shilp-input-font-sizes: () !default;
+$shilp-input-font-sizes: map-merge(
+  (
+    xl: 20px,
+    lg: 18px,
+    md: 16px,
+    sm: 14px,
+    xs: 12px
+  ),
+  $shilp-input-font-sizes
 );
 
 // BORDER_RADIUS
@@ -78,7 +93,6 @@ $shilp-border-radius: map-merge(
     xs: 2px,
     sm: 4px,
     md: 6px,
-    default: 6px,
     lg: 8px,
     xl: 10px
   ),

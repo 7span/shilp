@@ -1,5 +1,6 @@
 .DS_Store
 node_modules
+LAST_CHANGES.md
 
 # Log files
 npm-debug.log*

@@ -15,6 +15,6 @@
 
 .grid {
   display: grid;
-  gap: --gap(md);
+  gap: --space(md);
   @include grid("phone");
 }

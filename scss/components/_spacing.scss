@@ -32,7 +32,7 @@ $space-props: (
     @each $space, $value in $shilp-spaces {
       $className: breakpoint-class($breakpoint, #{$prop-initial}--#{$space});
       .#{$className} {
-        #{$prop}: --space($space);
+        #{$prop}: --space($space) !important;
       }
     }
 
@@ -45,7 +45,7 @@ $space-props: (
         );
         .#{$className} {
           @each $side, $value in $direction {
-            #{$prop}-#{$side}: --space($space);
+            #{$prop}-#{$side}: --space($space) !important;
           }
         }
       }
@@ -57,7 +57,7 @@ $space-props: (
 
 //Media Query
 @each $breakpoint, $value in $shilp-breakpoints {
-  @media only screen and (max-width: $value) {
+  @media only screen and (min-width: $value) {
     @include space($breakpoint);
   }
 }

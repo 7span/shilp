@@ -1,7 +1,7 @@
 $shilp-blocks-defaults: () !default;
 $shilp-blocks-defaults: map-merge(
   (
-    "gaps": $shilp-gaps,
+    "gaps": $shilp-spaces,
     "grids": 12,
     "gap": sm
   ),
@@ -25,7 +25,7 @@ $blocks-gaps: map-get($shilp-blocks-defaults, "gaps");
 
 // BLOCKS GAP
 @mixin blocks-gap($gap) {
-  $negetive-gap: calc(-1 * #{--gap($gap)});
+  $negetive-gap: calc(-1 * #{--space($gap)});
   margin-left: $negetive-gap;
   margin-right: $negetive-gap;
   &:first-child {
@@ -35,24 +35,30 @@ $blocks-gaps: map-get($shilp-blocks-defaults, "gaps");
     margin-bottom: $negetive-gap;
   }
   > .block {
-    padding: --gap($gap);
+    padding: --space($gap);
   }
 }
 
 // BLOCK SIZE
 // Defines the block size based on breakpoint and a class name.
-// I.e. .size--6 .phone--size--12
 @mixin block-size($breakpoint) {
   @for $i from 1 through $blocks-grids {
-    $className: breakpoint-class($breakpoint, size--#{$i});
-    &.#{$className} {
+    $className: breakpoint-class($breakpoint, block--#{$i});
+    .#{$className} {
       flex: 0 0 (100% / $blocks-grids) * $i;
       max-width: (100% / $blocks-grids) * $i;
     }
   }
-  &.#{$breakpoint}--size--auto {
+  $autoClassName: breakpoint-class($breakpoint, block--auto);
+  .#{$autoClassName} {
     flex-grow: 1;
     flex-basis: 0;
+  }
+  $fixClassName: breakpoint-class($breakpoint, block--fix);
+  .#{$fixClassName} {
+    flex: none;
+    display: block;
+    width: auto;
   }
 }
 
@@ -66,21 +72,19 @@ $blocks-gaps: map-get($shilp-blocks-defaults, "gaps");
   &.is-middle {
     align-items: center;
   }
-  > .block {
-    max-width: 100%;
-    width: 100%;
-    @include block-size("phone");
-  }
 }
+.block {
+  max-width: 100%;
+  width: 100%;
+}
+@include block-size("phone");
 
 // MEDIA QUERY
 @each $breakpoint, $value in $shilp-breakpoints {
   @media only screen and (min-width: $value) {
     .blocks {
       @include responsive-blocks-gap($breakpoint);
-      > .block {
-        @include block-size($breakpoint);
-      }
     }
+    @include block-size($breakpoint);
   }
 }

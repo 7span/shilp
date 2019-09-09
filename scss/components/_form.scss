@@ -32,23 +32,30 @@ $select-arrow: m-icon(
 // FIELD SIZES
 // Generates the size based on $shilp-input-sizes map
 @mixin field-size($size) {
-  &.is-radio,
-  &.is-checkbox {
+  .radio,
+  .checkbox {
     height: --input-size($size);
     line-height: --input-size($size);
   }
-  .field__block {
+  .field-block {
     height: --input-size($size);
     line-height: --input-size($size);
+    font-size: map-get($shilp-input-font-sizes, $size);
   }
   .field__before,
   .field__after {
     min-width: --input-size($size);
   }
+  .field__icon {
+    svg {
+      height: map-get($shilp-input-icon-sizes, $size) !important;
+      width: map-get($shilp-input-icon-sizes, $size) !important;
+    }
+  }
 }
 @mixin field-sizes {
   @each $size, $value in $shilp-input-sizes {
-    &.size--#{$size} {
+    &.field--#{$size} {
       @include field-size($size);
     }
   }
@@ -57,9 +64,9 @@ $select-arrow: m-icon(
 // FIELD STATES
 @mixin form-states {
   @each $state in $form-states {
-    &.color--#{$state} {
+    &.field--#{$state} {
       //Input, Select, Textarea
-      .field__block {
+      .field-block {
         border-color: --color($state);
         &:focus {
           box-shadow: inset 0 0 0 3px --color($state, lightest);
@@ -71,12 +78,14 @@ $select-arrow: m-icon(
         background-color: --color($state, lightest);
         color: --color($state, darker);
       }
+      .field__danger {
+        color: --color($state);
+      }
     }
   }
 }
 
 @mixin form-field-defaults {
-  font-size: --font-size(span);
   font-family: --font-family(content);
   color: #000;
   width: 100%;
@@ -93,19 +102,6 @@ $select-arrow: m-icon(
 
   .field {
     margin-bottom: 0;
-  }
-
-  //Radio, Checkbox
-  &.is-radio,
-  &.is-checkbox {
-    display: flex;
-    align-items: center;
-    > label {
-      margin-bottom: 0;
-      margin-left: --space(xs);
-      color: #000;
-      cursor: pointer;
-    }
   }
 
   //LOADING
@@ -131,66 +127,68 @@ $select-arrow: m-icon(
     margin-top: 4px;
     color: --color(grey);
   }
+}
 
-  //Input, Select, Textarea
-  &__block {
-    @include form-field-defaults;
-    border: $form-border-width solid $form-border-color;
-    border-radius: $form-radius;
-    min-width: 0px; //When .field__group is used, the input becomes flex child.
-    &:focus {
-      box-shadow: inset 0 0 0 3px --color(grey, lightest);
-      position: relative;
-    }
-    &:disabled {
-      color: --color(grey);
-      background-color: --color(grey, lightest);
-    }
+//THE BLOCK CONTAINING INPUT
+.field-block {
+  @include form-field-defaults;
+  border: $form-border-width solid $form-border-color;
+  border-radius: $form-radius;
+  min-width: 0px; //When .field__group is used, the input becomes flex child.
+  &:focus {
+    box-shadow: inset 0 0 0 3px --color(grey, lightest);
+    position: relative;
   }
-
-  //GROUP ITEMS
-  &__group {
-    display: flex;
-    align-items: stretch;
-    > * {
-      border-radius: 0;
-      &:first-child {
-        border-radius: $form-radius 0 0 $form-radius;
-      }
-      &:last-child {
-        border-radius: 0 $form-radius $form-radius 0;
-      }
-      &:only-child {
-        border-radius: $form-radius;
-      }
-    }
-    > .field {
-      + .field {
-        margin-top: 0;
-      }
-    }
-  }
-
-  &__before,
-  &__after {
-    flex: 0 0 auto;
-    border: $form-border-width solid $form-border-color;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0px --space(xs);
-    background-color: --color(grey, lighter);
-    color: --color(grey, dark);
-  }
-  &__before {
-    border-right: none;
-  }
-  &__after {
-    border-left: none;
+  &:disabled {
+    color: --color(grey);
+    background-color: --color(grey, lightest);
   }
 }
 
+//GROUP ITEMS
+.field__group {
+  display: flex;
+  align-items: stretch;
+  > * {
+    border-radius: 0;
+    &:first-child {
+      border-radius: $form-radius 0 0 $form-radius;
+    }
+    &:last-child {
+      border-radius: 0 $form-radius $form-radius 0;
+    }
+    &:only-child {
+      border-radius: $form-radius;
+    }
+  }
+  > .field {
+    + .field {
+      margin-top: 0;
+    }
+  }
+}
+
+// BEFORE & AFTER
+.field__before,
+.field__after {
+  flex: 0 0 auto;
+  border: $form-border-width solid $form-border-color;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px --space(xs);
+  background-color: --color(grey, lighter);
+  color: --color(grey, dark);
+}
+.field__before {
+  border-right: none;
+}
+.field__after {
+  border-left: none;
+}
+
+//FIELD LOADING ANIMATION
 @keyframes fieldLoading {
   0% {
     content: "";
@@ -209,6 +207,7 @@ $select-arrow: m-icon(
   }
 }
 
+//SELECT
 .select {
   position: relative;
   select {
@@ -228,5 +227,22 @@ $select-arrow: m-icon(
     background-image: url($select-arrow);
     background-repeat: no-repeat;
     background-position: center;
+  }
+}
+
+//RADIO & CHECKBOX
+.radio,
+.checkbox {
+  display: flex;
+  align-items: center;
+  > input {
+    margin: 0;
+  }
+  > label {
+    margin-bottom: 0;
+    margin-left: --space(xs);
+    color: #000;
+    cursor: pointer;
+    line-height: 1;
   }
 }

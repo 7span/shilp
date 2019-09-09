@@ -6,15 +6,15 @@
   margin-left: auto;
   margin-right: auto;
   @include box("phone");
-  &.is-fluid {
-    max-width: none;
-  }
 }
-
 @each $breakpoint, $value in $shilp-breakpoints {
   @media only screen and (min-width: $value) {
     .box {
       @include box($breakpoint);
     }
   }
+}
+
+.box--fluid {
+  max-width: none;
 }

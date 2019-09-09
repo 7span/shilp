@@ -1,13 +1,19 @@
-// FONT-FAMILIES
-$shilp-font-families: () !default;
-$shilp-font-families: map-merge(
+// FONTS
+$shilp-fonts: () !default;
+$shilp-fonts: map-merge(
   (
-    system: $system-fonts,
-    heading: $system-fonts,
-    content: $system-fonts,
+    heading: "",
+    content: "",
     code: '"Courier New", Courier, monospace'
   ),
-  $shilp-font-families
+  $shilp-fonts
+);
+
+$shilp-font-families: (
+  system: $system-fonts,
+  heading: font-with-fallback(map-get($shilp-fonts, heading)),
+  content: font-with-fallback(map-get($shilp-fonts, content)),
+  code: font-with-fallback(map-get($shilp-fonts, code))
 );
 
 // FONT-WEIGHTS

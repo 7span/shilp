@@ -13,7 +13,30 @@
   @if ($breakpoint== "phone") {
     $class: #{$class};
   } @else {
-    $class: #{$breakpoint}--#{$class};
+    $class: #{$class + $shilp-separator + $breakpoint};
   }
   @return $class;
+}
+
+//FONT WITH FALLCACK
+@function font-with-fallback($value) {
+  @if ($value== "") {
+    @return $system-fonts;
+  } @else {
+    @return $value + "," + $system-fonts;
+  }
+}
+
+//GENERATE GRADIENT
+@function gradient($name, $direction: null) {
+  $colors: map-get($shilp-gradients, $name);
+  $start-color: map-get($colors, start);
+  $stop-color: map-get($colors, stop);
+
+  @if ($direction) {
+  } @else {
+    $direction: map-get($colors, direction);
+  }
+
+  @return linear-gradient($direction, $start-color 0%, $stop-color 100%);
 }

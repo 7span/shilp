@@ -1,7 +1,7 @@
 $shilp-loader-defaults: () !default;
 $shilp-loader-defaults: map-merge(
   (
-    "size": 32px,
+    "size": md,
     "width": 3px,
     "base-color": rgba(255, 255, 255, 0.8),
     "overlay-color": rgba(255, 255, 255, 0.5),
@@ -16,34 +16,47 @@ $loader-width: map-get($shilp-loader-defaults, "width");
 $loader-base-color: map-get($shilp-loader-defaults, "base-color");
 $loader-overlay-color: map-get($shilp-loader-defaults, "base-color");
 
+@mixin loader-size($size) {
+  &:after {
+    width: map-get($shilp-input-icon-sizes, $size);
+    height: map-get($shilp-input-icon-sizes, $size);
+  }
+}
+
 .loader {
   position: relative;
-  min-height: 48px;
+  pointer-events: none;
+  cursor: wait;
   &:after {
     content: "";
-    width: $loader-size;
-    height: $loader-size;
     border-radius: 50%;
-    border-width: $loader-width;
-    border-color: $loader-color $loader-base-color $loader-base-color
-      $loader-base-color;
     border-style: solid;
     display: block;
-    @include position(absolute);
     z-index: 3;
     animation-name: loading;
     animation-duration: 1s;
     animation-iteration-count: infinite;
     margin: auto;
+    border-width: $loader-width;
+    border-color: $loader-color $loader-base-color $loader-base-color
+      $loader-base-color;
+    @include position(absolute);
   }
+  @include loader-size($loader-size);
+}
 
-  &--overlay {
-    &:before {
-      content: "";
-      @include position(absolute);
-      background-color: $loader-overlay-color;
-      z-index: 2;
-    }
+.loader--overlay {
+  &:before {
+    content: "";
+    @include position(absolute);
+    background-color: $loader-overlay-color;
+    z-index: 2;
+  }
+}
+
+@each $size, $value in $shilp-input-sizes {
+  .loader--#{$size} {
+    @include loader-size($size);
   }
 }
 

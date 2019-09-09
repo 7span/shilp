@@ -3,6 +3,7 @@
   #{$tag},
   .#{$tag} {
     font-size: --font-size($tag);
+    margin-top: 0;
     font-family: map-get($tag-settings, "font-family");
     font-weight: map-get($tag-settings, "font-weight");
   }

@@ -21,10 +21,6 @@
   @return --var("space", $val, $mod);
 }
 
-@function --gap($val, $mod: "") {
-  @return --var("gap", $val, $mod);
-}
-
 @function --input-size($val, $mod: "") {
   @return --var("input-size", $val, $mod);
 }
@@ -39,4 +35,16 @@
 
 @function --font-size($val, $mod: "") {
   @return --var("font-size", $val, $mod);
+}
+
+@function --border-radius($val, $mod: "") {
+  @return --var("border-radius", $val, $mod);
+}
+
+@function --box-shadow($val) {
+  @return --var("box-shadow", $val);
+}
+
+@function --gradient($val) {
+  @return --var("gradient", $val);
 }

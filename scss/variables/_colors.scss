@@ -86,3 +86,23 @@ $shilp-colors: map-merge(
   ),
   $shilp-colors
 );
+
+// GRADIENTS
+// Map should follow this format: ColorName > Shade : Color Code
+
+$shilp-gradients: () !default;
+$shilp-gradients: map-merge(
+  (
+    "primary": (
+      start: #9075ee,
+      stop: #71a9de,
+      direction: 90deg
+    ),
+    "secondary": (
+      start: #f487c1,
+      stop: #fe8d7d,
+      direction: 90deg
+    )
+  ),
+  $shilp-gradients
+);
