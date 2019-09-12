@@ -1,0 +1,148 @@
+$shilp-alert-defaults: () !default;
+$shilp-alert-defaults: map-merge(
+  (
+    "colors": (
+      primary,
+      secondary,
+      accent,
+      light,
+      dark,
+      "grey",
+      info,
+      success,
+      danger,
+      warning
+    ),
+    "styles": (
+      trn,
+      solid,
+      outline,
+      muted,
+      gradient
+    ),
+    "shapes": (
+      rectangle,
+      rounded,
+      pill
+    ),
+    "sizes": (
+      xs,
+      sm,
+      md,
+      lg,
+      xl
+    ),
+    "color": "primary",
+    "style": "solid",
+    "shape": "rounded",
+    "size": "sm",
+    "outline": 1px
+  ),
+  $shilp-alert-defaults
+);
+
+$alert-shape: map-get($shilp-alert-defaults, "shape");
+$alert-color: map-get($shilp-alert-defaults, "color");
+$alert-size: map-get($shilp-alert-defaults, "size");
+$alert-style: map-get($shilp-alert-defaults, "style");
+$alert-outline: map-get($shilp-alert-defaults, "outline");
+
+$alert-colors: map-get($shilp-alert-defaults, "colors");
+$alert-sizes: map-get($shilp-alert-defaults, "sizes");
+$alert-styles: map-get($shilp-alert-defaults, "styles");
+$alert-shapes: map-get($shilp-alert-defaults, "shapes");
+
+// SOLID STYLE
+@mixin alert--style--solid($color) {
+  background-color: --color($color);
+  color: --text-color($color, dark);
+}
+
+// OUTINE STYLE
+@mixin alert--style--outline($color) {
+  background-color: --color($color, lightest);
+  border: $alert-outline solid --color($color);
+  color: --text-color($color, light);
+}
+
+// MUTED STYLE
+@mixin alert--style--muted($color) {
+  background-color: --color($color, lightest);
+  color: --text-color($color, light);
+}
+
+// SIZE MIXIN
+@mixin alert--size($size) {
+  padding: calc(#{--space($size)} * 4 / 6) #{--space($size)};
+}
+
+// SHAPE
+@mixin alert--shape($shape) {
+  @if ($shape== "rectangle") {
+    border-radius: 0;
+  } //
+  @else if($shape== "rounded") {
+    border-radius: --border-radius(sm);
+  } //
+  @else if($shape== "pill") {
+    border-radius: 9999px;
+  }
+}
+
+// STYLE
+@mixin alert--style($color, $style) {
+  @if ($style== "solid") {
+    @include alert--style--solid($color);
+  } //
+  @else if($style== "outline") {
+    @include alert--style--outline($color);
+  } //
+  @else if($style== "muted") {
+    @include alert--style--muted($color);
+  }
+}
+
+.alert {
+  display: inline-flex;
+  @include alert--size($alert-size);
+  @include alert--shape($alert-shape);
+}
+.alert__body {
+  margin: 0;
+}
+.alert__icon {
+  margin-right: --space(xs);
+}
+.alert--fluid {
+  display: flex;
+}
+
+// COLOR
+@each $color in $alert-colors {
+  .alert--#{$color} {
+    @include alert--style($color, "solid");
+  }
+}
+
+// SIZE
+@each $size in $alert-sizes {
+  .alert--#{$size} {
+    @include alert--size($size);
+  }
+}
+
+// SHAPE
+@each $shape in $alert-shapes {
+  .alert--#{$shape} {
+    @include alert--shape($shape);
+  }
+}
+
+// STYLE
+@each $color in $alert-colors {
+  @each $style in $alert-styles {
+    .alert--#{$color}.alert--#{$style} {
+      @include alert--style($color, $style);
+    }
+  }
+}

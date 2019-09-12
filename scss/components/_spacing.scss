@@ -39,10 +39,7 @@ $space-props: (
     //Left,Right,Top,Bottom,X,Y
     @each $direction-initial, $direction in $space-directions {
       @each $space, $value in $shilp-spaces {
-        $className: breakpoint-class(
-          $breakpoint,
-          #{$prop-initial}#{$direction-initial}--#{$space}
-        );
+        $className: breakpoint-class($breakpoint, #{$prop-initial}#{$direction-initial}--#{$space});
         .#{$className} {
           @each $side, $value in $direction {
             #{$prop}-#{$side}: --space($space) !important;

@@ -5,7 +5,7 @@ $shilp-loader-defaults: map-merge(
     "width": 3px,
     "base-color": rgba(255, 255, 255, 0.8),
     "overlay-color": rgba(255, 255, 255, 0.5),
-    "color": --color(primary)
+    "color": rgba(0, 0, 0, 0.1)
   ),
   $shilp-loader-defaults
 );
@@ -38,8 +38,7 @@ $loader-overlay-color: map-get($shilp-loader-defaults, "base-color");
     animation-iteration-count: infinite;
     margin: auto;
     border-width: $loader-width;
-    border-color: $loader-color $loader-base-color $loader-base-color
-      $loader-base-color;
+    border-color: $loader-color $loader-base-color $loader-base-color $loader-base-color;
     @include position(absolute);
   }
   @include loader-size($loader-size);

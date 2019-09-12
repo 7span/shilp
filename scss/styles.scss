@@ -2,3 +2,7 @@
 @import "./css-variables"; // Required
 @import "./defaults";
 @import "./components/all";
+
+.material-design-icon {
+  display: flex;
+}

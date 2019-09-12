@@ -1,21 +1,115 @@
-$card-border-color: --color(grey, lighter);
+$shilp-card-defaults: () !default;
+$shilp-card-defaults: map-merge(
+  (
+    "border-color": --color(grey, lighter),
+    "border-radius": md,
+    "size": sm,
+    "sizes": (
+      xs,
+      sm,
+      md,
+      lg,
+      xl
+    )
+  ),
+  $shilp-card-defaults
+);
 
-.card {
-  background-color: #fff;
-  border: 1px solid $card-border-color;
-  border-radius: --border-radius(md);
+$card-sizes: map-get($shilp-card-defaults, "sizes");
+
+$card-border-color: map-get($shilp-card-defaults, "border-color");
+$card-radius: map-get($shilp-card-defaults, "border-radius");
+$card-size: map-get($shilp-card-defaults, "size");
+
+//CARD SIZES
+// Uses CSS Variable to define padding which considerably creates smaller CSS size
+@mixin card--size($breakpoint) {
+  @each $size in $card-sizes {
+    $className: breakpoint-class($breakpoint, card--#{$size});
+    .#{$className} {
+      --size: #{--space($size)};
+    }
+  }
 }
 
+//DEFAULT CSS
+.card {
+  --size: #{--space($card-size)};
+  display: inline-block;
+  background-clip: padding-box;
+  border-radius: --border-radius($card-radius);
+  @include card--size($card-size);
+  > * {
+    background-color: #fff;
+    &:first-child {
+      border-radius: --border-radius($card-radius) --border-radius($card-radius) 0 0;
+      background-clip: padding-box; //Avoids color leaking due to border-radius
+    }
+    &:last-child {
+      border-radius: 0 0 --border-radius($card-radius) --border-radius($card-radius);
+      background-clip: padding-box; //Avoids color leaking due to border-radius
+    }
+    &:only-child {
+      border-radius: --border-radius($card-radius);
+      background-clip: padding-box; //Avoids color leaking due to border-radius
+      padding: var(--size);
+    }
+  }
+}
 .card__header {
   display: flex;
   align-items: center;
-  padding: --space(sm);
-  border-bottom: 1px solid $card-border-color;
+  justify-content: space-between;
+  padding: var(--size);
 }
+
 .card__title {
   margin: 0;
+  margin-right: auto;
+}
+.card__icon {
+  margin-right: --space(xs);
 }
 
 .card__body {
-  padding: --space(sm);
+  padding-left: var(--size);
+  padding-right: var(--size);
+}
+
+.card__footer {
+  padding: var(--size);
+}
+
+.card--fluid {
+  display: block;
+}
+
+//CARD BORDERED
+.card--bordered {
+  .card__body {
+    padding: var(--size);
+  }
+  > * {
+    border: 1px solid $card-border-color;
+    + * {
+      border-top: none;
+    }
+  }
+}
+
+//CARD COLORED
+.card--colored {
+  .card__body {
+    padding: var(--size);
+  }
+}
+
+//SIZES
+@include card--size("phone");
+
+// MEDIA QUERY
+@each $breakpoint, $value in $shilp-breakpoints {
+  @media only screen and (min-width: $value) {
+    @include card--size($breakpoint);
+  }
 }

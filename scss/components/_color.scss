@@ -1,27 +1,24 @@
 @each $color, $shades in $shilp-colors {
   @each $shade, $code in $shades {
     //Background Color
-    .bg-color--#{$color} {
-      @if ($shade== "default") {
-        background-color: --color($color);
-        color: --text-color($color);
-      } @else {
-        //Color
-        &.shade--#{$shade} {
-          background-color: --color($color, $shade);
-          color: --text-color($color);
-        }
+    @if ($shade== "default") {
+      .bg--#{$color} {
+        background-color: --color($color) !important;
+      }
+    } @else {
+      .bg--#{$color}--#{$shade} {
+        background-color: --color($color, $shade) !important;
       }
     }
 
     //Color
-    .color--#{$color} {
-      @if ($shade== "default") {
-        color: --color($color);
-      } @else {
-        &.shade--#{$shade} {
-          color: --color($color, $shade);
-        }
+    @if ($shade== "default") {
+      .color--#{$color} {
+        color: --color($color) !important;
+      }
+    } @else {
+      .color--#{$color}--#{$shade} {
+        color: --color($color, $shade) !important;
       }
     }
   }

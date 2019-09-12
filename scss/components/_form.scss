@@ -24,10 +24,7 @@ $form-border-color: map-get($shilp-form-defaults, "border-color");
 
 //CUSTOM SELECT
 $select-arrow-color: map-deep-get($shilp-colors, "grey", "default");
-$select-arrow: m-icon(
-  "M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z",
-  $select-arrow-color
-);
+$select-arrow: m-icon("M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z", $select-arrow-color);
 
 // FIELD SIZES
 // Generates the size based on $shilp-input-sizes map
@@ -135,6 +132,7 @@ $select-arrow: m-icon(
   border: $form-border-width solid $form-border-color;
   border-radius: $form-radius;
   min-width: 0px; //When .field__group is used, the input becomes flex child.
+  font-size: --font-size(h5);
   &:focus {
     box-shadow: inset 0 0 0 3px --color(grey, lightest);
     position: relative;
@@ -217,6 +215,7 @@ $select-arrow: m-icon(
     border: none;
     -webkit-appearance: none;
     -moz-appearance: none;
+    font-size: --font-size(h5);
   }
   &:after {
     content: "";

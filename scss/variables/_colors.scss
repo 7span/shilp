@@ -5,34 +5,31 @@ $shilp-colors: () !default;
 $shilp-colors: map-merge(
   (
     "primary": (
-      lightest: #dae1fb,
-      lighter: #8d9ee8,
-      light: #6b7cd2,
-      default: #3f51b5,
-      dark: #2e3d9b,
-      darker: #1f2b82,
-      darkest: #0c1256,
-      text: #ffffff
+      lightest: #cce4fd,
+      lighter: #65a2f4,
+      light: #3f82ea,
+      default: #0652dd,
+      dark: #043fbe,
+      darker: #032e9f,
+      darkest: #01176a
     ),
     "secondary": (
-      lightest: #cafdf4,
-      lighter: #61f3f2,
-      light: #39dbe7,
-      default: #00b8d8,
-      dark: #008fb9,
-      darker: #006c9b,
-      darkest: #003867,
-      text: #ffffff
+      lightest: #cefcea,
+      lighter: #6cefd3,
+      light: #46dfcc,
+      default: #12cbc4,
+      dark: #0da6ae,
+      darker: #097f92,
+      darkest: #003867
     ),
     "accent": (
-      lightest: #fef5cc,
-      lighter: #f9d666,
-      light: #f4c340,
-      default: #eda704,
-      dark: #cb8902,
-      darker: #aa6d02,
-      darkest: #714100,
-      text: #000000
+      lightest: #fff7cf,
+      lighter: #ffe270,
+      light: #ffd64d,
+      default: #ffc312,
+      dark: #dba10d,
+      darker: #b78209,
+      darkest: #7a4f03
     ),
     "danger": (
       lightest: #fde2ce,
@@ -41,8 +38,7 @@ $shilp-colors: map-merge(
       default: #db2713,
       dark: #bc110d,
       darker: #9d0912,
-      darkest: #69031a,
-      text: #ffffff
+      darkest: #69031a
     ),
     "warning": (
       lightest: #fef5cc,
@@ -51,8 +47,7 @@ $shilp-colors: map-merge(
       default: #eda704,
       dark: #cb8902,
       darker: #aa6d02,
-      darkest: #714100,
-      text: #000000
+      darkest: #714100
     ),
     "success": (
       lightest: #e4fad2,
@@ -61,8 +56,7 @@ $shilp-colors: map-merge(
       default: #34aa22,
       dark: #1f9218,
       darker: #117a13,
-      darkest: #065114,
-      text: #ffffff
+      darkest: #065114
     ),
     "info": (
       lightest: #cafdf4,
@@ -71,8 +65,7 @@ $shilp-colors: map-merge(
       default: #00b8d8,
       dark: #008fb9,
       darker: #006c9b,
-      darkest: #003867,
-      text: #ffffff
+      darkest: #003867
     ),
     "grey": (
       lightest: #eceff1,
@@ -82,9 +75,56 @@ $shilp-colors: map-merge(
       dark: #455a64,
       darker: #37474f,
       darkest: #263238
+    ),
+    "white": (
+      default: #ffffff
+    ),
+    "black": (
+      default: #000000
     )
   ),
   $shilp-colors
+);
+
+//TEXT COLORS IN CONTRAST TO COLORS
+// Make sure the color names are used in contrast to the actual colors defined in top map
+$shilp-text-colors: () !default;
+$shilp-text-colors: map-merge(
+  (
+    "primary": (
+      dark: #ffffff,
+      light: #0652dd
+    ),
+    "secondary": (
+      dark: #ffffff,
+      light: #003867
+    ),
+    "accent": (
+      dark: #ffffff,
+      light: #7a4f03
+    ),
+    "success": (
+      dark: #ffffff,
+      light: #065114
+    ),
+    "warning": (
+      dark: #ffffff,
+      light: #714100
+    ),
+    "danger": (
+      dark: #ffffff,
+      light: #69031a
+    ),
+    "info": (
+      dark: #ffffff,
+      light: #003867
+    ),
+    "grey": (
+      dark: #ffffff,
+      light: #263238
+    )
+  ),
+  $shilp-text-colors
 );
 
 // GRADIENTS
@@ -94,14 +134,12 @@ $shilp-gradients: () !default;
 $shilp-gradients: map-merge(
   (
     "primary": (
-      start: #9075ee,
-      stop: #71a9de,
-      direction: 90deg
+      #9075ee,
+      #71a9de
     ),
     "secondary": (
-      start: #f487c1,
-      stop: #fe8d7d,
-      direction: 90deg
+      #f487c1,
+      #fe8d7d
     )
   ),
   $shilp-gradients

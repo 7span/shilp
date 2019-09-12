@@ -11,17 +11,24 @@
     @each $shade, $value in $color {
       @if ($shade== "default") {
         --color--#{$variant}: #{$value};
-      } @else if($shade== "text") {
-        --text-color--#{$variant}: #{$value};
       } @else {
         --color--#{$variant}--#{$shade}: #{$value};
       }
     }
   }
 
+  //TEXT COLORS
+  @each $variant, $color in $shilp-text-colors {
+    @each $shade, $value in $color {
+      --text-color--#{$variant}--#{$shade}: #{$value};
+    }
+  }
+
   //GRADIENT
-  @each $variant, $color in $shilp-gradients {
-    --gradient--#{$variant}: #{gradient($variant)};
+  @each $variant, $colors in $shilp-gradients {
+    @each $shade in $colors {
+      --gradient--#{$variant}--#{index($colors,$shade)}: #{$shade};
+    }
   }
 
   //FONT-FAMILIES

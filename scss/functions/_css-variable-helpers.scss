@@ -14,7 +14,16 @@
 }
 
 @function --text-color($val, $mod: "") {
-  @return --var("text-color", $val, $mod);
+  $new-mod: "";
+  //The text color value does not have multiple variants of dark and light.
+  @if ($mod== "lighter" or $mod== "lightest") {
+    $new-mod: "light";
+  } @else if ($mod== "darker" or $mod== "dark") {
+    $new-mod: "dark";
+  } @else {
+    $new-mod: $mod;
+  }
+  @return --var("text-color", $val, $new-mod);
 }
 
 @function --space($val, $mod: "") {
@@ -45,6 +54,6 @@
   @return --var("box-shadow", $val);
 }
 
-@function --gradient($val) {
-  @return --var("gradient", $val);
+@function --gradient($val, $mod) {
+  @return --var("gradient", $val, $mod);
 }

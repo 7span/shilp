@@ -7,4 +7,10 @@
     font-family: map-get($tag-settings, "font-family");
     font-weight: map-get($tag-settings, "font-weight");
   }
+  .#{$tag} {
+    svg {
+      width: --font-size($tag);
+      height: --font-size($tag);
+    }
+  }
 }

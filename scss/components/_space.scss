@@ -1,0 +1,67 @@
+$shilp-space-defaults: () !default;
+$shilp-space-defaults: map-merge(
+  (
+    "size": xs
+  ),
+  $shilp-space-defaults
+);
+
+$space-size: map-get($shilp-space-defaults, "size");
+
+//SIZES
+// Creates diffrent sizes for spacing
+@mixin space--sizes($breakpoint, $size) {
+  $className: breakpoint-class($breakpoint, space--#{$size});
+  .#{$className} {
+    --size: #{--space($size)};
+  }
+}
+
+.space {
+  display: inline-flex;
+  --size: #{--space(#{$space-size})};
+  > * {
+    margin: 0;
+  }
+  &:not(.space--reverse):not(.space--stack) {
+    > * {
+      flex: 1 1 0; //Makes all the childs same width when wrapped;
+      margin-right: var(--size);
+    }
+  }
+  &.space--reverse:not(.space--stack) {
+    > * {
+      flex: 1 1 0; //Makes all the childs same width when wrapped;
+      margin-left: var(--size);
+    }
+  }
+}
+
+//STACKED
+.space--stack {
+  flex-direction: column;
+  &:not(.space--reverse) {
+    > * {
+      margin-bottom: var(--size);
+    }
+  }
+  &.space--reverse {
+    > * {
+      margin-top: var(--size);
+    }
+  }
+}
+
+// GENERATE SIZES
+@each $size, $value in $shilp-spaces {
+  @include space--sizes("phone", $size);
+}
+
+// MEDIA QUERY
+@each $breakpoint, $value in $shilp-breakpoints {
+  @media only screen and (min-width: $value) {
+    @each $size, $value in $shilp-spaces {
+      @include space--sizes($breakpoint, $size);
+    }
+  }
+}

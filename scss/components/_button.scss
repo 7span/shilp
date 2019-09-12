@@ -7,6 +7,7 @@ $shilp-button-defaults: map-merge(
       accent,
       light,
       dark,
+      "grey",
       info,
       success,
       danger,
@@ -64,17 +65,22 @@ $button-muted-shade: map-get($shilp-button-defaults, "muted-shade");
   $muted: "";
   @if ($color== "light") {
     $default: --color(grey, lightest);
-    $text: --color(grey, darkest);
+    $text: --text-color(grey, light);
     $hover: --color(grey, lighter);
     $muted: --color(grey, lightest);
   } @else if($color== "dark") {
     $default: --color(grey, darkest);
-    $text: --color(grey, lightest);
+    $text: --text-color(grey, dark);
     $hover: --color(grey, darker);
     $muted: --color(grey, darkest);
+  } @else if($color== "grey") {
+    $default: --color(grey);
+    $text: --text-color(grey, dark);
+    $hover: --color(grey, dark);
+    $muted: --color(grey, lightest);
   } @else {
     $default: --color($color);
-    $text: --text-color($color);
+    $text: --text-color($color, dark);
     $hover: --color($color, $button-hover-shade);
     $muted: --color($color, $button-muted-shade);
   }
@@ -107,27 +113,24 @@ $button-muted-shade: map-get($shilp-button-defaults, "muted-shade");
     fill: map-get($colors, default);
   }
   &:hover:not(:disabled) {
-    background-color: map-get($colors, default);
-    color: map-get($colors, text);
-    path {
-      fill: map-get($colors, text);
-    }
+    background-color: map-get($colors, muted);
   }
 }
 
 @mixin button-style--muted($color) {
   $colors: define-colors($color);
-
-  background-color: map-get($colors, muted);
-  color: map-get($colors, default);
-  path {
-    fill: map-get($colors, default);
-  }
-  &:hover:not(:disabled) {
-    background-color: map-get($colors, default);
-    color: map-get($colors, text);
+  @if ($color!= "light" and $color!= "dark" and $color!= "grey") {
+    background-color: map-get($colors, muted);
+    color: map-get($colors, default);
     path {
-      fill: map-get($colors, text);
+      fill: map-get($colors, default);
+    }
+    &:hover:not(:disabled) {
+      background-color: map-get($colors, default);
+      color: map-get($colors, text);
+      path {
+        fill: map-get($colors, text);
+      }
     }
   }
 }
@@ -184,7 +187,7 @@ $button-muted-shade: map-get($shilp-button-defaults, "muted-shade");
   border-radius: 4px;
 }
 @mixin button-shape--pill($size) {
-  border-radius: --input-size($size);
+  border-radius: 9999px;
 }
 @mixin button-shape--square($size) {
   height: --input-size($size);
@@ -280,6 +283,7 @@ $button-muted-shade: map-get($shilp-button-defaults, "muted-shade");
   text-decoration: none;
   line-height: 1;
   justify-content: center;
+  font-weight: --font-weight(bold);
   &:hover {
     text-decoration: none;
   }
@@ -287,9 +291,7 @@ $button-muted-shade: map-get($shilp-button-defaults, "muted-shade");
     cursor: not-allowed;
     opacity: 0.8;
   }
-  @if mixin-exists(__button) {
-    @include __button();
-  }
+
   @include button-size($button-size);
   @include button-shape($button-shape, $button-size);
   //@include button-style($button-style, $button-color);
@@ -309,20 +311,58 @@ $button-muted-shade: map-get($shilp-button-defaults, "muted-shade");
   margin-right: --space(xs);
 }
 
-//BUTTON GROUP
+//BUTTONS
 .buttons {
   display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
-  .button {
-    flex: 0 0 auto;
-  }
 }
-.buttons--stacked {
+.buttons--stack {
   flex-direction: column;
   .button {
     width: 100%;
+  }
+}
+
+//BUTTONS GROUPED
+.buttons--group {
+  > .button {
+    &:not(:first-child):not(:last-child) {
+      border-radius: 0;
+    }
+  }
+
+  &:not(.buttons--stack) {
+    > .button {
+      &:first-child {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      &:last-child {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+      + .button {
+        border-left: none;
+      }
+    }
+  }
+
+  &.buttons--stack {
+    > .button {
+      &:first-child {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      &:last-child {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+      + .button {
+        border-top: none;
+      }
+    }
   }
 }
 
@@ -332,15 +372,6 @@ $button-muted-shade: map-get($shilp-button-defaults, "muted-shade");
 }
 .button--fluid {
   width: 100%;
-}
-
-// STYLE CLASSES
-// Generates classes for button styles.
-// Uses default color value.
-@each $style in $button-styles {
-  .button--#{$style} {
-    @include button-style($style, $button-color);
-  }
 }
 
 // COLORS CLASSES
