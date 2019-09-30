@@ -1,0 +1,34 @@
+$shilp-overlay-defaults: () !default;
+$shilp-overlay-defaults: map-merge(
+  (
+    "default-color": "dark",
+    "dark": rgba(0, 0, 0, 0.8),
+    "light": rgba(255, 255, 255, 0.8)
+  ),
+  $shilp-overlay-defaults
+);
+
+$overlay-dark: map-get($shilp-overlay-defaults, "dark");
+$overlay-light: map-get($shilp-overlay-defaults, "light");
+$overlay-default-color: map-get($shilp-overlay-defaults, "default-color");
+
+.overlay {
+  position: relative;
+  &:before {
+    content: "";
+    @include position(absolute);
+    background-color: map-get($shilp-overlay-defaults, $overlay-default-color);
+    z-index: 3;
+  }
+}
+
+.overlay--light {
+  &:before {
+    background-color: $overlay-light;
+  }
+}
+.overlay--dark {
+  &:before {
+    background-color: $overlay-dark;
+  }
+}

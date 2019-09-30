@@ -1,4 +1,5 @@
-$utilityClasses: (
+//CSS RULES BASED UTILITY CLASSES
+$utility-classes: (
   ta: (
     rule: "text-align",
     values: (
@@ -6,15 +7,40 @@ $utilityClasses: (
       "left",
       "right"
     )
+  ),
+  ai: (
+    rule: "align-items",
+    values: (
+      "flex-start",
+      "flex-end",
+      "center"
+    )
   )
 );
-
-@each $utility, $config in $utilityClasses {
+@each $utility, $config in $utility-classes {
   $values: map-get($config, "values");
   $rule: map-get($config, "rule");
   @each $value in $values {
     .#{$utility}--#{$value} {
       #{$rule}: #{$value};
+    }
+  }
+}
+
+//SHILP VARIABLES BASED UTILITY CLASSES
+$shilp-utility-classes: (
+  br: (
+    rule: "border-radius",
+    map: $shilp-border-radius
+  )
+);
+
+@each $utility, $config in $shilp-utility-classes {
+  $values: map-get($config, "map");
+  $rule: map-get($config, "rule");
+  @each $key, $value in $values {
+    .#{$utility}--#{$key} {
+      #{$rule}: --var($rule, $key);
     }
   }
 }

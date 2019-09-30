@@ -1,10 +1,15 @@
+//--------------------------------------------------
+// CONFIGURATION
+//--------------------------------------------------
+
 $shilp-card-defaults: () !default;
 $shilp-card-defaults: map-merge(
   (
     "border-color": --color(grey, lighter),
     "border-radius": md,
-    "size": sm,
+    "size": 0,
     "sizes": (
+      0,
       xs,
       sm,
       md,
@@ -16,12 +21,15 @@ $shilp-card-defaults: map-merge(
 );
 
 $card-sizes: map-get($shilp-card-defaults, "sizes");
-
 $card-border-color: map-get($shilp-card-defaults, "border-color");
 $card-radius: map-get($shilp-card-defaults, "border-radius");
 $card-size: map-get($shilp-card-defaults, "size");
 
-//CARD SIZES
+//--------------------------------------------------
+// MIXINS
+//--------------------------------------------------
+
+//---------- SIZE
 // Uses CSS Variable to define padding which considerably creates smaller CSS size
 @mixin card--size($breakpoint) {
   @each $size in $card-sizes {
@@ -32,15 +40,87 @@ $card-size: map-get($shilp-card-defaults, "size");
   }
 }
 
-//DEFAULT CSS
+//--------------------------------------------------
+// BLOCK & ELEMENTS
+//--------------------------------------------------
+
 .card {
-  --size: #{--space($card-size)};
+  --size: #{$card-size};
   display: inline-block;
   background-clip: padding-box;
-  border-radius: --border-radius($card-radius);
-  @include card--size($card-size);
   > * {
     background-color: #fff;
+    padding-left: var(--size);
+    padding-right: var(--size);
+    &:first-child {
+      padding-top: var(--size);
+    }
+    &:last-child {
+      padding-bottom: var(--size);
+    }
+    &:only-child {
+      padding: var(--size);
+    }
+  }
+}
+
+//---------- HEADER
+.card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--size);
+  //When the header is not first child,
+  // Reduce the horizontal space for better UI
+  &:not(:first-child) {
+    padding-bottom: calc(var(--size) * 4 / 6);
+  }
+}
+.card__title {
+  margin: 0;
+  margin-right: auto;
+}
+.card__icon {
+  margin-right: --space(xs);
+}
+
+//---------- BODY
+.card__body {
+}
+.card__media {
+  img {
+    width: 100%;
+  }
+  &.card__media--edge {
+    padding: 0;
+  }
+}
+
+//---------- FOOTER
+.card__footer {
+  padding-top: var(--size);
+}
+
+@include card--size("phone");
+
+//--------------------------------------------------
+// MODIFIERS
+//--------------------------------------------------
+
+.card--fluid {
+  display: block;
+}
+
+.card--split {
+  > * {
+    padding: var(--size) !important;
+  }
+}
+
+//---------- SHAPE: ROUND
+.card--round {
+  border-radius: --border-radius($card-radius);
+  > * {
     &:first-child {
       border-radius: --border-radius($card-radius) --border-radius($card-radius) 0 0;
       background-clip: padding-box; //Avoids color leaking due to border-radius
@@ -52,43 +132,12 @@ $card-size: map-get($shilp-card-defaults, "size");
     &:only-child {
       border-radius: --border-radius($card-radius);
       background-clip: padding-box; //Avoids color leaking due to border-radius
-      padding: var(--size);
     }
   }
 }
-.card__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--size);
-}
 
-.card__title {
-  margin: 0;
-  margin-right: auto;
-}
-.card__icon {
-  margin-right: --space(xs);
-}
-
-.card__body {
-  padding-left: var(--size);
-  padding-right: var(--size);
-}
-
-.card__footer {
-  padding: var(--size);
-}
-
-.card--fluid {
-  display: block;
-}
-
-//CARD BORDERED
-.card--bordered {
-  .card__body {
-    padding: var(--size);
-  }
+//---------- STYLE: BORDER
+.card--border {
   > * {
     border: 1px solid $card-border-color;
     + * {
@@ -97,17 +146,9 @@ $card-size: map-get($shilp-card-defaults, "size");
   }
 }
 
-//CARD COLORED
-.card--colored {
-  .card__body {
-    padding: var(--size);
-  }
-}
-
-//SIZES
-@include card--size("phone");
-
+//--------------------------------------------------
 // MEDIA QUERY
+//--------------------------------------------------
 @each $breakpoint, $value in $shilp-breakpoints {
   @media only screen and (min-width: $value) {
     @include card--size($breakpoint);

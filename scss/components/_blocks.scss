@@ -28,14 +28,9 @@ $blocks-gaps: map-get($shilp-blocks-defaults, "gaps");
   $negetive-gap: calc(-1 * #{--space($gap)});
   margin-left: $negetive-gap;
   margin-right: $negetive-gap;
-  &:first-child {
-    margin-top: $negetive-gap;
-  }
-  &:last-child {
-    margin-bottom: $negetive-gap;
-  }
   > .block {
-    padding: --space($gap);
+    padding-left: --space($gap);
+    padding-right: --space($gap);
   }
 }
 

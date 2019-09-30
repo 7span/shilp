@@ -284,6 +284,7 @@ $button-muted-shade: map-get($shilp-button-defaults, "muted-shade");
   line-height: 1;
   justify-content: center;
   font-weight: --font-weight(bold);
+  vertical-align: top;
   &:hover {
     text-decoration: none;
   }
@@ -327,41 +328,44 @@ $button-muted-shade: map-get($shilp-button-defaults, "muted-shade");
 
 //BUTTONS GROUPED
 .buttons--group {
-  > .button {
-    &:not(:first-child):not(:last-child) {
-      border-radius: 0;
-    }
+  > .button:not(:first-child):not(:last-child),
+  > .choice:not(:first-child):not(:last-child) .button {
+    border-radius: 0;
   }
 
   &:not(.buttons--stack) {
-    > .button {
-      &:first-child {
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-      }
-      &:last-child {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-      }
-      + .button {
-        border-left: none;
-      }
+    > .button:first-child,
+    > .choice:first-child .button {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    > .button:last-child,
+    > .choice:last-child .button {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    > .button + .button,
+    > .choice + .choice .button {
+      border-left: none;
     }
   }
 
   &.buttons--stack {
-    > .button {
-      &:first-child {
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-      }
-      &:last-child {
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-      }
-      + .button {
-        border-top: none;
-      }
+    > .button:first-child,
+    > .choice:first-child .button {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    > .button:last-child,
+    > .choice:first-child .button {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+    > .button + .button,
+    > .choice + .choice .button {
+      border-top: none;
     }
   }
 }

@@ -29,16 +29,24 @@ $select-arrow: m-icon("M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58
 // FIELD SIZES
 // Generates the size based on $shilp-input-sizes map
 @mixin field-size($size) {
-  .radio,
-  .checkbox {
-    height: --input-size($size);
-    line-height: --input-size($size);
+  .choice {
+    &:not(.choice--custom) {
+      height: --input-size($size);
+      line-height: --input-size($size);
+    }
   }
+
   .field-block {
-    height: --input-size($size);
-    line-height: --input-size($size);
     font-size: map-get($shilp-input-font-sizes, $size);
   }
+  textarea.field-block {
+    padding: --space(xs);
+  }
+  .field-block:not(textarea) {
+    height: --input-size($size);
+    line-height: --input-size($size);
+  }
+
   .field__before,
   .field__after {
     min-width: --input-size($size);
@@ -101,18 +109,6 @@ $select-arrow: m-icon("M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58
     margin-bottom: 0;
   }
 
-  //LOADING
-  &.is-loading {
-    > label {
-      &:after {
-        content: "";
-        animation-name: fieldLoading;
-        animation-duration: 1s;
-        animation-iteration-count: infinite;
-      }
-    }
-  }
-
   > label {
     display: flex;
     margin-bottom: 4px;
@@ -140,6 +136,14 @@ $select-arrow: m-icon("M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58
   &:disabled {
     color: --color(grey);
     background-color: --color(grey, lightest);
+  }
+}
+.field-block--view {
+  padding-left: 0;
+  padding-right: 0;
+  border: none;
+  > * {
+    margin: 0;
   }
 }
 
@@ -208,14 +212,21 @@ $select-arrow: m-icon("M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58
 //SELECT
 .select {
   position: relative;
+  padding: 0;
   select {
-    @include position(absolute);
     @include form-field-defaults;
     border-radius: $form-radius - 1;
     border: none;
     -webkit-appearance: none;
     -moz-appearance: none;
     font-size: --font-size(h5);
+    background-color: transparent;
+    padding-right: 32px;
+    z-index: 2;
+    height: 100%;
+    vertical-align: top;
+    position: relative;
+    outline: none;
   }
   &:after {
     content: "";
@@ -226,12 +237,17 @@ $select-arrow: m-icon("M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58
     background-image: url($select-arrow);
     background-repeat: no-repeat;
     background-position: center;
+    background-size: 24px;
+  }
+  &.loader {
+    &:after {
+      background-image: none;
+    }
   }
 }
 
 //RADIO & CHECKBOX
-.radio,
-.checkbox {
+.choice {
   display: flex;
   align-items: center;
   > input {
@@ -243,5 +259,18 @@ $select-arrow: m-icon("M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58
     color: #000;
     cursor: pointer;
     line-height: 1;
+  }
+}
+
+.choice--custom {
+  height: auto;
+  line-height: initial;
+  input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+  }
+  > label {
+    margin-left: 0;
   }
 }

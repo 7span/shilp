@@ -19,6 +19,7 @@ $space-size: map-get($shilp-space-defaults, "size");
 
 .space {
   display: inline-flex;
+  flex-wrap: wrap;
   --size: #{--space(#{$space-size})};
   > * {
     margin: 0;

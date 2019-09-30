@@ -1,0 +1,64 @@
+//--------------------------------------------------
+// CONFIGURATION
+//--------------------------------------------------
+$shilp-item-defaults: () !default;
+$shilp-item-defaults: map-merge(
+  (
+    "size": sm,
+    "sizes": (
+      xs: 32px,
+      sm: 48px,
+      md: 64px,
+      lg: 80px,
+      xl: 96px
+    )
+  ),
+  $shilp-item-defaults
+);
+
+$item-sizes: map-get($shilp-item-defaults, "sizes");
+$item-size: map-get($shilp-item-defaults, "size");
+
+//--------------------------------------------------
+// BLOCK & ELEMENTS
+//--------------------------------------------------
+.item {
+  display: flex;
+  align-items: center;
+  --size: var(--size--#{$item-size});
+  @each $size, $value in $item-sizes {
+    --size--#{$size}: #{$value};
+  }
+}
+.item__media {
+  flex: 0 0 var(--size);
+  height: var(--size);
+  display: flex;
+  align-items: center;
+  img {
+    width: 100%;
+  }
+}
+
+.item__body {
+  padding: 0px --space(sm);
+}
+.item__title {
+  margin: 0 0 --space(xs) 0;
+}
+.item__content {
+  p {
+    margin: 0;
+  }
+}
+
+//--------------------------------------------------
+// MODIFIERS
+//--------------------------------------------------
+
+//---------- SIZE
+@each $size, $value in $item-sizes {
+  .item--#{$size} {
+    --size: var(--size--#{$size});
+  }
+}
