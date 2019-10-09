@@ -1,8 +1,11 @@
-$debug: false !default;
-$scoped: false !default;
-$scope: "sevenspan" !default;
-$system-fonts: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"' !default;
-$shilp-separator: "\\:" !default;
-
-//Requires true for now.
-$shilp-css-variables: true;
+$shilp-config: () !default;
+$shilp-config: map-merge(
+  (
+    "debug": false,
+    "scoped": false,
+    "scope": "sevenspan",
+    "system-fonts": '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
+    "breakpoint-separator": "\\:"
+  ),
+  $shilp-config
+);

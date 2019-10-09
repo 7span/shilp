@@ -1,0 +1,63 @@
+.buttons {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+//--------------------------------------------------
+// MODIFIERS
+//--------------------------------------------------
+
+//---------- STACK
+.buttons--stack {
+  flex-direction: column;
+  .button {
+    width: 100%;
+  }
+}
+
+//---------- GROUP
+// Makes buttons attached and handles radius & borders
+.buttons--group {
+  > .button:not(:first-child):not(:last-child),
+  > .choice:not(:first-child):not(:last-child) .button {
+    border-radius: 0;
+  }
+
+  &:not(.buttons--stack) {
+    > .button:first-child,
+    > .choice:first-child .button {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    > .button:last-child,
+    > .choice:last-child .button {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    > .button + .button,
+    > .choice + .choice .button {
+      border-left: none;
+    }
+  }
+
+  &.buttons--stack {
+    > .button:first-child,
+    > .choice:first-child .button {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    > .button:last-child,
+    > .choice:first-child .button {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+    > .button + .button,
+    > .choice + .choice .button {
+      border-top: none;
+    }
+  }
+}

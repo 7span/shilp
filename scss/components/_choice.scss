@@ -1,0 +1,29 @@
+//TODO: Automatically highlight selected checkbox in button style.
+
+.choice {
+  display: flex;
+  align-items: center;
+  > input {
+    margin: 0;
+  }
+  > label {
+    margin-bottom: 0;
+    margin-left: --space(xs);
+    color: #000;
+    cursor: pointer;
+    line-height: 1;
+  }
+}
+
+.choice--custom {
+  height: auto;
+  line-height: initial;
+  input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+  }
+  > label {
+    margin-left: 0;
+  }
+}

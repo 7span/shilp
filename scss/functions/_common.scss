@@ -13,13 +13,14 @@
   @if ($breakpoint== "phone") {
     $class: #{$class};
   } @else {
-    $class: #{$class + $shilp-separator + $breakpoint};
+    $class: #{$class + map-get($shilp-config, breakpoint-separator) + $breakpoint};
   }
   @return $class;
 }
 
 //FONT WITH FALLCACK
 @function font-with-fallback($value) {
+  $system-fonts: map-get($shilp-config, system-fonts);
   @if ($value== "") {
     @return $system-fonts;
   } @else {
@@ -30,4 +31,13 @@
 //GENERATE GRADIENT
 @function gradient($name, $direction: 90deg) {
   @return linear-gradient($direction, --gradient($name, 1) 0%, --gradient($name, 2) 100%);
+}
+
+//GENERATE COLOR MAP
+@function shilp-colors() {
+  $colors: ();
+  @each $color, $value in $shilp-colors {
+    $colors: append($colors, $color);
+  }
+  @return $colors;
 }

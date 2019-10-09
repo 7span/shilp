@@ -42,8 +42,8 @@
 // SCOPE
 // If the scoped is true, the default rules will be applied under scoped selector.
 // Useful when integrating with other CSS frameworks
-@if $scoped {
-  .#{$scope} {
+@if map-get($shilp-config, scoped) {
+  .#{map-get($shilp-config, scope)} {
     font-family: --font-family(content);
     font-weight: --font-weight(regular);
     @include defaults;

@@ -1,37 +1,19 @@
+//--------------------------------------------------
+// CONFIGURATION
+//--------------------------------------------------
+
 $shilp-button-defaults: () !default;
 $shilp-button-defaults: map-merge(
   (
-    "colors": (
-      primary,
-      secondary,
-      accent,
-      light,
-      dark,
-      "grey",
-      info,
-      success,
-      danger,
-      warning
-    ),
+    "colors": shilp-colors(),
     "styles": (
       trn,
       solid,
       outline,
       muted,
-      gradient
+      gradient,
+      tab
     ),
-    "shapes": (
-      rectangle,
-      square,
-      rounded,
-      pill,
-      circle
-    ),
-    "alignments": (
-      left,
-      right
-    ),
-    "color": "primary",
     "style": "solid",
     "shape": "rounded",
     "size": "md",
@@ -42,54 +24,40 @@ $shilp-button-defaults: map-merge(
   $shilp-button-defaults
 );
 
-$button-shape: map-get($shilp-button-defaults, "shape");
-$button-color: map-get($shilp-button-defaults, "color");
-$button-size: map-get($shilp-button-defaults, "size");
-$button-style: map-get($shilp-button-defaults, "style");
-$button-outline: map-get($shilp-button-defaults, "outline");
+$default-button-shape: map-get($shilp-button-defaults, "shape");
+$default-button-size: map-get($shilp-button-defaults, "size");
+$default-button-style: map-get($shilp-button-defaults, "style");
+$default-button-outline: map-get($shilp-button-defaults, "outline");
 
+$button-shapes: (rectangle, square, rounded, pill, circle);
 $button-colors: map-get($shilp-button-defaults, "colors");
 $button-styles: map-get($shilp-button-defaults, "styles");
-$button-shapes: map-get($shilp-button-defaults, "shapes");
-$button-alignments: map-get($shilp-button-defaults, "alignments");
 $button-hover-shade: map-get($shilp-button-defaults, "hover-shade");
 $button-muted-shade: map-get($shilp-button-defaults, "muted-shade");
 
+//--------------------------------------------------
+// FUNCTIONS
+//--------------------------------------------------
 // DEFINES COLORS
 // Defines the colors to use in diffrent shade based on provided color.
 // Specially useful in light and dark shades.
 @function define-colors($color) {
-  $default: "";
-  $text: "";
-  $hover: "";
-  $muted: "";
-  @if ($color== "light") {
-    $default: --color(grey, lightest);
-    $text: --text-color(grey, light);
-    $hover: --color(grey, lighter);
-    $muted: --color(grey, lightest);
-  } @else if($color== "dark") {
-    $default: --color(grey, darkest);
-    $text: --text-color(grey, dark);
-    $hover: --color(grey, darker);
-    $muted: --color(grey, darkest);
-  } @else if($color== "grey") {
-    $default: --color(grey);
-    $text: --text-color(grey, dark);
-    $hover: --color(grey, dark);
-    $muted: --color(grey, lightest);
-  } @else {
-    $default: --color($color);
-    $text: --text-color($color, dark);
-    $hover: --color($color, $button-hover-shade);
-    $muted: --color($color, $button-muted-shade);
-  }
+  $default: --color($color);
+  $text: --text-color($color, dark);
+  $hover: --color($color, $button-hover-shade);
+  $muted: --color($color, $button-muted-shade);
   @return (default: $default, hover: $hover, text: $text, muted: $muted);
 }
 
-// STYLES
+//--------------------------------------------------
+// MIXINS
+//--------------------------------------------------
+
+//---------- STYLES
 // Each style has unique CSS rules hence requires seperate mixins.
 // naming convention is: button-style--<style_name>
+
+//---------- STYLE: SOLID
 @mixin button-style--solid($color) {
   $colors: define-colors($color);
 
@@ -103,10 +71,11 @@ $button-muted-shade: map-get($shilp-button-defaults, "muted-shade");
   }
 }
 
+//---------- STYLE: OUTLINE
 @mixin button-style--outline($color) {
   $colors: define-colors($color);
 
-  border: $button-outline solid map-get($colors, default);
+  border: $default-button-outline solid map-get($colors, default);
   background-color: transparent;
   color: map-get($colors, default);
   path {
@@ -117,24 +86,24 @@ $button-muted-shade: map-get($shilp-button-defaults, "muted-shade");
   }
 }
 
+//---------- STYLE: MUTED
 @mixin button-style--muted($color) {
   $colors: define-colors($color);
-  @if ($color!= "light" and $color!= "dark" and $color!= "grey") {
-    background-color: map-get($colors, muted);
-    color: map-get($colors, default);
+  background-color: map-get($colors, muted);
+  color: map-get($colors, default);
+  path {
+    fill: map-get($colors, default);
+  }
+  &:hover:not(:disabled) {
+    background-color: map-get($colors, default);
+    color: map-get($colors, text);
     path {
-      fill: map-get($colors, default);
-    }
-    &:hover:not(:disabled) {
-      background-color: map-get($colors, default);
-      color: map-get($colors, text);
-      path {
-        fill: map-get($colors, text);
-      }
+      fill: map-get($colors, text);
     }
   }
 }
 
+//---------- STYLE: TRANSPARENT
 @mixin button-style--trn($color) {
   $colors: define-colors($color);
 
@@ -152,12 +121,27 @@ $button-muted-shade: map-get($shilp-button-defaults, "muted-shade");
   }
 }
 
+//---------- STYLE: GRADIENT
 @mixin button-style--gradient($color) {
   @if (map-has-key($shilp-gradients, $color)) {
     background: gradient($color);
   }
 }
 
+//---------- STYLE: TAB
+@mixin button-style--tab($color) {
+  $colors: define-colors($color);
+  &.button--active {
+    path {
+      fill: map-get($colors, default);
+    }
+    &:after {
+      background-color: map-get($colors, default);
+    }
+  }
+}
+
+//---------- STYLE: SWITCHER
 @mixin button-style($style, $color) {
   @if $style== "solid" {
     @include button-style--solid($color);
@@ -176,58 +160,36 @@ $button-muted-shade: map-get($shilp-button-defaults, "muted-shade");
     @if mixin-exists(extend--button-style--gradient) {
       @include extend--button-style--gradient();
     }
+  } //
+  @else if $style== "tab" {
+    @include button-style--tab($color);
   }
 }
 
-// SHAPES
-@mixin button-shape--rectangle {
-  border-radius: 0;
-}
-@mixin button-shape--rounded {
-  border-radius: 4px;
-}
-@mixin button-shape--pill($size) {
-  border-radius: 9999px;
-}
+//---------- SHAPES
+//---------- SHAPE: SQUARE
 @mixin button-shape--square($size) {
   height: --input-size($size);
   width: --input-size($size);
-  padding: 0 !important;
-  justify-content: center;
-  .button__icon {
-    margin: 0;
-  }
 }
+
+//---------- SHAPE: CIRCLE
 @mixin button-shape--circle($size) {
   height: --input-size($size);
   width: --input-size($size);
-  padding: 0 !important;
-  border-radius: 50%;
-  justify-content: center;
-  .button__icon {
-    margin: 0;
-  }
 }
 
+//---------- SHAPE: SWITCHER
 @mixin button-shape($shape, $size) {
-  @if $shape== "rectangle" {
-    @include button-shape--rectangle;
-  } //
-  @else if $shape== "rounded" {
-    @include button-shape--rounded;
-  } //
-  @else if $shape== "pill" {
-    @include button-shape--pill($size);
-  } //
-  @else if $shape== "square" {
+  @if $shape== "square" {
     @include button-shape--square($size);
   } //
   @else if $shape== "circle" {
     @include button-shape--circle($size);
-  }
+  } //
 }
 
-// SIZES
+//----------  SIZES
 // Uses $shilp-input-sizes map to define sizes
 @mixin button-size($size) {
   padding: 0px --space($size);
@@ -241,39 +203,9 @@ $button-muted-shade: map-get($shilp-button-defaults, "muted-shade");
   }
 }
 
-// ALIGNMENT
-@mixin button-alignment--left {
-  padding-left: 0;
-  justify-content: flex-start;
-  .button__icon {
-    justify-content: flex-end;
-    margin-right: --space(xs);
-  }
-}
-@mixin button-alignment--right {
-  padding-right: 0;
-  flex-direction: row-reverse;
-  justify-content: space-between;
-  .button__icon {
-    justify-content: flex-start;
-    margin-left: --space(xs);
-    margin-right: 0;
-  }
-}
-
-@mixin button-alignment($alignment, $size) {
-  .button__icon {
-    width: --input-size($size);
-  }
-  @if $alignment== "left" {
-    @include button-alignment--left;
-  } //
-  @else if $alignment== "right" {
-    @include button-alignment--right;
-  } //
-}
-
-// Default .button rules.
+//--------------------------------------------------
+// CSS BLOCK & ELEMENTS
+//--------------------------------------------------
 .button {
   @include button--reset;
   display: inline-flex;
@@ -283,7 +215,6 @@ $button-muted-shade: map-get($shilp-button-defaults, "muted-shade");
   text-decoration: none;
   line-height: 1;
   justify-content: center;
-  font-weight: --font-weight(bold);
   vertical-align: top;
   &:hover {
     text-decoration: none;
@@ -293,10 +224,15 @@ $button-muted-shade: map-get($shilp-button-defaults, "muted-shade");
     opacity: 0.8;
   }
 
-  @include button-size($button-size);
-  @include button-shape($button-shape, $button-size);
-  //@include button-style($button-style, $button-color);
+  // Include default button size
+  @include button-size($default-button-size);
 
+  //TODO: Make this better!
+  @if ($default-button-shape== "rounded") {
+    border-radius: 4px;
+  }
+
+  // Button in loading state
   &.loader {
     span,
     .button__icon {
@@ -312,98 +248,101 @@ $button-muted-shade: map-get($shilp-button-defaults, "muted-shade");
   margin-right: --space(xs);
 }
 
-//BUTTONS
-.buttons {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.buttons--stack {
-  flex-direction: column;
-  .button {
-    width: 100%;
-  }
-}
-
-//BUTTONS GROUPED
-.buttons--group {
-  > .button:not(:first-child):not(:last-child),
-  > .choice:not(:first-child):not(:last-child) .button {
-    border-radius: 0;
-  }
-
-  &:not(.buttons--stack) {
-    > .button:first-child,
-    > .choice:first-child .button {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-
-    > .button:last-child,
-    > .choice:last-child .button {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-    }
-
-    > .button + .button,
-    > .choice + .choice .button {
-      border-left: none;
-    }
-  }
-
-  &.buttons--stack {
-    > .button:first-child,
-    > .choice:first-child .button {
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-    > .button:last-child,
-    > .choice:first-child .button {
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-    }
-    > .button + .button,
-    > .choice + .choice .button {
-      border-top: none;
-    }
-  }
-}
-
-//SIMPLE MODIFIERS
-.button--loading {
-  cursor: wait;
-}
+//--------------------------------------------------
+// MODIFIERS
+//--------------------------------------------------
 .button--fluid {
   width: 100%;
 }
-
-// COLORS CLASSES
-// Generates classes for button colors.
-// Uses default style value.
-@each $color in $button-colors {
-  .button--#{$color} {
-    @include button-style($button-style, $color);
+// ALIGNMENT CLASSES
+.button--left {
+  justify-content: flex-start;
+  .button__icon {
+    margin-right: --space(xs);
+  }
+}
+.button--right {
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  .button__icon {
+    margin-left: --space(xs);
+    margin-right: 0;
   }
 }
 
-// STYLE & COLOR CLASSES
+//----------  COLORS
+// Generates classes for button colors.
+// Uses default style value.
+@each $color, $value in $button-colors {
+  .button--#{$color} {
+    @include button-style($default-button-style, $color);
+  }
+}
+
+//----------  STYLE & COLOR CLASSES
 // Generates classes for button styles & colors.
 @each $style in $button-styles {
-  @each $color in $button-colors {
+  @each $color, $value in $shilp-colors {
     .button--#{$color}.button--#{$style} {
       @include button-style($style, $color);
     }
   }
 }
+//---------- STYLE: TAB
+// Default Rules
+@if (index($button-styles, "tab")) {
+  .button--tab {
+    position: relative;
+    &:after {
+      content: "";
+      @include position(absolute, auto, 0, 0, 0);
+      height: 2px;
+    }
+    color: --color(grey);
+    background-color: transparent;
+    path {
+      fill: --color(grey, light);
+    }
+    &:hover:not(:disabled) {
+      background-color: transparent;
+      &:not(.button--active):after {
+        background-color: --color(grey, lighter);
+      }
+    }
+    &.button--active {
+      color: --color(black);
+    }
+  }
+}
 
-// SHAPE CLASSES
+//----------  SHAPES
 // Generates classes for button shapes.
 // Users default size value.
 @each $shape in $button-shapes {
-  .button--#{$shape} {
-    @include button-shape($shape, $button-size);
+  @if mixin-exists(button-shape--#{$shape}) {
+    .button--#{$shape} {
+      @include button-shape($shape, $default-button-size);
+    }
   }
+}
+// Default styles
+.button--square,
+.button--circle {
+  padding: 0 !important;
+  justify-content: center;
+  .button__icon {
+    margin: 0;
+  }
+}
+
+.button--rectangle {
+  border-radius: 0;
+}
+.button--rounded {
+  border-radius: 4px;
+}
+.button--pill {
+  border-radius: 9999px;
 }
 
 // SIZE CLASSES
@@ -423,22 +362,6 @@ $button-muted-shade: map-get($shilp-button-defaults, "muted-shade");
       .button--#{$shape}.button--#{$size} {
         @include button-shape($shape, $size);
       }
-    }
-  }
-}
-
-// ALIGNMENT CLASSES
-// Uses default Button Size
-@each $align in $button-alignments {
-  .button--#{$align} {
-    @include button-alignment($align, $button-size);
-  }
-}
-
-@each $align in $button-alignments {
-  @each $size, $value in $shilp-input-sizes {
-    .button--#{$align}.button--#{$size} {
-      @include button-alignment($align, $size);
     }
   }
 }

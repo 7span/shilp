@@ -1,6 +1,6 @@
 // DEFAULTS
-$shilp-form-defaults: () !default;
-$shilp-form-defaults: map-merge(
+$shilp-field-defaults: () !default;
+$shilp-field-defaults: map-merge(
   (
     "radius": 3px,
     "size": "md",
@@ -13,14 +13,14 @@ $shilp-form-defaults: map-merge(
       info
     )
   ),
-  $shilp-form-defaults
+  $shilp-field-defaults
 );
 
-$form-radius: map-get($shilp-form-defaults, "radius");
-$form-size: map-get($shilp-form-defaults, "size");
-$form-border-width: map-get($shilp-form-defaults, "border-width");
-$form-states: map-get($shilp-form-defaults, "states");
-$form-border-color: map-get($shilp-form-defaults, "border-color");
+$field-radius: map-get($shilp-field-defaults, "radius");
+$field-size: map-get($shilp-field-defaults, "size");
+$field-border-width: map-get($shilp-field-defaults, "border-width");
+$field-states: map-get($shilp-field-defaults, "states");
+$field-border-color: map-get($shilp-field-defaults, "border-color");
 
 //CUSTOM SELECT
 $select-arrow-color: map-deep-get($shilp-colors, "grey", "default");
@@ -67,8 +67,8 @@ $select-arrow: m-icon("M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58
 }
 
 // FIELD STATES
-@mixin form-states {
-  @each $state in $form-states {
+@mixin field-states {
+  @each $state in $field-states {
     &.field--#{$state} {
       //Input, Select, Textarea
       .field-block {
@@ -90,20 +90,12 @@ $select-arrow: m-icon("M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58
   }
 }
 
-@mixin form-field-defaults {
-  font-family: --font-family(content);
-  color: #000;
-  width: 100%;
-  outline: 0;
-  padding: 0 --space(xs);
-}
-
 // FIELD
 .field {
   margin-bottom: --space(md);
-  @include field-size($form-size);
+  @include field-size($field-size);
   @include field-sizes;
-  @include form-states;
+  @include field-states;
 
   .field {
     margin-bottom: 0;
@@ -124,9 +116,9 @@ $select-arrow: m-icon("M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58
 
 //THE BLOCK CONTAINING INPUT
 .field-block {
-  @include form-field-defaults;
-  border: $form-border-width solid $form-border-color;
-  border-radius: $form-radius;
+  @include field-defaults;
+  border: $field-border-width solid $field-border-color;
+  border-radius: $field-radius;
   min-width: 0px; //When .field__group is used, the input becomes flex child.
   font-size: --font-size(h5);
   &:focus {
@@ -154,13 +146,13 @@ $select-arrow: m-icon("M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58
   > * {
     border-radius: 0;
     &:first-child {
-      border-radius: $form-radius 0 0 $form-radius;
+      border-radius: $field-radius 0 0 $field-radius;
     }
     &:last-child {
-      border-radius: 0 $form-radius $form-radius 0;
+      border-radius: 0 $field-radius $field-radius 0;
     }
     &:only-child {
-      border-radius: $form-radius;
+      border-radius: $field-radius;
     }
   }
   > .field {
@@ -174,7 +166,7 @@ $select-arrow: m-icon("M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58
 .field__before,
 .field__after {
   flex: 0 0 auto;
-  border: $form-border-width solid $form-border-color;
+  border: $field-border-width solid $field-border-color;
 
   display: flex;
   justify-content: center;
@@ -206,71 +198,5 @@ $select-arrow: m-icon("M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58
   }
   100% {
     content: "....";
-  }
-}
-
-//SELECT
-.select {
-  position: relative;
-  padding: 0;
-  select {
-    @include form-field-defaults;
-    border-radius: $form-radius - 1;
-    border: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    font-size: --font-size(h5);
-    background-color: transparent;
-    padding-right: 32px;
-    z-index: 2;
-    height: 100%;
-    vertical-align: top;
-    position: relative;
-    outline: none;
-  }
-  &:after {
-    content: "";
-    @include position(absolute, 0, 0, 0, auto);
-    width: 32px;
-    height: 100%;
-    display: block;
-    background-image: url($select-arrow);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 24px;
-  }
-  &.loader {
-    &:after {
-      background-image: none;
-    }
-  }
-}
-
-//RADIO & CHECKBOX
-.choice {
-  display: flex;
-  align-items: center;
-  > input {
-    margin: 0;
-  }
-  > label {
-    margin-bottom: 0;
-    margin-left: --space(xs);
-    color: #000;
-    cursor: pointer;
-    line-height: 1;
-  }
-}
-
-.choice--custom {
-  height: auto;
-  line-height: initial;
-  input {
-    position: absolute;
-    z-index: -1;
-    opacity: 0;
-  }
-  > label {
-    margin-left: 0;
   }
 }

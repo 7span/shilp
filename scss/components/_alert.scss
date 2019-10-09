@@ -1,18 +1,7 @@
 $shilp-alert-defaults: () !default;
 $shilp-alert-defaults: map-merge(
   (
-    "colors": (
-      primary,
-      secondary,
-      accent,
-      light,
-      dark,
-      "grey",
-      info,
-      success,
-      danger,
-      warning
-    ),
+    "colors": shilp-colors(),
     "styles": (
       trn,
       solid,

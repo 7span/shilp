@@ -15,14 +15,30 @@ $utility-classes: (
       "flex-end",
       "center"
     )
+  ),
+  w: (
+    rule: "width",
+    values: (
+      100: "100%"
+    )
+  ),
+  h: (
+    rule: "height",
+    values: (
+      100: "100%"
+    )
   )
 );
 @each $utility, $config in $utility-classes {
   $values: map-get($config, "values");
   $rule: map-get($config, "rule");
-  @each $value in $values {
-    .#{$utility}--#{$value} {
-      #{$rule}: #{$value};
+  @each $key, $value in $values {
+    .#{$utility}--#{$key} {
+      @if ($value) {
+        #{$rule}: #{$value};
+      } @else {
+        #{$rule}: #{$key};
+      }
     }
   }
 }

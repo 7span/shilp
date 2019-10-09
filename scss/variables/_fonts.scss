@@ -4,13 +4,13 @@ $shilp-fonts: map-merge(
   (
     heading: "",
     content: "",
-    code: '"Courier New", Courier, monospace'
+    code: "monospace"
   ),
   $shilp-fonts
 );
 
 $shilp-font-families: (
-  system: $system-fonts,
+  system: map-get($shilp-config, system-fonts),
   heading: font-with-fallback(map-get($shilp-fonts, heading)),
   content: font-with-fallback(map-get($shilp-fonts, content)),
   code: font-with-fallback(map-get($shilp-fonts, code))

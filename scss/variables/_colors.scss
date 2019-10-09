@@ -76,11 +76,23 @@ $shilp-colors: map-merge(
       darker: #37474f,
       darkest: #263238
     ),
-    "white": (
-      default: #ffffff
+    "light": (
+      lightest: #ffffff,
+      lighter: #ffffff,
+      light: #ffffff,
+      default: #ffffff,
+      dark: #ffffff,
+      darker: #ffffff,
+      darkest: #ffffff
     ),
-    "black": (
-      default: #000000
+    "dark": (
+      lightest: #000000,
+      lighter: #000000,
+      light: #000000,
+      default: #000000,
+      dark: #000000,
+      darker: #000000,
+      darkest: #000000
     )
   ),
   $shilp-colors
@@ -122,6 +134,14 @@ $shilp-text-colors: map-merge(
     "grey": (
       dark: #ffffff,
       light: #263238
+    ),
+    "light": (
+      dark: #000000,
+      light: #000000
+    ),
+    "dark": (
+      dark: #ffffff,
+      light: #ffffff
     )
   ),
   $shilp-text-colors
@@ -134,12 +154,12 @@ $shilp-gradients: () !default;
 $shilp-gradients: map-merge(
   (
     "primary": (
-      #9075ee,
-      #71a9de
+      #bd00cc,
+      #f67f29
     ),
     "secondary": (
-      #f487c1,
-      #fe8d7d
+      #a745ef,
+      #44bffd
     )
   ),
   $shilp-gradients

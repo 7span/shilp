@@ -1,0 +1,36 @@
+.select {
+  position: relative;
+  padding: 0;
+  select {
+    @include field-defaults;
+    //TODO: Create a centralized fields and inputs config
+    border-radius: map-get($shilp-field-defaults, "radius") - 1;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-size: --font-size(h5);
+    background-color: transparent;
+    padding-right: 32px;
+    z-index: 2;
+    height: 100%;
+    vertical-align: top;
+    position: relative;
+    outline: none;
+  }
+  &:after {
+    content: "";
+    @include position(absolute, 0, 0, 0, auto);
+    width: 32px;
+    height: 100%;
+    display: block;
+    background-image: url($select-arrow);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 24px;
+  }
+  &.loader {
+    &:after {
+      background-image: none;
+    }
+  }
+}
