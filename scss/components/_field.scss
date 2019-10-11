@@ -6,6 +6,7 @@ $shilp-field-defaults: map-merge(
     "size": "md",
     "border-width": 1px,
     "border-color": --color(grey, light),
+    "optional-text": "(Optional)",
     "states": (
       danger,
       warning,
@@ -36,7 +37,8 @@ $select-arrow: m-icon("M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58
     }
   }
 
-  .field-block {
+  .field-block,
+  .field-block > * {
     font-size: map-get($shilp-input-font-sizes, $size);
   }
   textarea.field-block {
@@ -105,6 +107,7 @@ $select-arrow: m-icon("M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58
     display: flex;
     margin-bottom: 4px;
     color: --color(grey, dark);
+    align-items: center;
   }
 
   > small {
@@ -198,5 +201,44 @@ $select-arrow: m-icon("M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58
   }
   100% {
     content: "....";
+  }
+}
+
+.file {
+  position: relative;
+  input[type="file"],
+  input[type="text"] {
+    @include position(absolute, 0, 0, 0, 0);
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: $field-radius;
+    @include field-defaults;
+  }
+  input[type="file"] {
+    z-index: 2;
+    opacity: 0;
+    cursor: pointer;
+  }
+  input[type="text"] {
+  }
+  button {
+    position: absolute;
+    right: -1px;
+    top: -1px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
+.field--optional {
+  > label {
+    &:after {
+      content: map-get($shilp-field-defaults, "optional-text");
+      font-style: italic;
+      margin-left: --space(xs);
+      font-size: --font-size(h6);
+      color: --color(grey);
+    }
   }
 }
