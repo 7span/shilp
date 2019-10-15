@@ -70,7 +70,7 @@ $loader-thickness: var(--loader--thickness);
   --loader--base-color: rgba(0, 0, 0, 0.2);
 }
 
-//---------- LOADER
+//---------- SIZE
 @each $key, $value in $shilp-input-icon-sizes {
   .loader--#{$key} {
     @include loader--size($key);

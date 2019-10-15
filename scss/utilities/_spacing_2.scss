@@ -1,0 +1,52 @@
+$space-directions: (
+  t: "top",
+  b: "bottom",
+  l: "left",
+  r: "right"
+);
+
+@mixin spacing($breakpoint, $initial, $property) {
+  //All Directions
+  @each $space, $value in $shilp-spaces {
+    $className: breakpoint-class($breakpoint, #{$initial}--#{$space});
+    .#{$className} {
+      #{$property}: --space($space) !important;
+    }
+  }
+
+  //Left,Right,Top,Bottom
+  @each $direction-initial, $direction in $space-directions {
+    @each $space, $value in $shilp-spaces {
+      $className: breakpoint-class($breakpoint, #{$initial}#{$direction-initial}--#{$space});
+      .#{$className} {
+        #{$property}-#{$direction}: --space($space) !important;
+      }
+    }
+  }
+
+  //X & Y
+  @each $space, $value in $shilp-spaces {
+    $className: breakpoint-class($breakpoint, #{$initial}x--#{$space});
+    .#{$className} {
+      #{$property}-left: --space($space) !important;
+      #{$property}-right: --space($space) !important;
+    }
+
+    $className: breakpoint-class($breakpoint, #{$initial}y--#{$space});
+    .#{$className} {
+      #{$property}-top: --space($space) !important;
+      #{$property}-bottom: --space($space) !important;
+    }
+  }
+}
+
+@include spacing("phone", "p", "padding");
+@include spacing("phone", "m", "margin");
+
+//Media Query
+@each $breakpoint, $value in $shilp-breakpoints {
+  @media only screen and (min-width: $value) {
+    @include spacing($breakpoint, "p", "padding");
+    @include spacing($breakpoint, "m", "margin");
+  }
+}

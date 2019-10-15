@@ -1,0 +1,85 @@
+$space-directions: (
+  t: "top",
+  b: "bottom",
+  l: "left",
+  r: "right"
+);
+
+@mixin spacing-rules($property-initial, $property) {
+  //All Directions
+  $className: '[class^="#{$property-initial}--"],[class*=" #{$property-initial}--"]';
+  $varName: --#{$property-initial};
+  #{$className} {
+    #{$property}: var(#{$varName}) !important;
+  }
+
+  //X
+  $className: '[class^="#{$property-initial}x--"],[class*=" #{$property-initial}x--"]';
+  $varName: --#{$property-initial}x;
+  #{$className} {
+    #{$property}-left: var(#{$varName}) !important;
+    #{$property}-right: var(#{$varName}) !important;
+  }
+
+  //Y
+  $className: '[class^="#{$property-initial}y--"],[class*=" #{$property-initial}y--"]';
+  $varName: --#{$property-initial}y;
+  #{$className} {
+    #{$property}-top: var(#{$varName}) !important;
+    #{$property}-bottom: var(#{$varName}) !important;
+  }
+
+  //T,B,L,R
+  @each $direction-initial, $direction in $space-directions {
+    $className: '[class^="#{$property-initial}#{$direction-initial}--"],[class*=" #{$property-initial}#{$direction-initial}--"]';
+    $varName: --#{$property-initial}#{$direction-initial};
+    #{$className} {
+      #{$property}-#{$direction}: var(#{$varName}) !important;
+    }
+  }
+}
+
+@mixin spacing-sizes($breakpoint, $property-initial, $property) {
+  @each $space, $value in $shilp-spaces {
+    $size: --space($space);
+
+    //All Directions
+    $className: breakpoint-class($breakpoint, #{$property-initial}--#{$space});
+    .#{$className} {
+      --#{$property-initial}: #{$size};
+    }
+
+    //X
+    $className: breakpoint-class($breakpoint, #{$property-initial}x--#{$space});
+    .#{$className} {
+      --#{$property-initial}x: #{$size};
+    }
+
+    //Y
+    $className: breakpoint-class($breakpoint, #{$property-initial}y--#{$space});
+    .#{$className} {
+      --#{$property-initial}y: #{$size};
+    }
+
+    //T,B,L,R
+    @each $direction-initial, $direction in $space-directions {
+      $className: breakpoint-class($breakpoint, #{$property-initial}#{$direction-initial}--#{$space});
+      .#{$className} {
+        --#{$property-initial}#{$direction-initial}: #{$size};
+      }
+    }
+  }
+}
+
+@include spacing-rules("p", "padding");
+@include spacing-rules("m", "margin");
+@include spacing-sizes("phone", "p", "padding");
+@include spacing-sizes("phone", "m", "margin");
+
+//Media Query
+@each $breakpoint, $value in $shilp-breakpoints {
+  @media only screen and (min-width: $value) {
+    @include spacing-sizes($breakpoint, "p", "padding");
+    @include spacing-sizes($breakpoint, "m", "margin");
+  }
+}
