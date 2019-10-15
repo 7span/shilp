@@ -3,6 +3,10 @@
 .choice {
   display: flex;
   align-items: center;
+  &:not(.choice--custom) {
+    height: var(--field--size);
+    line-height: var(--field--size);
+  }
   > input {
     margin: 0;
   }

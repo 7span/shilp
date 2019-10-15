@@ -1,0 +1,25 @@
+.file {
+  position: relative;
+  input[type="file"],
+  input[type="text"] {
+    @include field-defaults;
+    @include position(absolute, 0, 0, 0, 0);
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: var(--field--radius);
+  }
+  input[type="file"] {
+    z-index: 2;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  button {
+    position: absolute;
+    right: -1px;
+    top: -1px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}

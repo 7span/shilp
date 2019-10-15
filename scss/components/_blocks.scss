@@ -1,54 +1,55 @@
+//--------------------------------------------------
+// CONFIGURATION
+//--------------------------------------------------
+
+//---------- Config: Via SCSS Maps
 $shilp-blocks-defaults: () !default;
 $shilp-blocks-defaults: map-merge(
   (
     "gaps": $shilp-spaces,
-    "grids": 12,
-    "gap": sm
+    "grids": 12
   ),
   $shilp-blocks-defaults
 );
 
+//---------- Local Variables
 $blocks-grids: map-get($shilp-blocks-defaults, "grids");
-$blocks-gap: map-get($shilp-blocks-defaults, "gap");
 $blocks-gaps: map-get($shilp-blocks-defaults, "gaps");
+
+//--------------------------------------------------
+// MIXINS
+//--------------------------------------------------
 
 // RESPONSIVE BLOCKS GAP
 // Generates the responsive classes based on breakpoint. with all the gap values.
-@mixin responsive-blocks-gap($breakpoint) {
+@mixin blocks-gap($breakpoint) {
   @each $gap, $value in $blocks-gaps {
     $className: breakpoint-class($breakpoint, blocks--#{$gap});
-    &.#{$className} {
-      @include blocks-gap($gap);
+    .#{$className} {
+      --gap: #{$value};
     }
-  }
-}
-
-// BLOCKS GAP
-@mixin blocks-gap($gap) {
-  $negetive-gap: calc(-1 * #{--space($gap)});
-  margin-left: $negetive-gap;
-  margin-right: $negetive-gap;
-  > .block {
-    padding-left: --space($gap);
-    padding-right: --space($gap);
   }
 }
 
 // BLOCK SIZE
 // Defines the block size based on breakpoint and a class name.
 @mixin block-size($breakpoint) {
+  // 1 - 12
   @for $i from 1 through $blocks-grids {
     $className: breakpoint-class($breakpoint, block--#{$i});
     .#{$className} {
-      flex: 0 0 (100% / $blocks-grids) * $i;
-      max-width: (100% / $blocks-grids) * $i;
+      --size: #{(100% / $blocks-grids) * $i};
     }
   }
+
+  // Auto
   $autoClassName: breakpoint-class($breakpoint, block--auto);
   .#{$autoClassName} {
     flex-grow: 1;
     flex-basis: 0;
   }
+
+  // Fix
   $fixClassName: breakpoint-class($breakpoint, block--fix);
   .#{$fixClassName} {
     flex: none;
@@ -57,29 +58,35 @@ $blocks-gaps: map-get($shilp-blocks-defaults, "gaps");
   }
 }
 
-// BLOCKS RULES
+//--------------------------------------------------
+// CSS BLOCK & ELEMENTS
+//--------------------------------------------------
+
 .blocks {
+  --gap: 0;
   display: flex;
   flex-wrap: wrap;
-  //This will set a default gap rules.
-  @include blocks-gap($blocks-gap);
-  @include responsive-blocks-gap("phone");
-  &.is-middle {
-    align-items: center;
+  margin-left: calc(-1 * var(--gap));
+  margin-right: calc(-1 * var(--gap));
+  > .block {
+    padding-left: var(--gap);
+    padding-right: var(--gap);
   }
 }
 .block {
-  max-width: 100%;
-  width: 100%;
+  --size: 100%;
+  max-width: var(--size);
+  width: var(--size);
 }
 @include block-size("phone");
+@include blocks-gap("phone");
 
+//--------------------------------------------------
 // MEDIA QUERY
+//--------------------------------------------------
 @each $breakpoint, $value in $shilp-breakpoints {
   @media only screen and (min-width: $value) {
-    .blocks {
-      @include responsive-blocks-gap($breakpoint);
-    }
+    @include blocks-gap($breakpoint);
     @include block-size($breakpoint);
   }
 }

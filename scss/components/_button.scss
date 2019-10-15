@@ -2,6 +2,7 @@
 // CONFIGURATION
 //--------------------------------------------------
 
+//---------- Config: Via SCSS Maps
 $shilp-button-defaults: () !default;
 $shilp-button-defaults: map-merge(
   (
@@ -17,23 +18,32 @@ $shilp-button-defaults: map-merge(
     "style": "solid",
     "shape": "rounded",
     "size": "md",
-    "outline": 1px,
     "muted-shade": "lightest",
     "hover-shade": "darker"
   ),
   $shilp-button-defaults
 );
 
-$default-button-shape: map-get($shilp-button-defaults, "shape");
-$default-button-size: map-get($shilp-button-defaults, "size");
-$default-button-style: map-get($shilp-button-defaults, "style");
-$default-button-outline: map-get($shilp-button-defaults, "outline");
+//---------- Config: Via CSS Vars
+$shilp-button-vars: () !default;
+$shilp-button-vars: map-merge(
+  (
+    "outline": 1px
+  ),
+  $shilp-button-vars
+);
 
+//---------- Local Variables
 $button-shapes: (rectangle, square, rounded, pill, circle);
+$button-sizes: $shilp-input-sizes;
 $button-colors: map-get($shilp-button-defaults, "colors");
 $button-styles: map-get($shilp-button-defaults, "styles");
 $button-hover-shade: map-get($shilp-button-defaults, "hover-shade");
 $button-muted-shade: map-get($shilp-button-defaults, "muted-shade");
+$default-button-shape: map-get($shilp-button-defaults, "shape");
+$default-button-size: map-get($shilp-button-defaults, "size");
+$default-button-style: map-get($shilp-button-defaults, "style");
+$default-button-outline: var(--button--outline);
 
 //--------------------------------------------------
 // FUNCTIONS
@@ -190,7 +200,6 @@ $button-muted-shade: map-get($shilp-button-defaults, "muted-shade");
 }
 
 //----------  SIZES
-// Uses $shilp-input-sizes map to define sizes
 @mixin button-size($size) {
   padding: 0px --space($size);
   height: --input-size($size);
@@ -207,6 +216,7 @@ $button-muted-shade: map-get($shilp-button-defaults, "muted-shade");
 // CSS BLOCK & ELEMENTS
 //--------------------------------------------------
 .button {
+  @include component-vars("button", $shilp-button-vars);
   @include button--reset;
   display: inline-flex;
   align-items: center;
@@ -348,7 +358,7 @@ $button-muted-shade: map-get($shilp-button-defaults, "muted-shade");
 // SIZE CLASSES
 // Generates classes for button sizes.
 // Users default size value.
-@each $size, $value in $shilp-input-sizes {
+@each $size, $value in $button-sizes {
   .button--#{$size} {
     @include button-size($size);
   }
@@ -358,7 +368,7 @@ $button-muted-shade: map-get($shilp-button-defaults, "muted-shade");
 @each $shape in $button-shapes {
   //These shapes do not depend on sizes
   @if ($shape!= "rectangle" and $shape!= "rounded") {
-    @each $size, $value in $shilp-input-sizes {
+    @each $size, $value in $button-sizes {
       .button--#{$shape}.button--#{$size} {
         @include button-shape($shape, $size);
       }

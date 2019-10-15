@@ -1,10 +1,13 @@
+//CUSTOM SELECT
+$select-arrow-color: map-deep-get($shilp-colors, "grey", "default");
+$select-arrow: m-icon("M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z", $select-arrow-color);
+
 .select {
   position: relative;
   padding: 0;
   select {
     @include field-defaults;
-    //TODO: Create a centralized fields and inputs config
-    border-radius: map-get($shilp-field-defaults, "radius") - 1;
+    border-radius: var(--field--radius);
     border: none;
     -webkit-appearance: none;
     -moz-appearance: none;

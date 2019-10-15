@@ -1,0 +1,16 @@
+//---------- RESETTERS
+// Resets the markup of HTML tags
+
+@mixin button--reset {
+  background: transparent;
+  border: none;
+  outline: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+@mixin ul--reset {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}

@@ -1,12 +1,12 @@
-// DEFAULTS
+//--------------------------------------------------
+// CONFIGURATION
+//--------------------------------------------------
+
+//---------- Config: Via SCSS Maps
 $shilp-field-defaults: () !default;
 $shilp-field-defaults: map-merge(
   (
-    "radius": 3px,
     "size": "md",
-    "border-width": 1px,
-    "border-color": --color(grey, light),
-    "optional-text": "(Optional)",
     "states": (
       danger,
       warning,
@@ -17,87 +17,49 @@ $shilp-field-defaults: map-merge(
   $shilp-field-defaults
 );
 
-$field-radius: map-get($shilp-field-defaults, "radius");
+//---------- Config: Via CSS Vars
+$shilp-field-vars: () !default;
+$shilp-field-vars: map-merge(
+  (
+    "radius": 3px,
+    "border-width": 1px,
+    "border-color": --color(grey, light),
+    "optional-text": '"(Optional)"'
+  ),
+  $shilp-field-vars
+);
+
+//---------- Local Variables
+$field-radius: var(--field--radius);
+$field-border-width: var(--field--border-width);
+$field-border-color: var(--field--border-color);
+$field-optional-text: var(--field--optional-text);
+
 $field-size: map-get($shilp-field-defaults, "size");
-$field-border-width: map-get($shilp-field-defaults, "border-width");
 $field-states: map-get($shilp-field-defaults, "states");
-$field-border-color: map-get($shilp-field-defaults, "border-color");
+$field-sizes: $shilp-input-sizes;
 
-//CUSTOM SELECT
-$select-arrow-color: map-deep-get($shilp-colors, "grey", "default");
-$select-arrow: m-icon("M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z", $select-arrow-color);
+//--------------------------------------------------
+// MIXINS
+//--------------------------------------------------
 
-// FIELD SIZES
+//---------- SIZE
 // Generates the size based on $shilp-input-sizes map
 @mixin field-size($size) {
-  .choice {
-    &:not(.choice--custom) {
-      height: --input-size($size);
-      line-height: --input-size($size);
-    }
-  }
-
-  .field-block,
-  .field-block > * {
-    font-size: map-get($shilp-input-font-sizes, $size);
-  }
-  textarea.field-block {
-    padding: --space(xs);
-  }
-  .field-block:not(textarea) {
-    height: --input-size($size);
-    line-height: --input-size($size);
-  }
-
-  .field__before,
-  .field__after {
-    min-width: --input-size($size);
-  }
-  .field__icon {
-    svg {
-      height: map-get($shilp-input-icon-sizes, $size) !important;
-      width: map-get($shilp-input-icon-sizes, $size) !important;
-    }
-  }
-}
-@mixin field-sizes {
-  @each $size, $value in $shilp-input-sizes {
-    &.field--#{$size} {
-      @include field-size($size);
-    }
-  }
+  --field--size: #{--input-size($size)};
+  --field--font-size: #{map-get($shilp-input-font-sizes, $size)};
+  --field--icon-size: #{map-get($shilp-input-icon-sizes, $size)};
 }
 
-// FIELD STATES
-@mixin field-states {
-  @each $state in $field-states {
-    &.field--#{$state} {
-      //Input, Select, Textarea
-      .field-block {
-        border-color: --color($state);
-        &:focus {
-          box-shadow: inset 0 0 0 3px --color($state, lightest);
-        }
-      }
-      .field__before,
-      .field__after {
-        border-color: --color($state);
-        background-color: --color($state, lightest);
-        color: --color($state, darker);
-      }
-      .field__danger {
-        color: --color($state);
-      }
-    }
-  }
-}
+//--------------------------------------------------
+// CSS BLOCK & ELEMENTS
+//--------------------------------------------------
 
 // FIELD
 .field {
-  margin-bottom: --space(md);
+  @include component-vars("field", $shilp-field-vars);
   @include field-size($field-size);
-  @include field-sizes;
-  @include field-states;
+  margin-bottom: --space(md);
 
   .field {
     margin-bottom: 0;
@@ -123,7 +85,14 @@ $select-arrow: m-icon("M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58
   border: $field-border-width solid $field-border-color;
   border-radius: $field-radius;
   min-width: 0px; //When .field__group is used, the input becomes flex child.
-  font-size: --font-size(h5);
+  font-size: var(--field--font-size);
+  > * {
+    font-size: var(--field--font-size);
+  }
+  &:not(textarea) {
+    height: var(--field--size);
+    line-height: var(--field--size);
+  }
   &:focus {
     box-shadow: inset 0 0 0 3px --color(grey, lightest);
     position: relative;
@@ -133,13 +102,9 @@ $select-arrow: m-icon("M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58
     background-color: --color(grey, lightest);
   }
 }
-.field-block--view {
-  padding-left: 0;
-  padding-right: 0;
-  border: none;
-  > * {
-    margin: 0;
-  }
+
+textarea.field-block {
+  padding: --space(xs);
 }
 
 //GROUP ITEMS
@@ -169,8 +134,8 @@ $select-arrow: m-icon("M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58
 .field__before,
 .field__after {
   flex: 0 0 auto;
+  min-width: var(--field--size);
   border: $field-border-width solid $field-border-color;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -185,60 +150,65 @@ $select-arrow: m-icon("M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58
   border-left: none;
 }
 
-//FIELD LOADING ANIMATION
-@keyframes fieldLoading {
-  0% {
-    content: "";
-  }
-  25% {
-    content: ".";
-  }
-  50% {
-    content: "..";
-  }
-  75% {
-    content: "...";
-  }
-  100% {
-    content: "....";
+.field__icon {
+  svg {
+    height: var(--field--icon-size) !important;
+    width: var(--field--icon-size) !important;
   }
 }
 
-.file {
-  position: relative;
-  input[type="file"],
-  input[type="text"] {
-    @include position(absolute, 0, 0, 0, 0);
-    width: 100%;
-    height: 100%;
-    border: none;
-    border-radius: $field-radius;
-    @include field-defaults;
-  }
-  input[type="file"] {
-    z-index: 2;
-    opacity: 0;
-    cursor: pointer;
-  }
-  input[type="text"] {
-  }
-  button {
-    position: absolute;
-    right: -1px;
-    top: -1px;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+//--------------------------------------------------
+// MODIFIERS
+//--------------------------------------------------
+
+//---------- SIZE
+@each $size, $value in $field-sizes {
+  .field--#{$size} {
+    @include field-size($size);
   }
 }
 
+//---------- STATES
+@each $state in $field-states {
+  .field--#{$state} {
+    //Input, Select, Textarea
+    .field-block {
+      border-color: --color($state);
+      &:focus {
+        box-shadow: inset 0 0 0 3px --color($state, lightest);
+      }
+    }
+    .field__before,
+    .field__after {
+      border-color: --color($state);
+      background-color: --color($state, lightest);
+      color: --color($state, darker);
+    }
+    .field__danger {
+      color: --color($state);
+    }
+  }
+}
+
+//---------- OPTIONAL
 .field--optional {
   > label {
     &:after {
-      content: map-get($shilp-field-defaults, "optional-text");
+      content: $field-optional-text;
       font-style: italic;
       margin-left: --space(xs);
       font-size: --font-size(h6);
       color: --color(grey);
     }
+  }
+}
+
+//---------- VIEW
+.field-block--view {
+  padding-left: 0;
+  padding-right: 0;
+  border: none;
+  > * {
+    margin: 0;
   }
 }

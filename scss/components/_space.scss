@@ -1,28 +1,41 @@
+//--------------------------------------------------
+// CONFIGURATION
+//--------------------------------------------------
+
+//---------- Config: Via SCSS Maps
 $shilp-space-defaults: () !default;
 $shilp-space-defaults: map-merge(
   (
-    "size": xs,
     "sizes": $shilp-spaces
   ),
   $shilp-space-defaults
 );
 
-$space-size: map-get($shilp-space-defaults, "size");
+//---------- Local Variables
 $space-sizes: map-get($shilp-space-defaults, "sizes");
+
+//--------------------------------------------------
+// MIXINS
+//--------------------------------------------------
 
 //SIZES
 // Creates diffrent sizes for spacing
-@mixin space--sizes($breakpoint, $size) {
-  $className: breakpoint-class($breakpoint, space--#{$size});
-  .#{$className} {
-    --size: #{--space($size)};
+@mixin space--sizes($breakpoint) {
+  @each $size, $value in $space-sizes {
+    $className: breakpoint-class($breakpoint, space--#{$size});
+    .#{$className} {
+      --size: #{--space($size)};
+    }
   }
 }
 
+//--------------------------------------------------
+// CSS BLOCK & ELEMENTS
+//--------------------------------------------------
 .space {
+  --size: 0;
   display: inline-flex;
   flex-wrap: wrap;
-  --size: #{--space(#{$space-size})};
   > * {
     margin: 0;
   }
@@ -32,15 +45,13 @@ $space-sizes: map-get($shilp-space-defaults, "sizes");
       margin-right: var(--size);
     }
   }
-  &.space--reverse:not(.space--stack) {
-    > * {
-      flex: 1 1 0; //Makes all the childs same width when wrapped;
-      margin-left: var(--size);
-    }
-  }
 }
 
-//STACKED
+//--------------------------------------------------
+// MODIFIERS
+//--------------------------------------------------
+
+//---------- STACK
 .space--stack {
   flex-direction: column;
   &:not(.space--reverse) {
@@ -55,16 +66,22 @@ $space-sizes: map-get($shilp-space-defaults, "sizes");
   }
 }
 
-// GENERATE SIZES
-@each $size, $value in $space-sizes {
-  @include space--sizes("phone", $size);
+//---------- REVERSE
+.space--reverse:not(.space--stack) {
+  > * {
+    flex: 1 1 0; //Makes all the childs same width when wrapped;
+    margin-left: var(--size);
+  }
 }
 
+//---------- SIZE
+@include space--sizes("phone");
+
+//--------------------------------------------------
 // MEDIA QUERY
+//--------------------------------------------------
 @each $breakpoint, $value in $shilp-breakpoints {
   @media only screen and (min-width: $value) {
-    @each $size, $value in $space-sizes {
-      @include space--sizes($breakpoint, $size);
-    }
+    @include space--sizes($breakpoint);
   }
 }
