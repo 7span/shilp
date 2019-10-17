@@ -1,0 +1,71 @@
+$border-directions: (
+  t: "top",
+  b: "bottom",
+  l: "left",
+  r: "right"
+);
+
+@mixin border-rules() {
+  //All Directions
+  $className: '[class^="b--"],[class*=" b--"]';
+  #{$className} {
+    border: 1px solid var(--b--color) !important;
+  }
+
+  //X
+  $className: '[class^="bx--"],[class*=" bx--"]';
+  #{$className} {
+    border-left: 1px solid var(--bx--color) !important;
+    border-right: 1px solid var(--bx--color) !important;
+  }
+
+  //Y
+  $className: '[class^="by--"],[class*=" by--"]';
+  #{$className} {
+    border-top: 1px solid var(--by--color) !important;
+    border-bottom: 1px solid var(--by--color) !important;
+  }
+
+  //T,B,L,R
+  @each $direction-initial, $direction in $border-directions {
+    $className: '[class^="b#{$direction-initial}--"],[class*=" b#{$direction-initial}--"]';
+    #{$className} {
+      border-#{$direction}: 1px solid var(--b#{$direction-initial}--color) !important;
+    }
+  }
+}
+
+@mixin border-colors() {
+  @each $shade-name, $value in map-get($shilp-colors, "grey") {
+    $shade: --color(grey, $shade-name);
+
+    //All Directions
+    $className: b--#{$shade-name};
+    .#{$className} {
+      --b--color: #{$shade};
+    }
+
+    //X
+    $className: bx--#{$shade-name};
+    .#{$className} {
+      --bx--color: #{$shade};
+    }
+
+    //Y
+    $className: by--#{$shade-name};
+    .#{$className} {
+      --by--color: #{$shade};
+    }
+
+    //T,B,L,R
+    @each $direction-initial, $direction in $border-directions {
+      $className: b#{$direction-initial}--#{$shade-name};
+      .#{$className} {
+        --b#{$direction-initial}--color: #{$shade};
+      }
+    }
+  }
+}
+
+@include border-rules();
+@include border-colors();

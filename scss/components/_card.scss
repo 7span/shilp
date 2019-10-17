@@ -2,14 +2,11 @@
 // CONFIGURATION
 //--------------------------------------------------
 
+//---------- Config: Via SCSS Maps
 $shilp-card-defaults: () !default;
 $shilp-card-defaults: map-merge(
   (
-    "border-color": --color(grey, lighter),
-    "border-radius": md,
-    "size": 0,
     "sizes": (
-      0,
       xs,
       sm,
       md,
@@ -20,22 +17,32 @@ $shilp-card-defaults: map-merge(
   $shilp-card-defaults
 );
 
+//---------- Config: Via CSS Vars
+$shilp-card-vars: () !default;
+$shilp-card-vars: map-merge(
+  (
+    "border-size": 1px,
+    "border-color": --color(grey, lighter),
+    "radius": --border-radius(md)
+  ),
+  $shilp-card-vars
+);
+
+//---------- Local Variables
 $card-sizes: map-get($shilp-card-defaults, "sizes");
-$card-border-color: map-get($shilp-card-defaults, "border-color");
-$card-radius: map-get($shilp-card-defaults, "border-radius");
-$card-size: map-get($shilp-card-defaults, "size");
+$card-border-color: var(--card--border-color);
+$card-radius: var(--card--radius);
 
 //--------------------------------------------------
 // MIXINS
 //--------------------------------------------------
 
 //---------- SIZE
-// Uses CSS Variable to define padding which considerably creates smaller CSS size
-@mixin card--size($breakpoint) {
+@mixin card--card--size($breakpoint) {
   @each $size in $card-sizes {
     $className: breakpoint-class($breakpoint, card--#{$size});
     .#{$className} {
-      --size: #{--space($size)};
+      --card--size: #{--space($size)};
     }
   }
 }
@@ -45,21 +52,23 @@ $card-size: map-get($shilp-card-defaults, "size");
 //--------------------------------------------------
 
 .card {
-  --size: #{$card-size};
+  @include component-vars("card", $shilp-card-vars);
+  --card--size: 0;
   display: inline-block;
   background-clip: padding-box;
+  background-color: --color(light);
   > * {
-    background-color: #fff;
-    padding-left: var(--size);
-    padding-right: var(--size);
+    background-color: --color(light);
+    padding-left: var(--card--size);
+    padding-right: var(--card--size);
     &:first-child {
-      padding-top: var(--size);
+      padding-top: var(--card--size);
     }
     &:last-child {
-      padding-bottom: var(--size);
+      padding-bottom: var(--card--size);
     }
     &:only-child {
-      padding: var(--size);
+      padding: var(--card--size);
     }
   }
 }
@@ -69,43 +78,49 @@ $card-size: map-get($shilp-card-defaults, "size");
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--size);
+  padding: var(--card--size);
   //When the header is not first child,
   // Reduce the horizontal space for better UI
   &:not(:first-child) {
-    padding-bottom: calc(var(--size) * 4 / 6);
+    padding-bottom: calc(var(--card--size) * 4 / 6);
   }
 }
 .card__title {
   margin: 0;
   margin-right: auto;
+  line-height: 1;
+  display: flex;
+  flex-direction: column;
+  > * {
+    margin: 0;
+    line-height: 1;
+  }
 }
 .card__icon {
   margin-right: --space(xs);
 }
 
-//---------- BODY
-.card__body {
-}
+//---------- MEDIA
 .card__media {
   img {
     width: 100%;
-  }
-  &.card__media--edge {
-    padding: 0;
   }
 }
 
 //---------- FOOTER
 .card__footer {
-  padding-top: var(--size);
+  padding-top: var(--card--size);
 }
-
-@include card--size("phone");
 
 //--------------------------------------------------
 // MODIFIERS
 //--------------------------------------------------
+
+@include card--card--size("phone");
+
+.card__media--edge {
+  padding: 0;
+}
 
 .card--fluid {
   display: block;
@@ -113,24 +128,24 @@ $card-size: map-get($shilp-card-defaults, "size");
 
 .card--split {
   > * {
-    padding: var(--size) !important;
+    padding: var(--card--size) !important;
   }
 }
 
 //---------- SHAPE: ROUND
 .card--round {
-  border-radius: --border-radius($card-radius);
+  border-radius: $card-radius;
   > * {
     &:first-child {
-      border-radius: --border-radius($card-radius) --border-radius($card-radius) 0 0;
+      border-radius: $card-radius $card-radius 0 0;
       background-clip: padding-box; //Avoids color leaking due to border-radius
     }
     &:last-child {
-      border-radius: 0 0 --border-radius($card-radius) --border-radius($card-radius);
+      border-radius: 0 0 $card-radius $card-radius;
       background-clip: padding-box; //Avoids color leaking due to border-radius
     }
     &:only-child {
-      border-radius: --border-radius($card-radius);
+      border-radius: $card-radius;
       background-clip: padding-box; //Avoids color leaking due to border-radius
     }
   }
@@ -139,7 +154,7 @@ $card-size: map-get($shilp-card-defaults, "size");
 //---------- STYLE: BORDER
 .card--border {
   > * {
-    border: 1px solid $card-border-color;
+    border: var(--card--border-size) solid $card-border-color;
     + * {
       border-top: none;
     }
@@ -151,6 +166,6 @@ $card-size: map-get($shilp-card-defaults, "size");
 //--------------------------------------------------
 @each $breakpoint, $value in $shilp-breakpoints {
   @media only screen and (min-width: $value) {
-    @include card--size($breakpoint);
+    @include card--card--size($breakpoint);
   }
 }
