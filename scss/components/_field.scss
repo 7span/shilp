@@ -1,4 +1,8 @@
 //--------------------------------------------------
+// TODO:
+// Change 'after' & 'before' to prefix and suffix
+//--------------------------------------------------
+//--------------------------------------------------
 // CONFIGURATION
 //--------------------------------------------------
 
@@ -24,17 +28,15 @@ $shilp-field-vars: map-merge(
     "radius": 3px,
     "border-width": 1px,
     "border-color": --color(grey, light),
-    "optional-text": '"(Optional)"'
+    "optional-text": '"(Optional)"',
+    "circum-color": --color(grey),
+    "circum-bg": --color(grey, lightest),
+    "focus-color": --color(grey, lightest)
   ),
   $shilp-field-vars
 );
 
 //---------- Local Variables
-$field-radius: var(--field--radius);
-$field-border-width: var(--field--border-width);
-$field-border-color: var(--field--border-color);
-$field-optional-text: var(--field--optional-text);
-
 $field-size: map-get($shilp-field-defaults, "size");
 $field-states: map-get($shilp-field-defaults, "states");
 $field-sizes: $shilp-input-sizes;
@@ -82,8 +84,8 @@ $field-sizes: $shilp-input-sizes;
 //THE BLOCK CONTAINING INPUT
 .field-block {
   @include field-defaults;
-  border: $field-border-width solid $field-border-color;
-  border-radius: $field-radius;
+  border: var(--field--border-width) solid var(--field--border-color);
+  border-radius: var(--field--radius);
   min-width: 0px; //When .field__group is used, the input becomes flex child.
   font-size: var(--field--font-size);
   > * {
@@ -94,7 +96,7 @@ $field-sizes: $shilp-input-sizes;
     line-height: var(--field--size);
   }
   &:focus {
-    box-shadow: inset 0 0 0 3px --color(grey, lightest);
+    box-shadow: inset 0 0 0 3px var(--field--focus-color);
     position: relative;
   }
   &:disabled {
@@ -114,13 +116,13 @@ textarea.field-block {
   > * {
     border-radius: 0;
     &:first-child {
-      border-radius: $field-radius 0 0 $field-radius;
+      border-radius: var(--field--radius) 0 0 var(--field--radius);
     }
     &:last-child {
-      border-radius: 0 $field-radius $field-radius 0;
+      border-radius: 0 var(--field--radius) var(--field--radius) 0;
     }
     &:only-child {
-      border-radius: $field-radius;
+      border-radius: var(--field--radius);
     }
   }
   > .field {
@@ -135,13 +137,13 @@ textarea.field-block {
 .field__after {
   flex: 0 0 auto;
   min-width: var(--field--size);
-  border: $field-border-width solid $field-border-color;
+  border: var(--field--border-width) solid var(--field--border-color);
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0px --space(xs);
-  background-color: --color(grey, lighter);
-  color: --color(grey, dark);
+  background-color: var(--field--circum-bg);
+  color: var(--field--circum-color);
 }
 .field__before {
   border-right: none;
@@ -171,22 +173,10 @@ textarea.field-block {
 //---------- STATES
 @each $state in $field-states {
   .field--#{$state} {
-    //Input, Select, Textarea
-    .field-block {
-      border-color: --color($state);
-      &:focus {
-        box-shadow: inset 0 0 0 3px --color($state, lightest);
-      }
-    }
-    .field__before,
-    .field__after {
-      border-color: --color($state);
-      background-color: --color($state, lightest);
-      color: --color($state, darker);
-    }
-    .field__danger {
-      color: --color($state);
-    }
+    --field--border-color: #{--color($state)};
+    --field--circum-bg: #{--color($state, lightest)};
+    --field--circum-color: #{--color($state, darker)};
+    --field--focus-color: #{--color($state, lightest)};
   }
 }
 
@@ -194,7 +184,7 @@ textarea.field-block {
 .field--optional {
   > label {
     &:after {
-      content: $field-optional-text;
+      content: var(--field--optional-text);
       font-style: italic;
       margin-left: --space(xs);
       font-size: --font-size(h6);
