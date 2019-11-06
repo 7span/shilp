@@ -3,7 +3,7 @@
 // @val : Value (Blue)
 // @mod : Modifier (Dark, Light)
 @function --var($prop, $val, $mod: "") {
-  @if ($mod== "") {
+  @if ($mod== "" or $mod== "default") {
     @return var(--#{$prop}--#{$val});
   }
   @return var(--#{$prop}--#{$val}--#{$mod});

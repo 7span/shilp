@@ -5,7 +5,10 @@
 // The modifier "default" will not be added at the end.
 // Example: --color--primary
 
-:root {
+// DEFAULT CSS RULES
+// This will be added at root level of the document if not scoped.
+
+@mixin css-variables {
   //COLORS
   @each $variant, $color in $shilp-colors {
     @each $shade, $value in $color {
@@ -93,4 +96,17 @@
   // --container-width--tablet: #{map-get($containers, tablet)};
   // --container-width--laptop: #{map-get($containers, laptop)};
   // --container-width--desktop: #{map-get($containers, desktop)};
+}
+
+// WEBCOMPONENTS
+// If the webcomponent is true, the framework will be loaded under :host
+//hence :root is not required
+@if map-get($shilp-config, web-component) {
+  :host {
+    @include css-variables;
+  }
+} @else {
+  :root {
+    @include css-variables;
+  }
 }

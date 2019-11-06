@@ -38,28 +38,35 @@ $border-directions: (
 @mixin border-colors() {
   @each $shade-name, $value in map-get($shilp-colors, "grey") {
     $shade: --color(grey, $shade-name);
+    $modifier: "";
+
+    @if ($shade-name== "default") {
+      $modifier: "--default";
+    } @else {
+      $modifier: "--#{$shade-name}";
+    }
 
     //All Directions
-    $className: b--#{$shade-name};
+    $className: "b#{$modifier}";
     .#{$className} {
       --b--color: #{$shade};
     }
 
     //X
-    $className: bx--#{$shade-name};
+    $className: "bx#{$modifier}";
     .#{$className} {
       --bx--color: #{$shade};
     }
 
     //Y
-    $className: by--#{$shade-name};
+    $className: "by#{$modifier}";
     .#{$className} {
       --by--color: #{$shade};
     }
 
     //T,B,L,R
     @each $direction-initial, $direction in $border-directions {
-      $className: b#{$direction-initial}--#{$shade-name};
+      $className: "b#{$direction-initial}#{$modifier}";
       .#{$className} {
         --b#{$direction-initial}--color: #{$shade};
       }

@@ -344,6 +344,9 @@ $default-button-outline: var(--button--outline);
     margin: 0;
   }
 }
+.button--circle {
+  border-radius: 50%;
+}
 
 .button--rectangle {
   border-radius: 0;

@@ -1,0 +1,73 @@
+//--------------------------------------------------
+// CONFIGURATION
+//--------------------------------------------------
+
+//---------- Config: Via SCSS Maps
+$shilp-avatar-defaults: () !default;
+$shilp-avatar-defaults: map-merge(
+  (
+    "sizes": (
+      xs: 24px,
+      sm: 32px,
+      md: 40px,
+      lg: 48px,
+      xl: 56px
+    )
+  ),
+  $shilp-avatar-defaults
+);
+
+//---------- Config: Via CSS Vars
+$shilp-avatar-vars: () !default;
+$shilp-avatar-vars: map-merge(
+  (
+    "size": 48px
+  ),
+  $shilp-avatar-vars
+);
+
+//---------- Local Variables
+$avatar-sizes: map-get($shilp-avatar-defaults, "sizes");
+
+//--------------------------------------------------
+// BLOCK & ELEMENTS
+//--------------------------------------------------
+.avatar {
+  @include component-vars("avatar", $shilp-avatar-vars);
+  width: var(--avatar--size);
+  height: var(--avatar--size);
+  background-color: --color(primary, lightest);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: --color(primary);
+  font-size: var(--avatar--size);
+  position: relative;
+  overflow: hidden;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  img {
+    width: 100%;
+    position: relative;
+    z-index: 2;
+  }
+  &:after {
+    @include position(absolute, 0, 0, 0, 0);
+    content: attr(data-initials);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40%;
+    z-index: 1;
+  }
+}
+
+//--------------------------------------------------
+// MODIFIERS
+//--------------------------------------------------
+@each $size, $value in $avatar-sizes {
+  .avatar--#{$size} {
+    --avatar--size: #{$value};
+  }
+}
