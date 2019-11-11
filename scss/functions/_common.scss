@@ -21,10 +21,10 @@
 //FONT WITH FALLCACK
 @function font-with-fallback($value) {
   $system-fonts: map-get($shilp-config, system-fonts);
-  @if ($value== "") {
+  @if ($value== "system") {
     @return $system-fonts;
   } @else {
-    @return $value + "," + $system-fonts;
+    @return map-get($shilp-fonts, $value) + "," + $system-fonts;
   }
 }
 

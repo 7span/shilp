@@ -1,0 +1,118 @@
+//--------------------------------------------------
+// CONFIGURATION
+//--------------------------------------------------
+
+//---------- Config: Via SCSS Maps
+$shilp-modal-defaults: () !default;
+$shilp-modal-defaults: map-merge(
+  (
+    //Diffrent sizes for modal.
+      //This will be used as max-width of modal
+      //So at any point of size, modal will not be larger than screen width
+      "sizes":
+      (
+        xs: 480px,
+        sm: 576px,
+        md: 768px,
+        lg: 992px,
+        xl: 1200px
+      ),
+    //Defines the padding to keep around modal for diffrent breakpoints.
+      "space-around":
+      (
+        phone: --space(xs),
+        phablet: --space(sm),
+        tablet: --space(md),
+        laptop: --space(lg),
+        desktop: --space(xl)
+      )
+  ),
+  $shilp-modal-defaults
+);
+
+//---------- Config: Via CSS Vars
+$shilp-modal-vars: () !default;
+$shilp-modal-vars: map-merge(
+  (
+    "size": #{map-deep-get($shilp-modal-defaults, sizes, md)},
+    "space-around": #{map-deep-get($shilp-modal-defaults, "space-around", phone)}
+  ),
+  $shilp-modal-vars
+);
+
+//---------- Local Variables
+$modal-sizes: map-get($shilp-modal-defaults, "sizes");
+
+//--------------------------------------------------
+// BLOCK & ELEMENTS
+//--------------------------------------------------
+.modal {
+  @include component-vars("modal", $shilp-modal-vars);
+  @include position(fixed, 0, 0, 0, 0);
+  z-index: 98;
+}
+
+.modal__overlay {
+  z-index: 99;
+  overflow: hidden;
+  @include position(absolute, 0, 0, 0, 0);
+}
+.modal__wrapper {
+  @include position(absolute, 0, 0, 0, 0);
+  width: 100%;
+  z-index: 100;
+  overflow: auto;
+  display: grid;
+  padding: var(--modal--space-around);
+  > .card {
+    max-width: calc(var(--modal--size) - calc(var(--modal--space-around) * 2));
+    align-self: center;
+    justify-self: center;
+    width: 100%;
+  }
+}
+
+//--------------------------------------------------
+// MODIFIERS
+//--------------------------------------------------
+@each $size, $value in $modal-sizes {
+  .modal--#{$size} {
+    --modal--size: #{$value};
+  }
+}
+
+.modal--fluid {
+  --modal--size: 100%;
+  .modal__wrapper {
+    > .card {
+      max-width: none;
+    }
+  }
+}
+
+.modal--fix {
+  .modal__wrapper {
+    > .card {
+      height: 100%;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      > .card__body {
+        overflow: auto;
+        flex: 1 1 auto;
+      }
+    }
+  }
+}
+
+//--------------------------------------------------
+// MEDIA QUERY
+//--------------------------------------------------
+@each $breakpoint, $value in $shilp-breakpoints {
+  @media only screen and (min-width: $value) {
+    .modal {
+      --modal--space-around: #{map-deep-get($shilp-modal-defaults, "space-around", $breakpoint)};
+    }
+  }
+}

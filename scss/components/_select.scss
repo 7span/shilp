@@ -5,6 +5,7 @@ $select-arrow: m-icon("M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58
 .select {
   position: relative;
   padding: 0;
+  background-color: --color(light);
   select {
     @include field-defaults;
     border-radius: var(--field--radius);
@@ -29,6 +30,7 @@ $select-arrow: m-icon("M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58
     background-repeat: no-repeat;
     background-position: center;
     background-size: 24px;
+    z-index: 1;
   }
   &.loader {
     &:after {

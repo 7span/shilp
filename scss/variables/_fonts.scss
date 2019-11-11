@@ -2,18 +2,16 @@
 $shilp-fonts: () !default;
 $shilp-fonts: map-merge(
   (
-    heading: "",
-    content: "",
-    code: "monospace"
+    heading: "system",
+    content: "system"
   ),
   $shilp-fonts
 );
 
 $shilp-font-families: (
   system: map-get($shilp-config, system-fonts),
-  heading: font-with-fallback(map-get($shilp-fonts, heading)),
-  content: font-with-fallback(map-get($shilp-fonts, content)),
-  code: font-with-fallback(map-get($shilp-fonts, code))
+  heading: font-with-fallback(heading),
+  content: font-with-fallback(content)
 );
 
 // FONT-WEIGHTS

@@ -12,5 +12,11 @@
     "framework",
     "web"
   ],
-  "author": "Harsh Kansagara (https://7span.com)"
+  "author": "Harsh Kansagara (https://7span.com)",
+  "scripts": {
+    "build": "node-sass --output-style compressed scss/styles.scss dist/shilp.css"
+  },
+  "devDependencies": {
+    "node-sass": "^4.13.0"
+  }
 }
