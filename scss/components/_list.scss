@@ -1,0 +1,114 @@
+//--------------------------------------------------
+// CONFIGURATION
+//--------------------------------------------------
+
+//---------- Config: Via SCSS Maps
+$shilp-list-defaults: () !default;
+$shilp-list-defaults: map-merge(
+  (
+    "spaces": $shilp-spaces
+  ),
+  $shilp-list-defaults
+);
+
+//---------- Config: Via CSS Vars
+$shilp-list-vars: () !default;
+$shilp-list-vars: map-merge(
+  (
+    "space": map-deep-get($shilp-list-defaults, spaces, 0)
+  ),
+  $shilp-list-vars
+);
+
+//---------- Local Variables
+$list-spaces: map-get($shilp-list-defaults, "spaces");
+
+//--------------------------------------------------
+// BLOCK & ELEMENTS
+//--------------------------------------------------
+.list {
+  @include component-vars("list", $shilp-list-vars);
+  gap: var(--list--space);
+  display: inline-grid;
+  grid-auto-flow: column;
+}
+
+//--------------------------------------------------
+// MODIFIERS
+//--------------------------------------------------
+
+//---------- SPACE
+@each $space, $value in $list-spaces {
+  .list--#{$space} {
+    --list--space: #{$value};
+  }
+}
+
+//---------- STACK
+.list--stack {
+  grid-auto-flow: row;
+}
+
+//---------- FLUID
+.list--fluid {
+  display: grid;
+}
+
+//---------- GROUP
+// Makes child buttons attached and handles radius & borders
+.list--group {
+  > .button:not(:first-child):not(:last-child),
+  > .choice:not(:first-child):not(:last-child) .button {
+    border-radius: 0;
+  }
+
+  &:not(.list--stack) {
+    > .button:first-child,
+    > .choice:first-child .button {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    > .button:last-child,
+    > .choice:last-child .button {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    > .button + .button,
+    > .choice + .choice .button {
+      border-left: none;
+    }
+  }
+
+  &.list--stack {
+    > .button:first-child,
+    > .choice:first-child .button {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    > .button:last-child,
+    > .choice:first-child .button {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+    > .button + .button,
+    > .choice + .choice .button {
+      border-top: none;
+    }
+  }
+}
+
+//--------------------------------------------------
+// MEDIA QUERY
+//--------------------------------------------------
+@each $breakpoint, $value in $shilp-breakpoints {
+  @media only screen and (min-width: $value) {
+    @each $space, $value in $list-spaces {
+      $className: breakpoint-class($breakpoint, list--#{$space});
+      .#{$className} {
+        --list--space: #{$value};
+      }
+    }
+  }
+}

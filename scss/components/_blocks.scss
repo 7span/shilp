@@ -6,14 +6,21 @@
 $shilp-blocks-defaults: () !default;
 $shilp-blocks-defaults: map-merge(
   (
-    "gaps": $shilp-spaces,
-    "grids": 12
+    "gaps": $shilp-spaces
   ),
   $shilp-blocks-defaults
 );
 
+//---------- Config: Via CSS Vars
+$shilp-blocks-vars: () !default;
+$shilp-blocks-vars: map-merge(
+  (
+    "gap": map-deep-get($shilp-blocks-defaults, gaps, 0)
+  ),
+  $shilp-blocks-vars
+);
+
 //---------- Local Variables
-$blocks-grids: map-get($shilp-blocks-defaults, "grids");
 $blocks-gaps: map-get($shilp-blocks-defaults, "gaps");
 
 //--------------------------------------------------
@@ -26,35 +33,8 @@ $blocks-gaps: map-get($shilp-blocks-defaults, "gaps");
   @each $gap, $value in $blocks-gaps {
     $className: breakpoint-class($breakpoint, blocks--#{$gap});
     .#{$className} {
-      --gap: #{$value};
+      --blocks--gap: #{$value};
     }
-  }
-}
-
-// BLOCK SIZE
-// Defines the block size based on breakpoint and a class name.
-@mixin block-size($breakpoint) {
-  // 1 - 12
-  @for $i from 1 through $blocks-grids {
-    $className: breakpoint-class($breakpoint, block--#{$i});
-    .#{$className} {
-      --size: #{(100% / $blocks-grids) * $i};
-    }
-  }
-
-  // Auto
-  $autoClassName: breakpoint-class($breakpoint, block--auto);
-  .#{$autoClassName} {
-    flex-grow: 1;
-    flex-basis: 0;
-  }
-
-  // Fix
-  $fixClassName: breakpoint-class($breakpoint, block--fix);
-  .#{$fixClassName} {
-    flex: none;
-    display: block;
-    width: auto;
   }
 }
 
@@ -63,22 +43,16 @@ $blocks-gaps: map-get($shilp-blocks-defaults, "gaps");
 //--------------------------------------------------
 
 .blocks {
-  --gap: 0;
+  @include component-vars("blocks", $shilp-blocks-vars);
   display: flex;
   flex-wrap: wrap;
-  margin-left: calc(-1 * var(--gap));
-  margin-right: calc(-1 * var(--gap));
+  margin-left: calc(-1 * var(--blocks--gap));
+  margin-right: calc(-1 * var(--blocks--gap));
   > .block {
-    padding-left: var(--gap);
-    padding-right: var(--gap);
+    padding-left: var(--blocks--gap);
+    padding-right: var(--blocks--gap);
   }
 }
-.block {
-  --size: 100%;
-  max-width: var(--size);
-  width: var(--size);
-}
-@include block-size("phone");
 @include blocks-gap("phone");
 
 //--------------------------------------------------
@@ -87,6 +61,5 @@ $blocks-gaps: map-get($shilp-blocks-defaults, "gaps");
 @each $breakpoint, $value in $shilp-breakpoints {
   @media only screen and (min-width: $value) {
     @include blocks-gap($breakpoint);
-    @include block-size($breakpoint);
   }
 }

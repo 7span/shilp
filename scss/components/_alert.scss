@@ -1,100 +1,77 @@
+//--------------------------------------------------
+// CONFIGURATION
+//--------------------------------------------------
+
+//---------- Config: Via SCSS Maps
 $shilp-alert-defaults: () !default;
 $shilp-alert-defaults: map-merge(
   (
     "colors": shilp-colors(),
     "styles": (
-      trn,
       solid,
       outline,
-      muted,
-      gradient
+      muted
     ),
-    "shapes": (
-      rectangle,
-      rounded,
-      pill
-    ),
-    "sizes": (
-      xs,
-      sm,
-      md,
-      lg,
-      xl
-    ),
-    "color": "primary",
-    "style": "solid",
-    "shape": "rounded",
-    "size": "sm",
-    "outline": 1px
+    "sizes": $shilp-spaces
   ),
   $shilp-alert-defaults
 );
 
-$alert-shape: map-get($shilp-alert-defaults, "shape");
-$alert-color: map-get($shilp-alert-defaults, "color");
-$alert-size: map-get($shilp-alert-defaults, "size");
-$alert-style: map-get($shilp-alert-defaults, "style");
-$alert-outline: map-get($shilp-alert-defaults, "outline");
+//---------- Config: Via CSS Vars
+$shilp-alert-vars: () !default;
+$shilp-alert-vars: map-merge(
+  (
+    "bg": transparent,
+    "color": #000000,
+    "border": 0px,
+    "border-color": transparent,
+    "size": #{map-deep-get($shilp-alert-defaults, sizes, xs)}
+  ),
+  $shilp-alert-vars
+);
 
+//---------- Local Variables
 $alert-colors: map-get($shilp-alert-defaults, "colors");
 $alert-sizes: map-get($shilp-alert-defaults, "sizes");
 $alert-styles: map-get($shilp-alert-defaults, "styles");
-$alert-shapes: map-get($shilp-alert-defaults, "shapes");
 
-// SOLID STYLE
-@mixin alert--style--solid($color) {
-  background-color: --color($color);
-  color: --text-color($color, dark);
-}
-
-// OUTINE STYLE
-@mixin alert--style--outline($color) {
-  background-color: --color($color, lightest);
-  border: $alert-outline solid --color($color);
-  color: --text-color($color, light);
-}
-
-// MUTED STYLE
-@mixin alert--style--muted($color) {
-  background-color: --color($color, lightest);
-  color: --text-color($color, light);
-}
-
-// SIZE MIXIN
-@mixin alert--size($size) {
-  padding: calc(#{--space($size)} * 4 / 6) #{--space($size)};
-}
-
-// SHAPE
-@mixin alert--shape($shape) {
-  @if ($shape== "rectangle") {
-    border-radius: 0;
-  } //
-  @else if($shape== "rounded") {
-    border-radius: --border-radius(sm);
-  } //
-  @else if($shape== "pill") {
-    border-radius: 9999px;
-  }
-}
+//--------------------------------------------------
+// MIXINS
+//--------------------------------------------------
 
 // STYLE
 @mixin alert--style($color, $style) {
   @if ($style== "solid") {
-    @include alert--style--solid($color);
+    --alert--bg: #{--color($color)};
+    --alert--color: #{--text-color($color, dark)};
   } //
   @else if($style== "outline") {
-    @include alert--style--outline($color);
+    --alert--bg: #{--color($color, lightest)};
+    --alert--border-color: #{--color($color, lighter)};
+    --alert--color: #{--color($color, darker)};
+    --alert--border: 1px;
   } //
   @else if($style== "muted") {
-    @include alert--style--muted($color);
+    --alert--bg: #{--color($color, lightest)};
+    --alert--color: #{--text-color($color, light)};
+  } //
+  @else if($style== "gradient") {
+    background: gradient($color);
+    --alert--color: #{--text-color($color, light)};
   }
 }
 
+//--------------------------------------------------
+// CSS BLOCK & ELEMENTS
+//--------------------------------------------------
+
 .alert {
+  @include component-vars("alert", $shilp-alert-vars);
   display: inline-flex;
-  @include alert--size($alert-size);
-  @include alert--shape($alert-shape);
+  background-color: var(--alert--bg);
+  color: var(--alert--color);
+  border: var(--alert--border) solid var(--alert--border-color);
+  padding: calc(var(--alert--size) * 0.67) var(--alert--size);
 }
 .alert__body {
   margin: 0;
@@ -102,6 +79,11 @@ $alert-shapes: map-get($shilp-alert-defaults, "shapes");
 .alert__icon {
   margin-right: --space(xs);
 }
+
+//--------------------------------------------------
+// MODIFIERS
+//--------------------------------------------------
+
 .alert--fluid {
   display: flex;
 }
@@ -114,16 +96,9 @@ $alert-shapes: map-get($shilp-alert-defaults, "shapes");
 }
 
 // SIZE
-@each $size in $alert-sizes {
+@each $size, $value in $alert-sizes {
   .alert--#{$size} {
-    @include alert--size($size);
-  }
-}
-
-// SHAPE
-@each $shape in $alert-shapes {
-  .alert--#{$shape} {
-    @include alert--shape($shape);
+    --alert--size: #{$value};
   }
 }
 
@@ -134,4 +109,14 @@ $alert-shapes: map-get($shilp-alert-defaults, "shapes");
       @include alert--style($color, $style);
     }
   }
+}
+
+.alert--rectangle {
+  border-radius: 0;
+}
+.alert--rounded {
+  border-radius: --border-radius(sm);
+}
+.alert--pill {
+  border-radius: 9999px;
 }

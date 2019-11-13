@@ -1,0 +1,75 @@
+//--------------------------------------------------
+// CONFIGURATION
+//--------------------------------------------------
+
+//---------- Config: Via SCSS Maps
+$shilp-block-defaults: () !default;
+$shilp-block-defaults: map-merge(
+  (
+    "grids": 12
+  ),
+  $shilp-block-defaults
+);
+
+//---------- Config: Via CSS Vars
+$shilp-block-vars: () !default;
+$shilp-block-vars: map-merge(
+  (
+    "size": 100%
+  ),
+  $shilp-block-vars
+);
+
+//---------- Local Variables
+$block-grids: map-get($shilp-block-defaults, "grids");
+
+//--------------------------------------------------
+// MIXINS
+//--------------------------------------------------
+
+// BLOCK SIZE
+// Defines the block size based on breakpoint and a class name.
+@mixin block-size($breakpoint) {
+  // 1 - 12
+  @for $i from 1 through $block-grids {
+    $className: breakpoint-class($breakpoint, block--#{$i});
+    .#{$className} {
+      --block--size: #{(100% / $block-grids) * $i};
+    }
+  }
+
+  // Auto
+  $autoClassName: breakpoint-class($breakpoint, block--auto);
+  .#{$autoClassName} {
+    flex-grow: 1;
+    flex-basis: 0;
+  }
+
+  // Fix
+  $fixClassName: breakpoint-class($breakpoint, block--fix);
+  .#{$fixClassName} {
+    flex: none;
+    display: block;
+    width: auto;
+  }
+}
+
+//--------------------------------------------------
+// CSS BLOCK & ELEMENTS
+//--------------------------------------------------
+
+.block {
+  @include component-vars("block", $shilp-block-vars);
+  max-width: var(--block--size);
+  width: var(--block--size);
+}
+@include block-size("phone");
+
+//--------------------------------------------------
+// MEDIA QUERY
+//--------------------------------------------------
+@each $breakpoint, $value in $shilp-breakpoints {
+  @media only screen and (min-width: $value) {
+    @include block-size($breakpoint);
+  }
+}

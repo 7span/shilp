@@ -21,7 +21,7 @@ $shilp-avatar-defaults: map-merge(
 $shilp-avatar-vars: () !default;
 $shilp-avatar-vars: map-merge(
   (
-    "size": 48px
+    "size": map-deep-get($shilp-avatar-defaults, sizes, md)
   ),
   $shilp-avatar-vars
 );

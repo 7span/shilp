@@ -31,7 +31,10 @@ $shilp-field-vars: map-merge(
     "optional-text": '"(Optional)"',
     "circum-color": --color(grey),
     "circum-bg": --color(grey, lightest),
-    "focus-color": --color(grey, lightest)
+    "focus-color": --color(grey, lightest),
+    "size": map-get($shilp-input-sizes, md),
+    "font-size": map-get($shilp-input-font-sizes, md),
+    "icon-size": map-get($shilp-input-icon-sizes, md)
   ),
   $shilp-field-vars
 );
@@ -45,14 +48,6 @@ $field-sizes: $shilp-input-sizes;
 // MIXINS
 //--------------------------------------------------
 
-//---------- SIZE
-// Generates the size based on $shilp-input-sizes map
-@mixin field-size($size) {
-  --field--size: #{--input-size($size)};
-  --field--font-size: #{map-get($shilp-input-font-sizes, $size)};
-  --field--icon-size: #{map-get($shilp-input-icon-sizes, $size)};
-}
-
 //--------------------------------------------------
 // CSS BLOCK & ELEMENTS
 //--------------------------------------------------
@@ -60,7 +55,6 @@ $field-sizes: $shilp-input-sizes;
 // FIELD
 .field {
   @include component-vars("field", $shilp-field-vars);
-  @include field-size($field-size);
   margin-bottom: --space(md);
 
   .field {
@@ -166,7 +160,9 @@ textarea.field-block {
 //---------- SIZE
 @each $size, $value in $field-sizes {
   .field--#{$size} {
-    @include field-size($size);
+    --field--size: #{--input-size($size)};
+    --field--font-size: #{map-get($shilp-input-font-sizes, $size)};
+    --field--icon-size: #{map-get($shilp-input-icon-sizes, $size)};
   }
 }
 
