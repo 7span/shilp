@@ -46,11 +46,9 @@ $blocks-gaps: map-get($shilp-blocks-defaults, "gaps");
   @include component-vars("blocks", $shilp-blocks-vars);
   display: flex;
   flex-wrap: wrap;
-  margin-left: calc(-1 * var(--blocks--gap));
-  margin-right: calc(-1 * var(--blocks--gap));
+  margin: calc(-1 * var(--blocks--gap));
   > .block {
-    padding-left: var(--blocks--gap);
-    padding-right: var(--blocks--gap);
+    padding: var(--blocks--gap);
   }
 }
 @include blocks-gap("phone");

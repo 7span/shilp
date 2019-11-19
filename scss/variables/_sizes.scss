@@ -11,21 +11,6 @@ $shilp-breakpoints: map-merge(
   $shilp-breakpoints
 );
 
-// BOXES
-// Container sizes for boxed content.
-// Works just like Bootstrap's "container"
-$shilp-boxes: () !default;
-$shilp-boxes: map-merge(
-  (
-    //phone: 100%,
-      phablet: 540px,
-    tablet: 720px,
-    laptop: 960px,
-    desktop: 1140px
-  ),
-  $shilp-boxes
-);
-
 // SPACES
 // Used for spacing values in margin, padding etc.
 // The sizes are also used for keeping gap between blocks(aka grid).

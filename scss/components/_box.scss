@@ -1,20 +1,67 @@
+//--------------------------------------------------
+// CONFIGURATION
+//--------------------------------------------------
+
+//---------- Config: Via SCSS Maps
+$shilp-box-defaults: () !default;
+$shilp-box-defaults: map-merge(
+  (
+    sizes: (
+      phone: 100%,
+      phablet: 540px,
+      tablet: 720px,
+      laptop: 960px,
+      desktop: 1140px
+    ),
+    "gaps": $shilp-spaces
+  ),
+  $shilp-box-defaults
+);
+
+//---------- Config: Via CSS Vars
+$shilp-box-vars: (
+  "size": map-deep-get($shilp-box-defaults, sizes, phone),
+  "gap": map-deep-get($shilp-box-defaults, gaps, 0)
+) !default;
+$shilp-box-vars: map-merge((), $shilp-box-vars);
+
+//---------- Local Variables
+$box-sizes: map-get($shilp-box-defaults, "sizes");
+
+//--------------------------------------------------
+// MIXINS
+//--------------------------------------------------
 @mixin box($breakpoint) {
-  max-width: map-get($shilp-boxes, $breakpoint);
+  max-width: map-get($box-sizes, $breakpoint);
 }
 
+//--------------------------------------------------
+// CSS BLOCK & ELEMENTS
+//--------------------------------------------------
 .box {
+  @include component-vars("box", $shilp-box-vars);
   margin-left: auto;
   margin-right: auto;
-  @include box("phone");
-}
-@each $breakpoint, $value in $shilp-breakpoints {
-  @media only screen and (min-width: $value) {
-    .box {
-      @include box($breakpoint);
-    }
+  overflow-x: hidden;
+  &:not(.box--fluid) {
+    max-width: var(--box--size);
   }
 }
 
+//--------------------------------------------------
+// MODIFIERS
+//--------------------------------------------------
 .box--fluid {
-  max-width: none;
+  --box--size: "none";
+}
+
+//--------------------------------------------------
+// MEDIA QUERY
+//--------------------------------------------------
+@each $breakpoint, $value in $shilp-breakpoints {
+  @media only screen and (min-width: $value) {
+    .box:not(.box--fluid) {
+      --box--size: #{$value};
+    }
+  }
 }
