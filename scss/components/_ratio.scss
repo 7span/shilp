@@ -1,16 +1,55 @@
-@mixin block-with-ratio($width, $height) {
-  padding-bottom: ($height / $width) * 100%;
+//--------------------------------------------------
+// CONFIGURATION
+//--------------------------------------------------
+
+//---------- Config: Via SCSS Maps
+$shilp-ratio-defaults: () !default;
+$shilp-ratio-defaults: map-merge(
+  (
+    sizes: (
+      (1, 1),
+      (4, 3),
+      (3, 4),
+      (16, 9),
+      (9, 16),
+      (18, 9),
+      (9, 18)
+    )
+  ),
+  $shilp-ratio-defaults
+);
+
+//---------- Config: Via CSS Vars
+$shilp-ratio-vars: () !default;
+$shilp-ratio-vars: map-merge(
+  (
+    width: 1,
+    height: 1
+  ),
+  $shilp-ratio-vars
+);
+
+//---------- Local Variables
+$ratio-sizes: map-get($shilp-ratio-defaults, "sizes");
+
+//--------------------------------------------------
+// BLOCK & ELEMENTS
+//--------------------------------------------------
+.ratio {
+  @include component-vars("ratio", $shilp-ratio-vars);
   overflow: hidden;
+  padding-bottom: calc(calc(var(--ratio--height) / var(--ratio--width)) * 100%);
 }
 
-.ratio--1-1 {
-  @include block-with-ratio(1, 1);
-}
+//--------------------------------------------------
+// MODIFIERS
+//--------------------------------------------------
 
-.ratio--4-3 {
-  @include block-with-ratio(4, 3);
-}
-
-.ratio--16-9 {
-  @include block-with-ratio(16, 9);
+@each $size in $ratio-sizes {
+  $w: nth($size, 1);
+  $h: nth($size, 2);
+  .ratio--#{$w}x#{$h} {
+    --ratio--width: #{$w};
+    --ratio--height: #{$h};
+  }
 }

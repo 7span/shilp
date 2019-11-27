@@ -12,8 +12,7 @@ $shilp-box-defaults: map-merge(
       tablet: 720px,
       laptop: 960px,
       desktop: 1140px
-    ),
-    "gaps": $shilp-spaces
+    )
   ),
   $shilp-box-defaults
 );
@@ -21,7 +20,7 @@ $shilp-box-defaults: map-merge(
 //---------- Config: Via CSS Vars
 $shilp-box-vars: (
   "size": map-deep-get($shilp-box-defaults, sizes, phone),
-  "gap": map-deep-get($shilp-box-defaults, gaps, 0)
+  "padding": 16px
 ) !default;
 $shilp-box-vars: map-merge((), $shilp-box-vars);
 
@@ -42,7 +41,8 @@ $box-sizes: map-get($shilp-box-defaults, "sizes");
   @include component-vars("box", $shilp-box-vars);
   margin-left: auto;
   margin-right: auto;
-  overflow-x: hidden;
+  padding-left: var(--box--padding);
+  padding-right: var(--box--padding);
   &:not(.box--fluid) {
     max-width: var(--box--size);
   }

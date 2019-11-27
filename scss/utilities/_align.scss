@@ -1,0 +1,19 @@
+$shilp-text-aligns: "left", "right", "center";
+
+@mixin shilp-text-align-rules($breakpoint) {
+  @each $align in $shilp-text-aligns {
+    $className: breakpoint-class($breakpoint, ta--#{$align});
+    .#{$className} {
+      text-align: #{$align};
+    }
+  }
+}
+
+@include shilp-text-align-rules("phone");
+
+//Media Query
+@each $breakpoint, $value in $shilp-breakpoints {
+  @media only screen and (min-width: $value) {
+    @include shilp-text-align-rules($breakpoint);
+  }
+}

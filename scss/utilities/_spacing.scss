@@ -1,11 +1,11 @@
-$space-directions: (
+$shilp-space-directions: (
   t: "top",
   b: "bottom",
   l: "left",
   r: "right"
 );
 
-@mixin spacing-rules($property-initial, $property) {
+@mixin shilp-space-rules($property-initial, $property) {
   //All Directions
   $className: '[class^="#{$property-initial}--"],[class*=" #{$property-initial}--"]';
   $varName: --#{$property-initial};
@@ -30,7 +30,7 @@ $space-directions: (
   }
 
   //T,B,L,R
-  @each $direction-initial, $direction in $space-directions {
+  @each $direction-initial, $direction in $shilp-space-directions {
     $className: '[class^="#{$property-initial}#{$direction-initial}--"],[class*=" #{$property-initial}#{$direction-initial}--"]';
     $varName: --#{$property-initial}#{$direction-initial};
     #{$className} {
@@ -39,7 +39,7 @@ $space-directions: (
   }
 }
 
-@mixin spacing-sizes($breakpoint, $property-initial, $property) {
+@mixin shilp-space-sizes($breakpoint, $property-initial, $property) {
   @each $space, $value in $shilp-spaces {
     $size: --space($space);
 
@@ -62,8 +62,11 @@ $space-directions: (
     }
 
     //T,B,L,R
-    @each $direction-initial, $direction in $space-directions {
-      $className: breakpoint-class($breakpoint, #{$property-initial}#{$direction-initial}--#{$space});
+    @each $direction-initial, $direction in $shilp-space-directions {
+      $className: breakpoint-class(
+        $breakpoint,
+        #{$property-initial}#{$direction-initial}--#{$space}
+      );
       .#{$className} {
         --#{$property-initial}#{$direction-initial}: #{$size};
       }
@@ -71,15 +74,15 @@ $space-directions: (
   }
 }
 
-@include spacing-rules("p", "padding");
-@include spacing-rules("m", "margin");
-@include spacing-sizes("phone", "p", "padding");
-@include spacing-sizes("phone", "m", "margin");
+@include shilp-space-rules("p", "padding");
+@include shilp-space-rules("m", "margin");
+@include shilp-space-sizes("phone", "p", "padding");
+@include shilp-space-sizes("phone", "m", "margin");
 
 //Media Query
 @each $breakpoint, $value in $shilp-breakpoints {
   @media only screen and (min-width: $value) {
-    @include spacing-sizes($breakpoint, "p", "padding");
-    @include spacing-sizes($breakpoint, "m", "margin");
+    @include shilp-space-sizes($breakpoint, "p", "padding");
+    @include shilp-space-sizes($breakpoint, "m", "margin");
   }
 }

@@ -1,21 +1,22 @@
 //CSS RULES BASED UTILITY CLASSES
 $utility-classes: (
-  ta: (
-    rule: "text-align",
-    values: (
-      "center",
-      "left",
-      "right"
-    )
-  ),
-  ai: (
-    rule: "align-items",
-    values: (
-      "flex-start",
-      "flex-end",
-      "center"
-    )
-  ),
+  // ta: (
+    //   rule: "text-align",
+    //   values: (
+    //     "center",
+    //     "left",
+    //     "right"
+    //   )
+    // ),
+    ai:
+    (
+      rule: "align-items",
+      values: (
+        "flex-start",
+        "flex-end",
+        "center"
+      )
+    ),
   w: (
     rule: "width",
     values: (

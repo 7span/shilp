@@ -10,9 +10,6 @@ $shilp-person-defaults: map-merge((), $shilp-person-defaults);
 $shilp-person-vars: () !default;
 $shilp-person-vars: map-merge((), $shilp-person-vars);
 
-//---------- Local Variables
-// $person-sizes: map-get($shilp-person-defaults, "sizes");
-
 //--------------------------------------------------
 // BLOCK & ELEMENTS
 //--------------------------------------------------

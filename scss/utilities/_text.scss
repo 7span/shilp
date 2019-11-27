@@ -14,3 +14,10 @@
     }
   }
 }
+
+// FONT WEIGHTS
+@each $weight, $value in $shilp-font-weights {
+  .fw--#{$weight} {
+    font-weight: #{$value};
+  }
+}
