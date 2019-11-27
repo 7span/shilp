@@ -39,6 +39,10 @@ $ratio-sizes: map-get($shilp-ratio-defaults, "sizes");
   @include component-vars("ratio", $shilp-ratio-vars);
   overflow: hidden;
   padding-bottom: calc(calc(var(--ratio--height) / var(--ratio--width)) * 100%);
+  position: relative;
+  > * {
+    @include position(absolute, 0, 0, 0, 0);
+  }
 }
 
 //--------------------------------------------------

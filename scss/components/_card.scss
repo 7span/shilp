@@ -57,7 +57,7 @@ $card-radius: var(--card--radius);
   display: inline-block;
   background-clip: padding-box;
   background-color: --color(light);
-  > * {
+  > *:not(.ratio) {
     background-color: --color(light);
     padding-left: var(--card--size);
     padding-right: var(--card--size);
@@ -100,13 +100,6 @@ $card-radius: var(--card--radius);
   margin-right: --space(xs);
 }
 
-//---------- MEDIA
-.card__media {
-  img {
-    width: 100%;
-  }
-}
-
 //---------- FOOTER
 .card__footer {
   padding-top: var(--card--size);
@@ -118,17 +111,15 @@ $card-radius: var(--card--radius);
 
 @include card--card--size("phone");
 
-.card__media--edge {
-  padding: 0;
-}
-
 .card--fluid {
   display: block;
 }
 
 .card--split {
   > * {
-    padding: var(--card--size) !important;
+    &:not(.ratio) {
+      padding: var(--card--size) !important;
+    }
   }
 }
 

@@ -1,0 +1,63 @@
+//--------------------------------------------------
+// CONFIGURATION
+//--------------------------------------------------
+
+//---------- Config: Via SCSS Maps
+$shilp-grid-defaults: () !default;
+$shilp-grid-defaults: map-merge(
+  (
+    "gaps": $shilp-spaces
+  ),
+  $shilp-grid-defaults
+);
+
+//---------- Config: Via CSS Vars
+$shilp-grid-vars: () !default;
+$shilp-grid-vars: map-merge(
+  (
+    "gap": map-deep-get($shilp-blocks-defaults, gaps, 0),
+    "size": 160px
+  ),
+  $shilp-grid-vars
+);
+
+//---------- Local Variables
+$grid-gaps: map-get($shilp-grid-defaults, "gaps");
+
+//--------------------------------------------------
+// MIXINS
+//--------------------------------------------------
+
+// RESPONSIVE GRID GAP
+// Generates the responsive classes based on breakpoint. with all the gap values.
+@mixin shilp-grid-gap($breakpoint) {
+  @each $gap, $value in $grid-gaps {
+    $className: breakpoint-class($breakpoint, grid--#{$gap});
+    .#{$className} {
+      --grid--gap: #{$value};
+    }
+  }
+}
+
+//--------------------------------------------------
+// BLOCK & ELEMENTS
+//--------------------------------------------------
+.grid {
+  @include component-vars("grid", $shilp-grid-vars);
+  display: grid;
+  gap: var(--grid--gap);
+  grid-template-columns: repeat(auto-fill, minmax(var(--grid--size), 1fr));
+}
+@include shilp-grid-gap("phone");
+//--------------------------------------------------
+// MODIFIERS
+//--------------------------------------------------
+
+//--------------------------------------------------
+// MEDIA QUERY
+//--------------------------------------------------
+@each $breakpoint, $value in $shilp-breakpoints {
+  @media only screen and (min-width: $value) {
+    @include shilp-grid-gap($breakpoint);
+  }
+}

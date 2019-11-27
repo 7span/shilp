@@ -117,6 +117,7 @@ textarea.field-block {
     }
     &:only-child {
       border-radius: var(--field--radius);
+      flex: 1 1 auto;
     }
   }
   > .field {
