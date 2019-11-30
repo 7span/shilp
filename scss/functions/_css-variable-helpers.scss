@@ -9,10 +9,15 @@
   @return var(--#{$prop}--#{$val}--#{$mod});
 }
 
+// COLOR
 @function --color($val, $mod: "") {
   @return --var("color", $val, $mod);
 }
+@function color($color, $shade: "default") {
+  @return map-deep-get($shilp-colors, $color, $shade);
+}
 
+// TEXT COLOR
 @function --text-color($val, $mod: "") {
   $new-mod: "";
   //The text color value does not have multiple variants of dark and light.
@@ -26,34 +31,45 @@
   @return --var("text-color", $val, $new-mod);
 }
 
+// SPACE
 @function --space($val, $mod: "") {
   @return --var("space", $val, $mod);
 }
+@function space($size) {
+  @return map-get($shilp-spaces, $size);
+}
 
+// INPUT SIZE
 @function --input-size($val, $mod: "") {
   @return --var("input-size", $val, $mod);
 }
 
+// FONT WEIGHT
 @function --font-weight($val, $mod: "") {
   @return --var("font-weight", $val, $mod);
 }
 
+// FONT FAMILY
 @function --font-family($val, $mod: "") {
   @return --var("font-family", $val, $mod);
 }
 
+// FONT SIZE
 @function --font-size($val, $mod: "") {
   @return --var("font-size", $val, $mod);
 }
 
+// BORDER RADIUS
 @function --border-radius($val, $mod: "") {
   @return --var("border-radius", $val, $mod);
 }
 
+// BOX SHADOW
 @function --box-shadow($val) {
   @return --var("box-shadow", $val);
 }
 
+// GRADIENT
 @function --gradient($val, $mod) {
   @return --var("gradient", $val, $mod);
 }

@@ -6,7 +6,7 @@
 $shilp-list-defaults: () !default;
 $shilp-list-defaults: map-merge(
   (
-    "spaces": $shilp-spaces
+    "gaps": $shilp-spaces
   ),
   $shilp-list-defaults
 );
@@ -15,20 +15,20 @@ $shilp-list-defaults: map-merge(
 $shilp-list-vars: () !default;
 $shilp-list-vars: map-merge(
   (
-    "space": map-deep-get($shilp-list-defaults, spaces, 0)
+    "gap": map-deep-get($shilp-list-defaults, gaps, 0)
   ),
   $shilp-list-vars
 );
 
 //---------- Local Variables
-$list-spaces: map-get($shilp-list-defaults, "spaces");
+$list-gaps: map-get($shilp-list-defaults, "gaps");
 
 //--------------------------------------------------
 // BLOCK & ELEMENTS
 //--------------------------------------------------
 .list {
   @include component-vars("list", $shilp-list-vars);
-  gap: var(--list--space);
+  gap: var(--list--gap);
   display: inline-grid;
   grid-auto-flow: column;
 }
@@ -37,10 +37,10 @@ $list-spaces: map-get($shilp-list-defaults, "spaces");
 // MODIFIERS
 //--------------------------------------------------
 
-//---------- SPACE
-@each $space, $value in $list-spaces {
-  .list--#{$space} {
-    --list--space: #{$value};
+//---------- GAP
+@each $gap, $value in $list-gaps {
+  .list--#{$gap} {
+    --list--gap: #{$value};
   }
 }
 
@@ -104,10 +104,10 @@ $list-spaces: map-get($shilp-list-defaults, "spaces");
 //--------------------------------------------------
 @each $breakpoint, $value in $shilp-breakpoints {
   @media only screen and (min-width: $value) {
-    @each $space, $value in $list-spaces {
-      $className: breakpoint-class($breakpoint, list--#{$space});
+    @each $gap, $value in $list-gaps {
+      $className: breakpoint-class($breakpoint, list--#{$gap});
       .#{$className} {
-        --list--space: #{$value};
+        --list--gap: #{$value};
       }
     }
   }

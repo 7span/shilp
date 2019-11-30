@@ -7,4 +7,7 @@
 
 .nav--stack {
   flex-direction: column;
+  .nav__link {
+    width: 100%;
+  }
 }
