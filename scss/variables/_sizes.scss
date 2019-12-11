@@ -62,11 +62,11 @@ $shilp-input-icon-sizes: map-merge(
 $shilp-input-font-sizes: () !default;
 $shilp-input-font-sizes: map-merge(
   (
-    xl: 20px,
-    lg: 18px,
-    md: 16px,
-    sm: 14px,
-    xs: 12px
+    xl: md,
+    lg: md,
+    md: sm,
+    sm: sm,
+    xs: xs
   ),
   $shilp-input-font-sizes
 );

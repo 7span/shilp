@@ -1,23 +1,13 @@
-// Sets the default font-family, size, weight for text tags.
-@each $tag, $tag-settings in $shilp-text {
-  #{$tag},
-  .#{$tag} {
-    font-size: --font-size($tag);
-    margin-top: 0;
-    font-family: map-get($tag-settings, "font-family");
-    font-weight: map-get($tag-settings, "font-weight");
-  }
-  .#{$tag} {
-    svg {
-      width: --font-size($tag);
-      height: --font-size($tag);
-    }
+//FONT SIZES
+@each $size, $value in $shilp-font-sizes {
+  .fs--#{$size} {
+    font-size: --font-size($size);
   }
 }
 
 // FONT WEIGHTS
 @each $weight, $value in $shilp-font-weights {
   .fw--#{$weight} {
-    font-weight: #{$value};
+    font-weight: --font-weight($weight);
   }
 }

@@ -29,48 +29,21 @@ $shilp-font-weights: map-merge(
 $shilp-font-sizes: () !default;
 $shilp-font-sizes: map-merge(
   (
-    h1: 48px,
-    h2: 36px,
-    h3: 24px,
-    h4: 18px,
-    h5: 16px,
-    h6: 13px
+    xxl: 48px,
+    xl: 36px,
+    lg: 24px,
+    md: 18px,
+    sm: 14px,
+    xs: 12px
   ),
   $shilp-font-sizes
 );
 
-// TEXT
-// Defines the default font sizes, family and weights
-// The CSS variables are just a normal text for SCSS which will be rendered run time.
-// The CSS varialbes are used as fallback value.
-
-$shilp-text: () !default;
-$shilp-text: map-merge(
-  (
-    "h1": (
-      font-family: var(--font-family--heading),
-      font-weight: var(--font-weight--bold)
-    ),
-    "h2": (
-      font-family: var(--font-family--heading),
-      font-weight: var(--font-weight--bold)
-    ),
-    "h3": (
-      font-family: var(--font-family--heading),
-      font-weight: var(--font-weight--bold)
-    ),
-    "h4": (
-      font-family: var(--font-family--heading),
-      font-weight: var(--font-weight--bold)
-    ),
-    "h5": (
-      font-family: var(--font-family--heading),
-      font-weight: var(--font-weight--bold)
-    ),
-    "h6": (
-      font-family: var(--font-family--heading),
-      font-weight: var(--font-weight--bold)
-    )
-  ),
-  $shilp-text
+$shilp-font-size-map: (
+  h1: xxl,
+  h2: xl,
+  h3: lg,
+  h4: md,
+  h5: sm,
+  h6: xs
 );

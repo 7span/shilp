@@ -10,12 +10,15 @@
   > input {
     margin: 0;
   }
-  > label {
+  > label:not(.button) {
     margin-bottom: 0;
     margin-left: --space(xs);
     color: #000;
     cursor: pointer;
     line-height: 1;
+  }
+  > label.button {
+    width: 100%;
   }
 }
 

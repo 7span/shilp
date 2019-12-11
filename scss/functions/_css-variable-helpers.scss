@@ -55,13 +55,13 @@
 }
 
 // FONT SIZE
-@function --font-size($val, $mod: "") {
-  @return --var("font-size", $val, $mod);
+@function --font-size($val) {
+  @return --var("font-size", $val);
 }
 
 // BORDER RADIUS
-@function --border-radius($val, $mod: "") {
-  @return --var("border-radius", $val, $mod);
+@function --border-radius($val) {
+  @return --var("border-radius", $val);
 }
 
 // BOX SHADOW

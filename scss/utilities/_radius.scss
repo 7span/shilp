@@ -1,0 +1,10 @@
+[class*=" radius--"] {
+  overflow: hidden;
+  background-clip: padding-box; //Avoids color leaking due to border-radius
+}
+
+@each $key, $value in $shilp-border-radius {
+  .radius--#{$key} {
+    border-radius: --border-radius($key);
+  }
+}

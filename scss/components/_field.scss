@@ -33,7 +33,7 @@ $shilp-field-vars: map-merge(
     "circum-bg": --color(grey, lightest),
     "focus-color": --color(grey, lightest),
     "size": map-get($shilp-input-sizes, md),
-    "font-size": map-get($shilp-input-font-sizes, md),
+    "font-size": --font-size(map-get($shilp-input-font-sizes, md)),
     "icon-size": map-get($shilp-input-icon-sizes, md)
   ),
   $shilp-field-vars
@@ -82,6 +82,7 @@ $field-sizes: $shilp-input-sizes;
   border-radius: var(--field--radius);
   min-width: 0px; //When .field__group is used, the input becomes flex child.
   font-size: var(--field--font-size);
+  overflow: hidden;
   > * {
     font-size: var(--field--font-size);
   }
@@ -162,7 +163,9 @@ textarea.field-block {
 @each $size, $value in $field-sizes {
   .field--#{$size} {
     --field--size: #{--input-size($size)};
-    --field--font-size: #{map-get($shilp-input-font-sizes, $size)};
+    --field--font-size: #{--font-size(
+        #{map-get($shilp-input-font-sizes, $size)}
+      )};
     --field--icon-size: #{map-get($shilp-input-icon-sizes, $size)};
   }
 }
@@ -184,7 +187,6 @@ textarea.field-block {
       content: var(--field--optional-text);
       font-style: italic;
       margin-left: --space(xs);
-      font-size: --font-size(h6);
       color: --color(grey);
     }
   }

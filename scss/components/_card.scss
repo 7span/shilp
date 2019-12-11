@@ -22,8 +22,7 @@ $shilp-card-vars: () !default;
 $shilp-card-vars: map-merge(
   (
     "border-size": 1px,
-    "border-color": --color(grey, lighter),
-    "radius": --border-radius(md)
+    "border-color": --color(grey, lighter)
   ),
   $shilp-card-vars
 );
@@ -31,7 +30,6 @@ $shilp-card-vars: map-merge(
 //---------- Local Variables
 $card-sizes: map-get($shilp-card-defaults, "sizes");
 $card-border-color: var(--card--border-color);
-$card-radius: var(--card--radius);
 
 //--------------------------------------------------
 // MIXINS
@@ -119,25 +117,6 @@ $card-radius: var(--card--radius);
   > * {
     &:not(.ratio) {
       padding: var(--card--size) !important;
-    }
-  }
-}
-
-//---------- SHAPE: ROUND
-.card--round {
-  border-radius: $card-radius;
-  > * {
-    &:first-child {
-      border-radius: $card-radius $card-radius 0 0;
-      background-clip: padding-box; //Avoids color leaking due to border-radius
-    }
-    &:last-child {
-      border-radius: 0 0 $card-radius $card-radius;
-      background-clip: padding-box; //Avoids color leaking due to border-radius
-    }
-    &:only-child {
-      border-radius: $card-radius;
-      background-clip: padding-box; //Avoids color leaking due to border-radius
     }
   }
 }
