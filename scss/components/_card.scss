@@ -52,7 +52,8 @@ $card-border-color: var(--card--border-color);
 .card {
   @include component-vars("card", $shilp-card-vars);
   --card--size: 0;
-  display: inline-block;
+  display: inline-flex;
+  flex-direction: column;
   background-clip: padding-box;
   background-color: --color(light);
   > *:not(.ratio) {
@@ -82,6 +83,10 @@ $card-border-color: var(--card--border-color);
   &:not(:first-child) {
     padding-bottom: calc(var(--card--size) * 4 / 6);
   }
+}
+
+.card__body {
+  flex: 1 1 auto;
 }
 .card__title {
   margin: 0;

@@ -1,7 +1,7 @@
 {
   "name": "@7span/shilp",
   "description": "CSS Framework Completely Customizable via CSS Variables",
-  "version": "0.1.0-beta.12",
+  "version": "0.1.0-beta.13",
   "keywords": [
     "css",
     "sass",
@@ -14,7 +14,8 @@
   ],
   "author": "Harsh Kansagara (https://7span.com)",
   "scripts": {
-    "build": "node-sass --output-style compressed scss/styles.scss dist/shilp.css"
+    "build": "node-sass --output-style compressed scss/styles.scss dist/shilp.css",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "node-sass": "^4.13.0"
