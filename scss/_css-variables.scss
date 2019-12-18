@@ -1,7 +1,7 @@
 // CSS VARIABLES
 // Generates the CSS variable for all the SCSS variables and maps
 // The standard of variable naming is: property--value--modifier
-// Example: --color--primary--muted.
+// Example: --color--primary--light.
 // The modifier "default" will not be added at the end.
 // Example: --color--primary
 
@@ -9,7 +9,10 @@
 // This will be added at root level of the document if not scoped.
 
 @mixin css-variables {
-  //COLORS
+  //--------------------------------------------------
+  // COLORS
+  //--------------------------------------------------
+  //SOLID
   @each $variant, $color in $shilp-colors {
     @each $shade, $value in $color {
       @if ($shade== "default") {
@@ -20,13 +23,6 @@
     }
   }
 
-  //TEXT COLORS
-  @each $variant, $color in $shilp-text-colors {
-    @each $shade, $value in $color {
-      --text-color--#{$variant}--#{$shade}: #{$value};
-    }
-  }
-
   //GRADIENT
   @each $variant, $colors in $shilp-gradients {
     @each $shade in $colors {
@@ -34,55 +30,54 @@
     }
   }
 
-  //FONT-FAMILIES
-  @each $type, $value in $shilp-font-families {
-    --font-family--#{$type}: #{$value};
+  //--------------------------------------------------
+  // TEXT
+  //--------------------------------------------------
+  //SIZES
+  @each $key, $value in $shilp-font-sizes {
+    --text--#{$key}: #{$value};
+  }
+  //WEIGHTS
+  @each $key, $value in $shilp-font-weights {
+    --text--#{$key}: #{$value};
+  }
+  //FONTS
+  @each $key, $value in $shilp-font-families {
+    --text--#{$key}: #{$value};
   }
 
-  //FONT-SIZES
-  @each $size, $value in $shilp-font-sizes {
-    --font-size--#{$size}: #{$value};
+  //--------------------------------------------------
+  // FIELD
+  //--------------------------------------------------
+  //SIZES
+  @each $key, $value in $shilp-field-sizes {
+    --field--#{$key}: #{$value};
+  }
+  //TEXT SIZES
+  @each $key, $value in $shilp-field-text-sizes {
+    --field-text--#{$key}: #{$value};
+  }
+  //ICON SIZES
+  @each $key, $value in $shilp-field-icon-sizes {
+    --field-icon--#{$key}: #{$value};
   }
 
-  //FONT-WEIGHTS
-  @each $type, $value in $shilp-font-weights {
-    --font-weight--#{$type}: #{$value};
+  //--------------------------------------------------
+  // MISC
+  //--------------------------------------------------
+  //RADIUS
+  @each $key, $value in $shilp-radius {
+    --radius--#{$key}: #{$value};
   }
 
   //SPACES
-  @each $size, $value in $shilp-spaces {
-    @if ($size== "default") {
-      --space: #{$size};
-    } @else {
-      --space--#{$size}: #{$value};
-    }
+  @each $key, $value in $shilp-spaces {
+    --space--#{$key}: #{$value};
   }
 
-  //INPUT-SIZES
-  @each $size, $value in $shilp-input-sizes {
-    @if ($size== "default") {
-      --input-size: #{$value};
-    } @else {
-      --input-size--#{$size}: #{$value};
-    }
-  }
-
-  //BORDER-RADIUS
-  @each $size, $value in $shilp-border-radius {
-    @if ($size== "default") {
-      --border-radius: #{$value};
-    } @else {
-      --border-radius--#{$size}: #{$value};
-    }
-  }
-
-  //BOX-SHADOW
-  @each $size, $value in $shilp-box-shadows {
-    @if ($size== "default") {
-      --box-shadow: #{$value};
-    } @else {
-      --box-shadow--#{$size}: #{$value};
-    }
+  //SHADOW
+  @each $key, $value in $shilp-shadows {
+    --shadow--#{$key}: #{$value};
   }
 
   // BREAKPOINTS

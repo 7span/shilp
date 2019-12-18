@@ -30,7 +30,7 @@ $loader-thickness: var(--loader--thickness);
 // MIXINS
 //--------------------------------------------------
 @mixin loader--size($size) {
-  --loader--size: #{map-get($shilp-input-icon-sizes, $size)};
+  --loader--size: #{map-get($shilp-field-icon-sizes, $size)};
 }
 
 //--------------------------------------------------
@@ -47,7 +47,8 @@ $loader-thickness: var(--loader--thickness);
     width: var(--loader--size);
     height: var(--loader--size);
     @include position(absolute);
-    border-color: var(--loader--color) var(--loader--base-color) var(--loader--base-color) var(--loader--base-color);
+    border-color: var(--loader--color) var(--loader--base-color)
+      var(--loader--base-color) var(--loader--base-color);
     content: "";
     border-radius: 50%;
     border-style: solid;
@@ -71,7 +72,7 @@ $loader-thickness: var(--loader--thickness);
 }
 
 //---------- SIZE
-@each $key, $value in $shilp-input-icon-sizes {
+@each $key, $value in $shilp-field-icon-sizes {
   .loader--#{$key} {
     @include loader--size($key);
   }

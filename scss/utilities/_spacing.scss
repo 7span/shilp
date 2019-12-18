@@ -40,8 +40,22 @@ $shilp-space-directions: (
 }
 
 @mixin shilp-space-sizes($breakpoint, $property-initial, $property) {
-  @each $space, $value in $shilp-spaces {
-    $size: --space($space);
+  //Merge 0px and auto values to spaces.
+  $spaces: map-merge(
+    $shilp-spaces,
+    (
+      0: 0px,
+      auto: auto
+    )
+  );
+
+  @each $space, $value in $spaces {
+    $size: "";
+    @if ($space== 0 or $space== auto) {
+      $size: $value;
+    } @else {
+      $size: --space($space);
+    }
 
     //All Directions
     $className: breakpoint-class($breakpoint, #{$property-initial}--#{$space});

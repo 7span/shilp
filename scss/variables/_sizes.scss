@@ -17,70 +17,12 @@ $shilp-breakpoints: map-merge(
 $shilp-spaces: () !default;
 $shilp-spaces: map-merge(
   (
-    0: 0px,
     xxs: 4px,
     xs: 8px,
     sm: 16px,
     md: 24px,
     lg: 32px,
-    xl: 40px,
-    auto: auto
+    xl: 40px
   ),
   $shilp-spaces
-);
-
-// INPUT SIZES
-// Sizes for input, buttons.
-$shilp-input-sizes: () !default;
-$shilp-input-sizes: map-merge(
-  (
-    xs: 24px,
-    sm: 32px,
-    md: 40px,
-    lg: 48px,
-    xl: 56px
-  ),
-  $shilp-input-sizes
-);
-
-// INPUT ICON SIZES
-// Sizes of icons for input, buttons.
-$shilp-input-icon-sizes: () !default;
-$shilp-input-icon-sizes: map-merge(
-  (
-    xl: 28px,
-    lg: 24px,
-    md: 20px,
-    sm: 16px,
-    xs: 14px
-  ),
-  $shilp-input-icon-sizes
-);
-
-// INPUT FONT SIZES
-// Sizes of icons for input, buttons.
-$shilp-input-font-sizes: () !default;
-$shilp-input-font-sizes: map-merge(
-  (
-    xl: md,
-    lg: md,
-    md: sm,
-    sm: sm,
-    xs: xs
-  ),
-  $shilp-input-font-sizes
-);
-
-// BORDER_RADIUS
-$shilp-border-radius: () !default;
-$shilp-border-radius: map-merge(
-  (
-    xs: 2px,
-    sm: 4px,
-    md: 6px,
-    lg: 8px,
-    xl: 10px,
-    circle: 50%
-  ),
-  $shilp-border-radius
 );

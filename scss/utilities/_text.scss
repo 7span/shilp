@@ -1,13 +1,62 @@
-//FONT SIZES
+//TEXT SIZES
 @each $size, $value in $shilp-font-sizes {
-  .fs--#{$size} {
-    font-size: --font-size($size);
+  .text--#{$size} {
+    font-size: --text($size);
   }
 }
 
-// FONT WEIGHTS
+// TEXT WEIGHTS
 @each $weight, $value in $shilp-font-weights {
-  .fw--#{$weight} {
-    font-weight: --font-weight($weight);
+  .text--#{$weight} {
+    font-weight: --text($weight);
+  }
+}
+
+//ITALIC
+.text--italic {
+  font-style: italic;
+}
+
+//UNDERLINE
+.text--underline {
+  text-decoration: underline;
+}
+
+// TEXT COLOR
+@each $color, $shades in $shilp-colors {
+  @each $shade, $code in $shades {
+    @if ($shade== "default") {
+      .text--#{$color} {
+        color: --color($color) !important;
+      }
+    } @else {
+      .text--#{$color}--#{$shade} {
+        color: --color($color, $shade) !important;
+      }
+    }
+  }
+}
+
+//--------------------------------------------------
+// ALIGNMENT
+// Alignment has responsive classes too.
+//--------------------------------------------------
+$shilp-text-aligns: "left", "right", "center";
+
+@mixin shilp-text-align-rules($breakpoint) {
+  @each $align in $shilp-text-aligns {
+    $className: breakpoint-class($breakpoint, text--#{$align});
+    .#{$className} {
+      text-align: #{$align};
+    }
+  }
+}
+
+@include shilp-text-align-rules("phone");
+
+//Media Query
+@each $breakpoint, $value in $shilp-breakpoints {
+  @media only screen and (min-width: $value) {
+    @include shilp-text-align-rules($breakpoint);
   }
 }

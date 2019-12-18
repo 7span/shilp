@@ -10,7 +10,6 @@
 $shilp-field-defaults: () !default;
 $shilp-field-defaults: map-merge(
   (
-    "size": "md",
     "states": (
       danger,
       warning,
@@ -32,17 +31,15 @@ $shilp-field-vars: map-merge(
     "circum-color": --color(grey),
     "circum-bg": --color(grey, lightest),
     "focus-color": --color(grey, lightest),
-    "size": map-get($shilp-input-sizes, md),
-    "font-size": --font-size(map-get($shilp-input-font-sizes, md)),
-    "icon-size": map-get($shilp-input-icon-sizes, md)
+    "size": --field(md),
+    "font-size": --field-text(md),
+    "icon-size": --field-icon(md)
   ),
   $shilp-field-vars
 );
 
 //---------- Local Variables
-$field-size: map-get($shilp-field-defaults, "size");
 $field-states: map-get($shilp-field-defaults, "states");
-$field-sizes: $shilp-input-sizes;
 
 //--------------------------------------------------
 // MIXINS
@@ -81,10 +78,10 @@ $field-sizes: $shilp-input-sizes;
   border: var(--field--border-width) solid var(--field--border-color);
   border-radius: var(--field--radius);
   min-width: 0px; //When .field__group is used, the input becomes flex child.
-  font-size: var(--field--font-size);
+  font-size: var(--field--text-size);
   overflow: hidden;
   > * {
-    font-size: var(--field--font-size);
+    font-size: var(--field--text-size);
   }
   &:not(textarea) {
     height: var(--field--size);
@@ -160,13 +157,11 @@ textarea.field-block {
 //--------------------------------------------------
 
 //---------- SIZE
-@each $size, $value in $field-sizes {
-  .field--#{$size} {
-    --field--size: #{--input-size($size)};
-    --field--font-size: #{--font-size(
-        #{map-get($shilp-input-font-sizes, $size)}
-      )};
-    --field--icon-size: #{map-get($shilp-input-icon-sizes, $size)};
+@each $key, $value in $shilp-field-sizes {
+  .field--#{$key} {
+    --field--size: #{--field($key)};
+    --field--text-size: #{--field-text($key)};
+    --field--icon-size: #{--field-icon($key)};
   }
 }
 

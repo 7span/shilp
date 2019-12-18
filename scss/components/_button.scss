@@ -6,10 +6,7 @@
 $shilp-button-defaults: () !default;
 $shilp-button-defaults: map-merge(
   (
-    "colors": shilp-colors(),
-    "sizes": $shilp-input-sizes,
-    "font-sizes": $shilp-input-font-sizes,
-    "icon-sizes": $shilp-input-icon-sizes,
+    "colors": shilp-color-names(),
     "paddings": $shilp-spaces,
     "styles": (
       trn,
@@ -32,25 +29,22 @@ $shilp-button-vars: () !default;
 $shilp-button-vars: map-merge(
   (
     "bg": transparent,
-    "color": #000000,
+    "color": --color(dark),
     "hover-bg": transparent,
-    "hover-color": #000000,
+    "hover-color": --color(dark),
     "border": 0px,
-    "size": #{map-deep-get($shilp-button-defaults, sizes, md)},
-    "font-size": #{map-deep-get($shilp-button-defaults, font-sizes, md)},
-    "padding": #{map-deep-get($shilp-button-defaults, paddings, md)},
-    "icon-size": #{map-deep-get($shilp-button-defaults, icon-sizes, md)}
+    "size": --field(md),
+    "font-size": --field-text(md),
+    "icon-size": #{map-get($shilp-field-icon-sizes, md)},
+    "padding": #{map-deep-get($shilp-button-defaults, paddings, md)}
   ),
   $shilp-button-vars
 );
 
 //---------- Local Variables
 $button-shapes: (rectangle, square, rounded, pill, circle);
-$button-sizes: map-get($shilp-button-defaults, "sizes");
 $button-colors: map-get($shilp-button-defaults, "colors");
 $button-styles: map-get($shilp-button-defaults, "styles");
-$button-font-sizes: map-get($shilp-button-defaults, "font-sizes");
-$button-icon-sizes: map-get($shilp-button-defaults, "icon-sizes");
 $button-paddings: map-get($shilp-button-defaults, "paddings");
 $button-hover-shade: map-get($shilp-button-defaults, "hover-shade");
 $button-muted-shade: map-get($shilp-button-defaults, "muted-shade");
@@ -68,9 +62,23 @@ $default-button-style: map-get($shilp-button-defaults, "style");
 //---------- STYLE: SWITCHER
 @mixin button-style($style, $color) {
   $default: --color($color);
-  $text: --text-color($color, dark);
-  $hover: --color($color, $button-hover-shade);
-  $muted: --color($color, $button-muted-shade);
+  $text: "";
+  $hover: "";
+  $muted: "";
+
+  @if ($color== "light" or $color== "dark") {
+    $hover: --color($color);
+    $muted: --color($color);
+  } @else {
+    $hover: --color($color, $button-hover-shade);
+    $muted: --color($color, $button-muted-shade);
+  }
+
+  @if ($color== "light") {
+    $text: --color(dark);
+  } @else {
+    $text: --color(light);
+  }
 
   //---------- SOLID
   @if $style== "solid" {
@@ -100,7 +108,7 @@ $default-button-style: map-get($shilp-button-defaults, "style");
   }
   //---------- GRADIENT
   @else if $style== "gradient" {
-    background: gradient($color);
+    background: create-gradient($color);
   }
   //----------  TAB
   @else if $style== "tab" {
@@ -122,7 +130,7 @@ $default-button-style: map-get($shilp-button-defaults, "style");
   display: inline-flex;
   align-items: center;
   white-space: nowrap;
-  font-family: --font-family(content);
+  font-family: --text(content);
   text-decoration: none;
   line-height: 1;
   justify-content: center;
@@ -179,7 +187,7 @@ $default-button-style: map-get($shilp-button-defaults, "style");
 // MODIFIERS
 //--------------------------------------------------
 .button--fluid {
-  width: 100%;
+  width: 100% !important;
 }
 
 //----------  ALIGNMENTS
@@ -280,11 +288,11 @@ $default-button-style: map-get($shilp-button-defaults, "style");
 }
 
 //----------  SIZES
-@each $size, $value in $button-sizes {
-  .button--#{$size} {
-    --button--size: #{$value};
-    --button--padding: #{map-get($button-paddings, $size)};
-    --button--font-size: #{map-get($button-font-sizes, $size)};
-    --button--icon-size: #{map-get($button-icon-sizes, $size)};
+@each $key, $value in $shilp-field-sizes {
+  .button--#{$key} {
+    --button--size: #{--field($key)};
+    --button--font-size: #{--field-text($key)};
+    --button--icon-size: #{map-get($shilp-field-icon-sizes, $key)};
+    --button--padding: #{map-get($button-paddings, $key)};
   }
 }

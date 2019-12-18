@@ -77,74 +77,13 @@ $shilp-colors: map-merge(
       darkest: #263238
     ),
     "light": (
-      lightest: #ffffff,
-      lighter: #ffffff,
-      light: #ffffff,
-      default: #ffffff,
-      dark: #ffffff,
-      darker: #ffffff,
-      darkest: #ffffff
+      default: #ffffff
     ),
     "dark": (
-      lightest: #000000,
-      lighter: #000000,
-      light: #000000,
-      default: #000000,
-      dark: #000000,
-      darker: #000000,
-      darkest: #000000
+      default: #000000
     )
   ),
   $shilp-colors
-);
-
-//TEXT COLORS IN CONTRAST TO COLORS
-// Make sure the color names are used in contrast to the actual colors defined in top map
-$shilp-text-colors: () !default;
-$shilp-text-colors: map-merge(
-  (
-    "primary": (
-      dark: #ffffff,
-      light: #0652dd
-    ),
-    "secondary": (
-      dark: #ffffff,
-      light: #003867
-    ),
-    "accent": (
-      dark: #ffffff,
-      light: #7a4f03
-    ),
-    "success": (
-      dark: #ffffff,
-      light: #065114
-    ),
-    "warning": (
-      dark: #ffffff,
-      light: #714100
-    ),
-    "danger": (
-      dark: #ffffff,
-      light: #69031a
-    ),
-    "info": (
-      dark: #ffffff,
-      light: #003867
-    ),
-    "grey": (
-      dark: #ffffff,
-      light: #263238
-    ),
-    "light": (
-      dark: #000000,
-      light: #000000
-    ),
-    "dark": (
-      dark: #ffffff,
-      light: #ffffff
-    )
-  ),
-  $shilp-text-colors
 );
 
 // GRADIENTS

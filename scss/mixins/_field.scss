@@ -1,5 +1,5 @@
 @mixin field-defaults {
-  font-family: --font-family(content);
+  font-family: --text(content);
   color: #000;
   width: 100%;
   outline: 0;

@@ -1,0 +1,116 @@
+//--------------------------------------------------
+// Variable Helpers
+// Functions starting with -- will return CSS Variables.
+// While others will return values.
+//--------------------------------------------------
+
+//This is generalized function to handle "default" values.
+// @prop: Property
+// @val : Value
+// @mod : Modifier
+@function --var($prop, $val, $mod: "") {
+  @if ($mod== "" or $mod== "default") {
+    @return var(--#{$prop}--#{$val});
+  }
+  @return var(--#{$prop}--#{$val}--#{$mod});
+}
+
+//--------------------------------------------------
+// COLOR
+//--------------------------------------------------
+@function --color($val, $mod: "") {
+  @return --var("color", $val, $mod);
+}
+@function color($color, $shade: "default") {
+  @return map-deep-get($shilp-colors, $color, $shade);
+}
+
+//--------------------------------------------------
+// SPACE
+//--------------------------------------------------
+@function --space($val, $mod: "") {
+  @return --var("space", $val, $mod);
+}
+@function space($size) {
+  @return map-get($shilp-spaces, $size);
+}
+
+//--------------------------------------------------
+// TEXT
+//--------------------------------------------------
+@function --text($val) {
+  @return --var("text", $val);
+}
+@function text($val) {
+  @if (map-has-key($shilp-font-sizes, $val)) {
+    @return map-get($shilp-font-sizes, $val);
+  }
+  @if (map-has-key($shilp-font-weights, $val)) {
+    @return map-get($shilp-font-weights, $val);
+  }
+  @if (map-has-key($shilp-font-families, $val)) {
+    @return unquote(map-get($shilp-font-families, $val));
+  }
+  @return invalid-value-provided;
+}
+
+//--------------------------------------------------
+// RADIUS
+//--------------------------------------------------
+@function --radius($val) {
+  @return --var("radius", $val);
+}
+@function radius($val) {
+  @return map-get($shilp-radius, $val);
+}
+
+//--------------------------------------------------
+// SHADOW
+//--------------------------------------------------
+@function --shadow($val) {
+  @return --var("shadow", $val);
+}
+@function shadow($val) {
+  @return map-get($shilp-shadows, $val);
+}
+
+//--------------------------------------------------
+// FIELD
+//--------------------------------------------------
+@function --field($val) {
+  @return --var("field", $val);
+}
+@function field($val) {
+  @if (map-has-key($shilp-field-sizes, $val)) {
+    @return map-get($shilp-field-sizes, $val);
+  }
+  @return invalid-value-provided;
+}
+@function --field-text($val) {
+  @return --var("field-text", $val);
+}
+@function field-text($val) {
+  @if (map-has-key($shilp-field-text-sizes, $val)) {
+    @return map-get($shilp-field-text-sizes, $val);
+  }
+  @return invalid-value-provided;
+}
+@function --field-icon($val) {
+  @return --var("field-icon", $val);
+}
+@function field-icon($val) {
+  @if (map-has-key($shilp-field-icon-sizes, $val)) {
+    @return map-get($shilp-field-icon-sizes, $val);
+  }
+  @return invalid-value-provided;
+}
+
+//--------------------------------------------------
+// GRADIENT
+//--------------------------------------------------
+@function --gradient($val, $mod) {
+  @return --var("gradient", $val, $mod);
+}
+@function gradient($val, $mod: 1) {
+  @return nth(map-get($shilp-gradients, $val), $mod);
+}

@@ -6,7 +6,7 @@
 $shilp-alert-defaults: () !default;
 $shilp-alert-defaults: map-merge(
   (
-    "colors": shilp-colors(),
+    "colors": shilp-color-names(),
     "styles": (
       solid,
       outline,
@@ -43,7 +43,7 @@ $alert-styles: map-get($shilp-alert-defaults, "styles");
 @mixin alert--style($color, $style) {
   @if ($style== "solid") {
     --alert--bg: #{--color($color)};
-    --alert--color: #{--text-color($color, dark)};
+    --alert--color: #{--color(light)};
   } //
   @else if($style== "outline") {
     --alert--bg: #{--color($color, lightest)};
@@ -53,11 +53,11 @@ $alert-styles: map-get($shilp-alert-defaults, "styles");
   } //
   @else if($style== "muted") {
     --alert--bg: #{--color($color, lightest)};
-    --alert--color: #{--text-color($color, light)};
+    --alert--color: #{--color($color)};
   } //
   @else if($style== "gradient") {
-    background: gradient($color);
-    --alert--color: #{--text-color($color, light)};
+    background: create-gradient($color);
+    --alert--color: #{--color($color)};
   }
 }
 
@@ -115,7 +115,7 @@ $alert-styles: map-get($shilp-alert-defaults, "styles");
   border-radius: 0;
 }
 .alert--rounded {
-  border-radius: --border-radius(sm);
+  border-radius: --radius(sm);
 }
 .alert--pill {
   border-radius: 9999px;

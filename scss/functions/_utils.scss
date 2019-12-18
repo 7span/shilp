@@ -1,0 +1,62 @@
+//--------------------------------------------------
+// MAP DEEP GET
+// Get Deeper Values from Map
+//--------------------------------------------------
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}
+
+//--------------------------------------------------
+// BREAKPOINT CLASS
+// Automatically generates class for given breakpoint
+//--------------------------------------------------
+@function breakpoint-class($breakpoint, $class) {
+  $breakpoint-seperator: map-get($shilp-config, breakpoint-separator);
+  @if ($breakpoint== "phone") {
+    $class: #{$class};
+  } @else {
+    $class: #{$class + $breakpoint-seperator + $breakpoint};
+  }
+  @return $class;
+}
+
+//--------------------------------------------------
+// FONT WITH FALLCACK
+// Generates the font-stack with a fallback values
+// as system fonts
+//--------------------------------------------------
+@function font-with-fallback($value) {
+  $system-fonts: map-get($shilp-config, system-fonts);
+  @if ($value== "system") {
+    @return $system-fonts;
+  } @else {
+    @return map-get($shilp-fonts, $value) + "," + $system-fonts;
+  }
+}
+
+//--------------------------------------------------
+// CREATE GRADIENT
+// Generates the gradient string with direction provided
+//--------------------------------------------------
+@function create-gradient($name, $direction: 90deg) {
+  @return linear-gradient(
+    $direction,
+    --gradient($name, 1) 0%,
+    --gradient($name, 2) 100%
+  );
+}
+
+//--------------------------------------------------
+// COLOR NAMES
+// Returns the list of color names defined in $shilp-colors
+//--------------------------------------------------
+@function shilp-color-names() {
+  $colors: ();
+  @each $color, $value in $shilp-colors {
+    $colors: append($colors, $color);
+  }
+  @return $colors;
+}

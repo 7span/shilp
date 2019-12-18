@@ -1,5 +1,5 @@
-$shilp-box-shadows: () !default;
-$shilp-box-shadows: map-merge(
+$shilp-shadows: () !default;
+$shilp-shadows: map-merge(
   (
     xs: 0px 4px 0px 0px rgba(0, 0, 0, 0.1),
     sm: 0px 8px 16px 0px rgba(0, 0, 0, 0.1),
@@ -7,5 +7,5 @@ $shilp-box-shadows: map-merge(
     lg: 0px 24px 48px 0px rgba(0, 0, 0, 0.1),
     xl: 0px 32px 64px 0px rgba(0, 0, 0, 0.1)
   ),
-  $shilp-box-shadows
+  $shilp-shadows
 );

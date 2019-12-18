@@ -1,0 +1,41 @@
+// INPUT SIZES
+// Sizes for input, buttons.
+$shilp-field-sizes: () !default;
+$shilp-field-sizes: map-merge(
+  (
+    xs: 24px,
+    sm: 32px,
+    md: 40px,
+    lg: 48px,
+    xl: 56px
+  ),
+  $shilp-field-sizes
+);
+
+// INPUT ICON SIZES
+// Sizes of icons for input, buttons.
+$shilp-field-icon-sizes: () !default;
+$shilp-field-icon-sizes: map-merge(
+  (
+    xs: 14px,
+    sm: 16px,
+    md: 20px,
+    lg: 24px,
+    xl: 28px
+  ),
+  $shilp-field-icon-sizes
+);
+
+// INPUT FONT SIZES
+// Sizes of icons for input, buttons.
+$shilp-field-text-sizes: () !default;
+$shilp-field-text-sizes: map-merge(
+  (
+    xs: --text(xs),
+    sm: --text(sm),
+    md: --text(sm),
+    lg: --text(md),
+    xl: --text(md)
+  ),
+  $shilp-field-text-sizes
+);

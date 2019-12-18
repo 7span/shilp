@@ -3,7 +3,9 @@ $shilp-fonts: () !default;
 $shilp-fonts: map-merge(
   (
     heading: "system",
-    content: "system"
+    content: "system",
+    code:
+      'Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace'
   ),
   $shilp-fonts
 );
@@ -11,7 +13,8 @@ $shilp-fonts: map-merge(
 $shilp-font-families: (
   system: map-get($shilp-config, system-fonts),
   heading: font-with-fallback(heading),
-  content: font-with-fallback(content)
+  content: font-with-fallback(content),
+  code: font-with-fallback(code)
 );
 
 // FONT-WEIGHTS
@@ -37,13 +40,4 @@ $shilp-font-sizes: map-merge(
     xs: 12px
   ),
   $shilp-font-sizes
-);
-
-$shilp-font-size-map: (
-  h1: xxl,
-  h2: xl,
-  h3: lg,
-  h4: md,
-  h5: sm,
-  h6: xs
 );

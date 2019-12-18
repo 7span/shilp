@@ -15,7 +15,7 @@
 
   strong,
   b {
-    font-weight: --font-weight(bold);
+    font-weight: --text(bold);
   }
 
   a {
@@ -23,11 +23,11 @@
   }
 
   small {
-    font-size: --font-size(xs);
+    font-size: --text(xs);
   }
 
   code {
-    font-family: --font-family(code);
+    font-family: --text(code);
   }
 
   p {
@@ -44,14 +44,23 @@
   h4,
   h5,
   h6 {
-    font-family: --font-family(heading);
-    font-weight: --font-weight(bold);
+    font-family: --text(heading);
+    font-weight: --text(bold);
+    margin: 0;
   }
 
   //Add font-size according to tags
-  @each $tag, $value in $shilp-font-size-map {
+  $shilp-heading-sizes: (
+    h1: xxl,
+    h2: xl,
+    h3: lg,
+    h4: md,
+    h5: sm,
+    h6: xs
+  );
+  @each $tag, $value in $shilp-heading-sizes {
     #{$tag} {
-      font-size: --font-size($value);
+      font-size: --text($value);
     }
   }
 }
@@ -61,8 +70,8 @@
 // Useful when integrating with other CSS frameworks
 @if map-get($shilp-config, scoped) {
   .#{map-get($shilp-config, scope)} {
-    font-family: --font-family(content);
-    font-weight: --font-weight(regular);
+    font-family: --text(content);
+    font-weight: --text(regular);
     @include defaults;
   }
 } @else {
@@ -70,9 +79,9 @@
     body {
       margin: 0;
       padding: 0;
-      font-size: --font-size(sm);
-      font-family: --font-family(content);
-      font-weight: --font-weight(regular);
+      font-size: --text(sm);
+      font-family: --text(content);
+      font-weight: --text(regular);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
