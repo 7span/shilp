@@ -1,11 +1,11 @@
 $shilp-radius: () !default;
 $shilp-radius: map-merge(
   (
-    xs: 2px,
-    sm: 4px,
-    md: 6px,
-    lg: 8px,
-    xl: 10px
+    1: 2px,
+    2: 4px,
+    3: 6px,
+    4: 8px,
+    5: 10px
   ),
   $shilp-radius
 );

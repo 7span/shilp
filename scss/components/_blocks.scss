@@ -15,7 +15,7 @@ $shilp-blocks-defaults: map-merge(
 $shilp-blocks-vars: () !default;
 $shilp-blocks-vars: map-merge(
   (
-    "gap": map-deep-get($shilp-blocks-defaults, gaps, 0)
+    "gap": 0px
   ),
   $shilp-blocks-vars
 );
@@ -30,8 +30,8 @@ $blocks-gaps: map-get($shilp-blocks-defaults, "gaps");
 // RESPONSIVE BLOCKS GAP
 // Generates the responsive classes based on breakpoint. with all the gap values.
 @mixin blocks-gap($breakpoint) {
-  @each $gap, $value in $blocks-gaps {
-    $className: breakpoint-class($breakpoint, blocks--#{$gap});
+  @each $key, $value in $blocks-gaps {
+    $className: breakpoint-class($breakpoint, blocks--#{$key});
     .#{$className} {
       --blocks--gap: #{$value};
     }

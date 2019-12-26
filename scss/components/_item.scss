@@ -41,10 +41,10 @@ $item-size: map-get($shilp-item-defaults, "size");
 }
 
 .item__body {
-  padding: 0px --space(sm);
+  padding: 0px --space(2);
 }
 .item__title {
-  margin: 0 0 --space(xs) 0;
+  margin: 0 0 --space(1) 0;
 }
 .item__content {
   p {

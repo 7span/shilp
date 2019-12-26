@@ -15,7 +15,7 @@ $shilp-list-defaults: map-merge(
 $shilp-list-vars: () !default;
 $shilp-list-vars: map-merge(
   (
-    "gap": map-deep-get($shilp-list-defaults, gaps, 0)
+    "gap": 0px
   ),
   $shilp-list-vars
 );
@@ -42,6 +42,9 @@ $list-gaps: map-get($shilp-list-defaults, "gaps");
   .list--#{$gap} {
     --list--gap: #{$value};
   }
+}
+.list--0 {
+  --list--gap: 0;
 }
 
 //---------- STACK

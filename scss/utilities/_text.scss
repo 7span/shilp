@@ -22,6 +22,11 @@
   text-decoration: underline;
 }
 
+//UPPERCASE
+.text--uppercase {
+  text-transform: uppercase;
+}
+
 // TEXT COLOR
 @each $color, $shades in $shilp-colors {
   @each $shade, $code in $shades {

@@ -13,7 +13,7 @@
 }
 .choice__label:not(.button) {
   margin-bottom: 0;
-  margin-left: --space(xs);
+  margin-left: --space(1);
   color: #000;
   cursor: pointer;
 }
@@ -24,7 +24,15 @@
   }
 }
 
-.choice--custom {
+.choice.choice--custom {
+  input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+  }
+}
+
+.choice:not(.choice--native):not(.choice--custom) {
   height: auto;
   input {
     position: absolute;

@@ -52,7 +52,7 @@ $field-states: map-get($shilp-field-defaults, "states");
 // FIELD
 .field {
   @include component-vars("field", $shilp-field-vars);
-  margin-bottom: --space(md);
+  margin-bottom: --space(3);
 
   .field {
     margin-bottom: 0;
@@ -98,7 +98,7 @@ $field-states: map-get($shilp-field-defaults, "states");
 }
 
 textarea.field-block {
-  padding: --space(xs);
+  padding: --space(1);
 }
 
 //GROUP ITEMS
@@ -134,7 +134,7 @@ textarea.field-block {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0px --space(xs);
+  padding: 0px --space(1);
   background-color: var(--field--circum-bg);
   color: var(--field--circum-color);
 }
@@ -181,7 +181,7 @@ textarea.field-block {
     &:after {
       content: var(--field--optional-text);
       font-style: italic;
-      margin-left: --space(xs);
+      margin-left: --space(1);
       color: --color(grey);
     }
   }

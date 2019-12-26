@@ -20,11 +20,11 @@ $shilp-modal-defaults: map-merge(
     //Defines the padding to keep around modal for diffrent breakpoints.
       "space-around":
       (
-        phone: --space(xs),
-        phablet: --space(sm),
-        tablet: --space(md),
-        laptop: --space(lg),
-        desktop: --space(xl)
+        phone: --space(1),
+        phablet: --space(2),
+        tablet: --space(3),
+        laptop: --space(4),
+        desktop: --space(5)
       )
   ),
   $shilp-modal-defaults
@@ -112,7 +112,11 @@ $modal-sizes: map-get($shilp-modal-defaults, "sizes");
 @each $breakpoint, $value in $shilp-breakpoints {
   @media only screen and (min-width: $value) {
     .modal {
-      --modal--space-around: #{map-deep-get($shilp-modal-defaults, "space-around", $breakpoint)};
+      --modal--space-around: #{map-deep-get(
+          $shilp-modal-defaults,
+          "space-around",
+          $breakpoint
+        )};
     }
   }
 }

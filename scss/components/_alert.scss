@@ -77,7 +77,7 @@ $alert-styles: map-get($shilp-alert-defaults, "styles");
   margin: 0;
 }
 .alert__icon {
-  margin-right: --space(xs);
+  margin-right: --space(1);
 }
 
 //--------------------------------------------------

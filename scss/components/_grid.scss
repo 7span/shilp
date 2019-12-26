@@ -6,7 +6,14 @@
 $shilp-grid-defaults: () !default;
 $shilp-grid-defaults: map-merge(
   (
-    "gaps": $shilp-spaces
+    "gaps": $shilp-spaces,
+    "sizes": (
+      xs: 120px,
+      sm: 240px,
+      md: 360px,
+      lg: 480px,
+      xl: 600px
+    )
   ),
   $shilp-grid-defaults
 );
@@ -15,14 +22,15 @@ $shilp-grid-defaults: map-merge(
 $shilp-grid-vars: () !default;
 $shilp-grid-vars: map-merge(
   (
-    "gap": map-deep-get($shilp-blocks-defaults, gaps, 0),
-    "size": 160px
+    "gap": 0px,
+    "size": map-deep-get($shilp-grid-defaults, sizes, md)
   ),
   $shilp-grid-vars
 );
 
 //---------- Local Variables
 $grid-gaps: map-get($shilp-grid-defaults, "gaps");
+$grid-sizes: map-get($shilp-grid-defaults, "sizes");
 
 //--------------------------------------------------
 // MIXINS
@@ -31,10 +39,21 @@ $grid-gaps: map-get($shilp-grid-defaults, "gaps");
 // RESPONSIVE GRID GAP
 // Generates the responsive classes based on breakpoint. with all the gap values.
 @mixin shilp-grid-gap($breakpoint) {
-  @each $gap, $value in $grid-gaps {
-    $className: breakpoint-class($breakpoint, grid--#{$gap});
+  @each $key, $value in $grid-gaps {
+    $className: breakpoint-class($breakpoint, grid--#{$key});
     .#{$className} {
       --grid--gap: #{$value};
+    }
+  }
+}
+
+// RESPONSIVE GRID SIZE
+// Generates the responsive classes based on breakpoint. with all the gap values.
+@mixin shilp-grid-size($breakpoint) {
+  @each $key, $value in $grid-sizes {
+    $className: breakpoint-class($breakpoint, grid--#{$key});
+    .#{$className} {
+      --grid--size: #{$value};
     }
   }
 }
@@ -48,16 +67,21 @@ $grid-gaps: map-get($shilp-grid-defaults, "gaps");
   gap: var(--grid--gap);
   grid-template-columns: repeat(auto-fill, minmax(var(--grid--size), 1fr));
 }
+.grid--fix {
+  grid-template-columns: repeat(auto-fill, var(--grid--size));
+}
+
 @include shilp-grid-gap("phone");
+@include shilp-grid-size("phone");
 //--------------------------------------------------
 // MODIFIERS
 //--------------------------------------------------
-
 //--------------------------------------------------
 // MEDIA QUERY
 //--------------------------------------------------
 @each $breakpoint, $value in $shilp-breakpoints {
   @media only screen and (min-width: $value) {
     @include shilp-grid-gap($breakpoint);
+    @include shilp-grid-size($breakpoint);
   }
 }

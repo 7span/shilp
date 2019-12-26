@@ -6,13 +6,7 @@
 $shilp-card-defaults: () !default;
 $shilp-card-defaults: map-merge(
   (
-    "sizes": (
-      xs,
-      sm,
-      md,
-      lg,
-      xl
-    )
+    "gaps": $shilp-spaces
   ),
   $shilp-card-defaults
 );
@@ -28,7 +22,7 @@ $shilp-card-vars: map-merge(
 );
 
 //---------- Local Variables
-$card-sizes: map-get($shilp-card-defaults, "sizes");
+$card-gaps: map-get($shilp-card-defaults, "gaps");
 $card-border-color: var(--card--border-color);
 
 //--------------------------------------------------
@@ -36,11 +30,11 @@ $card-border-color: var(--card--border-color);
 //--------------------------------------------------
 
 //---------- SIZE
-@mixin card--card--size($breakpoint) {
-  @each $size in $card-sizes {
-    $className: breakpoint-class($breakpoint, card--#{$size});
+@mixin card--size($breakpoint) {
+  @each $key, $value in $card-gaps {
+    $className: breakpoint-class($breakpoint, card--#{$key});
     .#{$className} {
-      --card--size: #{--space($size)};
+      --card--gap: #{$value};
     }
   }
 }
@@ -51,23 +45,23 @@ $card-border-color: var(--card--border-color);
 
 .card {
   @include component-vars("card", $shilp-card-vars);
-  --card--size: 0;
+  --card--gap: 0;
   display: inline-flex;
   flex-direction: column;
   background-clip: padding-box;
   background-color: --color(light);
   > *:not(.ratio) {
     background-color: --color(light);
-    padding-left: var(--card--size);
-    padding-right: var(--card--size);
+    padding-left: var(--card--gap);
+    padding-right: var(--card--gap);
     &:first-child {
-      padding-top: var(--card--size);
+      padding-top: var(--card--gap);
     }
     &:last-child {
-      padding-bottom: var(--card--size);
+      padding-bottom: var(--card--gap);
     }
     &:only-child {
-      padding: var(--card--size);
+      padding: var(--card--gap);
     }
   }
 }
@@ -77,11 +71,11 @@ $card-border-color: var(--card--border-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--card--size);
+  padding: var(--card--gap);
   //When the header is not first child,
   // Reduce the horizontal space for better UI
   &:not(:first-child) {
-    padding-bottom: calc(var(--card--size) * 4 / 6);
+    padding-bottom: calc(var(--card--gap) * 4 / 6);
   }
 }
 
@@ -100,19 +94,19 @@ $card-border-color: var(--card--border-color);
   }
 }
 .card__icon {
-  margin-right: --space(xs);
+  margin-right: --space(1);
 }
 
 //---------- FOOTER
 .card__footer {
-  padding-top: var(--card--size);
+  padding-top: var(--card--gap);
 }
 
 //--------------------------------------------------
 // MODIFIERS
 //--------------------------------------------------
 
-@include card--card--size("phone");
+@include card--size("phone");
 
 .card--fluid {
   display: block;
@@ -121,7 +115,7 @@ $card-border-color: var(--card--border-color);
 .card--split {
   > * {
     &:not(.ratio) {
-      padding: var(--card--size) !important;
+      padding: var(--card--gap) !important;
     }
   }
 }
@@ -141,6 +135,6 @@ $card-border-color: var(--card--border-color);
 //--------------------------------------------------
 @each $breakpoint, $value in $shilp-breakpoints {
   @media only screen and (min-width: $value) {
-    @include card--card--size($breakpoint);
+    @include card--size($breakpoint);
   }
 }

@@ -7,7 +7,6 @@ $shilp-button-defaults: () !default;
 $shilp-button-defaults: map-merge(
   (
     "colors": shilp-color-names(),
-    "paddings": $shilp-spaces,
     "styles": (
       trn,
       solid,
@@ -35,8 +34,7 @@ $shilp-button-vars: map-merge(
     "border": 0px,
     "size": --field(md),
     "font-size": --field-text(md),
-    "icon-size": #{map-get($shilp-field-icon-sizes, md)},
-    "padding": #{map-deep-get($shilp-button-defaults, paddings, md)}
+    "icon-size": --field-icon(md)
   ),
   $shilp-button-vars
 );
@@ -45,7 +43,6 @@ $shilp-button-vars: map-merge(
 $button-shapes: (rectangle, square, rounded, pill, circle);
 $button-colors: map-get($shilp-button-defaults, "colors");
 $button-styles: map-get($shilp-button-defaults, "styles");
-$button-paddings: map-get($shilp-button-defaults, "paddings");
 $button-hover-shade: map-get($shilp-button-defaults, "hover-shade");
 $button-muted-shade: map-get($shilp-button-defaults, "muted-shade");
 $default-button-shape: map-get($shilp-button-defaults, "shape");
@@ -139,7 +136,7 @@ $default-button-style: map-get($shilp-button-defaults, "style");
   color: var(--button--color);
   border: var(--button--border) solid var(--button--color);
   height: var(--button--size);
-  padding: 0px var(--button--padding);
+  padding: 0px calc(var(--button--size) / 2);
   font-size: var(--button--font-size);
   svg {
     height: var(--button--icon-size) !important;
@@ -180,7 +177,7 @@ $default-button-style: map-get($shilp-button-defaults, "style");
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: --space(xs);
+  margin-right: --space(2);
 }
 
 //--------------------------------------------------
@@ -194,14 +191,14 @@ $default-button-style: map-get($shilp-button-defaults, "style");
 .button--left {
   justify-content: flex-start;
   .button__icon {
-    margin-right: --space(xs);
+    margin-right: --space(2);
   }
 }
 .button--right {
   flex-direction: row-reverse;
   justify-content: space-between;
   .button__icon {
-    margin-left: --space(xs);
+    margin-left: --space(2);
     margin-right: 0;
   }
 }
@@ -293,6 +290,5 @@ $default-button-style: map-get($shilp-button-defaults, "style");
     --button--size: #{--field($key)};
     --button--font-size: #{--field-text($key)};
     --button--icon-size: #{map-get($shilp-field-icon-sizes, $key)};
-    --button--padding: #{map-get($button-paddings, $key)};
   }
 }

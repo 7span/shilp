@@ -18,7 +18,7 @@ $shilp-person-vars: map-merge((), $shilp-person-vars);
   display: grid;
   grid-template-columns: max-content auto;
   grid-template-rows: 1fr 1fr;
-  column-gap: --space(sm);
+  column-gap: --space(2);
   text-decoration: none;
   > .avatar {
     grid-column: 1 / 2;
