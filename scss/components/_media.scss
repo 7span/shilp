@@ -1,6 +1,8 @@
 .media {
   --media--fit: contain;
   --media--position: center;
+}
+.media__wrap {
   > img,
   > video,
   > iframe {

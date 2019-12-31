@@ -40,7 +40,6 @@ $shilp-button-vars: map-merge(
 );
 
 //---------- Local Variables
-$button-shapes: (rectangle, square, rounded, pill, circle);
 $button-colors: map-get($shilp-button-defaults, "colors");
 $button-styles: map-get($shilp-button-defaults, "styles");
 $button-hover-shade: map-get($shilp-button-defaults, "hover-shade");
@@ -180,11 +179,20 @@ $default-button-style: map-get($shilp-button-defaults, "style");
   margin-right: --space(2);
 }
 
+label.button {
+  cursor: default;
+  pointer-events: none;
+}
+
 //--------------------------------------------------
 // MODIFIERS
 //--------------------------------------------------
 .button--fluid {
   width: 100% !important;
+}
+.button--link {
+  padding: 0;
+  height: auto;
 }
 
 //----------  ALIGNMENTS

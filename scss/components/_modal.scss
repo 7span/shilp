@@ -90,7 +90,7 @@ $modal-sizes: map-get($shilp-modal-defaults, "sizes");
   }
 }
 
-.modal--fix {
+.modal--full-height {
   .modal__wrapper {
     > .card {
       height: 100%;

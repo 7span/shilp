@@ -57,19 +57,23 @@ $field-states: map-get($shilp-field-defaults, "states");
   .field {
     margin-bottom: 0;
   }
+}
 
-  > label {
-    display: flex;
-    margin-bottom: 4px;
-    color: --color(grey, dark);
-    align-items: center;
-  }
+.field__label {
+  display: flex;
+  margin-bottom: 4px;
+  color: --color(grey, dark);
+  align-items: center;
+}
 
-  > small {
-    display: flex;
-    margin-top: 4px;
-    color: --color(grey);
-  }
+.field__desc {
+  display: flex;
+  margin-top: 4px;
+  color: --color(grey);
+}
+
+.field__message {
+  color: var(--field--border-color);
 }
 
 //THE BLOCK CONTAINING INPUT
@@ -98,7 +102,7 @@ $field-states: map-get($shilp-field-defaults, "states");
 }
 
 textarea.field-block {
-  padding: --space(1);
+  padding: --space(2);
 }
 
 //GROUP ITEMS

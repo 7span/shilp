@@ -42,6 +42,7 @@ $avatar-sizes: map-get($shilp-avatar-defaults, "sizes");
   align-items: center;
   color: --color(primary);
   font-size: var(--avatar--size);
+  line-height: 1;
   position: relative;
   overflow: hidden;
   -moz-background-clip: padding;

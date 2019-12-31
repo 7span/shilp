@@ -115,7 +115,7 @@ $card-border-color: var(--card--border-color);
 .card--split {
   > * {
     &:not(.ratio) {
-      padding: var(--card--gap) !important;
+      padding: var(--card--gap);
     }
   }
 }
