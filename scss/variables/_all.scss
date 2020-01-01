@@ -4,3 +4,10 @@
 @import "shadows";
 @import "radius";
 @import "field";
+
+$shilp-logical-directions: (
+  top: "block-start",
+  bottom: "block-end",
+  left: "inline-start",
+  right: "inline-end"
+);

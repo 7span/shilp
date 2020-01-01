@@ -45,9 +45,6 @@
   @if (map-has-key($shilp-font-sizes, $val)) {
     @return map-get($shilp-font-sizes, $val);
   }
-  @if (map-has-key($shilp-font-weights, $val)) {
-    @return map-get($shilp-font-weights, $val);
-  }
   @if (map-has-key($shilp-font-families, $val)) {
     @return unquote(map-get($shilp-font-families, $val));
   }

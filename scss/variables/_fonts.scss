@@ -17,17 +17,6 @@ $shilp-font-families: (
   code: font-with-fallback(code)
 );
 
-// FONT-WEIGHTS
-$shilp-font-weights: () !default;
-$shilp-font-weights: map-merge(
-  (
-    light: 300,
-    regular: 400,
-    bold: 600
-  ),
-  $shilp-font-weights
-);
-
 // FONT-SIZES
 $shilp-font-sizes: () !default;
 $shilp-font-sizes: map-merge(

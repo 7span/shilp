@@ -1,0 +1,30 @@
+//---------- POSITION
+@mixin position($pos: absolute, $t: 0, $r: 0, $b: 0, $l: 0) {
+  position: $pos;
+  top: $t;
+  right: $r;
+  bottom: $b;
+  left: $l;
+}
+
+//---------- COMPONENT VARS
+// Adds CSS Variables to provided component's block class
+@mixin component-vars($block, $vars) {
+  @each $key, $value in $vars {
+    --#{$block}--#{$key}: #{$value};
+  }
+}
+
+//---------- LOGICAL MARGIN
+// Uses logical margin properties for RTL support
+@mixin margin($direction, $value) {
+  // margin-#{$direction}: $value;
+  margin-#{map-get($shilp-logical-directions,$direction)}: $value;
+}
+
+//---------- LOGICAL PADDING
+// Uses logical padding properties for RTL support
+@mixin padding($direction, $value) {
+  // padding-#{$direction}: $value;
+  padding-#{map-get($shilp-logical-directions,$direction)}: $value;
+}

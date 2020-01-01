@@ -17,24 +17,30 @@ $shilp-space-directions: (
   $className: '[class^="#{$property-initial}x--"],[class*=" #{$property-initial}x--"]';
   $varName: --#{$property-initial}x;
   #{$className} {
-    #{$property}-left: var(#{$varName}) !important;
-    #{$property}-right: var(#{$varName}) !important;
+    // #{$property}-left: var(#{$varName}) !important;
+    // #{$property}-right: var(#{$varName}) !important;
+    #{$property}-inline-start: var(#{$varName}) !important;
+    #{$property}-inline-end: var(#{$varName}) !important;
   }
 
   //Y
   $className: '[class^="#{$property-initial}y--"],[class*=" #{$property-initial}y--"]';
   $varName: --#{$property-initial}y;
   #{$className} {
-    #{$property}-top: var(#{$varName}) !important;
-    #{$property}-bottom: var(#{$varName}) !important;
+    // #{$property}-top: var(#{$varName}) !important;
+    // #{$property}-bottom: var(#{$varName}) !important;
+    #{$property}-block-start: var(#{$varName}) !important;
+    #{$property}-block-end: var(#{$varName}) !important;
   }
 
   //T,B,L,R
   @each $direction-initial, $direction in $shilp-space-directions {
     $className: '[class^="#{$property-initial}#{$direction-initial}--"],[class*=" #{$property-initial}#{$direction-initial}--"]';
     $varName: --#{$property-initial}#{$direction-initial};
+    $logicalProperty: map-get($shilp-logical-directions, $direction);
     #{$className} {
-      #{$property}-#{$direction}: var(#{$varName}) !important;
+      // #{$property}-#{$direction}: var(#{$varName}) !important;
+      #{$property}-#{$logicalProperty}: var(#{$varName}) !important;
     }
   }
 }

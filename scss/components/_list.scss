@@ -50,11 +50,18 @@ $list-gaps: map-get($shilp-list-defaults, "gaps");
 //---------- STACK
 .list--stack {
   grid-auto-flow: row;
+  &.list--fit {
+    grid-auto-rows: min-content;
+  }
 }
 
 //---------- FLUID
 .list--fluid {
   display: grid;
+}
+
+.list--fit {
+  grid-auto-columns: min-content;
 }
 
 //---------- GROUP

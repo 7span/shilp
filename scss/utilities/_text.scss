@@ -6,10 +6,14 @@
 }
 
 // TEXT WEIGHTS
-@each $weight, $value in $shilp-font-weights {
-  .text--#{$weight} {
-    font-weight: --text($weight);
-  }
+.text--thin {
+  font-weight: lighter;
+}
+.text--normal {
+  font-weight: normal;
+}
+.text--bold {
+  font-weight: bold;
 }
 
 //ITALIC
@@ -47,12 +51,18 @@
 // Alignment has responsive classes too.
 //--------------------------------------------------
 $shilp-text-aligns: "left", "right", "center";
+$shilp-text-logical-aligns: (
+  "left": "start",
+  "right": "end",
+  "center": "center"
+);
 
 @mixin shilp-text-align-rules($breakpoint) {
   @each $align in $shilp-text-aligns {
     $className: breakpoint-class($breakpoint, text--#{$align});
     .#{$className} {
-      text-align: #{$align};
+      text-align: #{$align}; //Fallback for browsers that doesn't support logical directions
+      text-align: #{map-get($shilp-text-logical-aligns, $align)};
     }
   }
 }

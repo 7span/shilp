@@ -37,10 +37,7 @@
   @each $key, $value in $shilp-font-sizes {
     --text--#{$key}: #{$value};
   }
-  //WEIGHTS
-  @each $key, $value in $shilp-font-weights {
-    --text--#{$key}: #{$value};
-  }
+
   //FONTS
   @each $key, $value in $shilp-font-families {
     --text--#{$key}: #{$value};
