@@ -1,6 +1,33 @@
+//--------------------------------------------------
+// CONFIGURATION
+//--------------------------------------------------
+
+//---------- Config: Via SCSS Maps
+$shilp-media-defaults: () !default;
+$shilp-media-defaults: map-merge((), $shilp-media-defaults);
+
+//---------- Config: Via CSS Vars
+$shilp-media-vars: () !default;
+$shilp-media-vars: map-merge(
+  (
+    "fit": "contain",
+    "position": "center"
+  ),
+  $shilp-media-vars
+);
+
+//---------- Local Variables
+
+//--------------------------------------------------
+// MIXINS
+//--------------------------------------------------
+
+//--------------------------------------------------
+// BLOCK & ELEMENTS
+//--------------------------------------------------
 .media {
-  --media--fit: contain;
-  --media--position: center;
+  background-color: --color(light);
+  @include component-vars("media", $shilp-media-vars);
 }
 .media__wrap {
   > img,
@@ -11,4 +38,11 @@
     object-fit: var(--media--fit);
     object-position: var(--media--position);
   }
+}
+
+//--------------------------------------------------
+// MODIFIERS
+//--------------------------------------------------`
+.media--cover {
+  --media--fit: cover;
 }

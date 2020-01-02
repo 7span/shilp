@@ -109,7 +109,7 @@ $card-border-color: var(--card--border-color);
 @include card--size("phone");
 
 .card--fluid {
-  display: block;
+  display: flex;
 }
 
 .card--split {

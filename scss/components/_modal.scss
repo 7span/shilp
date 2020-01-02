@@ -69,6 +69,7 @@ $modal-sizes: map-get($shilp-modal-defaults, "sizes");
     align-self: center;
     justify-self: center;
     width: 100%;
+    min-width: 0;
   }
 }
 
