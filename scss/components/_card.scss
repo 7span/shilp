@@ -120,7 +120,7 @@ $card-border-color: var(--card--border-color);
   }
 }
 
-//---------- STYLE: BORDER
+//---------- THEME: BORDER
 .card--border {
   > * {
     border: var(--card--border-size) solid $card-border-color;

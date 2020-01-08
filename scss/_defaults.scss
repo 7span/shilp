@@ -71,7 +71,6 @@
 @if map-get($shilp-config, scoped) {
   .#{map-get($shilp-config, scope)} {
     font-family: --text(content);
-    font-weight: --text(regular);
     @include defaults;
   }
 } @else {
@@ -81,7 +80,6 @@
       padding: 0;
       font-size: --text(sm);
       font-family: --text(content);
-      font-weight: --text(regular);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;

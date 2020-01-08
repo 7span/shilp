@@ -7,7 +7,7 @@ $shilp-alert-defaults: () !default;
 $shilp-alert-defaults: map-merge(
   (
     "colors": shilp-color-names(),
-    "styles": (
+    "themes": (
       solid,
       outline,
       muted
@@ -33,29 +33,29 @@ $shilp-alert-vars: map-merge(
 //---------- Local Variables
 $alert-colors: map-get($shilp-alert-defaults, "colors");
 $alert-sizes: map-get($shilp-alert-defaults, "sizes");
-$alert-styles: map-get($shilp-alert-defaults, "styles");
+$alert-themes: map-get($shilp-alert-defaults, "themes");
 
 //--------------------------------------------------
 // MIXINS
 //--------------------------------------------------
 
-// STYLE
-@mixin alert--style($color, $style) {
-  @if ($style== "solid") {
+// THEME
+@mixin alert--theme($color, $theme) {
+  @if ($theme== "solid") {
     --alert--bg: #{--color($color)};
     --alert--color: #{--color(light)};
   } //
-  @else if($style== "outline") {
+  @else if($theme== "outline") {
     --alert--bg: #{--color($color, lightest)};
     --alert--border-color: #{--color($color, lighter)};
     --alert--color: #{--color($color, darker)};
     --alert--border: 1px;
   } //
-  @else if($style== "muted") {
+  @else if($theme== "muted") {
     --alert--bg: #{--color($color, lightest)};
     --alert--color: #{--color($color)};
   } //
-  @else if($style== "gradient") {
+  @else if($theme== "gradient") {
     background: create-gradient($color);
     --alert--color: #{--color($color)};
   }
@@ -91,7 +91,7 @@ $alert-styles: map-get($shilp-alert-defaults, "styles");
 // COLOR
 @each $color in $alert-colors {
   .alert--#{$color} {
-    @include alert--style($color, "solid");
+    @include alert--theme($color, "solid");
   }
 }
 
@@ -102,11 +102,11 @@ $alert-styles: map-get($shilp-alert-defaults, "styles");
   }
 }
 
-// STYLE
+// theme
 @each $color in $alert-colors {
-  @each $style in $alert-styles {
-    .alert--#{$color}.alert--#{$style} {
-      @include alert--style($color, $style);
+  @each $theme in $alert-themes {
+    .alert--#{$color}.alert--#{$theme} {
+      @include alert--theme($color, $theme);
     }
   }
 }

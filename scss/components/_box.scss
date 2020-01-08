@@ -18,11 +18,14 @@ $shilp-box-defaults: map-merge(
 );
 
 //---------- Config: Via CSS Vars
-$shilp-box-vars: (
-  "size": map-deep-get($shilp-box-defaults, sizes, phone),
-  "padding": 16px
-) !default;
-$shilp-box-vars: map-merge((), $shilp-box-vars);
+$shilp-box-vars: () !default;
+$shilp-box-vars: map-merge(
+  (
+    "size": map-deep-get($shilp-box-defaults, sizes, phone),
+    "padding": 16px
+  ),
+  $shilp-box-vars
+);
 
 //---------- Local Variables
 $box-sizes: map-get($shilp-box-defaults, "sizes");

@@ -7,7 +7,7 @@ $shilp-button-defaults: () !default;
 $shilp-button-defaults: map-merge(
   (
     "colors": shilp-color-names(),
-    "styles": (
+    "themes": (
       trn,
       solid,
       outline,
@@ -15,10 +15,10 @@ $shilp-button-defaults: map-merge(
       gradient,
       tab
     ),
-    "style": "solid",
-    "shape": "rounded",
+    "theme": "solid",
     "muted-shade": "lightest",
-    "hover-shade": "darker"
+    "hover-shade": "darker",
+    "radius": "4px"
   ),
   $shilp-button-defaults
 );
@@ -34,18 +34,19 @@ $shilp-button-vars: map-merge(
     "border": 0px,
     "size": --field(md),
     "font-size": --field-text(md),
-    "icon-size": --field-icon(md)
+    "icon-size": --field-icon(md),
+    "radius": 0px
   ),
   $shilp-button-vars
 );
 
 //---------- Local Variables
 $button-colors: map-get($shilp-button-defaults, "colors");
-$button-styles: map-get($shilp-button-defaults, "styles");
+$button-themes: map-get($shilp-button-defaults, "themes");
 $button-hover-shade: map-get($shilp-button-defaults, "hover-shade");
 $button-muted-shade: map-get($shilp-button-defaults, "muted-shade");
-$default-button-shape: map-get($shilp-button-defaults, "shape");
-$default-button-style: map-get($shilp-button-defaults, "style");
+$default-button-theme: map-get($shilp-button-defaults, "theme");
+$default-button-radius: map-get($shilp-button-defaults, "radius");
 
 //--------------------------------------------------
 // FUNCTIONS
@@ -55,8 +56,8 @@ $default-button-style: map-get($shilp-button-defaults, "style");
 // MIXINS
 //--------------------------------------------------
 
-//---------- STYLE: SWITCHER
-@mixin button-style($style, $color) {
+//---------- THEME: SWITCHER
+@mixin button-theme($theme, $color) {
   $default: --color($color);
   $text: "";
   $hover: "";
@@ -77,37 +78,37 @@ $default-button-style: map-get($shilp-button-defaults, "style");
   }
 
   //---------- SOLID
-  @if $style== "solid" {
+  @if $theme== "solid" {
     --button--bg: #{$default};
     --button--color: #{$text};
     --button--hover-color: #{$text};
     --button--hover-bg: #{$hover};
   }
   //---------- OUTLINE
-  @else if $style== "outline" {
+  @else if $theme== "outline" {
     --button--color: #{$default};
     --button--hover-color: #{$default};
     --button--hover-bg: #{$muted};
   }
   //---------- MUTED
-  @else if $style== "muted" {
+  @else if $theme== "muted" {
     --button--bg: #{$muted};
     --button--color: #{$default};
     --button--hover-color: #{$text};
   }
   //----------  TRANSPARENT
-  @else if $style== "trn" {
+  @else if $theme== "trn" {
     --button--color: #{$default};
     --button--hover-color: #{$hover};
     --button--bg: transparent;
     --button--hover-bg: transparent;
   }
   //---------- GRADIENT
-  @else if $style== "gradient" {
+  @else if $theme== "gradient" {
     background: create-gradient($color);
   }
   //----------  TAB
-  @else if $style== "tab" {
+  @else if $theme== "tab" {
     &.button--active {
       --button--color: #{$default};
       --button--hover-color: #{$default};
@@ -120,8 +121,11 @@ $default-button-style: map-get($shilp-button-defaults, "style");
 //--------------------------------------------------
 // CSS BLOCK & ELEMENTS
 //--------------------------------------------------
-.button {
+.button,
+.button-group {
   @include component-vars("button", $shilp-button-vars);
+}
+.button {
   @include button--reset;
   display: inline-flex;
   align-items: center;
@@ -130,13 +134,13 @@ $default-button-style: map-get($shilp-button-defaults, "style");
   text-decoration: none;
   line-height: 1;
   justify-content: center;
-  vertical-align: top;
   background-color: var(--button--bg);
   color: var(--button--color);
   border: var(--button--border) solid var(--button--color);
   height: var(--button--size);
   padding: 0px calc(var(--button--size) / 2);
   font-size: var(--button--font-size);
+  border-radius: var(--button--radius);
   svg {
     height: var(--button--icon-size) !important;
     width: var(--button--icon-size) !important;
@@ -156,11 +160,6 @@ $default-button-style: map-get($shilp-button-defaults, "style");
   &:disabled {
     cursor: not-allowed;
     opacity: 0.8;
-  }
-
-  //TODO: Make this better!
-  @if ($default-button-shape== "rounded") {
-    border-radius: 4px;
   }
 
   // Button in loading state
@@ -213,25 +212,33 @@ label.button {
 
 //----------  COLORS
 // Generates classes for button colors.
-// Uses default style value.
+// Uses default theme value.
 @each $color, $value in $button-colors {
   .button--#{$color} {
-    @include button-style($default-button-style, $color);
+    @include button-theme($default-button-theme, $color);
   }
 }
 
-//----------  STYLE & COLOR CLASSES
-// Generates classes for button styles & colors.
-@each $style in $button-styles {
+//----------  theme & COLOR CLASSES
+// Generates classes for button themes & colors.
+@each $theme in $button-themes {
   @each $color, $value in $shilp-colors {
-    .button--#{$color}.button--#{$style} {
-      @include button-style($style, $color);
+    .button--#{$color}.button--#{$theme} {
+      @include button-theme($theme, $color);
     }
   }
 }
 
-//---------- STYLES
+//----------  SIZES
+@each $key, $value in $shilp-field-sizes {
+  .button--#{$key} {
+    --button--size: #{--field($key)};
+    --button--font-size: #{--field-text($key)};
+    --button--icon-size: #{map-get($shilp-field-icon-sizes, $key)};
+  }
+}
 
+//---------- themes
 //OUTLINE
 .button--outline {
   --button--border: 1px;
@@ -279,24 +286,14 @@ label.button {
   }
 }
 .button--circle {
-  border-radius: 50%;
+  --button--radius: 50%;
 }
-
 .button--rectangle {
-  border-radius: 0;
+  --button--radius: 0px;
 }
 .button--rounded {
-  border-radius: 4px;
+  --button--radius: #{$default-button-radius};
 }
 .button--pill {
-  border-radius: 9999px;
-}
-
-//----------  SIZES
-@each $key, $value in $shilp-field-sizes {
-  .button--#{$key} {
-    --button--size: #{--field($key)};
-    --button--font-size: #{--field-text($key)};
-    --button--icon-size: #{map-get($shilp-field-icon-sizes, $key)};
-  }
+  --button--radius: 9999px;
 }

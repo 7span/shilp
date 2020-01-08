@@ -1,0 +1,50 @@
+.flex {
+  display: flex;
+}
+.flex__fluid {
+  flex: 1 1 auto;
+}
+
+//---------- Wrap
+.flex--wrap {
+  flex-wrap: wrap;
+}
+
+//---------- X Axis
+.flex--left {
+  justify-content: flex-start;
+}
+.flex--right {
+  justify-content: flex-end;
+}
+.flex--center {
+  justify-content: center;
+}
+.flex--between {
+  justify-content: space-between;
+}
+.flex--around {
+  justify-content: space-around;
+}
+.flex--evenly {
+  justify-content: space-evenly;
+}
+
+//---------- Y Axis
+.flex--top {
+  align-items: flex-start;
+}
+.flex--bottom {
+  align-items: flex-end;
+}
+.flex--middle {
+  align-items: center;
+}
+.flex--stretch {
+  align-items: stretch;
+}
+
+//---------- Direction
+.flex--column {
+  flex-direction: column;
+}

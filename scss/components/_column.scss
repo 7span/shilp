@@ -1,0 +1,84 @@
+//--------------------------------------------------
+// CONFIGURATION
+//--------------------------------------------------
+
+//---------- Config: Via SCSS Maps
+$shilp-column-defaults: () !default;
+$shilp-column-defaults: map-merge(
+  (
+    "grids": 12
+  ),
+  $shilp-column-defaults
+);
+
+//---------- Config: Via CSS Vars
+$shilp-column-vars: () !default;
+$shilp-column-vars: map-merge(
+  (
+    "size": 100%
+  ),
+  $shilp-column-vars
+);
+
+//---------- Local Variables
+$column-grids: map-get($shilp-column-defaults, "grids");
+
+//--------------------------------------------------
+// MIXINS
+//--------------------------------------------------
+
+// column SIZE
+// Defines the column size based on breakpoint and a class name.
+@mixin column-size($breakpoint) {
+  // 1 - 12
+  @for $i from 1 through $column-grids {
+    $className: breakpoint-class($breakpoint, column--#{$i});
+    .#{$className} {
+      --column--size: #{(100% / $column-grids) * $i};
+    }
+  }
+
+  // Fluid
+  $autoClassName: breakpoint-class($breakpoint, column--fluid);
+  .#{$autoClassName} {
+    flex-grow: 1;
+    flex-basis: 0;
+  }
+
+  $autoClassName: breakpoint-class($breakpoint, column--fix);
+  .#{$autoClassName} {
+    --column--size: auto;
+  }
+}
+
+@mixin column-order($breakpoint) {
+  // 1 - 12
+  @for $i from 1 through $column-grids {
+    $className: breakpoint-class($breakpoint, o-#{$i});
+    .#{$className} {
+      order: $i;
+    }
+  }
+}
+
+//--------------------------------------------------
+// CSS column & ELEMENTS
+//--------------------------------------------------
+
+.column {
+  @include component-vars("column", $shilp-column-vars);
+  max-width: var(--column--size);
+  width: var(--column--size);
+}
+@include column-size("phone");
+@include column-order("phone");
+
+//--------------------------------------------------
+// MEDIA QUERY
+//--------------------------------------------------
+@each $breakpoint, $value in $shilp-breakpoints {
+  @media only screen and (min-width: $value) {
+    @include column-size($breakpoint);
+    @include column-order($breakpoint);
+  }
+}

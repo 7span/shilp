@@ -3,37 +3,37 @@
 //--------------------------------------------------
 
 //---------- Config: Via SCSS Maps
-$shilp-blocks-defaults: () !default;
-$shilp-blocks-defaults: map-merge(
+$shilp-row-defaults: () !default;
+$shilp-row-defaults: map-merge(
   (
     "gaps": $shilp-spaces
   ),
-  $shilp-blocks-defaults
+  $shilp-row-defaults
 );
 
 //---------- Config: Via CSS Vars
-$shilp-blocks-vars: () !default;
-$shilp-blocks-vars: map-merge(
+$shilp-row-vars: () !default;
+$shilp-row-vars: map-merge(
   (
     "gap": 0px
   ),
-  $shilp-blocks-vars
+  $shilp-row-vars
 );
 
 //---------- Local Variables
-$blocks-gaps: map-get($shilp-blocks-defaults, "gaps");
+$row-gaps: map-get($shilp-row-defaults, "gaps");
 
 //--------------------------------------------------
 // MIXINS
 //--------------------------------------------------
 
-// RESPONSIVE BLOCKS GAP
+// RESPONSIVE row GAP
 // Generates the responsive classes based on breakpoint. with all the gap values.
-@mixin blocks-gap($breakpoint) {
-  @each $key, $value in $blocks-gaps {
-    $className: breakpoint-class($breakpoint, blocks--#{$key});
+@mixin row-gap($breakpoint) {
+  @each $key, $value in $row-gaps {
+    $className: breakpoint-class($breakpoint, row--#{$key});
     .#{$className} {
-      --blocks--gap: #{$value};
+      --row--gap: #{$value};
     }
   }
 }
@@ -42,22 +42,22 @@ $blocks-gaps: map-get($shilp-blocks-defaults, "gaps");
 // CSS BLOCK & ELEMENTS
 //--------------------------------------------------
 
-.blocks {
-  @include component-vars("blocks", $shilp-blocks-vars);
+.row {
+  @include component-vars("row", $shilp-row-vars);
   display: flex;
   flex-wrap: wrap;
-  margin: calc(-1 * var(--blocks--gap));
-  > .block {
-    padding: var(--blocks--gap);
+  margin: calc(-1 * var(--row--gap));
+  > .column {
+    padding: var(--row--gap);
   }
 }
-@include blocks-gap("phone");
+@include row-gap("phone");
 
 //--------------------------------------------------
 // MEDIA QUERY
 //--------------------------------------------------
 @each $breakpoint, $value in $shilp-breakpoints {
   @media only screen and (min-width: $value) {
-    @include blocks-gap($breakpoint);
+    @include row-gap($breakpoint);
   }
 }
