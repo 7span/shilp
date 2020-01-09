@@ -1,0 +1,103 @@
+//--------------------------------------------------
+// CONFIGUswitchN
+//--------------------------------------------------
+
+//---------- Config: Via SCSS Maps
+$shilp-switch-defaults: () !default;
+$shilp-switch-defaults: map-merge(
+  (
+    "colors": shilp-color-names()
+  ),
+  $shilp-switch-defaults
+);
+
+//---------- Config: Via CSS Vars
+$shilp-switch-vars: () !default;
+$shilp-switch-vars: map-merge(
+  (
+    size: #{--field(md)},
+    padding: 4px,
+    border-width: 0px,
+    radius: 0,
+    color: --color(primary),
+    bg: --color(grey, lightest)
+  ),
+  $shilp-switch-vars
+);
+
+//---------- Local Variables
+$shilp-switch-colors: map-get($shilp-switch-defaults, "colors");
+
+//--------------------------------------------------
+// BLOCK & ELEMENTS
+//--------------------------------------------------
+.switch {
+  @include component-vars("switch", $shilp-switch-vars);
+}
+.switch__wrapper {
+  display: flex;
+  width: calc(var(--switch--size) * 2);
+  height: var(--switch--size);
+  border-radius: var(--switch--radius);
+  border: var(--switch--border-width) solid --color(grey, lighter);
+  background: var(--switch--bg);
+  cursor: pointer;
+  position: relative;
+}
+.switch__input {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  opacity: 0.01;
+  &:checked {
+    ~ .switch__wrapper {
+      .switch__indicator {
+        background-color: var(--switch--color);
+        left: calc(100% - var(--switch--size) + var(--switch--padding));
+      }
+    }
+  }
+}
+.switch__indicator {
+  width: calc(
+    var(--switch--size) - var(--switch--padding) * 2 -
+      var(--switch--border-width) * 2
+  );
+  height: calc(
+    var(--switch--size) - var(--switch--padding) * 2 -
+      var(--switch--border-width) * 2
+  );
+  top: var(--switch--padding);
+  left: var(--switch--padding);
+  border-radius: calc(var(--switch--radius) / 2);
+  background-color: --color(grey);
+  position: absolute;
+  transition: all 0.3s ease 0s;
+}
+
+//--------------------------------------------------
+// MODIFIERS
+//--------------------------------------------------
+
+@each $key in $shilp-switch-colors {
+  .switch--#{$key} {
+    --switch--color: #{--color($key)};
+  }
+}
+
+@each $key, $value in $shilp-field-sizes {
+  .switch--#{$key} {
+    --switch--size: #{$value};
+  }
+}
+
+.switch--pill {
+  --switch--radius: 9999px;
+}
+.switch--rounded {
+  --switch--radius: 4px;
+}
+.switch--outline {
+  --switch--border-width: 1px;
+  --switch--bg: --color(light);
+}

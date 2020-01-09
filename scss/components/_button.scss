@@ -187,7 +187,7 @@ label.button {
 // MODIFIERS
 //--------------------------------------------------
 .button--fluid {
-  width: 100% !important;
+  display: flex;
 }
 .button--link {
   padding: 0;
