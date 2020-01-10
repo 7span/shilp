@@ -1,5 +1,19 @@
 .block {
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+}
+.block--bg {
+  background-color: var(--block--bg-color);
+  position: relative;
+  &:after {
+    content: "";
+    @include position(absolute);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-image: var(--block--bg-image);
+    opacity: var(--block--bg-opacity, 1);
+  }
+  > * {
+    position: relative;
+    z-index: 1;
+  }
 }

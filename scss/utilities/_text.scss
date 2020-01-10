@@ -31,6 +31,10 @@
   text-transform: uppercase;
 }
 
+.text--numeric {
+  font-variant-numeric: tabular-nums;
+}
+
 // TEXT COLOR
 @each $color, $shades in $shilp-colors {
   @each $shade, $code in $shades {
