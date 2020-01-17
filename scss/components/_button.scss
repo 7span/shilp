@@ -13,7 +13,8 @@ $shilp-button-defaults: map-merge(
       outline,
       muted,
       gradient,
-      tab
+      tab,
+      link
     ),
     "theme": "solid",
     "muted-shade": "lightest",
@@ -35,7 +36,7 @@ $shilp-button-vars: map-merge(
     "size": --field(md),
     "font-size": --field-text(md),
     "icon-size": --field-icon(md),
-    "radius": 0px
+    "radius": map-get($shilp-button-defaults, "radius")
   ),
   $shilp-button-vars
 );
@@ -93,6 +94,7 @@ $default-button-radius: map-get($shilp-button-defaults, "radius");
   //---------- MUTED
   @else if $theme== "muted" {
     --button--bg: #{$muted};
+    --button--hover-bg: #{$default};
     --button--color: #{$default};
     --button--hover-color: #{$text};
   }
@@ -102,6 +104,15 @@ $default-button-radius: map-get($shilp-button-defaults, "radius");
     --button--hover-color: #{$hover};
     --button--bg: transparent;
     --button--hover-bg: transparent;
+  }
+  //---------- LINK
+  @else if $theme== "link" {
+    --button--color: #{$default};
+    --button--hover-color: #{$hover};
+    --button--bg: transparent;
+    --button--hover-bg: transparent;
+    padding: 0;
+    height: auto;
   }
   //---------- GRADIENT
   @else if $theme== "gradient" {
@@ -175,7 +186,9 @@ $default-button-radius: map-get($shilp-button-defaults, "radius");
   display: flex;
   justify-content: center;
   align-items: center;
-  @include margin(right, --space(2));
+  ~ .button__label {
+    @include margin(left, --space(2));
+  }
 }
 
 label.button {
@@ -188,25 +201,27 @@ label.button {
 //--------------------------------------------------
 .button--fluid {
   display: flex;
-}
-.button--link {
-  padding: 0;
-  height: auto;
+  width: 100%; //Flex sometimes doesn't occupy full width!
 }
 
 //----------  ALIGNMENTS
 .button--left {
   justify-content: flex-start;
   .button__icon {
-    margin-right: --space(2);
+    ~ .button__label {
+      @include margin(left, --space(2));
+      @include margin(right, 0);
+    }
   }
 }
 .button--right {
   flex-direction: row-reverse;
   justify-content: space-between;
   .button__icon {
-    margin-left: --space(2);
-    margin-right: 0;
+    ~ .button__label {
+      @include margin(right, --space(2));
+      @include margin(left, 0);
+    }
   }
 }
 
@@ -281,14 +296,11 @@ label.button {
   padding: 0 !important;
   justify-content: center;
   width: var(--button--size);
-  .button__icon {
-    margin: 0;
-  }
 }
 .button--circle {
   --button--radius: 50%;
 }
-.button--rectangle {
+.button--flat {
   --button--radius: 0px;
 }
 .button--rounded {

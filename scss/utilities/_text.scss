@@ -54,11 +54,12 @@
 // ALIGNMENT
 // Alignment has responsive classes too.
 //--------------------------------------------------
-$shilp-text-aligns: "left", "right", "center";
+$shilp-text-aligns: "left", "right", "center", "justify";
 $shilp-text-logical-aligns: (
   "left": "start",
   "right": "end",
-  "center": "center"
+  "center": "center",
+  "justify": "justify"
 );
 
 @mixin shilp-text-align-rules($breakpoint) {
