@@ -7,7 +7,8 @@ $shilp-config: map-merge(
     "system-fonts":
       '-apple-system, BlinkMacSystemFont, Roboto, Helvetica, "Segoe UI",Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
     "breakpoint-separator": "\\:",
-    "web-component": false
+    "web-component": false,
+    "radius": "4px"
   ),
   $shilp-config
 );

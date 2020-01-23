@@ -16,7 +16,7 @@ $shilp-switch-vars: () !default;
 $shilp-switch-vars: map-merge(
   (
     size: #{--field(md)},
-    padding: 4px,
+    padding: 6px,
     border-width: 0px,
     radius: 0,
     color: --color(primary),
@@ -43,6 +43,7 @@ $shilp-switch-colors: map-get($shilp-switch-defaults, "colors");
   background: var(--switch--bg);
   cursor: pointer;
   position: relative;
+  transition: all 0.3s ease 0s;
 }
 .switch__input {
   position: absolute;
@@ -51,8 +52,9 @@ $shilp-switch-colors: map-get($shilp-switch-defaults, "colors");
   opacity: 0.01;
   &:checked {
     ~ .switch__wrapper {
+      background-color: var(--switch--color);
       .switch__indicator {
-        background-color: var(--switch--color);
+        background-color: --color(light);
         left: calc(100% - var(--switch--size) + var(--switch--padding));
       }
     }

@@ -11,8 +11,7 @@ $shilp-alert-defaults: map-merge(
       solid,
       outline,
       muted
-    ),
-    "sizes": $shilp-spaces
+    )
   ),
   $shilp-alert-defaults
 );
@@ -25,14 +24,14 @@ $shilp-alert-vars: map-merge(
     "color": #000000,
     "border": 0px,
     "border-color": transparent,
-    "size": #{map-deep-get($shilp-alert-defaults, sizes, xs)}
+    "padding": #{--space(3)},
+    "radius": map-get($shilp-config, "radius")
   ),
   $shilp-alert-vars
 );
 
 //---------- Local Variables
 $alert-colors: map-get($shilp-alert-defaults, "colors");
-$alert-sizes: map-get($shilp-alert-defaults, "sizes");
 $alert-themes: map-get($shilp-alert-defaults, "themes");
 
 //--------------------------------------------------
@@ -67,17 +66,33 @@ $alert-themes: map-get($shilp-alert-defaults, "themes");
 
 .alert {
   @include component-vars("alert", $shilp-alert-vars);
-  display: inline-flex;
+  display: inline-grid;
   background-color: var(--alert--bg);
   color: var(--alert--color);
   border: var(--alert--border) solid var(--alert--border-color);
-  padding: calc(var(--alert--size) * 0.67) var(--alert--size);
+  padding: var(--alert--padding);
+  border-radius: var(--alert--radius);
+  grid-template-rows: min-content min-content;
+  grid-template-columns: min-content auto;
+}
+.alert__title {
+  font-weight: bold;
+  font-size: --text(md);
+  grid-column: 2 / 3;
+  line-height: 1;
+  ~ .alert__body {
+    grid-row: 2 / 3;
+  }
 }
 .alert__body {
   margin: 0;
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
 }
+
 .alert__icon {
-  margin-right: --space(1);
+  margin-right: --space(2);
+  grid-row: 1 / 3;
 }
 
 //--------------------------------------------------
@@ -95,13 +110,6 @@ $alert-themes: map-get($shilp-alert-defaults, "themes");
   }
 }
 
-// SIZE
-@each $size, $value in $alert-sizes {
-  .alert--#{$size} {
-    --alert--size: #{$value};
-  }
-}
-
 // theme
 @each $color in $alert-colors {
   @each $theme in $alert-themes {
@@ -115,7 +123,7 @@ $alert-themes: map-get($shilp-alert-defaults, "themes");
   border-radius: 0;
 }
 .alert--rounded {
-  border-radius: --radius(sm);
+  border-radius: --radius(3);
 }
 .alert--pill {
   border-radius: 9999px;

@@ -18,8 +18,7 @@ $shilp-button-defaults: map-merge(
     ),
     "theme": "solid",
     "muted-shade": "lightest",
-    "hover-shade": "darker",
-    "radius": "4px"
+    "hover-shade": "darker"
   ),
   $shilp-button-defaults
 );
@@ -36,7 +35,7 @@ $shilp-button-vars: map-merge(
     "size": --field(md),
     "font-size": --field-text(md),
     "icon-size": --field-icon(md),
-    "radius": map-get($shilp-button-defaults, "radius")
+    "radius": map-get($shilp-config, "radius")
   ),
   $shilp-button-vars
 );
