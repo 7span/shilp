@@ -1,5 +1,11 @@
 //TODO: Automatically highlight selected checkbox in button style.
 
+.choices {
+  display: flex;
+  .choice {
+    margin-right: --space(4);
+  }
+}
 .choice {
   display: flex;
   align-items: center;

@@ -11,11 +11,11 @@ $shilp-modal-defaults: map-merge(
       //So at any point of size, modal will not be larger than screen width
       "sizes":
       (
-        xs: 480px,
-        sm: 576px,
-        md: 768px,
-        lg: 992px,
-        xl: 1200px
+        xs: 320px,
+        sm: 480px,
+        md: 576px,
+        lg: 768px,
+        xl: 992px
       ),
     //Defines the padding to keep around modal for diffrent breakpoints.
       "space-around":
@@ -64,6 +64,7 @@ $modal-sizes: map-get($shilp-modal-defaults, "sizes");
 .modal__wrapper {
   z-index: 100;
   overflow: auto;
+  width: 100%;
   max-width: var(--modal--size);
   max-height: calc(100% - var(--modal--space-around) * 2);
   margin: var(--modal--space-around);

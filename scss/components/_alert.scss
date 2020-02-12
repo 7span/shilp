@@ -100,7 +100,7 @@ $alert-themes: map-get($shilp-alert-defaults, "themes");
 //--------------------------------------------------
 
 .alert--fluid {
-  display: flex;
+  display: grid;
 }
 
 // COLOR

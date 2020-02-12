@@ -31,6 +31,10 @@
   text-transform: uppercase;
 }
 
+.text--strikethrough {
+  text-decoration: line-through;
+}
+
 .text--numeric {
   font-variant-numeric: tabular-nums;
 }
