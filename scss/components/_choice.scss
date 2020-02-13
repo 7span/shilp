@@ -45,6 +45,7 @@
 
 .choice:not(.choice--native):not(.choice--custom) {
   height: auto;
+  line-height: initial;
   input {
     position: absolute;
     z-index: -1;

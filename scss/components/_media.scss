@@ -26,7 +26,6 @@ $shilp-media-vars: map-merge(
 // BLOCK & ELEMENTS
 //--------------------------------------------------
 .media {
-  background-color: --color(light);
   @include component-vars("media", $shilp-media-vars);
 }
 .media__wrap {
