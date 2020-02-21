@@ -1,5 +1,5 @@
 @each $size, $value in $shilp-shadows {
-  .shadow--#{$size} {
+  .shadow-#{$size} {
     box-shadow: --shadow($size);
   }
 }

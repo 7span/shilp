@@ -1,64 +1,71 @@
 //--------------------------------------------------
 // CONFIGURATION
 //--------------------------------------------------
-$shilp-item-defaults: () !default;
-$shilp-item-defaults: map-merge(
-  (
-    "size": sm,
-    "sizes": (
-      xs: 32px,
-      sm: 48px,
-      md: 64px,
-      lg: 80px,
-      xl: 96px
-    )
-  ),
-  $shilp-item-defaults
-);
+//---------- Config: Via SCSS Maps
+$shilp-item-defaults: (
+  gaps: (
+    0: 0px,
+    1: 2px,
+    2: 4px,
+    3: 6px,
+    4: 8px,
+    5: 10px,
+    6: 12px
+  )
+) !default;
+$shilp-item-defaults: map-merge((), $shilp-item-defaults);
 
-$item-sizes: map-get($shilp-item-defaults, "sizes");
-$item-size: map-get($shilp-item-defaults, "size");
+//---------- Local Variables
+$shilp-item-gaps: map-get($shilp-item-defaults, gaps);
+
+//---------- Config: Via CSS Vars
+$shilp-item-vars: () !default;
+$shilp-item-vars: map-merge(
+  (
+    gap: 0px
+  ),
+  $shilp-item-vars
+);
 
 //--------------------------------------------------
 // BLOCK & ELEMENTS
 //--------------------------------------------------
 .item {
-  display: flex;
-  align-items: center;
-  --size: var(--size--#{$item-size});
-  @each $size, $value in $item-sizes {
-    --size--#{$size}: #{$value};
-  }
-}
-.item__media {
-  flex: 0 0 var(--size);
-  height: var(--size);
-  display: flex;
-  align-items: center;
-  img {
-    width: 100%;
+  @include component-vars("item", $shilp-item-vars);
+  display: inline-grid;
+  //The first row should not expand more than the content
+  //The second content should expand till it's max content
+  grid-template-rows: minmax(0, min-content) minmax(0, max-content);
+  grid-template-columns: min-content auto;
+  gap: var(--item--gap);
+  > .media {
+    grid-row: 1 / 3;
   }
 }
 
-.item__body {
-  padding: 0px --space(2);
-}
 .item__title {
-  margin: 0 0 --space(1) 0;
-}
-.item__content {
-  p {
-    margin: 0;
+  grid-column: 2 / 3;
+  ~ .item__body {
+    grid-row: 2 / 3;
   }
+}
+.item__body {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
 }
 
 //--------------------------------------------------
 // MODIFIERS
 //--------------------------------------------------
 
-//---------- SIZE
-@each $size, $value in $item-sizes {
-  .item--#{$size} {
-    --size: var(--size--#{$size});
+.item--middle {
+  grid-template-rows: 50% 50%;
+  .item__title {
+    align-self: flex-end;
+  }
+}
+@each $key, $value in $shilp-item-gaps {
+  .item--#{$key} {
+    --item--gap: #{$value};
   }
 }

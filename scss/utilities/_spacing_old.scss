@@ -1,0 +1,108 @@
+$shilp-space-directions: (
+  t: "top",
+  b: "bottom",
+  l: "left",
+  r: "right"
+);
+
+@mixin shilp-space-rules($property-initial, $property) {
+  //All Directions
+  $className: '[class^="#{$property-initial}--"],[class*=" #{$property-initial}--"]';
+  $varName: --#{$property-initial};
+  #{$className} {
+    #{$property}: var(#{$varName}) !important;
+  }
+
+  //X
+  $className: '[class^="#{$property-initial}x--"],[class*=" #{$property-initial}x--"]';
+  $varName: --#{$property-initial}x;
+  #{$className} {
+    // #{$property}-left: var(#{$varName}) !important;
+    // #{$property}-right: var(#{$varName}) !important;
+    #{$property}-inline-start: var(#{$varName}) !important;
+    #{$property}-inline-end: var(#{$varName}) !important;
+  }
+
+  //Y
+  $className: '[class^="#{$property-initial}y--"],[class*=" #{$property-initial}y--"]';
+  $varName: --#{$property-initial}y;
+  #{$className} {
+    // #{$property}-top: var(#{$varName}) !important;
+    // #{$property}-bottom: var(#{$varName}) !important;
+    #{$property}-block-start: var(#{$varName}) !important;
+    #{$property}-block-end: var(#{$varName}) !important;
+  }
+
+  //T,B,L,R
+  @each $direction-initial, $direction in $shilp-space-directions {
+    $className: '[class^="#{$property-initial}#{$direction-initial}--"],[class*=" #{$property-initial}#{$direction-initial}--"]';
+    $varName: --#{$property-initial}#{$direction-initial};
+    $logicalProperty: map-get($shilp-logical-directions, $direction);
+    #{$className} {
+      // #{$property}-#{$direction}: var(#{$varName}) !important;
+      #{$property}-#{$logicalProperty}: var(#{$varName}) !important;
+    }
+  }
+}
+
+@mixin shilp-space-sizes($breakpoint, $property-initial, $property) {
+  //Merge 0px and auto values to spaces.
+  $spaces: map-merge(
+    $shilp-spaces,
+    (
+      0: 0px,
+      auto: auto
+    )
+  );
+
+  @each $space, $value in $spaces {
+    $size: "";
+    @if ($space== 0 or $space== auto) {
+      $size: $value;
+    } @else {
+      $size: --space($space);
+    }
+
+    //All Directions
+    $className: breakpoint-class($breakpoint, #{$property-initial}--#{$space});
+    .#{$className} {
+      --#{$property-initial}: #{$size};
+    }
+
+    //X
+    $className: breakpoint-class($breakpoint, #{$property-initial}x--#{$space});
+    .#{$className} {
+      --#{$property-initial}x: #{$size};
+    }
+
+    //Y
+    $className: breakpoint-class($breakpoint, #{$property-initial}y--#{$space});
+    .#{$className} {
+      --#{$property-initial}y: #{$size};
+    }
+
+    //T,B,L,R
+    @each $direction-initial, $direction in $shilp-space-directions {
+      $className: breakpoint-class(
+        $breakpoint,
+        #{$property-initial}#{$direction-initial}--#{$space}
+      );
+      .#{$className} {
+        --#{$property-initial}#{$direction-initial}: #{$size};
+      }
+    }
+  }
+}
+
+@include shilp-space-rules("p", "padding");
+@include shilp-space-rules("m", "margin");
+@include shilp-space-sizes("phone", "p", "padding");
+@include shilp-space-sizes("phone", "m", "margin");
+
+//Media Query
+@each $breakpoint, $value in $shilp-breakpoints {
+  @media only screen and (min-width: $value) {
+    @include shilp-space-sizes($breakpoint, "p", "padding");
+    @include shilp-space-sizes($breakpoint, "m", "margin");
+  }
+}

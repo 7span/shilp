@@ -1,56 +1,76 @@
-//TEXT SIZES
+.text-italic {
+  font-style: italic;
+}
+
+.text-underline {
+  text-decoration: underline;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-strikethrough {
+  text-decoration: line-through;
+}
+
+.text-numeric {
+  font-variant-numeric: tabular-nums;
+}
+
+//--------------------------------------------------
+// SIZES
+//--------------------------------------------------
 @each $size, $value in $shilp-font-sizes {
-  .text--#{$size} {
+  .text-#{$size} {
     font-size: --text($size);
   }
 }
 
-// TEXT WEIGHTS
-.text--thin {
+//--------------------------------------------------
+// WEIGHTS
+//--------------------------------------------------
+.text-thin {
   font-weight: lighter;
 }
-.text--normal {
+.text-normal {
   font-weight: normal;
 }
-.text--bold {
+.text-bold {
   font-weight: bold;
 }
 
-//ITALIC
-.text--italic {
-  font-style: italic;
-}
-
-//UNDERLINE
-.text--underline {
-  text-decoration: underline;
-}
-
-//UPPERCASE
-.text--uppercase {
-  text-transform: uppercase;
-}
-
-.text--strikethrough {
-  text-decoration: line-through;
-}
-
-.text--numeric {
-  font-variant-numeric: tabular-nums;
-}
-
-// TEXT COLOR
+//--------------------------------------------------
+// COLOR
+//--------------------------------------------------
 @each $color, $shades in $shilp-colors {
   @each $shade, $code in $shades {
     @if ($shade== "default") {
-      .text--#{$color} {
+      .text-#{$color} {
         color: --color($color) !important;
       }
     } @else {
-      .text--#{$color}--#{$shade} {
+      .text-#{$color}-#{$shade} {
         color: --color($color, $shade) !important;
       }
     }
+  }
+}
+
+//--------------------------------------------------
+// LINEHEIGHTS
+//--------------------------------------------------
+$shilp-line-heights: (
+  "none": 1,
+  "xs": 1.2,
+  "sm": 1.5,
+  "md": 1.8,
+  "lg": 2,
+  "xl": 2.5
+);
+@each $key, $value in $shilp-line-heights {
+  .line-height-#{$key} {
+    line-height: #{$value};
   }
 }
 
@@ -68,7 +88,7 @@ $shilp-text-logical-aligns: (
 
 @mixin shilp-text-align-rules($breakpoint) {
   @each $align in $shilp-text-aligns {
-    $className: breakpoint-class($breakpoint, text--#{$align});
+    $className: breakpoint-class($breakpoint, text-#{$align});
     .#{$className} {
       text-align: #{$align}; //Fallback for browsers that doesn't support logical directions
       text-align: #{map-get($shilp-text-logical-aligns, $align)};

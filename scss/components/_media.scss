@@ -3,20 +3,35 @@
 //--------------------------------------------------
 
 //---------- Config: Via SCSS Maps
-$shilp-media-defaults: () !default;
+$shilp-media-defaults: (
+  sizes: (
+    1: 16px,
+    2: 32px,
+    3: 48px,
+    4: 64px,
+    5: 96px,
+    6: 128px,
+    7: 160px,
+    8: 192px,
+    9: 256px,
+    10: 320px
+  )
+) !default;
 $shilp-media-defaults: map-merge((), $shilp-media-defaults);
+
+//---------- Local Variables
+$shilp-media-sizes: map-get($shilp-media-defaults, sizes);
 
 //---------- Config: Via CSS Vars
 $shilp-media-vars: () !default;
 $shilp-media-vars: map-merge(
   (
+    "size": "",
     "fit": "contain",
     "position": "center"
   ),
   $shilp-media-vars
 );
-
-//---------- Local Variables
 
 //--------------------------------------------------
 // MIXINS
@@ -27,6 +42,8 @@ $shilp-media-vars: map-merge(
 //--------------------------------------------------
 .media {
   @include component-vars("media", $shilp-media-vars);
+  width: var(--media--size, 100%);
+  display: inline-block;
 }
 .media__wrap {
   > img,
@@ -44,4 +61,10 @@ $shilp-media-vars: map-merge(
 //--------------------------------------------------`
 .media--cover {
   --media--fit: cover;
+}
+
+@each $key, $value in $shilp-media-sizes {
+  .media--#{$key} {
+    --media--size: #{$value};
+  }
 }

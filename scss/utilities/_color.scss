@@ -2,11 +2,11 @@
   @each $shade, $code in $shades {
     //Background Color
     @if ($shade== "default") {
-      .bg--#{$color} {
+      .bg-#{$color} {
         background-color: --color($color) !important;
       }
     } @else {
-      .bg--#{$color}--#{$shade} {
+      .bg-#{$color}-#{$shade} {
         background-color: --color($color, $shade) !important;
       }
     }

@@ -299,12 +299,6 @@ label.button {
 .button--circle {
   --button--radius: 50%;
 }
-.button--flat {
-  --button--radius: 0px;
-}
-.button--rounded {
-  --button--radius: #{$default-button-radius};
-}
 .button--pill {
   --button--radius: 9999px;
 }
