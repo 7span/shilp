@@ -1,13 +1,15 @@
 @each $key, $value in $shilp-radius {
   .radius-#{$key} {
     border-radius: --radius($key);
-    background-clip: padding-box; //Avoids color leaking due to border-radius
+    background-clip: padding-box; //Avoids color leaking due to border-radius\
+    overflow: hidden;
   }
 }
 .radius-0 {
   border-radius: 0;
 }
 .radius-circle {
+  overflow: hidden;
   border-radius: 50%;
   background-clip: padding-box; //Avoids color leaking due to border-radius
 }

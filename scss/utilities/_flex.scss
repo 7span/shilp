@@ -13,6 +13,10 @@
   flex-wrap: wrap;
 }
 
+.flex--inline {
+  display: inline-flex;
+}
+
 //---------- X Axis
 .flex--left {
   justify-content: flex-start;

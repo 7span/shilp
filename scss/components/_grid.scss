@@ -8,12 +8,12 @@ $shilp-grid-defaults: map-merge(
   (
     "gaps": $shilp-spaces,
     "sizes": (
-      xxs: 60px,
+      xxs: 80px,
       xs: 120px,
-      sm: 240px,
-      md: 360px,
-      lg: 480px,
-      xl: 600px
+      sm: 160px,
+      md: 200px,
+      lg: 240px,
+      xl: 280px
     )
   ),
   $shilp-grid-defaults
