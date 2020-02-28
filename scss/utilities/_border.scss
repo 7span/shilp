@@ -4,77 +4,38 @@ $shilp-border-directions: (
   l: "left",
   r: "right"
 );
+$shilp-border-colors: map-get($shilp-colors, "grey");
 
-@mixin shilp-border-rules() {
-  //All Directions
-  $className: '[class^="b--"],[class*=" b--"]';
-  #{$className} {
-    border: 1px solid var(--b--color) !important;
+@each $shade, $code in $shilp-border-colors {
+  $shadeToAppend: "";
+  @if ($shade== "default") {
+    $shadeToAppend: "";
+  } @else {
+    $shadeToAppend: "-#{$shade}";
   }
 
-  //X
-  $className: '[class^="bx--"],[class*=" bx--"]';
-  #{$className} {
-    border-left: 1px solid var(--bx--color) !important;
-    border-right: 1px solid var(--bx--color) !important;
+  // Directions
+  @each $dir, $prop in $shilp-border-directions {
+    $className: ".b#{$dir}#{$shadeToAppend}";
+    #{$className} {
+      border-#{$prop}: 1px solid #{--color("grey", $shade)} !important;
+    }
+  }
+
+  // X
+  .bx#{$shadeToAppend} {
+    border-left: 1px solid #{--color("grey", $shade)} !important;
+    border-right: 1px solid #{--color("grey", $shade)} !important;
   }
 
   //Y
-  $className: '[class^="by--"],[class*=" by--"]';
-  #{$className} {
-    border-top: 1px solid var(--by--color) !important;
-    border-bottom: 1px solid var(--by--color) !important;
+  .by#{$shadeToAppend} {
+    border-top: 1px solid #{--color("grey", $shade)} !important;
+    border-bottom: 1px solid #{--color("grey", $shade)} !important;
   }
 
-  //T,B,L,R
-  @each $direction-initial, $direction in $shilp-border-directions {
-    $className: '[class^="b#{$direction-initial}--"],[class*=" b#{$direction-initial}--"]';
-    #{$className} {
-      border-#{$direction}: 1px
-        solid
-        var(--b#{$direction-initial}--color) !important;
-    }
+  //All
+  .b#{$shadeToAppend} {
+    border: 1px solid #{--color("grey", $shade)} !important;
   }
 }
-
-@mixin shilp-border-colors() {
-  @each $shade-name, $value in map-get($shilp-colors, "grey") {
-    $shade: --color(grey, $shade-name);
-    $modifier: "";
-
-    @if ($shade-name== "default") {
-      $modifier: "--default";
-    } @else {
-      $modifier: "--#{$shade-name}";
-    }
-
-    //All Directions
-    $className: "b#{$modifier}";
-    .#{$className} {
-      --b--color: #{$shade};
-    }
-
-    //X
-    $className: "bx#{$modifier}";
-    .#{$className} {
-      --bx--color: #{$shade};
-    }
-
-    //Y
-    $className: "by#{$modifier}";
-    .#{$className} {
-      --by--color: #{$shade};
-    }
-
-    //T,B,L,R
-    @each $direction-initial, $direction in $shilp-border-directions {
-      $className: "b#{$direction-initial}#{$modifier}";
-      .#{$className} {
-        --b#{$direction-initial}--color: #{$shade};
-      }
-    }
-  }
-}
-
-@include shilp-border-rules();
-@include shilp-border-colors();

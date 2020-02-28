@@ -1,11 +1,9 @@
 .flex {
   display: flex;
+  flex-wrap: wrap;
 }
-.flex__fluid {
-  flex: 1 1 auto;
-}
-.flex__fit {
-  flex: 0 0 auto;
+.flex__item {
+  width: 100%;
 }
 
 //---------- Wrap
@@ -54,4 +52,41 @@
 //---------- Direction
 .flex--column {
   flex-direction: column;
+}
+.flex--row {
+  flex-direction: row;
+}
+
+@mixin shilp-flex-sizing($breakpoint) {
+  $className: breakpoint-class($breakpoint, ".flex__fluid");
+  #{$className} {
+    flex: 1 1 auto;
+    width: auto;
+  }
+  $className: breakpoint-class($breakpoint, ".flex__fit");
+  #{$className} {
+    flex: 0 0 auto;
+    width: auto;
+  }
+}
+
+@mixin shilp-flex-order($breakpoint) {
+  @for $i from 1 through 12 {
+    $className: breakpoint-class($breakpoint, o-#{$i});
+    .#{$className} {
+      order: $i;
+    }
+  }
+}
+
+@include shilp-flex-sizing("phone");
+@include shilp-flex-order("phone");
+//--------------------------------------------------
+// MEDIA QUERY
+//--------------------------------------------------
+@each $breakpoint, $value in $shilp-breakpoints {
+  @media only screen and (min-width: $value) {
+    @include shilp-flex-sizing($breakpoint);
+    @include shilp-flex-order($breakpoint);
+  }
 }

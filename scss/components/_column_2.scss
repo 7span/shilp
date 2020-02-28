@@ -1,0 +1,70 @@
+//--------------------------------------------------
+// CONFIGURATION
+//--------------------------------------------------
+
+//---------- Config: Via SCSS Maps
+$shilp-column-defaults: () !default;
+$shilp-column-defaults: map-merge(
+  (
+    "grids": 12
+  ),
+  $shilp-column-defaults
+);
+
+//---------- Config: Via CSS Vars
+$shilp-column-vars: () !default;
+$shilp-column-vars: map-merge((), $shilp-column-vars);
+
+//---------- Local Variables
+$column-grids: map-get($shilp-column-defaults, "grids");
+
+//--------------------------------------------------
+// MIXINS
+//--------------------------------------------------
+
+// column SIZE
+// Defines the column size based on breakpoint and a class name.
+@mixin column-size($breakpoint) {
+  // 1 - 12
+  @for $i from 1 through $column-grids {
+    $className: breakpoint-class($breakpoint, column--#{$i});
+    .#{$className} {
+      grid-column-end: span #{$i};
+    }
+  }
+}
+
+@mixin column-order($breakpoint) {
+  // 1 - 12
+  @for $i from 1 through $column-grids {
+    $className: breakpoint-class($breakpoint, c-#{$i});
+    .#{$className} {
+      grid-column-start: $i;
+    }
+    $className: breakpoint-class($breakpoint, r-#{$i});
+    .#{$className} {
+      grid-row-start: $i;
+    }
+  }
+}
+
+//--------------------------------------------------
+// CSS column & ELEMENTS
+//--------------------------------------------------
+
+.column {
+  @include component-vars("column", $shilp-column-vars);
+  grid-column-end: span 12;
+}
+@include column-size("phone");
+@include column-order("phone");
+
+//--------------------------------------------------
+// MEDIA QUERY
+//--------------------------------------------------
+@each $breakpoint, $value in $shilp-breakpoints {
+  @media only screen and (min-width: $value) {
+    @include column-size($breakpoint);
+    @include column-order($breakpoint);
+  }
+}
