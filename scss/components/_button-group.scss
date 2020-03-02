@@ -1,60 +1,48 @@
 .button-group {
   display: inline-flex;
 
-  // The Button Group implemetation does not follow BEM guidelines
-  // For styling all the child buttons.
-  // The .button modifiers are used to style .button-group
-  // .button {
-  //   --button--bg: inherit;
-  //   --button--color: inherit;
-  //   --button--bg: inherit;
-  //   --button--hover-bg: inherit;
-  //   --button--hover-color: inherit;
-  //   --button--border: inherit;
-  //   --button--size: inherit;
-  //   --button--font-size: inherit;
-  //   --button--icon-size: inherit;
-  //   --button--radius: inherit;
-  // }
-
-  > .button:not(:first-child):not(:last-child),
-  > .choice:not(:first-child):not(:last-child) .button {
-    border-radius: 0;
-  }
-
-  &:not(.button-group--stack) {
-    > .button:first-child,
-    > .choice:first-child .button {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
+  //If .list class used with .button-group
+  //The radius of buttons should not be modified as the list may have space between it.
+  &:not(.list) {
+    > .button:not(:first-child):not(:last-child),
+    > .choice:not(:first-child):not(:last-child) .button {
+      border-radius: 0;
     }
 
-    > .button:last-child,
-    > .choice:last-child .button {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
+    &:not(.button-group--stack) {
+      > .button:first-child,
+      > .choice:first-child .button {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      > .button:last-child,
+      > .choice:last-child .button {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+
+      > .button + .button,
+      > .choice + .choice .button {
+        border-left: none;
+      }
     }
 
-    > .button + .button,
-    > .choice + .choice .button {
-      border-left: none;
-    }
-  }
-
-  &.button-group--stack {
-    > .button:first-child,
-    > .choice:first-child .button {
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-    > .button:last-child,
-    > .choice:first-child .button {
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-    }
-    > .button + .button,
-    > .choice + .choice .button {
-      border-top: none;
+    &.button-group--stack {
+      > .button:first-child,
+      > .choice:first-child .button {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      > .button:last-child,
+      > .choice:first-child .button {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+      > .button + .button,
+      > .choice + .choice .button {
+        border-top: none;
+      }
     }
   }
 
@@ -77,11 +65,5 @@
 .button-group--pill {
   .button {
     --button--radius: 9999px;
-  }
-}
-
-.button-group--rounded {
-  .button {
-    --button--radius: 4px;
   }
 }

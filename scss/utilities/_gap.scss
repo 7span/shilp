@@ -1,0 +1,40 @@
+@mixin shilp-gaps($breakpoint) {
+  //Merge 0px values to spaces.
+  $spaces: map-merge(
+    $shilp-spaces,
+    (
+      0: 0px
+    )
+  );
+
+  @each $key, $value in $spaces {
+    // X & Y
+    $className: breakpoint-class($breakpoint, ".g-#{$key}");
+    #{$className} {
+      gap: #{$value};
+    }
+
+    //X
+    $className: breakpoint-class($breakpoint, ".gx-#{$key}");
+    #{$className} {
+      column-gap: #{$value};
+    }
+
+    //Y
+    $className: breakpoint-class($breakpoint, ".gy-#{$key}");
+    #{$className} {
+      row-gap: #{$value};
+    }
+  }
+}
+
+@include shilp-gaps("phone");
+
+//--------------------------------------------------
+// MEDIA QUERY
+//--------------------------------------------------
+@each $breakpoint, $value in $shilp-breakpoints {
+  @media only screen and (min-width: $value) {
+    @include shilp-gaps($breakpoint);
+  }
+}

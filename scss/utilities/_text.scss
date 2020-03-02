@@ -61,15 +61,15 @@
 // LINEHEIGHTS
 //--------------------------------------------------
 $shilp-line-heights: (
-  "none": 1,
-  "xs": 1.2,
-  "sm": 1.5,
-  "md": 1.8,
-  "lg": 2,
-  "xl": 2.5
+  "1": 1,
+  "2": 1.2,
+  "3": 1.5,
+  "4": 1.8,
+  "5": 2,
+  "6": 2.5
 );
 @each $key, $value in $shilp-line-heights {
-  .line-height-#{$key} {
+  .lh-#{$key} {
     line-height: #{$value};
   }
 }
@@ -98,7 +98,9 @@ $shilp-text-logical-aligns: (
 
 @include shilp-text-align-rules("phone");
 
-//Media Query
+//--------------------------------------------------
+// MEDIA QUERY
+//--------------------------------------------------
 @each $breakpoint, $value in $shilp-breakpoints {
   @media only screen and (min-width: $value) {
     @include shilp-text-align-rules($breakpoint);

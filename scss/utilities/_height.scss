@@ -1,0 +1,21 @@
+@mixin shilp-flex-height($breakpoint) {
+  $className: breakpoint-class($breakpoint, ".h-auto");
+  #{$className} {
+    height: auto;
+  }
+  $className: breakpoint-class($breakpoint, ".h-100");
+  #{$className} {
+    height: 100%;
+  }
+}
+
+@include shilp-flex-height("phone");
+
+//--------------------------------------------------
+// MEDIA QUERY
+//--------------------------------------------------
+@each $breakpoint, $value in $shilp-breakpoints {
+  @media only screen and (min-width: $value) {
+    @include shilp-flex-height($breakpoint);
+  }
+}

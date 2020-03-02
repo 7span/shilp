@@ -1,0 +1,24 @@
+@mixin phablet {
+  @media only screen and (min-width: map-get($shilp-breakpoints,"phablet")) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media only screen and (min-width: map-get($shilp-breakpoints,"tablet")) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media only screen and (min-width: map-get($shilp-breakpoints,"laptop")) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media only screen and (min-width: map-get($shilp-breakpoints,"desktop")) {
+    @content;
+  }
+}
+

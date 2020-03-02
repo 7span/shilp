@@ -51,6 +51,14 @@ $box-sizes: map-get($shilp-box-defaults, "sizes");
   }
 }
 
+//Removes the padding given by .box class
+//By adding negetive margin same as .box padding
+// Helpful in mobile devices to make the element set to screen edge and horizontal scrolling
+.-box {
+  margin-left: -16px;
+  margin-right: -16px;
+}
+
 //--------------------------------------------------
 // MODIFIERS
 //--------------------------------------------------

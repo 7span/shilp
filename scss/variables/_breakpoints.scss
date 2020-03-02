@@ -1,0 +1,12 @@
+// BREAKPOINTS
+$shilp-breakpoints: () !default;
+$shilp-breakpoints: map-merge(
+  (
+    //phone not required in mobile first approach
+      phablet: 576px,
+    tablet: 768px,
+    laptop: 992px,
+    desktop: 1200px
+  ),
+  $shilp-breakpoints
+);

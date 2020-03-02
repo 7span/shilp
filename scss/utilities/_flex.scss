@@ -1,9 +1,11 @@
 .flex {
   display: flex;
   flex-wrap: wrap;
-}
-.flex__item {
-  width: 100%;
+  > * {
+    //As the framework is mobile-first,
+    //All the children should occupy full width bydefault
+    flex: 1 1 100%;
+  }
 }
 
 //---------- Wrap
@@ -13,6 +15,12 @@
 
 .flex--inline {
   display: inline-flex;
+}
+
+.flex--fit {
+  > * {
+    flex: 0 0 auto;
+  }
 }
 
 //---------- X Axis
@@ -57,30 +65,55 @@
   flex-direction: row;
 }
 
+@mixin shilp-flex-wrap($breakpoint) {
+  $className: breakpoint-class($breakpoint, ".flex--no-wrap");
+  #{$className} {
+    flex-wrap: nowrap;
+  }
+}
+
 @mixin shilp-flex-sizing($breakpoint) {
   $className: breakpoint-class($breakpoint, ".flex__fluid");
   #{$className} {
     flex: 1 1 auto;
-    width: auto;
   }
   $className: breakpoint-class($breakpoint, ".flex__fit");
   #{$className} {
     flex: 0 0 auto;
-    width: auto;
   }
 }
 
 @mixin shilp-flex-order($breakpoint) {
   @for $i from 1 through 12 {
+    // 1-12
     $className: breakpoint-class($breakpoint, o-#{$i});
     .#{$className} {
       order: $i;
     }
   }
+
+  //First
+  $className: breakpoint-class($breakpoint, o-first);
+  .#{$className} {
+    order: -9999;
+  }
+
+  //Last
+  $className: breakpoint-class($breakpoint, o-last);
+  .#{$className} {
+    order: 9999;
+  }
+
+  //Reset
+  $className: breakpoint-class($breakpoint, o-reset);
+  .#{$className} {
+    order: initial;
+  }
 }
 
 @include shilp-flex-sizing("phone");
 @include shilp-flex-order("phone");
+@include shilp-flex-wrap("phone");
 //--------------------------------------------------
 // MEDIA QUERY
 //--------------------------------------------------
@@ -88,5 +121,6 @@
   @media only screen and (min-width: $value) {
     @include shilp-flex-sizing($breakpoint);
     @include shilp-flex-order($breakpoint);
+    @include shilp-flex-wrap($breakpoint);
   }
 }

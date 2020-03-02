@@ -1,9 +1,10 @@
 @import "colors";
 @import "fonts";
-@import "sizes";
 @import "shadows";
 @import "radius";
 @import "field";
+@import "spaces";
+@import "breakpoints";
 
 $shilp-logical-directions: (
   top: "block-start",

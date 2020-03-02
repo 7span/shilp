@@ -35,12 +35,16 @@ $shilp-item-vars: map-merge(
   display: inline-grid;
   //The first row should not expand more than the content
   //The second content should expand till it's max content
-  grid-template-rows: minmax(0, min-content) minmax(0, max-content);
+  grid-template-rows: minmax(0, min-content) 1fr;
   grid-template-columns: min-content auto;
   gap: var(--item--gap);
   > .media {
     grid-row: 1 / 3;
   }
+}
+
+.item__media {
+  grid-row: 1 / 3;
 }
 
 .item__title {

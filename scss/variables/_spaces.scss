@@ -1,0 +1,16 @@
+// SPACES
+// Used for spacing values in margin, padding etc.
+// The sizes are also used for keeping gap between blocks(aka grid).
+$shilp-spaces: () !default;
+$shilp-spaces: map-merge(
+  (
+    1: 4px,
+    2: 8px,
+    3: 16px,
+    4: 24px,
+    5: 48px,
+    6: 72px,
+    7: 96px
+  ),
+  $shilp-spaces
+);

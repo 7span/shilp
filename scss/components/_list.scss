@@ -4,21 +4,11 @@
 
 //---------- Config: Via SCSS Maps
 $shilp-list-defaults: () !default;
-$shilp-list-defaults: map-merge(
-  (
-    "gaps": $shilp-spaces
-  ),
-  $shilp-list-defaults
-);
+$shilp-list-defaults: map-merge((), $shilp-list-defaults);
 
 //---------- Config: Via CSS Vars
 $shilp-list-vars: () !default;
-$shilp-list-vars: map-merge(
-  (
-    "gap": 0px
-  ),
-  $shilp-list-vars
-);
+$shilp-list-vars: map-merge((), $shilp-list-vars);
 
 //---------- Local Variables
 $list-gaps: map-get($shilp-list-defaults, "gaps");
@@ -28,7 +18,6 @@ $list-gaps: map-get($shilp-list-defaults, "gaps");
 //--------------------------------------------------
 .list {
   @include component-vars("list", $shilp-list-vars);
-  gap: var(--list--gap);
   display: inline-grid;
   grid-auto-flow: column;
 }
@@ -36,16 +25,6 @@ $list-gaps: map-get($shilp-list-defaults, "gaps");
 //--------------------------------------------------
 // MODIFIERS
 //--------------------------------------------------
-
-//---------- GAP
-@each $gap, $value in $list-gaps {
-  .list--#{$gap} {
-    --list--gap: #{$value};
-  }
-}
-.list--0 {
-  --list--gap: 0;
-}
 
 //---------- STACK
 .list--stack {
@@ -62,23 +41,4 @@ $list-gaps: map-get($shilp-list-defaults, "gaps");
 
 .list--fit {
   grid-auto-columns: max-content;
-}
-
-//---------- GROUP
-// Makes child buttons attached and handles radius & borders
-.list--group {
-}
-
-//--------------------------------------------------
-// MEDIA QUERY
-//--------------------------------------------------
-@each $breakpoint, $value in $shilp-breakpoints {
-  @media only screen and (min-width: $value) {
-    @each $gap, $value in $list-gaps {
-      $className: breakpoint-class($breakpoint, list--#{$gap});
-      .#{$className} {
-        --list--gap: #{$value};
-      }
-    }
-  }
 }

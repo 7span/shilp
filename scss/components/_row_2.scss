@@ -4,34 +4,17 @@
 
 //---------- Config: Via SCSS Maps
 $shilp-row-defaults: () !default;
-$shilp-row-defaults: map-merge(
-  (
-    "gaps": $shilp-spaces
-  ),
-  $shilp-row-defaults
-);
+$shilp-row-defaults: map-merge((), $shilp-row-defaults);
 
 //---------- Config: Via CSS Vars
 $shilp-row-vars: () !default;
 $shilp-row-vars: map-merge((), $shilp-row-vars);
 
 //---------- Local Variables
-$row-gaps: map-get($shilp-row-defaults, "gaps");
 
 //--------------------------------------------------
 // MIXINS
 //--------------------------------------------------
-
-// RESPONSIVE row GAP
-// Generates the responsive classes based on breakpoint. with all the gap values.
-@mixin row-gap($breakpoint) {
-  @each $key, $value in $row-gaps {
-    $className: breakpoint-class($breakpoint, row--#{$key});
-    .#{$className} {
-      gap: #{$value};
-    }
-  }
-}
 
 //--------------------------------------------------
 // CSS BLOCK & ELEMENTS
@@ -41,14 +24,4 @@ $row-gaps: map-get($shilp-row-defaults, "gaps");
   @include component-vars("row", $shilp-row-vars);
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-}
-@include row-gap("phone");
-
-//--------------------------------------------------
-// MEDIA QUERY
-//--------------------------------------------------
-@each $breakpoint, $value in $shilp-breakpoints {
-  @media only screen and (min-width: $value) {
-    @include row-gap($breakpoint);
-  }
 }
