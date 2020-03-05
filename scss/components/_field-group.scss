@@ -1,0 +1,9 @@
+@each $key, $value in $shilp-field-sizes {
+  .field-group--#{$key} {
+    .field {
+      --field--size: #{--field($key)};
+      --field--text-size: #{--field-text($key)};
+      --field--icon-size: #{--field-icon($key)};
+    }
+  }
+}

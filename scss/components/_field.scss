@@ -106,8 +106,8 @@ textarea.field-block {
   overflow: auto;
 }
 
-//GROUP ITEMS
-.field__group {
+//Content ITEMS
+.field__content {
   display: flex;
   align-items: stretch;
   > * {
@@ -203,5 +203,21 @@ textarea.field-block {
   border: none;
   > * {
     margin: 0;
+  }
+}
+
+//--------------------------------------------------
+// THEMES
+//--------------------------------------------------
+.field--underline,
+.field-group--underline .field {
+  --field--radius: 0;
+  --field--circum-bg: --color(light);
+  .field__before,
+  .field__after,
+  .field-block:not(textarea) {
+    border-top: none;
+    border-left: none;
+    border-right: none;
   }
 }

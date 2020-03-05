@@ -190,11 +190,6 @@ $default-button-radius: map-get($shilp-button-defaults, "radius");
   }
 }
 
-label.button {
-  cursor: default;
-  pointer-events: none;
-}
-
 //--------------------------------------------------
 // MODIFIERS
 //--------------------------------------------------
@@ -301,4 +296,7 @@ label.button {
 }
 .button--pill {
   --button--radius: 9999px;
+}
+.button--rectangle {
+  --button--radius: 0px;
 }

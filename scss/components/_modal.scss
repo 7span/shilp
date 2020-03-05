@@ -96,6 +96,14 @@ $modal-sizes: map-get($shilp-modal-defaults, "sizes");
   display: flex;
 }
 
+.modal--fullscreen {
+  --modal--size: none;
+  --modal--space-around: #{--space(3)} !important;
+  .modal__wrapper {
+    height: 100%;
+  }
+}
+
 //--------------------------------------------------
 // MEDIA QUERY
 //--------------------------------------------------

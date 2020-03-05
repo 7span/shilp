@@ -43,7 +43,6 @@ $shilp-media-vars: map-merge(
 .media {
   @include component-vars("media", $shilp-media-vars);
   width: var(--media--size, 100%);
-  display: inline-block;
 }
 .media__wrap {
   > img,
@@ -66,5 +65,6 @@ $shilp-media-vars: map-merge(
 @each $key, $value in $shilp-media-sizes {
   .media--#{$key} {
     --media--size: #{$value};
+    display: inline-block; //When width is applied, media will be always visible. Hence it should be able to center itself from parent
   }
 }
