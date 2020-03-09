@@ -10,3 +10,11 @@
 @import "height";
 @import "gap";
 @import "opacity";
+
+.hide {
+  display: none !important;
+}
+
+.ul--reset {
+  list-style: none;
+}
