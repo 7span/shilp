@@ -1,5 +1,5 @@
 //--------------------------------------------------
-// CONFIGUswitchN
+// CONFIG
 //--------------------------------------------------
 
 //---------- Config: Via SCSS Maps
@@ -16,7 +16,7 @@ $shilp-switch-vars: () !default;
 $shilp-switch-vars: map-merge(
   (
     size: #{--field(md)},
-    padding: 6px,
+    padding: 4px,
     border-width: 0px,
     radius: 0,
     color: --color(primary),

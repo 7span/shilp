@@ -57,6 +57,10 @@ $field-states: map-get($shilp-field-defaults, "states");
   .field {
     margin-bottom: 0;
   }
+
+  .material-design-icon {
+    display: flex;
+  }
 }
 
 .field__label {
@@ -167,6 +171,21 @@ textarea.field-block {
     --field--size: #{--field($key)};
     --field--text-size: #{--field-text($key)};
     --field--icon-size: #{--field-icon($key)};
+  }
+}
+
+.field--inline {
+  display: grid;
+  grid-template-rows: 1fr min-content;
+  grid-template-columns: minmax(min-content, 1fr) 1fr;
+  .field__label {
+    margin: 0;
+  }
+  .field__content {
+    justify-content: flex-end;
+  }
+  .field__desc {
+    grid-column: 1 / 3;
   }
 }
 

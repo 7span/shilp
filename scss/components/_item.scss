@@ -63,7 +63,7 @@ $shilp-item-vars: map-merge(
 //--------------------------------------------------
 
 .item--middle {
-  grid-template-rows: 50% 50%;
+  grid-template-rows: minmax(min-content, 50%) minmax(min-content, 50%);
   .item__title {
     align-self: flex-end;
   }

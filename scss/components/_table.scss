@@ -1,9 +1,127 @@
+//--------------------------------------------------
+// CONFIG
+//--------------------------------------------------
+
+//---------- Config: Via SCSS Maps
+$shilp-table-defaults: () !default;
+$shilp-table-defaults: map-merge(
+  (
+    "paddings": (
+      0: (
+        0px,
+        0px
+      ),
+      1: (
+        2px,
+        4px
+      ),
+      2: (
+        4px,
+        6px
+      ),
+      3: (
+        6px,
+        10px
+      ),
+      4: (
+        8px,
+        12px
+      )
+    )
+  ),
+  $shilp-table-defaults
+);
+
+//---------- Config: Via CSS Vars
+$shilp-table-vars: () !default;
+$shilp-table-vars: map-merge(
+  (
+    "border-color": #{--color(grey, lighter)}
+  ),
+  $shilp-table-vars
+);
+
+//---------- Local Variables
+$shilp-table-paddings: map-get($shilp-table-defaults, "paddings");
+
+//--------------------------------------------------
+// BLOCK & ELEMENTS
+//--------------------------------------------------
+
 .table {
-}
-.table--fit {
-  table-layout: fixed;
+  @include component-vars("table", $shilp-table-vars);
+  border-collapse: collapse;
+  th,
+  td {
+    padding: var(--table--py) var(--table--px) var(--table--py) var(--table--px);
+  }
 }
 .table__fit {
   width: 1px;
   white-space: nowrap;
+}
+
+//--------------------------------------------------
+// MODIFIERS
+//--------------------------------------------------
+
+.table--fix {
+  table-layout: fixed;
+}
+
+.table--border {
+  td,
+  th {
+    border: 1px solid var(--table--border-color);
+  }
+}
+
+.table--border-x {
+  td,
+  th {
+    border-left: 1px solid var(--table--border-color);
+    border-right: 1px solid var(--table--border-color);
+  }
+}
+
+.table--border-y {
+  td,
+  th {
+    border-top: 1px solid var(--table--border-color);
+    border-bottom: 1px solid var(--table--border-color);
+  }
+}
+
+.table--edge {
+  thead {
+    th {
+      border-top: none;
+    }
+  }
+  td,
+  th {
+    &:first-child {
+      padding-left: 0;
+      border-left: none;
+    }
+    &:last-child {
+      padding-right: 0;
+      border-right: none;
+    }
+  }
+
+  tr {
+    &:last-child {
+      > td {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+@each $key, $value in $shilp-table-paddings {
+  .table--#{$key} {
+    --table--py: #{nth($value, 1)};
+    --table--px: #{nth($value, 2)};
+  }
 }

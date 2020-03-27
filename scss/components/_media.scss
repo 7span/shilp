@@ -55,6 +55,35 @@ $shilp-media-vars: map-merge(
   }
 }
 
+.media--avatar {
+  width: var(--media--size, 100%);
+  height: var(--media--size, 100%);
+  background-color: --color(primary, lightest);
+  color: --color(primary);
+  font-size: var(--media--size);
+  line-height: 1;
+  position: relative;
+  overflow: hidden;
+  background-clip: padding-box;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    position: relative;
+    z-index: 2;
+  }
+  &:after {
+    @include position(absolute, 0, 0, 0, 0);
+    content: attr(data-initials);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40%;
+    z-index: 1;
+  }
+}
+
 //--------------------------------------------------
 // MODIFIERS
 //--------------------------------------------------`

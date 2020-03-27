@@ -151,6 +151,7 @@ $default-button-radius: map-get($shilp-button-defaults, "radius");
   padding: 0px calc(var(--button--size) / 2);
   font-size: var(--button--font-size);
   border-radius: var(--button--radius);
+
   svg {
     height: var(--button--icon-size) !important;
     width: var(--button--icon-size) !important;
@@ -299,4 +300,9 @@ $default-button-radius: map-get($shilp-button-defaults, "radius");
 }
 .button--rectangle {
   --button--radius: 0px;
+}
+
+.button--badge {
+  pointer-events: none;
+  vertical-align: top;
 }

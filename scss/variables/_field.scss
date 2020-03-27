@@ -3,6 +3,7 @@
 $shilp-field-sizes: () !default;
 $shilp-field-sizes: map-merge(
   (
+    xxs: 18px,
     xs: 24px,
     sm: 32px,
     md: 40px,
@@ -17,6 +18,7 @@ $shilp-field-sizes: map-merge(
 $shilp-field-icon-sizes: () !default;
 $shilp-field-icon-sizes: map-merge(
   (
+    xxs: 12px,
     xs: 14px,
     sm: 16px,
     md: 20px,
@@ -31,6 +33,7 @@ $shilp-field-icon-sizes: map-merge(
 $shilp-field-text-sizes: () !default;
 $shilp-field-text-sizes: map-merge(
   (
+    xxs: --text(xs),
     xs: --text(xs),
     sm: --text(sm),
     md: --text(sm),
