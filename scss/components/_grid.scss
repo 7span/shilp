@@ -6,15 +6,7 @@
 $shilp-grid-defaults: () !default;
 $shilp-grid-defaults: map-merge(
   (
-    "gaps": $shilp-spaces,
-    "sizes": (
-      xxs: 80px,
-      xs: 120px,
-      sm: 160px,
-      md: 200px,
-      lg: 240px,
-      xl: 280px
-    )
+    "items": 8
   ),
   $shilp-grid-defaults
 );
@@ -23,15 +15,13 @@ $shilp-grid-defaults: map-merge(
 $shilp-grid-vars: () !default;
 $shilp-grid-vars: map-merge(
   (
-    "gap": 0px,
-    "size": map-deep-get($shilp-grid-defaults, sizes, md)
+    "items": 4
   ),
   $shilp-grid-vars
 );
 
 //---------- Local Variables
-$grid-gaps: map-get($shilp-grid-defaults, "gaps");
-$grid-sizes: map-get($shilp-grid-defaults, "sizes");
+$grid-items: map-get($shilp-grid-defaults, "items");
 
 //--------------------------------------------------
 // MIXINS
@@ -40,10 +30,10 @@ $grid-sizes: map-get($shilp-grid-defaults, "sizes");
 // RESPONSIVE GRID SIZE
 // Generates the responsive classes based on breakpoint. with all the gap values.
 @mixin shilp-grid-size($breakpoint) {
-  @each $key, $value in $grid-sizes {
-    $className: breakpoint-class($breakpoint, grid--#{$key});
+  @for $i from 1 through $grid-items {
+    $className: breakpoint-class($breakpoint, grid--#{$i});
     .#{$className} {
-      --grid--size: #{$value};
+      --grid--items: #{$i};
     }
   }
 }
@@ -54,11 +44,7 @@ $grid-sizes: map-get($shilp-grid-defaults, "sizes");
 .grid {
   @include component-vars("grid", $shilp-grid-vars);
   display: grid;
-  gap: var(--grid--gap);
-  grid-template-columns: repeat(auto-fill, minmax(var(--grid--size), 1fr));
-}
-.grid--fit {
-  grid-template-columns: repeat(auto-fill, var(--grid--size));
+  grid-template-columns: repeat(var(--grid--items), 1fr);
 }
 
 @include shilp-grid-size("phone");
