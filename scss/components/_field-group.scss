@@ -1,3 +1,7 @@
+.field-group {
+  display: grid;
+}
+
 @each $key, $value in $shilp-field-sizes {
   .field-group--#{$key} {
     .field {

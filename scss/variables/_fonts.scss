@@ -4,6 +4,7 @@ $shilp-fonts: map-merge(
   (
     heading: "sytem",
     content: "system",
+    emoji: '"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
     code:
       'Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace'
   ),
@@ -14,7 +15,8 @@ $shilp-font-families: (
   system: map-get($shilp-config, system-fonts),
   heading: font-with-fallback(heading),
   content: font-with-fallback(content),
-  code: font-with-fallback(code)
+  code: font-with-fallback(code),
+  emoji: map-get($shilp-fonts, emoji)
 );
 
 // FONT-SIZES

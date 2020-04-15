@@ -15,7 +15,7 @@ $shilp-modal-defaults: map-merge(
         sm: 480px,
         md: 576px,
         lg: 768px,
-        xl: 992px
+        xl: 992px,
       ),
     //Defines the padding to keep around modal for diffrent breakpoints.
       "space-around":
@@ -24,7 +24,7 @@ $shilp-modal-defaults: map-merge(
         phablet: --space(2),
         tablet: --space(3),
         laptop: --space(4),
-        desktop: --space(5)
+        desktop: --space(5),
       )
   ),
   $shilp-modal-defaults
@@ -35,7 +35,7 @@ $shilp-modal-vars: () !default;
 $shilp-modal-vars: map-merge(
   (
     "size": #{map-deep-get($shilp-modal-defaults, sizes, md)},
-    "space-around": #{map-deep-get($shilp-modal-defaults, "space-around", phone)}
+    "space-around": #{map-deep-get($shilp-modal-defaults, "space-around", phone)},
   ),
   $shilp-modal-vars
 );
@@ -68,8 +68,6 @@ $modal-sizes: map-get($shilp-modal-defaults, "sizes");
   max-width: var(--modal--size);
   max-height: calc(100% - var(--modal--space-around) * 2);
   margin: var(--modal--space-around);
-  border-radius: map-get($shilp-config, "radius");
-  background-color: --color(light);
 }
 .modal__close {
   @include position(fixed, 0, 0, auto, auto);
@@ -99,6 +97,12 @@ $modal-sizes: map-get($shilp-modal-defaults, "sizes");
 .modal--fullscreen {
   --modal--size: none;
   --modal--space-around: #{--space(3)} !important;
+  .modal__wrapper {
+    height: 100%;
+  }
+}
+
+.modal--full-height {
   .modal__wrapper {
     height: 100%;
   }

@@ -8,7 +8,6 @@ $select-arrow: m-icon(
 .select {
   position: relative;
   padding: 0;
-  background-color: --color(light);
   select {
     @include field-defaults;
     border-radius: var(--field--radius);

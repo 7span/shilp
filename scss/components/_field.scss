@@ -24,15 +24,15 @@ $shilp-field-defaults: map-merge(
 $shilp-field-vars: () !default;
 $shilp-field-vars: map-merge(
   (
-    "radius": 3px,
-    "border-width": 1px,
+    "radius": 4px,
+    "border-width": 0px,
     "border-color": --color(grey, light),
-    "optional-text": '"(Optional)"',
+    "optional-text": '"— Optional"',
     "circum-color": --color(grey),
     "circum-bg": --color(grey, lightest),
     "focus-color": --color(grey, lightest),
     "size": --field(md),
-    "font-size": --field-text(md),
+    "text-size": --field-text(md),
     "icon-size": --field-icon(md)
   ),
   $shilp-field-vars
@@ -52,12 +52,7 @@ $field-states: map-get($shilp-field-defaults, "states");
 // FIELD
 .field {
   @include component-vars("field", $shilp-field-vars);
-  margin-bottom: --space(3);
-
-  .field {
-    margin-bottom: 0;
-  }
-
+  position: relative;
   .material-design-icon {
     display: flex;
   }
@@ -88,6 +83,7 @@ $field-states: map-get($shilp-field-defaults, "states");
   min-width: 0px; //When .field__group is used, the input becomes flex child.
   font-size: var(--field--text-size);
   overflow: hidden;
+  background-color: var(--field--circum-bg);
   > * {
     font-size: var(--field--text-size);
   }
@@ -211,6 +207,7 @@ textarea.field-block {
       font-style: italic;
       margin-left: --space(1);
       color: --color(grey);
+      font-size: 11px;
     }
   }
 }
@@ -239,4 +236,10 @@ textarea.field-block {
     border-left: none;
     border-right: none;
   }
+}
+
+.field--outline,
+.field-group--outline .field {
+  --field--border-width: 1px;
+  --field--circum-bg: transparent;
 }

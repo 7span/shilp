@@ -10,8 +10,8 @@ $shilp-alert-defaults: map-merge(
     "themes": (
       solid,
       outline,
-      muted
-    )
+      muted,
+    ),
   ),
   $shilp-alert-defaults
 );
@@ -25,7 +25,7 @@ $shilp-alert-vars: map-merge(
     "border": 0px,
     "border-color": transparent,
     "padding": #{--space(3)},
-    "radius": map-get($shilp-config, "radius")
+    "radius": map-get($shilp-config, "radius"),
   ),
   $shilp-alert-vars
 );
@@ -72,7 +72,7 @@ $alert-themes: map-get($shilp-alert-defaults, "themes");
   border: var(--alert--border) solid var(--alert--border-color);
   padding: var(--alert--padding);
   border-radius: var(--alert--radius);
-  grid-template-rows: min-content min-content;
+  grid-template-rows: minmax(0, min-content) 1fr;
   grid-template-columns: min-content auto;
 }
 .alert__title {

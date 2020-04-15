@@ -1,3 +1,11 @@
+//Height classes for all the spaces
+//Useful for shimmer design
+@each $key, $value in $shilp-spaces {
+  .h-#{$key} {
+    height: $value;
+  }
+}
+
 @mixin shilp-flex-height($breakpoint) {
   $className: breakpoint-class($breakpoint, ".h-auto");
   #{$className} {

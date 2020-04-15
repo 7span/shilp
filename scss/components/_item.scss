@@ -2,30 +2,14 @@
 // CONFIGURATION
 //--------------------------------------------------
 //---------- Config: Via SCSS Maps
-$shilp-item-defaults: (
-  gaps: (
-    0: 0px,
-    1: 2px,
-    2: 4px,
-    3: 6px,
-    4: 8px,
-    5: 10px,
-    6: 12px
-  )
-) !default;
+$shilp-item-defaults: () !default;
 $shilp-item-defaults: map-merge((), $shilp-item-defaults);
 
 //---------- Local Variables
-$shilp-item-gaps: map-get($shilp-item-defaults, gaps);
 
 //---------- Config: Via CSS Vars
 $shilp-item-vars: () !default;
-$shilp-item-vars: map-merge(
-  (
-    gap: 0px
-  ),
-  $shilp-item-vars
-);
+$shilp-item-vars: map-merge((), $shilp-item-vars);
 
 //--------------------------------------------------
 // BLOCK & ELEMENTS
@@ -68,8 +52,7 @@ $shilp-item-vars: map-merge(
     align-self: flex-end;
   }
 }
-@each $key, $value in $shilp-item-gaps {
-  .item--#{$key} {
-    --item--gap: #{$value};
-  }
+
+.item--fluid {
+  display: grid;
 }

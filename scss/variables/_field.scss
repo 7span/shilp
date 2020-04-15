@@ -35,9 +35,9 @@ $shilp-field-text-sizes: map-merge(
   (
     xxs: --text(xs),
     xs: --text(xs),
-    sm: --text(sm),
+    sm: --text(xs),
     md: --text(sm),
-    lg: --text(md),
+    lg: --text(sm),
     xl: --text(md)
   ),
   $shilp-field-text-sizes

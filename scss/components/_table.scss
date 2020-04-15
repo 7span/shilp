@@ -36,7 +36,7 @@ $shilp-table-defaults: map-merge(
 $shilp-table-vars: () !default;
 $shilp-table-vars: map-merge(
   (
-    "border-color": #{--color(grey, lighter)}
+    "border-color": #{--color(grey, lightest)}
   ),
   $shilp-table-vars
 );

@@ -2,6 +2,7 @@
 
 .choices {
   display: flex;
+  font-size: var(--field--text-size);
   .choice {
     margin-right: --space(3);
   }

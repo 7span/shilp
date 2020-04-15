@@ -1,15 +1,20 @@
 .shimmer {
-  animation-duration: 10s;
+  animation-duration: 5s;
   animation-fill-mode: forwards;
   animation-iteration-count: infinite;
   animation-name: shimmer;
   animation-timing-function: linear;
-  background: #f6f7f8;
-  background: linear-gradient(to right, #eeeeee 10%, #dddddd 50%, #eeeeee 90%);
-  height: 100%;
+  background: linear-gradient(
+    to right,
+    --color(grey, lightest) 5%,
+    --color(grey, lighter) 50%,
+    --color(grey, lightest) 95%
+  );
+  background-size: 1200px 100%;
   width: 100%;
   position: relative;
 }
+
 @keyframes shimmer {
   0% {
     background-position: -1200px 0;

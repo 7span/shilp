@@ -11,61 +11,61 @@ $shilp-colors: map-merge(
       default: #0652dd,
       dark: #043fbe,
       darker: #032e9f,
-      darkest: #01176a
+      darkest: #01176a,
     ),
     "secondary": (
-      lightest: #cefcea,
-      lighter: #6cefd3,
-      light: #46dfcc,
-      default: #12cbc4,
-      dark: #0da6ae,
-      darker: #097f92,
-      darkest: #003867
+      lightest: #e0f7fa,
+      lighter: #80deea,
+      light: #4dd0e1,
+      default: #00bcd4,
+      dark: #0097a7,
+      darker: #00838f,
+      darkest: #006064,
     ),
     "accent": (
-      lightest: #fff7cf,
-      lighter: #ffe270,
-      light: #ffd64d,
-      default: #ffc312,
-      dark: #dba10d,
-      darker: #b78209,
-      darkest: #7a4f03
+      lightest: #fff3e0,
+      lighter: #ffcc80,
+      light: #ffb74d,
+      default: #ff9800,
+      dark: #f57c00,
+      darker: #ef6c00,
+      darkest: #e65100,
     ),
     "danger": (
-      lightest: #fde2ce,
-      lighter: #f4916e,
-      light: #e96649,
-      default: #db2713,
-      dark: #bc110d,
-      darker: #9d0912,
-      darkest: #69031a
+      lightest: #ffebee,
+      lighter: #ef9a9a,
+      light: #e57373,
+      default: #f44336,
+      dark: #d32f2f,
+      darker: #c62828,
+      darkest: #b71c1c,
     ),
     "warning": (
-      lightest: #fef5cc,
-      lighter: #f9d666,
-      light: #f4c340,
-      default: #eda704,
-      dark: #cb8902,
-      darker: #aa6d02,
-      darkest: #714100
+      lightest: #fff3e0,
+      lighter: #ffcc80,
+      light: #ffb74d,
+      default: #ff9800,
+      dark: #f57c00,
+      darker: #ef6c00,
+      darkest: #e65100,
     ),
     "success": (
-      lightest: #e4fad2,
-      lighter: #97e577,
-      light: #6bcc51,
-      default: #34aa22,
-      dark: #1f9218,
-      darker: #117a13,
-      darkest: #065114
+      lightest: #e8f5e9,
+      lighter: #a5d6a7,
+      light: #81c784,
+      default: #4caf50,
+      dark: #388e3c,
+      darker: #2e7d32,
+      darkest: #1b5e20,
     ),
     "info": (
-      lightest: #cafdf4,
-      lighter: #61f3f2,
-      light: #39dbe7,
-      default: #00b8d8,
-      dark: #008fb9,
-      darker: #006c9b,
-      darkest: #003867
+      lightest: #e3f2fd,
+      lighter: #90caf9,
+      light: #64b5f6,
+      default: #2196f3,
+      dark: #1976d2,
+      darker: #1565c0,
+      darkest: #0d47a1,
     ),
     "grey": (
       lightest: #eceff1,
@@ -74,14 +74,14 @@ $shilp-colors: map-merge(
       default: #607d8b,
       dark: #455a64,
       darker: #37474f,
-      darkest: #263238
+      darkest: #263238,
     ),
     "light": (
-      default: #ffffff
+      default: #ffffff,
     ),
     "dark": (
-      default: #000000
-    )
+      default: #000000,
+    ),
   ),
   $shilp-colors
 );
@@ -94,12 +94,12 @@ $shilp-gradients: map-merge(
   (
     "primary": (
       #bd00cc,
-      #f67f29
+      #f67f29,
     ),
     "secondary": (
       #a745ef,
-      #44bffd
-    )
+      #44bffd,
+    ),
   ),
   $shilp-gradients
 );

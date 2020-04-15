@@ -33,6 +33,8 @@ $shilp-switch-colors: map-get($shilp-switch-defaults, "colors");
 //--------------------------------------------------
 .switch {
   @include component-vars("switch", $shilp-switch-vars);
+  display: inline-block;
+  vertical-align: top;
 }
 .switch__wrapper {
   display: flex;

@@ -14,11 +14,10 @@ $shilp-button-defaults: map-merge(
       muted,
       gradient,
       tab,
-      link
+      link,
     ),
     "theme": "solid",
-    "muted-shade": "lightest",
-    "hover-shade": "darker"
+    "hover-shade": "darker",
   ),
   $shilp-button-defaults
 );
@@ -35,7 +34,8 @@ $shilp-button-vars: map-merge(
     "size": --field(md),
     "font-size": --field-text(md),
     "icon-size": --field-icon(md),
-    "radius": map-get($shilp-config, "radius")
+    "radius": map-get($shilp-config, "radius"),
+    "tab-border-size": 2px,
   ),
   $shilp-button-vars
 );
@@ -61,14 +61,11 @@ $default-button-radius: map-get($shilp-button-defaults, "radius");
   $default: --color($color);
   $text: "";
   $hover: "";
-  $muted: "";
 
   @if ($color== "light" or $color== "dark") {
     $hover: --color($color);
-    $muted: --color($color);
   } @else {
     $hover: --color($color, $button-hover-shade);
-    $muted: --color($color, $button-muted-shade);
   }
 
   @if ($color== "light") {
@@ -88,14 +85,14 @@ $default-button-radius: map-get($shilp-button-defaults, "radius");
   @else if $theme== "outline" {
     --button--color: #{$default};
     --button--hover-color: #{$default};
-    --button--hover-bg: #{$muted};
+    --button--hover-bg: #{--color($color, "lightest")};
   }
   //---------- MUTED
   @else if $theme== "muted" {
-    --button--bg: #{$muted};
-    --button--hover-bg: #{$default};
-    --button--color: #{$default};
-    --button--hover-color: #{$text};
+    --button--bg: #{--color($color, "lightest")};
+    --button--hover-bg: #{--color($color, "lightest")};
+    --button--color: #{--color($color)};
+    --button--hover-color: #{--color($color, "darkest")};
   }
   //----------  TRANSPARENT
   @else if $theme== "trn" {
@@ -151,7 +148,7 @@ $default-button-radius: map-get($shilp-button-defaults, "radius");
   padding: 0px calc(var(--button--size) / 2);
   font-size: var(--button--font-size);
   border-radius: var(--button--radius);
-
+  position: relative;
   svg {
     height: var(--button--icon-size) !important;
     width: var(--button--icon-size) !important;
@@ -190,7 +187,9 @@ $default-button-radius: map-get($shilp-button-defaults, "radius");
     @include margin(left, --space(2));
   }
 }
-
+.button__emoji {
+  font-family: --text(emoji);
+}
 //--------------------------------------------------
 // MODIFIERS
 //--------------------------------------------------
@@ -212,6 +211,7 @@ $default-button-radius: map-get($shilp-button-defaults, "radius");
 .button--right {
   flex-direction: row-reverse;
   justify-content: space-between;
+  text-align: right;
   .button__icon {
     ~ .button__label {
       @include margin(right, --space(2));
@@ -267,7 +267,7 @@ $default-button-radius: map-get($shilp-button-defaults, "radius");
   &:after {
     content: "";
     @include position(absolute, auto, 0, 0, 0);
-    height: 2px;
+    height: var(--button--tab-border-size);
     background-color: var(--button--color);
     display: none;
   }
@@ -305,4 +305,14 @@ $default-button-radius: map-get($shilp-button-defaults, "radius");
 .button--badge {
   pointer-events: none;
   vertical-align: top;
+}
+
+//Wrap
+.button--wrap {
+  word-break: break-word;
+  white-space: initial;
+  padding-top: calc(var(--button--size) / 3);
+  padding-bottom: calc(var(--button--size) / 3);
+  height: auto;
+  line-height: initial;
 }
