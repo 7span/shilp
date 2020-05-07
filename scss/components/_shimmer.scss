@@ -2,24 +2,13 @@
   animation-duration: 5s;
   animation-fill-mode: forwards;
   animation-iteration-count: infinite;
-  animation-name: shimmer;
+  animation-name: shilp-shimmer;
   animation-timing-function: linear;
-  background: linear-gradient(
-    to right,
-    --color(grey, lightest) 5%,
-    --color(grey, lighter) 50%,
-    --color(grey, lightest) 95%
-  );
+  background: linear-gradient(to right,
+      --color(grey, lightest) 5%,
+      --color(grey, lighter) 50%,
+      --color(grey, lightest) 95%);
   background-size: 1200px 100%;
   width: 100%;
   position: relative;
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -1200px 0;
-  }
-  100% {
-    background-position: 1200px 0;
-  }
 }

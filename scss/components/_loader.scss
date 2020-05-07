@@ -4,23 +4,15 @@
 
 //---------- Config: Via SCSS Maps
 $shilp-loader-defaults: () !default;
-$shilp-loader-defaults: map-merge(
-  (
-    "size": md
-  ),
-  $shilp-loader-defaults
-);
+$shilp-loader-defaults: map-merge(("size": md),
+  $shilp-loader-defaults);
 
 //---------- Config: Via CSS Vars
 $shilp-loader-vars: () !default;
-$shilp-loader-vars: map-merge(
-  (
-    "thickness": 3px,
+$shilp-loader-vars: map-merge(("thickness": 3px,
     "base-color": rgba(255, 255, 255, 0.4),
-    "color": rgba(255, 255, 255, 0.8)
-  ),
-  $shilp-loader-vars
-);
+    "color": rgba(255, 255, 255, 0.8)),
+  $shilp-loader-vars);
 
 //---------- Local Variables
 $loader-size: map-get($shilp-loader-defaults, "size");
@@ -42,19 +34,19 @@ $loader-thickness: var(--loader--thickness);
   position: relative;
   pointer-events: none;
   cursor: wait;
+
   &:after {
     border-width: $loader-thickness;
     width: var(--loader--size);
     height: var(--loader--size);
     @include position(absolute);
-    border-color: var(--loader--color) var(--loader--base-color)
-      var(--loader--base-color) var(--loader--base-color);
+    border-color: var(--loader--color) var(--loader--base-color) var(--loader--base-color) var(--loader--base-color);
     content: "";
     border-radius: 50%;
     border-style: solid;
     display: block;
     z-index: 3;
-    animation-name: loading;
+    animation-name: shilp-loader;
     animation-duration: 1s;
     animation-iteration-count: infinite;
     margin: auto;
@@ -72,20 +64,9 @@ $loader-thickness: var(--loader--thickness);
 }
 
 //---------- SIZE
-@each $key, $value in $shilp-field-icon-sizes {
+@each $key,
+$value in $shilp-field-icon-sizes {
   .loader--#{$key} {
     @include loader--size($key);
-  }
-}
-
-//--------------------------------------------------
-// ANIMATIONS
-//--------------------------------------------------
-@keyframes loading {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
   }
 }

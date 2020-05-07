@@ -14,8 +14,8 @@ $shilp-media-defaults: (
     7: 160px,
     8: 192px,
     9: 256px,
-    10: 320px
-  )
+    10: 320px,
+  ),
 ) !default;
 $shilp-media-defaults: map-merge((), $shilp-media-defaults);
 
@@ -28,7 +28,7 @@ $shilp-media-vars: map-merge(
   (
     "size": "",
     "fit": "contain",
-    "position": "center"
+    "position": "center",
   ),
   $shilp-media-vars
 );
@@ -45,6 +45,7 @@ $shilp-media-vars: map-merge(
   width: var(--media--size, 100%);
 }
 .media__wrap {
+  height: 100%;
   > img,
   > video,
   > iframe {

@@ -4,21 +4,13 @@
 
 //---------- Config: Via SCSS Maps
 $shilp-grid-defaults: () !default;
-$shilp-grid-defaults: map-merge(
-  (
-    "items": 8
-  ),
-  $shilp-grid-defaults
-);
+$shilp-grid-defaults: map-merge(("items": 8),
+  $shilp-grid-defaults);
 
 //---------- Config: Via CSS Vars
 $shilp-grid-vars: () !default;
-$shilp-grid-vars: map-merge(
-  (
-    "items": 4
-  ),
-  $shilp-grid-vars
-);
+$shilp-grid-vars: map-merge(("items": 4),
+  $shilp-grid-vars);
 
 //---------- Local Variables
 $grid-items: map-get($shilp-grid-defaults, "items");
@@ -32,6 +24,7 @@ $grid-items: map-get($shilp-grid-defaults, "items");
 @mixin shilp-grid-size($breakpoint) {
   @for $i from 1 through $grid-items {
     $className: breakpoint-class($breakpoint, grid--#{$i});
+
     .#{$className} {
       --grid--items: #{$i};
     }
@@ -43,18 +36,20 @@ $grid-items: map-get($shilp-grid-defaults, "items");
 //--------------------------------------------------
 .grid {
   @include component-vars("grid", $shilp-grid-vars);
-  display: grid;
+  display: grid !important;
   grid-template-columns: repeat(var(--grid--items), 1fr);
 }
 
 @include shilp-grid-size("phone");
+
 //--------------------------------------------------
 // MODIFIERS
 //--------------------------------------------------
 //--------------------------------------------------
 // MEDIA QUERY
 //--------------------------------------------------
-@each $breakpoint, $value in $shilp-breakpoints {
+@each $breakpoint,
+$value in $shilp-breakpoints {
   @media only screen and (min-width: $value) {
     @include shilp-grid-size($breakpoint);
   }

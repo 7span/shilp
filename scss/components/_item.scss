@@ -22,7 +22,8 @@ $shilp-item-vars: map-merge((), $shilp-item-vars);
   grid-template-rows: minmax(0, min-content) 1fr;
   grid-template-columns: min-content auto;
   gap: var(--item--gap);
-  > .media {
+
+  >.media {
     grid-row: 1 / 3;
   }
 }
@@ -33,10 +34,12 @@ $shilp-item-vars: map-merge((), $shilp-item-vars);
 
 .item__title {
   grid-column: 2 / 3;
-  ~ .item__body {
+
+  ~.item__body {
     grid-row: 2 / 3;
   }
 }
+
 .item__body {
   grid-column: 2 / 3;
   grid-row: 1 / 2;
@@ -47,7 +50,8 @@ $shilp-item-vars: map-merge((), $shilp-item-vars);
 //--------------------------------------------------
 
 .item--middle {
-  grid-template-rows: minmax(min-content, 50%) minmax(min-content, 50%);
+  grid-template-rows: minmax(min-content, auto) minmax(min-content, auto);
+
   .item__title {
     align-self: flex-end;
   }

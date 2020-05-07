@@ -1,53 +1,54 @@
 //--------------------------------------------------
 // Handle Border Radius
 //--------------------------------------------------
-.button-group {
+.button-group--join {
   display: inline-flex;
 
-  //If .list class used with .button-group
-  //The radius of buttons should not be modified as the list may have space between it.
-  &:not(.list) {
-    > .button:not(:nth-of-type(1)):not(:nth-last-of-type(1)),
-    > .choice:not(:nth-of-type(1)):not(:nth-last-of-type(1)) .button {
-      border-radius: 0;
+  >.button:not(:nth-of-type(1)):not(:nth-last-of-type(1)),
+  >.choice:not(:nth-of-type(1)):not(:nth-last-of-type(1)) .button {
+    border-radius: 0;
+  }
+
+  &:not(.button-group--stack) {
+
+    >.button:nth-of-type(1),
+    >.choice:nth-of-type(1) .button {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
     }
 
-    &:not(.button-group--stack) {
-      > .button:nth-of-type(1),
-      > .choice:nth-of-type(1) .button {
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-      }
-
-      > .button:nth-last-of-type(1),
-      > .choice:nth-last-of-type(1) .button {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-      }
-
-      > .button + .button,
-      > .choice + .choice .button {
-        border-left: none;
-      }
+    >.button:nth-last-of-type(1),
+    >.choice:nth-last-of-type(1) .button {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
     }
 
-    &.button-group--stack {
-      > .button:nth-of-type(1),
-      > .choice:nth-of-type(1) .button {
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-      }
-      > .button:nth-last-of-type(1),
-      > .choice:nth-last-of-type(1) .button {
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-      }
-      > .button + .button,
-      > .choice + .choice .button {
-        border-top: none;
-      }
+    >.button+.button,
+    >.choice+.choice .button {
+      border-left: none;
     }
   }
+
+  &.button-group--stack {
+
+    >.button:nth-of-type(1),
+    >.choice:nth-of-type(1) .button {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    >.button:nth-last-of-type(1),
+    >.choice:nth-last-of-type(1) .button {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+
+    >.button+.button,
+    >.choice+.choice .button {
+      border-top: none;
+    }
+  }
+
 }
 
 .button-group--stack {
@@ -56,6 +57,7 @@
 
 .button-group--fluid {
   display: flex;
+
   .button {
     flex: 1 1 auto;
   }

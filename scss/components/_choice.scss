@@ -5,6 +5,9 @@
   font-size: var(--field--text-size);
   .choice {
     margin-right: --space(3);
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }
 .choice {

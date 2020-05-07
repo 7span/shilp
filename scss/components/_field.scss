@@ -14,8 +14,8 @@ $shilp-field-defaults: map-merge(
       danger,
       warning,
       success,
-      info
-    )
+      info,
+    ),
   ),
   $shilp-field-defaults
 );
@@ -33,7 +33,7 @@ $shilp-field-vars: map-merge(
     "focus-color": --color(grey, lightest),
     "size": --field(md),
     "text-size": --field-text(md),
-    "icon-size": --field-icon(md)
+    "icon-size": --field-icon(md),
   ),
   $shilp-field-vars
 );
@@ -67,7 +67,7 @@ $field-states: map-get($shilp-field-defaults, "states");
 
 .field__desc {
   display: flex;
-  margin-top: 4px;
+  margin-top: --space(2);
   color: --color(grey);
 }
 

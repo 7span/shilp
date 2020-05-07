@@ -4,31 +4,24 @@
 
 //---------- Config: Via SCSS Maps
 $shilp-alert-defaults: () !default;
-$shilp-alert-defaults: map-merge(
-  (
-    "colors": shilp-color-names(),
-    "themes": (
-      solid,
+$shilp-alert-defaults: map-merge(("colors": shilp-color-names(),
+    "themes": (solid,
       outline,
       muted,
     ),
   ),
-  $shilp-alert-defaults
-);
+  $shilp-alert-defaults);
 
 //---------- Config: Via CSS Vars
 $shilp-alert-vars: () !default;
-$shilp-alert-vars: map-merge(
-  (
-    "bg": transparent,
+$shilp-alert-vars: map-merge(("bg": transparent,
     "color": #000000,
     "border": 0px,
     "border-color": transparent,
     "padding": #{--space(3)},
     "radius": map-get($shilp-config, "radius"),
   ),
-  $shilp-alert-vars
-);
+  $shilp-alert-vars);
 
 //---------- Local Variables
 $alert-colors: map-get($shilp-alert-defaults, "colors");
@@ -40,23 +33,33 @@ $alert-themes: map-get($shilp-alert-defaults, "themes");
 
 // THEME
 @mixin alert--theme($color, $theme) {
-  @if ($theme== "solid") {
+  @if ($theme=="solid") {
     --alert--bg: #{--color($color)};
     --alert--color: #{--color(light)};
-  } //
-  @else if($theme== "outline") {
-    --alert--bg: #{--color($color, lightest)};
+    --alert--body-color: #{--color($color,lightest)};
+  }
+
+  //
+  @else if($theme=="outline") {
+    --alert--bg: #{--color(light)};
     --alert--border-color: #{--color($color, lighter)};
     --alert--color: #{--color($color, darker)};
     --alert--border: 1px;
-  } //
-  @else if($theme== "muted") {
+    --alert--body-color: #{--color($color,darker)};
+  }
+
+  //
+  @else if($theme=="muted") {
     --alert--bg: #{--color($color, lightest)};
     --alert--color: #{--color($color)};
-  } //
-  @else if($theme== "gradient") {
+    --alert--body-color: #{--color($color)};
+  }
+
+  //
+  @else if($theme=="gradient") {
     background: create-gradient($color);
     --alert--color: #{--color($color)};
+    --alert--body-color: #{--color(light)};
   }
 }
 
@@ -72,27 +75,17 @@ $alert-themes: map-get($shilp-alert-defaults, "themes");
   border: var(--alert--border) solid var(--alert--border-color);
   padding: var(--alert--padding);
   border-radius: var(--alert--radius);
-  grid-template-rows: minmax(0, min-content) 1fr;
   grid-template-columns: min-content auto;
 }
-.alert__title {
-  font-weight: bold;
+
+.alert__message {
   font-size: --text(md);
-  grid-column: 2 / 3;
-  line-height: 1;
-  ~ .alert__body {
-    grid-row: 2 / 3;
-  }
-}
-.alert__body {
-  margin: 0;
-  grid-column: 2 / 3;
-  grid-row: 1 / 2;
 }
 
-.alert__icon {
-  margin-right: --space(2);
-  grid-row: 1 / 3;
+.alert__body {
+  color: var(--alert--body-color);
+  grid-row: 2 / 3;
+  grid-column: 1 / 3;
 }
 
 //--------------------------------------------------
@@ -122,9 +115,11 @@ $alert-themes: map-get($shilp-alert-defaults, "themes");
 .alert--rectangle {
   border-radius: 0;
 }
+
 .alert--rounded {
   border-radius: --radius(3);
 }
+
 .alert--pill {
   border-radius: 9999px;
 }
