@@ -96,7 +96,7 @@ $field-states: map-get($shilp-field-defaults, "states");
     position: relative;
   }
   &:disabled {
-    color: --color(grey);
+    color: --color(grey, light);
     background-color: --color(grey, lightest);
   }
 }
